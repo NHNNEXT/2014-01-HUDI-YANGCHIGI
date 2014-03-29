@@ -9,5 +9,6 @@
     </head>
     <body>
         <p>Message: ${message}</p>
+        <p>Message: ${request}</p>
     </body>
 </html>
