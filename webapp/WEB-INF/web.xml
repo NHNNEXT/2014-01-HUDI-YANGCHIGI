@@ -10,8 +10,19 @@
 		<servlet-class>org.yangchigi.web.DefaultServlet</servlet-class>
 	</servlet>
 	
+	<servlet>	
+		<servlet-name>landing</servlet-name>
+		<servlet-class>org.yangchigi.web.LandingServlet</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>next</servlet-name>
 		<url-pattern>/aa</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>	
+		<servlet-name>landing</servlet-name>
+		<url-pattern>/seize</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
