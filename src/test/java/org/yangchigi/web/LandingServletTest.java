@@ -6,7 +6,6 @@ import org.junit.runners.JUnit4;
 
 import quicktime.app.spaces.Protocol;
 
-import com.sun.security.ntlm.Client;
 
 @RunWith(JUnit4.class)
 public class LandingServletTest {
