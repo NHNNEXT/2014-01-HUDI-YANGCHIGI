@@ -17,6 +17,8 @@
 .container {
 	background-color: #FFDDDD;
 	margin-top: 50px;
+	max-width: none !important;
+	width:1000px;
 }
 #mypagecontainer {
 	padding:20px;
@@ -44,19 +46,13 @@
 	<div class="container">
 		
 		<div id="mypagecontainer" class="row">
-			<div id="calendar" class="col-md-4">calendar</div>
+			<div id="calendar" class="col-xs-4">calendar</div>
 
-			<div id="mypageright" class="col-md-7">
+			<div id="mypageright" class="col-xs-7">
 				<div class="row"></div>
 					<div id="writing" class="row">writing</div>
 					<div id="contents" class="row">contents</div>
 					<div id="contents" class="row">contents</div>
-					<div id="contents" class="row">contents</div>
-					<div id="contents" class="row">contents</div>
-					<div id="contents" class="row">contents</div>
-					<div id="contents" class="row">contents</div>
-			</div>
-		</div>
-	</div>
+					<div id="contents" class="row">contents</div>ㅠ 풒  
 </body>
 </html>
