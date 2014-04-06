@@ -3,6 +3,7 @@ package org.yangchigi.repository;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.yangchigi.web.User;
@@ -13,32 +14,57 @@ public class UserRepository implements Repository {
 	private final String user = "yangchigi";
 	private final String pw = "yangchigi";
 	private Connection conn;
-	
-	public Connection getConn() throws SQLException {
-		return this.conn;
-	}
-	
-	public void setConn() throws SQLException, ClassNotFoundException {
+
+	public UserRepository() throws ClassNotFoundException, SQLException {
+		super();
 		Class.forName(driver);
 		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
 
+	public Connection getConn() throws SQLException {
+		return this.conn;
+	}
+
 	@Override
-	public Object findByEmail(String string) {
-		return null;
+	public User findByEmail(String email) {
+		PreparedStatement pstmt;
+		ResultSet rs;
+		User user = null;
+		System.out.println("findByEmail call");
+		String sql = "SELECT * FROM `user` WHERE (email = ?)";
+		try {
+			pstmt = this.conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			System.out.println("before execute query");
+			rs = pstmt.executeQuery();
+			System.out.println("after execute query");
+			System.out.println(rs.getString("email"));
+			while (rs.next()) {
+				System.out.println(rs.getString("email"));
+				user = new User(rs.getString("email"),
+								rs.getString("nickname"),
+								rs.getString("password"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	@Override
 	public void add(User user) {
 		PreparedStatement pstmt;
-		
-		String sql = "INSERT INTO `user` (`email`, `nickname`, `password`) " +
-						"VALUES (?, ?, ?)";
+
+		String sql = "INSERT INTO `user` (`email`, `nickname`, `password`) "
+				+ "VALUES (?, ?, ?)";
 		try {
-			pstmt = conn.prepareStatement(sql);
+			pstmt = this.conn.prepareStatement(sql);
+			pstmt.setString(1, user.getEmail());
+			pstmt.setString(2, user.getNickname());
+			pstmt.setString(3, user.getPassword());
+			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
 }

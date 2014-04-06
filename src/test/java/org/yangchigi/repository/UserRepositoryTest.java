@@ -11,7 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.yangchigi.repository.Repository;
-import org.yangchigi.repository.UserRepository;
 import org.yangchigi.web.User;
 
 public class UserRepositoryTest {
