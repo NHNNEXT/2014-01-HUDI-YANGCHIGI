@@ -37,7 +37,7 @@
 	<input type='file' onchange="readURL(this);" />
 	<br />
 	<span id="previewPane">
-		<img id="img_prev" data-src="holder.js/100%x200" src="#" alt="your image" />
+		<img id="img_prev" src="#" alt="your image" />
 	</span>
 
 

@@ -4,65 +4,114 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
-<script	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
 <style>
+
 .container {
+	background-color: #FFDDDD;
 	margin-top: 50px;
-	height: 600px;
-	padding: 20px;
-	background-color: #FFEAEA;
+	max-width: none !important;
+	width:1000px;
+}
+#mypagecontainer {
+	padding:20px;
 }
 
-aside {
-	/* float: left; */
-	display: inline; width : 200px;
-	height: 400px;
-	background-color: #C5C5C5;
-	width: 200px;
+#calendar {
+	height:300px;
+	margin-right:20px;
+	background-color:#AFAFAF;
+}
+#contents{
+	background-color:#FFFFDD;
+	margin-top:20px;
+	border:1px solid black;
+	height:80px;
+	margin-left:30px;
 }
 
-section {
-	background-color: #C5C5C5;
-	width: 50px;
+#writing{
+	height: 150px;
+	background-color: #FFFFFF;
+	position:relative;
 }
-
-article {
-	width: 80px;
-	background-color: #FFB3F9;
+#writing_menu{
+	height: 30px;
+	background-color: #AFAFAF;
+	
+	position:absolute;
+	bottom:0;
+	right:0;
+}
+#withimg{
+	height: 30px;
+	background-color: #AFAFAF;
+	
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+#img_prev{
+	position:absolute;
+	left:100%;
+	bottom:0;
+	margin-left:10px;
 }
 </style>
+
+<script type="text/javascript">
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				$('#img_prev').attr('src', e.target.result).height(70).css("display","inline")
+			};
+
+			reader.readAsDataURL(input.files[0]);
+		} else {
+			// if cancel selection
+			var img = input.value;
+			$('#img_prev').attr('src', img).css("display","none");
+		}
+	}
+	
+	function chooseFile(){
+		$("#fileInput").click();
+	}
+	
+</script>
 </head>
 <body>
 	<div class="container">
-		<div class="row show-grid">
-			<div class="col-md-4">calendar</div>
-			<div class="col-md-8">
-				<div class="row">
-					writing
-				</div>
-				
-				<div class="row">
-					contents
-				</div> 
-				<div class="row">
-					contents
-				</div> 
-			</div>
-		</div>
 		
-		
+		<div id="mypagecontainer" class="row">
+			<div id="calendar" class="col-xs-4">calendar</div>
 
-
-		<!-- <aside>aside</aside>
-		
-		<section>section
-			<article>article</article>
-			<article>article</article>
-		</section> -->
-
-	</div>
+			<div id="mypageright" class="col-xs-7">
+				<div class="row"></div>
+					<div id="writing" class="row">writing
+							<input type='file' id="fileInput" accept="image" onchange="readURL(this);" style="display:none;" />
+						<div id="withimg">
+							
+							<img src="icon/addimage.png" onclick="chooseFile()" style="height:30px;"/>
+							<span id="previewPane">
+								<img id="img_prev" src="#" alt="your image" style="display:none;"/>
+							</span>
+						</div>
+						<div id="writing_menu">writing_menu</div>
+					</div>
+					<div id="contents" class="row">contents</div>
+					<div id="contents" class="row">contents</div>
+					<div id="contents" class="row">contents</div>
+					<div id="contents" class="row">contents</div>
+					<div id="contents" class="row">contents</div>
 </body>
 </html>
