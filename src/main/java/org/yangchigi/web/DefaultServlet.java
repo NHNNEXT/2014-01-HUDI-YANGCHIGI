@@ -1,16 +1,17 @@
 package org.yangchigi.web;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 public class DefaultServlet extends HttpServlet {
 
@@ -21,28 +22,48 @@ public class DefaultServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Connection conn;
+		PreparedStatement pstmt;
+		ResultSet rs;
+		String sql;
+		
+		String addr = "jdbc:mysql://localhost/seize";
+		String user = "yangchigi";
+		String pw = "yangchigi";
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Driver Loading Success");
+		
+		sql = "INSERT INTO `employee` (`firstname`," +
+									"`lastname`," +
+									"`birth_date`," +
+									"`cell_phone`)" +
+									"VALUES " +
+									"(?, ?, ?, ?)";
+		try {
+			conn = DriverManager.getConnection(addr, user, pw);
+			System.out.println("Connect Success");
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "Taeksoon");
+			pstmt.setString(2, "Jang");
+			pstmt.setString(3, "2013-04-01");
+			pstmt.setString(4, "9231");
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 		String message = "Hello World";
 		request.setAttribute("message", message);
-		System.out.println(request);
 		System.out.println("******* WRITE *******");
-		Employee empl = new Employee("Jack", "Bauer", new Date(System.currentTimeMillis()), "911");
-		empl = save(empl);
 		getServletContext().getRequestDispatcher("/page.jsp").forward(request,
 				response);
-	}
-
-	private static Employee save(Employee employee) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
-		session.beginTransaction();
-
-		Long id = (Long) session.save(employee);
-		employee.setId(id);
-
-		session.getTransaction().commit();
-
-		session.close();
-
-		return employee;
 	}
 }
