@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,97 +18,80 @@
 	<!-- Button trigger modal -->
 	<button class="btn btn-primary btn-lg" data-toggle="modal"
 		data-target="#myModal">SignUp</button>
-	<!-- Login form -->
-	<form id="loginForm" action="login" method="post" class="form-inline"
-		role="form">
-		<div class="form-group">
-			<label class="sr-only">Email address</label> <input type="email"
-				name="email" class="form-control" placeholder="Enter email">
-		</div>
-		<div class="form-group">
-			<label class="sr-only">Password</label> <input type="password"
-				name="password" class="form-control" placeholder="Password">
-		</div>
-		<div class="checkbox">
-			<label> <input type="checkbox"> Remember me
-			</label>
-		</div>
-		<button type="button" id="loginBtn" class="btn btn-default">Sign
-			in</button>
-	</form>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Sign Up!</h4>
-				</div>
-				<div class="modal-body">
-					<form id="signUpForm" class="form-horizontal" role="form">
-						<div class="form-group">
-							<label for="inputEmail" class="col-sm-2 control-label">Email</label>
-							<div class="col-sm-10">
-								<input type="email" name="email" class="form-control"
-									id="inputEmail" placeholder="Email">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputNickname" class="col-sm-2 control-label">Nickname</label>
-							<div class="col-sm-10">
-								<input type="text" name="nickname" class="form-control"
-									id="inputNickname" placeholder="Nickname">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputPassword" class="col-sm-2 control-label">Password</label>
-							<div class="col-sm-10">
-								<input type="password" name="password" class="form-control"
-									id="inputPassword" placeholder="Password">
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" id="signUpBtn" class="btn btn-primary">SignUp</button>
-				</div>
-			</div>
-		</div>
+	<div id="signinDiv">
+		<!-- Login form -->
+		<c:if test="${empty user}"><jsp:include page="login.jsp" /></c:if>
+		<!-- Logout -->
+		<c:if test="${not empty user}"><jsp:include page="logout.jsp" /></c:if>
 	</div>
+	<!-- Modal -->
+	<jsp:include page="signup.jsp" />
 </body>
 
 <script>
-	var signUpBtn = $('#signUpBtn');
+	(function() {
+		function addSignUpEvent() {
+			var signUpBtn = $('#signUpBtn');
 
-	signUpBtn.click(function() {
-		var data = $('#signUpForm :input');
-		/* jQuery.each(data, function(i, field) {
-			console.log(i + ': ' + field.value);
-		});*/
-		$.ajax({
-			type : "POST",
-			url : "signup",
-			data : data
-		}).done(function(msg) {
-			console.log(msg);
-		});
-	})
-	var loginBtn = $('#loginBtn');
-	loginBtn.click(function() {
-		var data = $('#loginForm :input');
-		jQuery.each(data, function(i, field) {
-			console.log(i + ': ' + field.value);
-		});
-		$.ajax({
-			type : "POST",
-			url : "login",
-			data : data
-		}).done(function(msg) {
-			console.log(msg);
-		});
-	})
+			signUpBtn.click(function() {
+				var data = $('#signUpForm :input');
+				/* jQuery.each(data, function(i, field) {
+					console.log(i + ': ' + field.value);
+				});*/
+				$.ajax({
+					type : "POST",
+					url : "signup",
+					data : data
+				}).done(function(msg) {
+					console.log(msg);
+				});
+			})
+		}
+
+		function addLoginEvent() {
+			var loginBtn = $('#loginBtn');
+			loginBtn.click(function() {
+				var data = $('#loginForm :input');
+				/* jQuery.each(data, function(i, field) {
+					console.log(i + ': ' + field.value);
+				}); */
+				$.ajax({
+					type : "POST",
+					url : "login",
+					data : data
+				}).done(function(msg) {
+					console.log(msg);
+					if ("success" === msg) {
+						var signinDiv = $('#signinDiv');
+						signinDiv.load('logout.jsp', function() {
+							addLogoutEvent();
+						});
+					}
+				});
+			})
+		}
+
+		function addLogoutEvent() {
+			var logoutBtn = $('#logoutBtn');
+			logoutBtn.click(function() {
+				$.ajax({
+					type : "POST",
+					url : "logout",
+				}).done(function(msg) {
+					console.log(msg);
+					if ("success" === msg) {
+						var signinDiv = $('#signinDiv');
+						signinDiv.load('login.jsp', function() {
+							addLoginEvent();
+						});
+					}
+				})
+			})
+		}
+		
+		addSignUpEvent();
+		addLoginEvent();
+		addLogoutEvent();
+	})();
 </script>
 </html>

@@ -1,0 +1,1 @@
+<button type="button" id="logoutBtn" class="btn btn-default">Logout</button>
