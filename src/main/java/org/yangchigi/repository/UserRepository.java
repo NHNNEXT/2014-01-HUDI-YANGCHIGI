@@ -30,14 +30,13 @@ public class UserRepository implements Repository {
 		PreparedStatement pstmt;
 		ResultSet rs;
 		User user = null;
-		System.out.println("findByEmail call");
+		System.out.println("UserRepository > findByEmail");
 		String sql = "SELECT * FROM `user` WHERE (email = ?)";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, email);
-			System.out.println("before execute query");
 			rs = pstmt.executeQuery();
-			System.out.println("after execute query");
+			
 			System.out.println(rs.getString("email"));
 			while (rs.next()) {
 				System.out.println(rs.getString("email"));
@@ -57,6 +56,7 @@ public class UserRepository implements Repository {
 
 		String sql = "INSERT INTO `user` (`email`, `nickname`, `password`) "
 				+ "VALUES (?, ?, ?)";
+		System.out.println("UserRepository > add: " + user.toString());
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, user.getEmail());

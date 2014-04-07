@@ -17,7 +17,24 @@
 	<!-- Button trigger modal -->
 	<button class="btn btn-primary btn-lg" data-toggle="modal"
 		data-target="#myModal">SignUp</button>
-
+	<!-- Login form -->
+	<form id="loginForm" class="form-inline" role="form">
+		<div class="form-group">
+			<label class="sr-only" for="exampleInputEmail2">Email address</label>
+			<input type="email" name="email" class="form-control" id="exampleInputEmail2"
+				placeholder="Enter email">
+		</div>
+		<div class="form-group">
+			<label class="sr-only" for="exampleInputPassword2">Password</label> <input
+				type="password" name="password" class="form-control" id="exampleInputPassword2"
+				placeholder="Password">
+		</div>
+		<div class="checkbox">
+			<label> <input type="checkbox"> Remember me
+			</label>
+		</div>
+		<button id="loginBtn" type="submit" class="btn btn-default">Sign in</button>
+	</form>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -33,30 +50,29 @@
 						<div class="form-group">
 							<label for="inputEmail" class="col-sm-2 control-label">Email</label>
 							<div class="col-sm-10">
-								<input type="email" name="email" class="form-control" id="inputEmail"
-									placeholder="Email">
+								<input type="email" name="email" class="form-control"
+									id="inputEmail" placeholder="Email">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputNickname" class="col-sm-2 control-label">Nickname</label>
 							<div class="col-sm-10">
-								<input type="text" name="nickname" class="form-control" id="inputNickname"
-									placeholder="Nickname">
+								<input type="text" name="nickname" class="form-control"
+									id="inputNickname" placeholder="Nickname">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputPassword" class="col-sm-2 control-label">Password</label>
 							<div class="col-sm-10">
-								<input type="password" name="password" class="form-control" id="inputPassword"
-									placeholder="Password">
+								<input type="password" name="password" class="form-control"
+									id="inputPassword" placeholder="Password">
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="signUpBtn" class="btn btn-default"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">SignUp</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="signUpBtn" class="btn btn-primary">SignUp</button>
 				</div>
 			</div>
 		</div>
@@ -65,7 +81,6 @@
 
 <script>
 	var signUpBtn = $('#signUpBtn');
-	var signUpForm = $('#signUpForm');
 
 	signUpBtn.click(function() {
 		var data = $('#signUpForm :input');
@@ -77,7 +92,19 @@
 			url : "signup",
 			data : data
 		}).done(function(msg) {
-			console.log("sucess");
+			console.log(msg);
+		});
+	})
+	
+	var loginBtn = $('#loginBtn');
+	loginBtn.click(function() {
+		var data = $('loginForm :ipnut');
+		$.ajax({
+			type : "POST",
+			url : "login",
+			data : data
+		}).done(function(msg) {
+			console.log(msg);
 		});
 	})
 </script>
