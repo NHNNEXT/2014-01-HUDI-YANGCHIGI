@@ -94,7 +94,7 @@
 		
 		<div id="mypagecontainer" class="row">
 			<div id="calendar" class="col-xs-4">calendar</div>
-
+		
 			<div id="mypageright" class="col-xs-7">
 				<div class="row"></div>
 					<div id="writing" class="row">writing
@@ -113,5 +113,8 @@
 					<div id="contents" class="row">contents</div>
 					<div id="contents" class="row">contents</div>
 					<div id="contents" class="row">contents</div>
+			</div>
+			</div>
+		</div>
 </body>
 </html>
