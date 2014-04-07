@@ -18,22 +18,22 @@
 	<button class="btn btn-primary btn-lg" data-toggle="modal"
 		data-target="#myModal">SignUp</button>
 	<!-- Login form -->
-	<form id="loginForm" class="form-inline" role="form">
+	<form id="loginForm" action="login" method="post" class="form-inline"
+		role="form">
 		<div class="form-group">
-			<label class="sr-only" for="exampleInputEmail2">Email address</label>
-			<input type="email" name="email" class="form-control" id="exampleInputEmail2"
-				placeholder="Enter email">
+			<label class="sr-only">Email address</label> <input type="email"
+				name="email" class="form-control" placeholder="Enter email">
 		</div>
 		<div class="form-group">
-			<label class="sr-only" for="exampleInputPassword2">Password</label> <input
-				type="password" name="password" class="form-control" id="exampleInputPassword2"
-				placeholder="Password">
+			<label class="sr-only">Password</label> <input type="password"
+				name="password" class="form-control" placeholder="Password">
 		</div>
 		<div class="checkbox">
 			<label> <input type="checkbox"> Remember me
 			</label>
 		</div>
-		<button id="loginBtn" type="submit" class="btn btn-default">Sign in</button>
+		<button type="button" id="loginBtn" class="btn btn-default">Sign
+			in</button>
 	</form>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -95,10 +95,12 @@
 			console.log(msg);
 		});
 	})
-	
 	var loginBtn = $('#loginBtn');
 	loginBtn.click(function() {
-		var data = $('loginForm :ipnut');
+		var data = $('#loginForm :input');
+		jQuery.each(data, function(i, field) {
+			console.log(i + ': ' + field.value);
+		});
 		$.ajax({
 			type : "POST",
 			url : "login",

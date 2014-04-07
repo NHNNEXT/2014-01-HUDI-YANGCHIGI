@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("LoginServlet > doGet");
 	}
 
 	/**
@@ -37,12 +37,12 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("LoginServlet > doPost");
-		
+		System.out.println("email: " + request.getParameter("email"));
 		try {
 			Repository repository = new UserRepository();
 			User user = (User) repository.findByEmail(request.getParameter("email"));
 			if (user.getPassword().equals(request.getParameter("password"))) {
-				response.getWriter().write("success");
+				response.getWriter().write("login success");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

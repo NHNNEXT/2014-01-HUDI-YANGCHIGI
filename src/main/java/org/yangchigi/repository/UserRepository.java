@@ -31,15 +31,15 @@ public class UserRepository implements Repository {
 		ResultSet rs;
 		User user = null;
 		System.out.println("UserRepository > findByEmail");
+		System.out.println("email: " + email);
 		String sql = "SELECT * FROM `user` WHERE (email = ?)";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			
-			System.out.println(rs.getString("email"));
 			while (rs.next()) {
-				System.out.println(rs.getString("email"));
+				System.out.println("email: " + rs.getString("email"));
 				user = new User(rs.getString("email"),
 								rs.getString("nickname"),
 								rs.getString("password"));
