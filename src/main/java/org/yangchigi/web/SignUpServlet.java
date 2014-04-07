@@ -1,12 +1,15 @@
 package org.yangchigi.web;
 
 import java.io.IOException;
-import java.util.Enumeration;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.yangchigi.repository.Repository;
+import org.yangchigi.repository.UserRepository;
 
 /**
  * Servlet implementation class SignUpServlet
@@ -32,6 +35,17 @@ public class SignUpServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("SignUpServlet > doPost call");
+		try {
+			UserRepository repository = new UserRepository();
+			User user = new User(request.getParameter("email"),
+								request.getParameter("nickname"),
+								request.getParameter("password"));
+			System.out.println("SignUpServlet > doPost");
+			repository.add(user);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

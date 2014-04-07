@@ -15,6 +15,12 @@ public class User {
 		return email;
 	}
 
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", nickname=" + nickname
+				+ ", password=" + password + "]";
+	}
+
 	public String getNickname() {
 		return nickname;
 	}

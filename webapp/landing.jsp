@@ -54,9 +54,9 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="signUpBtn" class="btn btn-default"
+					<button type="button" class="btn btn-default"
 						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">SignUp</button>
+					<button type="button" id="signUpBtn" class="btn btn-primary">SignUp</button>
 				</div>
 			</div>
 		</div>

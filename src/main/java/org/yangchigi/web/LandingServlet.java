@@ -11,7 +11,7 @@ public class LandingServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("LandingServlet call");
+		System.out.println("LandingServlet");
 		
 		String message = "hi yo man";
 		request.setAttribute("message", message);
