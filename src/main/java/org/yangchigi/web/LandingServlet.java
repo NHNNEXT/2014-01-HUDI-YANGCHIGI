@@ -9,21 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LandingServlet extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("LandingServlet call");
 		
 		String message = "hi yo man";
-		req.setAttribute("message", message);
+		request.setAttribute("message", message);
 		
-		getServletContext().getRequestDispatcher("/landing.jsp").forward(req,
-				resp);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		req.setAttribute("mes2", "aaa");
-		System.out.println("doPost Call");
+		getServletContext().getRequestDispatcher("/landing.jsp").forward(request,
+				response);
 	}
 }

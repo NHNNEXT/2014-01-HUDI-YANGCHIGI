@@ -1,28 +1,21 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
 
-<web-app>
-	<display-name>Archetype Created Web Application</display-name>
-  
-	<servlet>
-		<servlet-name>next</servlet-name>
-		<servlet-class>org.yangchigi.web.DefaultServlet</servlet-class>
-	</servlet>
-	
-	<servlet>	
-		<servlet-name>landing</servlet-name>
-		<servlet-class>org.yangchigi.web.LandingServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>next</servlet-name>
-		<url-pattern>/aa</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>	
-		<servlet-name>landing</servlet-name>
-		<url-pattern>/seize</url-pattern>
-	</servlet-mapping>
-	
+<web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <javaee:display-name>Archetype Created Web Application</javaee:display-name>
+  <servlet>
+    <servlet-name>landing</servlet-name>
+    <servlet-class>org.yangchigi.web.LandingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>landing</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SignUpServlet</servlet-name>
+    <servlet-class>org.yangchigi.web.SignUpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SignUpServlet</servlet-name>
+    <url-pattern>/signup</url-pattern>
+  </servlet-mapping>
 </web-app>
