@@ -68,11 +68,10 @@
 	var signUpForm = $('#signUpForm');
 
 	signUpBtn.click(function() {
-		console.log('si');
 		var data = $('#signUpForm :input');
-		jQuery.each(data, function(i, field) {
+		/* jQuery.each(data, function(i, field) {
 			console.log(i + ': ' + field.value);
-		});
+		});*/
 		$.ajax({
 			type : "POST",
 			url : "signup",

@@ -17,8 +17,6 @@ public class SignUpServletTest {
 //		when(mockedRequest.getParameter("email")).thenReturn("hook3748@gmail.com");
 //		when(mockedRequest.getParameter("nickname")).thenReturn("hogu");
 //		when(mockedRequest.getParameter("password")).thenReturn("123456");
-//		
-		
 	}
 
 }
