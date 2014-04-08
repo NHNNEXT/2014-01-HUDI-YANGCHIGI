@@ -8,8 +8,10 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>landing</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/landing</url-pattern>
   </servlet-mapping>
+  
+  
   <servlet>
     <servlet-name>SignUpServlet</servlet-name>
     <servlet-class>org.yangchigi.web.SignUpServlet</servlet-class>
@@ -17,5 +19,25 @@
   <servlet-mapping>
     <servlet-name>SignUpServlet</servlet-name>
     <url-pattern>/signup</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>MyPageServlet</servlet-name>
+    <servlet-class>org.yangchigi.web.MyPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyPageServlet</servlet-name>
+    <url-pattern>/mypage</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>WriteArticleServlet</servlet-name>
+    <servlet-class>org.yangchigi.web.WriteArticleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WriteArticleServlet</servlet-name>
+    <url-pattern>/writearticle</url-pattern>
   </servlet-mapping>
 </web-app>
