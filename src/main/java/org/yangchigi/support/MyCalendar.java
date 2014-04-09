@@ -13,8 +13,7 @@ public class MyCalendar {
 		int minute = cal.get(Calendar.MINUTE);
 		int second = cal.get(Calendar.SECOND);
 		String curDate = year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
-		System.out.println(curDate);
-		
+
 		return curDate;
 	}
 }

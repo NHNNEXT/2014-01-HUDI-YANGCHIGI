@@ -6,20 +6,19 @@ function readURL(input) {
 
 		reader.onload = function(e) {
 			$('#img_prev').attr('src', e.target.result).height(50).css(
-					"display", "inline");
+					'display', 'inline');
 		};
 		img_name = input.files[0].name;
 		console.log(img_name);
 		reader.readAsDataURL(input.files[0]);
 	} else {
 		// if cancel selection
-		var img = input.value;
-		$('#img_prev').attr('src', img).css("display", "none");
+		$('#img_prev').attr('src', '').css('display', 'none');
 	}
 }
 
 function chooseFile() {
-	$("#fileInput").click();
+	$('#fileInput').click();
 }
 
 function submitArticle() {
@@ -37,13 +36,14 @@ function submitArticle() {
 				img : img_name
 			}
 		}).done(function(msg) {
-			// submit?? ajax??
+			$('#contentsContainerDiv').prepend('<div class="row contentsDiv newContents">'
+					+ $('#contentInput').val()
+					+ '</div>')
+					.hide().fadeIn('slow');
+
 			
-			var val = $('#contentInput')
-			
-			
-//			debugger;
-			console.log("sending!");
+			$('#img_prev').attr('src', '').css('display', 'none');
+			$('.form-horizontal')[0].reset();
 		});
 	}
 }

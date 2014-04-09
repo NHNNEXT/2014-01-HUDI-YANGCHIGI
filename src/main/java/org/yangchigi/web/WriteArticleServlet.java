@@ -43,8 +43,6 @@ public class WriteArticleServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Driver Loading Success");
-		
 		sql = "INSERT INTO `today` (`contents`," +
 									"`date`," +
 									"`img`)" +
@@ -52,7 +50,6 @@ public class WriteArticleServlet extends HttpServlet {
 									"(?, ?, ?)";
 		try {
 			conn = DriverManager.getConnection(addr, user, pw);
-			System.out.println("Connect Success");
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, contents);

@@ -2,7 +2,7 @@
 
 
 .container {
-	background-color: #FFDDDD;
+	background-color: #424242;
 	margin-top: 50px;
 	max-width: none !important;
 	width:1000px;
@@ -16,7 +16,7 @@
 	margin-right:20px;
 	background-color:#AFAFAF;
 }
-#contentsDiv{
+.contentsDiv{
 	background-color:#FFFFDD;
 	margin-top:20px;
 	border:1px solid black;
