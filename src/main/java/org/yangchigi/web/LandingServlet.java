@@ -11,11 +11,7 @@ public class LandingServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("LandingServlet ca");
-		
-		String message = "hi yo man";
-		request.setAttribute("message", message);
-		
+		System.out.println("LandingServlet");
 		getServletContext().getRequestDispatcher("/landing.jsp").forward(request,
 				response);
 	}

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,44 +44,50 @@
 				});
 			})
 		}
-
-		function addLoginEvent() {
-			var loginBtn = $('#loginBtn');
-			loginBtn.click(function() {
+		// 로그인, 로그아웃 관리 객체
+		function Auth() {
+			this.signinDiv = $('#signinDiv');
+		}
+		// 로그인 버튼 이벤트
+		Auth.prototype.addLoginEvent = function() {
+			var self = this;
+			$('#loginBtn').click(function() {
 				var data = $('#loginForm :input');
 				$.ajax({
 					type : "POST",
 					url : "login",
 					data : data
 				}).done(function(msg) {
-					console.log(msg);
 					if ("success" === msg) {
-						var signinDiv = $('#signinDiv');
-						signinDiv.load('logout.jsp', function() {
-							addLogoutEvent();
+						self.signinDiv.load('logout.jsp', function() {
+							self.addLogoutEvent();
 						});
 					}
 				});
 			})
-		}
-
-		function addLogoutEvent() {
-			var logoutBtn = $('#logoutBtn');
-			logoutBtn.click(function() {
+		};
+		// 로그아웃 버튼 이벤트
+		Auth.prototype.addLogoutEvent = function() {
+			var self = this;
+			$('#logoutBtn').click(function() {
 				$.ajax({
 					type : "POST",
 					url : "logout",
 				}).done(function(msg) {
-					console.log(msg);
 					if ("success" === msg) {
-						var signinDiv = $('#signinDiv');
-						signinDiv.load('login.jsp', function() {
-							addLoginEvent();
+						self.signinDiv.load('login.jsp', function() {
+							self.addLoginEvent();
 						});
 					}
 				})
-			})
-		}
+			});
+		};
+		Auth.prototype.init = function() {
+			this.addLoginEvent();
+			this.addLogoutEvent();
+		};
+		var auth = new Auth();
+		auth.init();
 
 		function addClearFormEvent() {
 			var data = $('#signUpForm :input');
@@ -96,8 +101,6 @@
 		}
 
 		addSignUpEvent();
-		addLoginEvent();
-		addLogoutEvent();
 		addClearFormEvent();
 		addValidateEvent();
 
@@ -130,7 +133,7 @@
 					$(this).next().css('color', 'green');
 				}
 			});
-			
+
 			passwordInput.keyup(function() {
 				var password = passwordInput.val();
 				if (!password) {
