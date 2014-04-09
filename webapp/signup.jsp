@@ -10,30 +10,33 @@
 			<div class="modal-body">
 				<form id="signUpForm" class="form-horizontal" role="form">
 					<div class="form-group">
-						<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+						<label class="col-sm-2 control-label">Email</label>
 						<div class="col-sm-10">
-							<input type="email" name="email" class="form-control"
-								id="inputEmail" placeholder="Email">
+							<input type="email" id="emailInput" name="email"
+								class="form-control" placeholder="Email">
+							<div class="validate-form"></div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputNickname" class="col-sm-2 control-label">Nickname</label>
+						<label class="col-sm-2 control-label">Nickname</label>
 						<div class="col-sm-10">
-							<input type="text" name="nickname" class="form-control"
-								id="inputNickname" placeholder="Nickname">
+							<input type="text" id="nicknameInput" name="nickname"
+								class="form-control" placeholder="Nickname">
+							<div class="validate-form"></div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+						<label class="col-sm-2 control-label">Password</label>
 						<div class="col-sm-10">
-							<input type="password" name="password" class="form-control"
-								id="inputPassword" placeholder="Password">
+							<input type="password" id="passwordInput" name="password"
+								class="form-control" placeholder="Password">
+							<div class="validate-form"></div>
 						</div>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button type="button" id="signUpBtn" class="btn btn-primary">SignUp</button>
 			</div>
 		</div>

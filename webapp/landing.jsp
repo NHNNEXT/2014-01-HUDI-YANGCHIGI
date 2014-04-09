@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/signup.css">
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script
@@ -35,9 +36,6 @@
 
 			signUpBtn.click(function() {
 				var data = $('#signUpForm :input');
-				/* jQuery.each(data, function(i, field) {
-					console.log(i + ': ' + field.value);
-				});*/
 				$.ajax({
 					type : "POST",
 					url : "signup",
@@ -52,9 +50,6 @@
 			var loginBtn = $('#loginBtn');
 			loginBtn.click(function() {
 				var data = $('#loginForm :input');
-				/* jQuery.each(data, function(i, field) {
-					console.log(i + ': ' + field.value);
-				}); */
 				$.ajax({
 					type : "POST",
 					url : "login",
@@ -88,10 +83,65 @@
 				})
 			})
 		}
-		
+
+		function addClearFormEvent() {
+			var data = $('#signUpForm :input');
+			var closeBtn = $('#closeBtn');
+
+			closeBtn.click(function() {
+				jQuery.each(data, function(i, field) {
+					$(field).val('');
+				});
+			})
+		}
+
 		addSignUpEvent();
 		addLoginEvent();
 		addLogoutEvent();
+		addClearFormEvent();
+		addValidateEvent();
+
+		function addValidateEvent() {
+			var emailInput = $('#emailInput');
+			var nicknameInput = $('#nicknameInput');
+			var passwordInput = $('#passwordInput');
+
+			emailInput.keyup(function() {
+				var emailReg = /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/;
+				var email = emailInput.val();
+
+				if (!email || !email.match(emailReg)) {
+					$(this).next().html('이메일을 입력하세요');
+					$(this).next().css('color', 'red');
+				} else {
+					$(this).next().html('입력 완료');
+					$(this).next().css('color', 'green');
+				}
+			});
+
+			nicknameInput.keyup(function() {
+				var nickname = nicknameInput.val();
+
+				if (!nickname) {
+					$(this).next().html('닉네임을 입력하세요.');
+					$(this).next().css('color', 'red');
+				} else {
+					$(this).next().html('입력 완료');
+					$(this).next().css('color', 'green');
+				}
+			});
+			
+			passwordInput.keyup(function() {
+				var password = passwordInput.val();
+				if (!password) {
+					$(this).next().html('비밀번호 입력하세요.');
+					$(this).next().css('color', 'red');
+				} else {
+					$(this).next().html('입력 완료');
+					$(this).next().css('color', 'green');
+				}
+			});
+		}
 	})();
 </script>
 </html>
