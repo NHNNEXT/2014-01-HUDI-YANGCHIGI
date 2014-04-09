@@ -46,8 +46,8 @@ public class SignUpServlet extends HttpServlet {
 			repository = new UserRepository();
 
 			User user = new User(request.getParameter("email"),
-								request.getParameter("nickname"),
-								request.getParameter("password"));
+					request.getParameter("nickname"),
+					request.getParameter("password"));
 			System.out.println("SignUpServlet > doPost");
 			repository.add(user);
 		} catch (ClassNotFoundException e) {

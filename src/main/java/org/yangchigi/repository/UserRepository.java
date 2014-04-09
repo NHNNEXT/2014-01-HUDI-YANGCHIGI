@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import org.yangchigi.web.User;
 
-public class UserRepository implements Repository {
+public class UserRepository implements Repository <User> {
 	private final String addr = "jdbc:mysql://localhost/seize";
 	private final String driver = "com.mysql.jdbc.Driver";
 	private final String user = "yangchigi";

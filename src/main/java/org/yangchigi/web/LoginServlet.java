@@ -39,18 +39,16 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("LoginServlet > doPost");
 		try {
-			Repository repository = new UserRepository();
-			User user = (User) repository.findByEmail(request.getParameter("email"));
+			Repository<User> repository = new UserRepository();
+			User user = repository.findByEmail(request.getParameter("email"));
 			if (user.getPassword().equals(request.getParameter("password"))) {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", "logged");
 				response.getWriter().write("success");
 			}
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
