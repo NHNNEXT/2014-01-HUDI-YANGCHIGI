@@ -1,14 +1,14 @@
-package org.yangchigi.web;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
-import quicktime.app.spaces.Protocol;
-
-
-@RunWith(JUnit4.class)
-public class LandingServletTest {
+//package org.yangchigi.web;
+//
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.junit.runners.JUnit4;
+//
+//import quicktime.app.spaces.Protocol;
+//
+//
+//@RunWith(JUnit4.class)
+//public class LandingServletTest {
 //	@Test
 //	public void thisAlwaysPasses() {
 //		String url ="http://localhost:8080/seize";
@@ -20,4 +20,4 @@ public class LandingServletTest {
 //	    System.out.println("request"+response.getStatus().getCode());
 //	    System.out.println("request test::"+response.getEntityAsText());
 //	}
-}
+//}
