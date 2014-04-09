@@ -24,28 +24,26 @@
 
 			<div id="rightSectionDiv" class="col-xs-7">
 				<div id="writeFormDiv" class="row">					
-					      <textarea id="contentInput" class="form-control" rows="3" placeholder="생각을 기록하세요" style="resize:none;"></textarea>
 					<form class="form-horizontal" role="form">
-					
-					<input type='file' id="fileInput" accept="image" onchange="readURL(this);" style="display: none;" />
-					<div id="imgFormDiv">
-						<img src="icon/addimage.png" onclick="chooseFile()"
-							style="height: 30px;" /> <span id="previewPane"> <img
-							id="img_prev" src="#" alt="your image" style="display: none;" />
-						</span>
-					</div>
-					<div id="writeMenuDiv">
-						<div class="form-group">
-						      <button type="button" class="btn btn-success" id="submitBtn" onclick="submitArticle()">Submit</button>
-					  </div>
-					</div>					
+					    <textarea id="contentInput" class="form-control" rows="3" placeholder="생각을 기록하세요" style="resize:none;"></textarea>
+						<input type='file' id="fileInput" accept="image" onchange="readURL(this);" style="display: none;" />
+						
+						<div id="imgFormDiv">
+							<img src="icon/addimage.png" onclick="chooseFile()" style="height: 30px;" />
+								<img id="img_prev" src="#" alt="your image" style="display: none;"/>
+						</div>
+						
+						<div id="writeMenuDiv">
+							<div class="form-group">
+								<button type="button" class="btn btn-success" id="submitBtn" onclick="submitArticle()">Submit</button>
+						 	</div>
+						</div>					
 					</form>
 				</div>
-				<div id="contentsDiv" class="row">contents</div>
-				<div id="contentsDiv" class="row">contents</div>
-				<div id="contentsDiv" class="row">contents</div>
-				<div id="contentsDiv" class="row">contents</div>
-				<div id="contentsDiv" class="row">contents</div>
+				<div id = "contentsContainerDiv" >
+					<div class="row contentsDiv">contents</div>
+					<div class="row contentsDiv">contents</div>
+				</div>
 			</div>
 		</div>
 	</div>
