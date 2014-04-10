@@ -97,30 +97,20 @@
 	};
 	var auth = new Auth();
 
-	/* function addClearFormEvent() {
-		var data = $('#signUpForm :input');
-		var closeBtn = $('#closeBtn');
-
-		closeBtn.click(function() {
-			jQuery.each(data, function(i, field) {
-				$(field).val('');
-			});
-		})
-	}
-	 */
-	//addSignUpEvent();
-	//addClearFormEvent();
 	function SignUp() {
 		this.formInputs = {
 			email : {
 				input : $('#emailInput'),
-				inputReg : /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/
+				inputReg : /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/,
+				warnMsg : '이메일 형식에 맞게 입력하세요.'
 			},
 			nickname : {
-				input : $('#nicknameInput')
+				input : $('#nicknameInput'),
+				warnMsg : '닉네임은 4자 이상 입니다.'
 			},
 			password : {
-				input : $('#passwordInput')
+				input : $('#passwordInput'),
+				warnMsg : '비밀번호는 4자 이상 입니다.'
 			}
 		};
 		this.addValidateEvent();
@@ -128,73 +118,24 @@
 
 	SignUp.prototype.addValidateEvent = function() {
 		$.each(this.formInputs, function(key, value) {
-			var callback = function(value, e) {
-				console.log(value);
-				debugger;
-				var inputReg = /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/;
-				var input = $(this).val();
-
-				var showValidityDiv = $(this).next();
-				if (!input || !input.match(inputReg)) {
-					showValidityDiv.html('not match!');
-					showValidityDiv.css('color', 'red');
-				} else {
-					showValidityDiv.html('match');
-					showValidityDiv.css('color', 'green');
-				}
-			};
-
+			var callback = this.callback.bind(value['input'], value);
 			value['input'].keyup(callback);
-		});
+		}.bind(this));
 	}
 
+	SignUp.prototype.callback = function(value, e) {
+		var input = $(this).val();
+
+		var showValidityDiv = $(this).next();
+		if (!input || !input.match(value['inputReg'])) {
+			showValidityDiv.html(value['warnMsg']);
+			showValidityDiv.css('color', 'red');
+		} else {
+			showValidityDiv.html('입력 완료');
+			showValidityDiv.css('color', 'green');
+		}
+	};
+
 	var signUp = new SignUp();
-	/* function addValidateEvent() {
-		var emailInput = $('#emailInput');
-		var nicknameInput = $('#nicknameInput');
-		var passwordInput = $('#passwordInput');
-
-		emailInput.keyup(function() {
-			var inputReg = /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/;
-			var input = $(this).val();
-
-			var showValidityDiv = $(this).next();
-			if (!input || !input.match(inputReg)) {
-				showValidityDiv.html('not match!');
-				showValidityDiv.css('color', 'red');
-			} else {
-				showValidityDiv.html('match');
-				showValidityDiv.css('color', 'green');
-			}
-		});
-
-		nicknameInput.keyup(function() {
-			var input = $(this).val();
-			var showValidityDiv = $(this).next();
-
-			if (!input) {
-				showValidityDiv.html('닉네임을 입력하세요.');
-				showValidityDiv.css('color', 'red');
-			} else {
-				showValidityDiv.html('입력 완료');
-				showValidityDiv.css('color', 'green');
-			}
-		});
-
-		passwordInput.keyup(function() {
-			var input = $(this).val();
-			var showValidityDiv = $(this).next();
-
-			if (!input) {
-				showValidityDiv.html('비밀번호 입력하세요.');
-				showValidityDiv.css('color', 'red');
-			} else {
-				showValidityDiv.html('입력 완료');
-				showValidityDiv.css('color', 'green');
-			}
-		}); 
-	}*/
-
-	//addValidateEvent();
 </script>
 </html>
