@@ -26,8 +26,9 @@ public class WriteArticleServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String contents = req.getParameter("contents");
 		String img = req.getParameter("img");
+		String date = MyCalendar.getCurrentTime();
 		
-		
+		resp.getWriter().write(date);
 		uploadArticle(contents, img);
 		
 	}

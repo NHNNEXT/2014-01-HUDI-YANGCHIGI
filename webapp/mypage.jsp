@@ -43,7 +43,10 @@
 				</div>
 				<div id = "contentsContainerDiv" >
 					<c:forEach items="${todaySet}" var="today" >
-						<div class="row contentsDiv">${today.contents}</div>
+						<div class="row contentsDiv">
+							<div class="timeDiv" ><p class="date">${today.date}</p></div>
+							${today.contents}
+						</div>
 					</c:forEach>
 				</div>
 			</div>

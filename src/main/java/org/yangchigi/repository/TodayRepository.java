@@ -45,8 +45,9 @@ public class TodayRepository implements Repository {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				today = new Today(rs.getString("contents"),
-								rs.getString("date"),
+								rs.getString("date").substring(11).substring(0, 5),
 								rs.getString("img"));
+				System.out.println(today.toString());
 				todayList.add(today);				
 			}
 		} catch (SQLException e) {

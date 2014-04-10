@@ -35,8 +35,12 @@ function submitArticle() {
 				contents : $('#contentInput').val(),
 				img : img_name
 			}
-		}).done(function(msg) {
-			var a = $('#contentsContainerDiv').append('<div class="row contentsDiv newContents">'
+		}).done(function(date) {
+			
+			$('#contentsContainerDiv').append('<div class="row contentsDiv">'
+					+ '<div class="timeDiv" ><p class="date">'
+					+ date
+					+ '</p></div>'
 					+ $('#contentInput').val()
 					+ '</div>').children(':last').hide().fadeIn('slow');
 			$("html, body").animate({ scrollTop: $(document).height() }, "fast");
