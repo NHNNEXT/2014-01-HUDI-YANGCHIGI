@@ -1,4 +1,3 @@
-<!-- Login form -->
 <form id="loginForm" action="login" method="post" class="form-inline"
 	role="form">
 	<div class="form-group">

@@ -53,7 +53,8 @@
 	// 로그인 버튼 이벤트
 	Auth.prototype.addLoginEvent = function() {
 		var self = this;
-		var callback = this.callback.bind(this, function() {});
+		var callback = this.callback.bind(this, function() {
+		});
 		$('#loginBtn').click(function() {
 			var data = $('#loginForm :input');
 			$.ajax({
@@ -65,8 +66,9 @@
 	};
 	// 로그아웃 버튼 이벤트
 	Auth.prototype.addLogoutEvent = function() {
-		var self = this;
-		var callback = this.callback.bind(this, this.loginForm[0].reset);
+		var callback = this.callback.bind(this, function() {
+			this.loginForm[0].reset()
+		}, $('#logoutBtn'));
 		$('#logoutBtn').click(function() {
 			debugger;
 			$.ajax({
@@ -76,10 +78,8 @@
 		});
 	};
 
-	Auth.prototype.callback = function(fp, msg) {
+	Auth.prototype.callback = function(fp, ele, msg) {
 		if ("success" === msg) {
-			//this.logoutBtn.css('display', 'none');
-			//this.loginForm.css('display', 'block')
 			if (this.loginForm.css('display') == 'none') {
 				this.loginForm.css('display', 'block');
 				this.logoutBtn.css('display', 'none');
@@ -96,9 +96,8 @@
 		this.addLogoutEvent();
 	};
 	var auth = new Auth();
-	//auth.init();
 
-	function addClearFormEvent() {
+	/* function addClearFormEvent() {
 		var data = $('#signUpForm :input');
 		var closeBtn = $('#closeBtn');
 
@@ -108,51 +107,94 @@
 			});
 		})
 	}
+	 */
+	//addSignUpEvent();
+	//addClearFormEvent();
+	function SignUp() {
+		this.formInputs = {
+			email : {
+				input : $('#emailInput'),
+				inputReg : /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/
+			},
+			nickname : {
+				input : $('#nicknameInput')
+			},
+			password : {
+				input : $('#passwordInput')
+			}
+		};
+		this.addValidateEvent();
+	}
 
-	addSignUpEvent();
-	addClearFormEvent();
-	addValidateEvent();
+	SignUp.prototype.addValidateEvent = function() {
+		$.each(this.formInputs, function(key, value) {
+			var callback = function(value, e) {
+				console.log(value);
+				debugger;
+				var inputReg = /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/;
+				var input = $(this).val();
 
-	function addValidateEvent() {
+				var showValidityDiv = $(this).next();
+				if (!input || !input.match(inputReg)) {
+					showValidityDiv.html('not match!');
+					showValidityDiv.css('color', 'red');
+				} else {
+					showValidityDiv.html('match');
+					showValidityDiv.css('color', 'green');
+				}
+			};
+
+			value['input'].keyup(callback);
+		});
+	}
+
+	var signUp = new SignUp();
+	/* function addValidateEvent() {
 		var emailInput = $('#emailInput');
 		var nicknameInput = $('#nicknameInput');
 		var passwordInput = $('#passwordInput');
 
 		emailInput.keyup(function() {
-			var emailReg = /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/;
-			var email = emailInput.val();
+			var inputReg = /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/;
+			var input = $(this).val();
 
-			if (!email || !email.match(emailReg)) {
-				$(this).next().html('이메일을 입력하세요');
-				$(this).next().css('color', 'red');
+			var showValidityDiv = $(this).next();
+			if (!input || !input.match(inputReg)) {
+				showValidityDiv.html('not match!');
+				showValidityDiv.css('color', 'red');
 			} else {
-				$(this).next().html('입력 완료');
-				$(this).next().css('color', 'green');
+				showValidityDiv.html('match');
+				showValidityDiv.css('color', 'green');
 			}
 		});
 
 		nicknameInput.keyup(function() {
-			var nickname = nicknameInput.val();
+			var input = $(this).val();
+			var showValidityDiv = $(this).next();
 
-			if (!nickname) {
-				$(this).next().html('닉네임을 입력하세요.');
-				$(this).next().css('color', 'red');
+			if (!input) {
+				showValidityDiv.html('닉네임을 입력하세요.');
+				showValidityDiv.css('color', 'red');
 			} else {
-				$(this).next().html('입력 완료');
-				$(this).next().css('color', 'green');
+				showValidityDiv.html('입력 완료');
+				showValidityDiv.css('color', 'green');
 			}
 		});
 
 		passwordInput.keyup(function() {
-			var password = passwordInput.val();
-			if (!password) {
-				$(this).next().html('비밀번호 입력하세요.');
-				$(this).next().css('color', 'red');
+			var input = $(this).val();
+			var showValidityDiv = $(this).next();
+
+			if (!input) {
+				showValidityDiv.html('비밀번호 입력하세요.');
+				showValidityDiv.css('color', 'red');
 			} else {
-				$(this).next().html('입력 완료');
-				$(this).next().css('color', 'green');
+				showValidityDiv.html('입력 완료');
+				showValidityDiv.css('color', 'green');
 			}
-		});
-	}
+		}); 
+	}*/
+
+	//addValidateEvent();
 </script>
 </html>
