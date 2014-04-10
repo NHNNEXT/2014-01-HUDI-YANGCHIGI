@@ -39,7 +39,6 @@ function submitArticle() {
 			var a = $('#contentsContainerDiv').prepend('<div class="row contentsDiv newContents">'
 					+ $('#contentInput').val()
 					+ '</div>').children(':first').hide().fadeIn('slow');
-
 			
 			$('#img_prev').attr('src', '').css('display', 'none');
 			$('.form-horizontal')[0].reset();
