@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,8 +42,9 @@
 					</form>
 				</div>
 				<div id = "contentsContainerDiv" >
-					<div class="row contentsDiv">contents</div>
-					<div class="row contentsDiv">contents</div>
+					<c:forEach items="${todaySet}" var="today" >
+						<div class="row contentsDiv">${today.contents}</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

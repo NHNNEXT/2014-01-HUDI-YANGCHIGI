@@ -36,9 +36,10 @@ function submitArticle() {
 				img : img_name
 			}
 		}).done(function(msg) {
-			var a = $('#contentsContainerDiv').prepend('<div class="row contentsDiv newContents">'
+			var a = $('#contentsContainerDiv').append('<div class="row contentsDiv newContents">'
 					+ $('#contentInput').val()
-					+ '</div>').children(':first').hide().fadeIn('slow');
+					+ '</div>').children(':last').hide().fadeIn('slow');
+			$("html, body").animate({ scrollTop: $(document).height() }, "fast");
 			
 			$('#img_prev').attr('src', '').css('display', 'none');
 			$('.form-horizontal')[0].reset();

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.yangchigi.support.MyCalendar;
 import org.yangchigi.web.Today;
@@ -30,10 +31,11 @@ public class TodayRepository implements Repository {
 	}
 
 	@Override
-	public Today findByEmail(String email) {
+	public ArrayList<Today> findByEmail(String email) {
 		PreparedStatement pstmt;
-		ResultSet rs;
+		ResultSet rs = null;
 		Today today = null;
+		ArrayList<Today> todayList = new ArrayList<Today>();
 		
 		//email 에 의한 select 구현 필
 		String sql = "SELECT * FROM today";
@@ -41,20 +43,17 @@ public class TodayRepository implements Repository {
 			pstmt = this.conn.prepareStatement(sql);
 //			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
-			
 			while (rs.next()) {
-				today = new Today(rs.getInt("id"),
-								rs.getString("contents"),
+				today = new Today(rs.getString("contents"),
 								rs.getString("date"),
 								rs.getString("img"));
-				System.out.println(today.toString());
-				
+				todayList.add(today);				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return today;
+		return todayList;
 	}
 
 	@Override
