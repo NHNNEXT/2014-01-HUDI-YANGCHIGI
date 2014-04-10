@@ -13,52 +13,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.yangchigi.support.FileUploader;
+import org.yangchigi.repository.Repository;
+import org.yangchigi.repository.TodayRepository;
 import org.yangchigi.support.MyCalendar;
 
+
 public class WriteArticleServlet extends HttpServlet {
+	private Repository repository;
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String contents = req.getParameter("contents");
 		String img = req.getParameter("img");
 		
+		
 		uploadArticle(contents, img);
 		
 	}
 
 	private void uploadArticle(String contents, String img) {
-		Connection conn;
-		PreparedStatement pstmt;
-		ResultSet rs;
-		String sql;
-		
-		String addr = "jdbc:mysql://localhost/seize";
-		String user = "yangchigi";
-		String pw = "yangchigi";
-		
+		Repository repository;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO `today` (`contents`," +
-									"`date`," +
-									"`img`)" +
-									"VALUES " +
-									"(?, ?, ?)";
-		try {
-			conn = DriverManager.getConnection(addr, user, pw);
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, contents);
-			pstmt.setString(2, MyCalendar.getCurrentDateTime());
-			pstmt.setString(3, img);
-			
-			pstmt.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			repository = new TodayRepository();
+			Today today = new Today(contents, MyCalendar.getCurrentDateTime(), img);
+			repository.add(today);
+			repository.findByEmail(contents);
+		} catch (Exception e) {}
 	}
 }

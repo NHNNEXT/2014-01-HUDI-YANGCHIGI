@@ -6,17 +6,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.yangchigi.support.MyCalendar;
 import org.yangchigi.web.Today;
 import org.yangchigi.web.User;
 
-public class UserRepository implements Repository {
+public class TodayRepository implements Repository {
+
 	private final String addr = "jdbc:mysql://localhost/seize";
 	private final String driver = "com.mysql.jdbc.Driver";
 	private final String user = "yangchigi";
 	private final String pw = "yangchigi";
 	private Connection conn;
+	private Today today;
 
-	public UserRepository() throws ClassNotFoundException, SQLException {
+	public TodayRepository() throws ClassNotFoundException, SQLException {
 		super();
 		Class.forName(driver);
 		this.conn = DriverManager.getConnection(addr, user, pw);
@@ -27,42 +30,47 @@ public class UserRepository implements Repository {
 	}
 
 	@Override
-	public User findByEmail(String email) {
+	public Today findByEmail(String email) {
 		PreparedStatement pstmt;
 		ResultSet rs;
-		User user = null;
-		System.out.println("findByEmail call");
-		String sql = "SELECT * FROM `user` WHERE (email = ?)";
+		Today today = null;
+		
+		//email 에 의한 select 구현 필
+		String sql = "SELECT * FROM today";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
-			pstmt.setString(1, email);
-			System.out.println("before execute query");
+//			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
-			System.out.println("after execute query");
-			System.out.println(rs.getString("email"));
+			
 			while (rs.next()) {
-				System.out.println(rs.getString("email"));
-				user = new User(rs.getString("email"),
-								rs.getString("nickname"),
-								rs.getString("password"));
+				today = new Today(rs.getInt("id"),
+								rs.getString("contents"),
+								rs.getString("date"),
+								rs.getString("img"));
+				System.out.println(today.toString());
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return user;
+		
+		return today;
 	}
 
 	@Override
-	public void add(User user) {
+	public void add(Today today) {
 		PreparedStatement pstmt;
 
-		String sql = "INSERT INTO `user` (`email`, `nickname`, `password`) "
-				+ "VALUES (?, ?, ?)";
+		String sql = "INSERT INTO `today` (`contents`," +
+				"`date`," +
+				"`img`)" +
+				"VALUES " +
+				"(?, ?, ?)";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
-			pstmt.setString(1, user.getEmail());
-			pstmt.setString(2, user.getNickname());
-			pstmt.setString(3, user.getPassword());
+			pstmt.setString(1, today.getContents());
+			pstmt.setString(2, MyCalendar.getCurrentDateTime());
+			pstmt.setString(3, today.getImg());
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,8 +78,9 @@ public class UserRepository implements Repository {
 	}
 
 	@Override
-	public void add(Today today) {
+	public void add(User user) {
 		// TODO Auto-generated method stub
 		
 	}
+
 }
