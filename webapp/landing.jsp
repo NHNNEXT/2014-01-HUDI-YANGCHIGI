@@ -20,131 +20,139 @@
 		data-target="#myModal">SignUp</button>
 	<div id="signinDiv">
 		<!-- Login form -->
-		<c:if test="${empty user}"><jsp:include page="login.jsp" /></c:if>
+		<jsp:include page="login.jsp" />
 		<!-- Logout -->
-		<c:if test="${not empty user}"><jsp:include page="logout.jsp" /></c:if>
+		<jsp:include page="logout.jsp" />
 	</div>
 	<!-- Modal -->
 	<jsp:include page="signup.jsp" />
 </body>
 
 <script>
-	(function() {
-		function addSignUpEvent() {
-			var signUpBtn = $('#signUpBtn');
+	function addSignUpEvent() {
+		var signUpBtn = $('#signUpBtn');
 
-			signUpBtn.click(function() {
-				var data = $('#signUpForm :input');
-				$.ajax({
-					type : "POST",
-					url : "signup",
-					data : data
-				}).done(function(msg) {
-					console.log(msg);
-				});
-			})
-		}
-		// 로그인, 로그아웃 관리 객체
-		function Auth() {
-			this.signinDiv = $('#signinDiv');
-		}
-		// 로그인 버튼 이벤트
-		Auth.prototype.addLoginEvent = function() {
-			var self = this;
-			$('#loginBtn').click(function() {
-				var data = $('#loginForm :input');
-				$.ajax({
-					type : "POST",
-					url : "login",
-					data : data
-				}).done(function(msg) {
-					if ("success" === msg) {
-						self.signinDiv.load('logout.jsp', function() {
-							self.addLogoutEvent();
-						});
-					}
-				});
-			})
-		};
-		// 로그아웃 버튼 이벤트
-		Auth.prototype.addLogoutEvent = function() {
-			var self = this;
-			$('#logoutBtn').click(function() {
-				$.ajax({
-					type : "POST",
-					url : "logout",
-				}).done(function(msg) {
-					if ("success" === msg) {
-						self.signinDiv.load('login.jsp', function() {
-							self.addLoginEvent();
-						});
-					}
-				})
-			});
-		};
-		Auth.prototype.init = function() {
-			this.addLoginEvent();
-			this.addLogoutEvent();
-		};
-		var auth = new Auth();
-		auth.init();
-
-		function addClearFormEvent() {
+		signUpBtn.click(function() {
 			var data = $('#signUpForm :input');
-			var closeBtn = $('#closeBtn');
+			$.ajax({
+				type : "POST",
+				url : "signup",
+				data : data
+			}).done(function(msg) {
+				console.log(msg);
+			});
+		})
+	}
+	// 로그인, 로그아웃 관리 객체
+	function Auth() {
+		this.loginForm = $('#loginForm');
+		this.loginBtn = $('#loginBtn');
+		this.logoutBtn = $('#logoutBtn');
+		this.init();
+	}
+	// 로그인 버튼 이벤트
+	Auth.prototype.addLoginEvent = function() {
+		var self = this;
+		var callback = this.callback.bind(this, function() {});
+		$('#loginBtn').click(function() {
+			var data = $('#loginForm :input');
+			$.ajax({
+				type : "POST",
+				url : "login",
+				data : data
+			}).done(callback);
+		})
+	};
+	// 로그아웃 버튼 이벤트
+	Auth.prototype.addLogoutEvent = function() {
+		var self = this;
+		var callback = this.callback.bind(this, this.loginForm[0].reset);
+		$('#logoutBtn').click(function() {
+			debugger;
+			$.ajax({
+				type : "POST",
+				url : "logout"
+			}).done(callback)
+		});
+	};
 
-			closeBtn.click(function() {
-				jQuery.each(data, function(i, field) {
-					$(field).val('');
-				});
-			})
+	Auth.prototype.callback = function(fp, msg) {
+		if ("success" === msg) {
+			//this.logoutBtn.css('display', 'none');
+			//this.loginForm.css('display', 'block')
+			if (this.loginForm.css('display') == 'none') {
+				this.loginForm.css('display', 'block');
+				this.logoutBtn.css('display', 'none');
+			} else {
+				this.logoutBtn.css('display', 'block');
+				this.loginForm.css('display', 'none');
+			}
+			fp && fp();
 		}
+	}
+	Auth.prototype.init = function() {
+		this.logoutBtn.css('display', 'none');
+		this.addLoginEvent();
+		this.addLogoutEvent();
+	};
+	var auth = new Auth();
+	//auth.init();
 
-		addSignUpEvent();
-		addClearFormEvent();
-		addValidateEvent();
+	function addClearFormEvent() {
+		var data = $('#signUpForm :input');
+		var closeBtn = $('#closeBtn');
 
-		function addValidateEvent() {
-			var emailInput = $('#emailInput');
-			var nicknameInput = $('#nicknameInput');
-			var passwordInput = $('#passwordInput');
-
-			emailInput.keyup(function() {
-				var emailReg = /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/;
-				var email = emailInput.val();
-
-				if (!email || !email.match(emailReg)) {
-					$(this).next().html('이메일을 입력하세요');
-					$(this).next().css('color', 'red');
-				} else {
-					$(this).next().html('입력 완료');
-					$(this).next().css('color', 'green');
-				}
+		closeBtn.click(function() {
+			jQuery.each(data, function(i, field) {
+				$(field).val('');
 			});
+		})
+	}
 
-			nicknameInput.keyup(function() {
-				var nickname = nicknameInput.val();
+	addSignUpEvent();
+	addClearFormEvent();
+	addValidateEvent();
 
-				if (!nickname) {
-					$(this).next().html('닉네임을 입력하세요.');
-					$(this).next().css('color', 'red');
-				} else {
-					$(this).next().html('입력 완료');
-					$(this).next().css('color', 'green');
-				}
-			});
+	function addValidateEvent() {
+		var emailInput = $('#emailInput');
+		var nicknameInput = $('#nicknameInput');
+		var passwordInput = $('#passwordInput');
 
-			passwordInput.keyup(function() {
-				var password = passwordInput.val();
-				if (!password) {
-					$(this).next().html('비밀번호 입력하세요.');
-					$(this).next().css('color', 'red');
-				} else {
-					$(this).next().html('입력 완료');
-					$(this).next().css('color', 'green');
-				}
-			});
-		}
-	})();
+		emailInput.keyup(function() {
+			var emailReg = /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/;
+			var email = emailInput.val();
+
+			if (!email || !email.match(emailReg)) {
+				$(this).next().html('이메일을 입력하세요');
+				$(this).next().css('color', 'red');
+			} else {
+				$(this).next().html('입력 완료');
+				$(this).next().css('color', 'green');
+			}
+		});
+
+		nicknameInput.keyup(function() {
+			var nickname = nicknameInput.val();
+
+			if (!nickname) {
+				$(this).next().html('닉네임을 입력하세요.');
+				$(this).next().css('color', 'red');
+			} else {
+				$(this).next().html('입력 완료');
+				$(this).next().css('color', 'green');
+			}
+		});
+
+		passwordInput.keyup(function() {
+			var password = passwordInput.val();
+			if (!password) {
+				$(this).next().html('비밀번호 입력하세요.');
+				$(this).next().css('color', 'red');
+			} else {
+				$(this).next().html('입력 완료');
+				$(this).next().css('color', 'green');
+			}
+		});
+	}
 </script>
 </html>
