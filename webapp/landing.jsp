@@ -20,29 +20,15 @@
 		data-target="#myModal">SignUp</button>
 	<div id="signinDiv">
 		<!-- Login form -->
-		<jsp:include page="login.jsp" />
+		<jsp:include page="login.jspf" />
 		<!-- Logout -->
-		<jsp:include page="logout.jsp" />
+		<jsp:include page="logout.jspf" />
 	</div>
 	<!-- Modal -->
-	<jsp:include page="signup.jsp" />
+	<jsp:include page="signup.jspf" />
 </body>
 
 <script>
-	function addSignUpEvent() {
-		var signUpBtn = $('#signUpBtn');
-
-		signUpBtn.click(function() {
-			var data = $('#signUpForm :input');
-			$.ajax({
-				type : "POST",
-				url : "signup",
-				data : data
-			}).done(function(msg) {
-				console.log(msg);
-			});
-		})
-	}
 	// 로그인, 로그아웃 관리 객체
 	function Auth() {
 		this.loginForm = $('#loginForm');
@@ -59,7 +45,7 @@
 			var data = $('#loginForm :input');
 			$.ajax({
 				type : "POST",
-				url : "login",
+				url : "user/login",
 				data : data
 			}).done(callback);
 		})
@@ -70,10 +56,9 @@
 			this.loginForm[0].reset()
 		}, $('#logoutBtn'));
 		$('#logoutBtn').click(function() {
-			debugger;
 			$.ajax({
 				type : "POST",
-				url : "logout"
+				url : "user/logout"
 			}).done(callback)
 		});
 	};
@@ -98,6 +83,7 @@
 	var auth = new Auth();
 
 	function SignUp() {
+		this.addSignUpEvent();
 		this.formInputs = {
 			email : {
 				input : $('#emailInput'),
@@ -114,6 +100,21 @@
 			}
 		};
 		this.addValidateEvent();
+	}
+
+	SignUp.prototype.addSignUpEvent = function() {
+		var signUpBtn = $('#signUpBtn');
+
+		signUpBtn.click(function() {
+			var data = $('#signUpForm :input');
+			$.ajax({
+				type : "POST",
+				url : "user/signup",
+				data : data
+			}).done(function(msg) {
+				console.log(msg);
+			});
+		})
 	}
 
 	SignUp.prototype.addValidateEvent = function() {

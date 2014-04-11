@@ -12,7 +12,7 @@ public class LandingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("LandingServlet");
-		getServletContext().getRequestDispatcher("/landing.jsp").forward(request,
-				response);
+		getServletContext().getRequestDispatcher("/landing.jsp").forward(
+				request, response);
 	}
 }
