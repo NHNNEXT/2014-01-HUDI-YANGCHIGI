@@ -88,33 +88,44 @@
 			email : {
 				input : $('#emailInput'),
 				inputReg : /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/,
-				warnMsg : '이메일 형식에 맞게 입력하세요.'
+				warnMsg : '이메일 형식에 맞게 입력하세요.',
+				valid : false
 			},
 			nickname : {
 				input : $('#nicknameInput'),
-				warnMsg : '닉네임은 4자 이상 입니다.'
+				warnMsg : '닉네임은 4자 이상 입니다.',
+				valid : false
 			},
 			password : {
 				input : $('#passwordInput'),
-				warnMsg : '비밀번호는 4자 이상 입니다.'
+				warnMsg : '비밀번호는 4자 이상 입니다.',
+				valid : false
 			}
 		};
 		this.addValidateEvent();
 	}
-
+	SignUp.prototype.isValid = function() {
+		var valid = true;
+		$.each(this.formInputs, function(key, value) {
+			valid = valid && value['valid'];
+		})
+		return valid;
+	}
 	SignUp.prototype.addSignUpEvent = function() {
 		var signUpBtn = $('#signUpBtn');
 
 		signUpBtn.click(function() {
-			var data = $('#signUpForm :input');
-			$.ajax({
-				type : "POST",
-				url : "user/signup",
-				data : data
-			}).done(function(msg) {
-				console.log(msg);
-			});
-		})
+			if (this.isValid()) {
+				var data = $('#signUpForm :input');
+				$.ajax({
+					type : "POST",
+					url : "user/signup",
+					data : data
+				}).done(function(msg) {
+					console.log(msg);
+				});
+			}
+		}.bind(this))
 	}
 
 	SignUp.prototype.addValidateEvent = function() {
@@ -123,7 +134,7 @@
 			value['input'].keyup(callback);
 		}.bind(this));
 	}
-	
+
 	SignUp.prototype.callback = function(value, e) {
 		var input = $(this).val();
 
@@ -131,9 +142,11 @@
 		if (!input || !input.match(value['inputReg'])) {
 			showValidityDiv.html(value['warnMsg']);
 			showValidityDiv.css('color', 'red');
+			value['valid'] = false;
 		} else {
 			showValidityDiv.html('입력 완료');
 			showValidityDiv.css('color', 'green');
+			value['valid'] = true;
 		}
 	};
 
