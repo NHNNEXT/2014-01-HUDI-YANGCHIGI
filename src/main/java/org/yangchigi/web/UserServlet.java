@@ -18,7 +18,8 @@ import org.yangchigi.repository.UserRepository;
  * Servlet implementation class UserServlet
  */
 public class UserServlet extends HttpServlet {
-	private final static Logger logger = LogManager.getLogger(UserServlet.class.getName());
+	private final static Logger logger = LogManager.getLogger(UserServlet.class
+			.getName());
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -62,7 +63,11 @@ public class UserServlet extends HttpServlet {
 				if (user.getPassword().equals(request.getParameter("password"))) {
 					HttpSession session = request.getSession();
 					session.setAttribute("user", "logged");
+					System.out.println("login success");
 					response.getWriter().write("success");
+				} else {
+					System.out.println("login fail");
+					response.getWriter().write("fail");
 				}
 			} else if ("/user/logout".equals(request.getRequestURI())) {
 				logger.debug("UserServlet > /user/logout");
@@ -73,6 +78,8 @@ public class UserServlet extends HttpServlet {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
