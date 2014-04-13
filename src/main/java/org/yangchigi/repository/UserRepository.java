@@ -68,10 +68,4 @@ public class UserRepository implements Repository <User> {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public void add(Today today) {
-		// TODO Auto-generated method stub
-		
-	}
 }

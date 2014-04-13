@@ -9,9 +9,8 @@ import java.util.ArrayList;
 
 import org.yangchigi.support.MyCalendar;
 import org.yangchigi.web.Today;
-import org.yangchigi.web.User;
 
-public class TodayRepository implements Repository {
+public class TodayRepository implements Repository<Today> {
 
 	private final String addr = "jdbc:mysql://localhost/seize";
 	private final String driver = "com.mysql.jdbc.Driver";
@@ -58,7 +57,7 @@ public class TodayRepository implements Repository {
 	}
 
 	@Override
-	public void add(Today today) {
+	public void add(Today user) {
 		PreparedStatement pstmt;
 
 		String sql = "INSERT INTO `today` (`contents`," +
@@ -76,11 +75,4 @@ public class TodayRepository implements Repository {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public void add(User user) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
