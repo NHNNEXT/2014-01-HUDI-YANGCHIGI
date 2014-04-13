@@ -9,16 +9,14 @@ import java.util.ArrayList;
 
 import org.yangchigi.support.MyCalendar;
 import org.yangchigi.web.Today;
-import org.yangchigi.web.User;
 
-public class TodayRepository implements Repository {
+public class TodayRepository implements Repository <Today> {
 
 	private final String addr = "jdbc:mysql://localhost/seize";
 	private final String driver = "com.mysql.jdbc.Driver";
 	private final String user = "yangchigi";
 	private final String pw = "yangchigi";
 	private Connection conn;
-	private Today today;
 
 	public TodayRepository() throws ClassNotFoundException, SQLException {
 		super();
@@ -31,7 +29,7 @@ public class TodayRepository implements Repository {
 	}
 
 	@Override
-	public ArrayList<Today> findByEmail(String email) {
+	public ArrayList<Today> findListByEmail() {
 		PreparedStatement pstmt;
 		ResultSet rs = null;
 		Today today = null;
@@ -47,7 +45,6 @@ public class TodayRepository implements Repository {
 				today = new Today(rs.getString("contents"),
 								rs.getString("date").substring(11).substring(0, 5),
 								rs.getString("img"));
-				System.out.println(today.toString());
 				todayList.add(today);				
 			}
 		} catch (SQLException e) {
@@ -71,6 +68,7 @@ public class TodayRepository implements Repository {
 			pstmt.setString(1, today.getContents());
 			pstmt.setString(2, MyCalendar.getCurrentDateTime());
 			pstmt.setString(3, today.getImg());
+			System.out.println(pstmt.toString());
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,9 +76,11 @@ public class TodayRepository implements Repository {
 	}
 
 	@Override
-	public void add(User user) {
+	public Today findByEmail(String string) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+
 
 }

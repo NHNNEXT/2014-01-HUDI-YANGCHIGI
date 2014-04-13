@@ -24,6 +24,7 @@ function chooseFile() {
 function submitArticle() {
 	// 일단 이미지가 없을때만 ajax로..
 	if(img_name == undefined){
+		
 		var contentsVal = $('#contentInput').val();
 //		$("body form").submit(function(e){
 			
@@ -63,7 +64,7 @@ function submitArticle() {
 
 function load() {
 	$('.timeDiv').each(function(i){
-		console.log($(this).height($(this).parent().height() + 45));
+		$(this).height($(this).parent().height() + 45);
 		
 	});
 }
