@@ -10,6 +10,6 @@
 	</div>
 	<button type="button" id="loginBtn" class="btn btn-default"
 		data-toggle="popover" data-placement="bottom"
-		data-content="email and password are not matched.">Sign
+		>Sign
 		in</button>
 </form>

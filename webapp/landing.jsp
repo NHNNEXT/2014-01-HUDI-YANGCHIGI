@@ -83,7 +83,8 @@
 			clearTimeout(this.popoverTimer);
 			// 로그인 실패 popover
 			this.loginBtn.popover('destroy');
-			this.loginBtn.popover('show')
+			this.loginBtn.popover({html: true, content: '로그인 정보가 틀렸어요.'})
+			this.loginBtn.popover('show');
 			// 1초 후 popover 제거 
 			this.popoverTimer = setTimeout(function() {
 				this.loginBtn.popover('destroy');
