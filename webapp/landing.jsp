@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/signup.css">
+<link rel="stylesheet" href="css/landing.css">
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script
@@ -16,9 +16,9 @@
 </head>
 <body>
 	<!-- Button trigger modal -->
-	<button class="btn btn-primary btn-lg" data-toggle="modal"
-		data-target="#myModal">SignUp</button>
 	<div id="signinDiv">
+		<button id="signupBtn" class="btn btn-primary" data-toggle="modal"
+			data-target="#myModal">SignUp</button>
 		<!-- Login form -->
 		<jsp:include page="login.jspf" />
 		<!-- Logout -->
@@ -34,6 +34,11 @@
 		this.loginForm = $('#loginForm');
 		this.loginBtn = $('#loginBtn');
 		this.logoutBtn = $('#logoutBtn');
+		this.isLogged = function() {
+			// ${user}정보는 세션에 저장되어 있음
+			return 'logged' === '${user}'
+		}
+		this.popoverTimer;
 		this.init();
 	}
 	// 로그인 버튼 이벤트
@@ -41,7 +46,7 @@
 		var self = this;
 		var callback = this.callback.bind(this, function() {
 		});
-		$('#loginBtn').click(function() {
+		this.loginBtn.click(function() {
 			var data = $('#loginForm :input');
 			$.ajax({
 				type : "POST",
@@ -53,8 +58,8 @@
 	// 로그아웃 버튼 이벤트
 	Auth.prototype.addLogoutEvent = function() {
 		var callback = this.callback.bind(this, function() {
-			this.loginForm[0].reset()
-		}, $('#logoutBtn'));
+			auth.loginForm[0].reset()
+		});
 		$('#logoutBtn').click(function() {
 			$.ajax({
 				type : "POST",
@@ -63,7 +68,7 @@
 		});
 	};
 
-	Auth.prototype.callback = function(fp, ele, msg) {
+	Auth.prototype.callback = function(fp, msg) {
 		if ("success" === msg) {
 			if (this.loginForm.css('display') == 'none') {
 				this.loginForm.css('display', 'block');
@@ -73,10 +78,24 @@
 				this.loginForm.css('display', 'none');
 			}
 			fp && fp();
+			// 로그인 실패
+		} else {
+			clearTimeout(this.popoverTimer);
+			// 로그인 실패 popover
+			this.loginBtn.popover('destroy');
+			this.loginBtn.popover('show')
+			// 1초 후 popover 제거 
+			this.popoverTimer = setTimeout(function() {
+				this.loginBtn.popover('destroy');
+			}.bind(this), 1000);
 		}
 	}
 	Auth.prototype.init = function() {
-		this.logoutBtn.css('display', 'none');
+		if (this.isLogged())
+			this.loginForm.css('display', 'none');
+		else
+			this.logoutBtn.css('display', 'none');
+
 		this.addLoginEvent();
 		this.addLogoutEvent();
 	};
@@ -88,33 +107,44 @@
 			email : {
 				input : $('#emailInput'),
 				inputReg : /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/,
-				warnMsg : '이메일 형식에 맞게 입력하세요.'
+				warnMsg : '이메일 형식에 맞게 입력하세요.',
+				valid : false
 			},
 			nickname : {
 				input : $('#nicknameInput'),
-				warnMsg : '닉네임은 4자 이상 입니다.'
+				warnMsg : '닉네임을 입력하세요.',
+				valid : false
 			},
 			password : {
 				input : $('#passwordInput'),
-				warnMsg : '비밀번호는 4자 이상 입니다.'
+				warnMsg : '비밀번호를 입력하세요.',
+				valid : false
 			}
 		};
 		this.addValidateEvent();
 	}
-
+	SignUp.prototype.isValid = function() {
+		var valid = true;
+		$.each(this.formInputs, function(key, value) {
+			valid = valid && value['valid'];
+		})
+		return valid;
+	}
 	SignUp.prototype.addSignUpEvent = function() {
 		var signUpBtn = $('#signUpBtn');
 
 		signUpBtn.click(function() {
-			var data = $('#signUpForm :input');
-			$.ajax({
-				type : "POST",
-				url : "user/signup",
-				data : data
-			}).done(function(msg) {
-				console.log(msg);
-			});
-		})
+			if (this.isValid()) {
+				var data = $('#signUpForm :input');
+				$.ajax({
+					type : "POST",
+					url : "user/signup",
+					data : data
+				}).done(function(msg) {
+					console.log(msg);
+				});
+			}
+		}.bind(this))
 	}
 
 	SignUp.prototype.addValidateEvent = function() {
@@ -123,7 +153,7 @@
 			value['input'].keyup(callback);
 		}.bind(this));
 	}
-	
+
 	SignUp.prototype.callback = function(value, e) {
 		var input = $(this).val();
 
@@ -131,9 +161,11 @@
 		if (!input || !input.match(value['inputReg'])) {
 			showValidityDiv.html(value['warnMsg']);
 			showValidityDiv.css('color', 'red');
+			value['valid'] = false;
 		} else {
 			showValidityDiv.html('입력 완료');
 			showValidityDiv.css('color', 'green');
+			value['valid'] = true;
 		}
 	};
 

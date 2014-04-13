@@ -8,6 +8,8 @@
 		<label class="sr-only">Password</label> <input type="password"
 			name="password" class="form-control" placeholder="Password" />
 	</div>
-	<button type="button" id="loginBtn" class="btn btn-default">Sign
+	<button type="button" id="loginBtn" class="btn btn-default"
+		data-toggle="popover" data-placement="bottom"
+		data-content="로그인 정보가 틀렸어요">Sign
 		in</button>
 </form>
