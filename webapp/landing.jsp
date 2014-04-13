@@ -9,6 +9,7 @@
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/signup.css">
+<link rel="stylesheet" href="css/landing.css">
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script
@@ -16,9 +17,9 @@
 </head>
 <body>
 	<!-- Button trigger modal -->
-	<button class="btn btn-primary btn-lg" data-toggle="modal"
-		data-target="#myModal">SignUp</button>
 	<div id="signinDiv">
+		<button id="signupBtn" class="btn btn-primary"
+			data-toggle="modal" data-target="#myModal">SignUp</button>
 		<!-- Login form -->
 		<jsp:include page="login.jspf" />
 		<!-- Logout -->

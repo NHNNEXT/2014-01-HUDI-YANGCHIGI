@@ -1,1 +1,21 @@
 @CHARSET "US-ASCII";
+
+#signinDiv {
+	padding: 1%;
+}
+
+#loginForm {
+	display: inline-block;
+	float: right;
+}
+
+#logoutBtn {
+	display: inline-block;
+	float: right;
+}
+
+#signupBtn {
+	display: inline-block;
+	float: right;
+	margin-left: 3px;
+}
