@@ -123,7 +123,7 @@
 			value['input'].keyup(callback);
 		}.bind(this));
 	}
-
+	
 	SignUp.prototype.callback = function(value, e) {
 		var input = $(this).val();
 
