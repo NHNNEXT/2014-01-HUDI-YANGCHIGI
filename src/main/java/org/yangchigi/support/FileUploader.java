@@ -12,7 +12,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class FileUploader {
 	// location to store file uploaded
-	private static final String UPLOAD_DIRECTORY = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/img";
+	private static final String UPLOAD_DIRECTORY = "/Users/jehyeok/yangchigi/2014-01-HUDI-YANGCHIGI/webapp/img";
 
 	// upload settings
 	private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3; // 3MB
@@ -21,9 +21,10 @@ public class FileUploader {
 
 	public static ArrayList<String> upload(HttpServletRequest req) {
 		ArrayList<String> contentList = new ArrayList<String>();
-		
+
 		if (!ServletFileUpload.isMultipartContent(req)) {
-			System.out.println("Error: Form must has enctype=multipart/form-data.");
+			System.out
+					.println("Error: Form must has enctype=multipart/form-data.");
 			return null;
 		}
 
@@ -62,18 +63,18 @@ public class FileUploader {
 			if (formItems != null && formItems.size() > 0) {
 				// iterates over form's fields
 				for (FileItem item : formItems) {
-					if(item.getFieldName().equals("contents"))
+					if (item.getFieldName().equals("contents"))
 						contentList.add(item.getString());
-					
+
 					// processes only fields that are not form fields
 					if (!item.isFormField()) {
 						String fileName = new File(item.getName()).getName();
 						String filePath = uploadPath + File.separator
 								+ fileName;
 						File storeFile = new File(filePath);
-						
+
 						contentList.add(item.getName());
-						
+
 						// saves the file on disk
 						item.write(storeFile);
 						req.setAttribute("message",

@@ -19,8 +19,6 @@ public class Today {
 		this.img = img;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
@@ -42,7 +40,4 @@ public class Today {
 		return "Today [id=" + id + ", contents=" + contents + ", date=" + date
 				+ ", img=" + img + "]";
 	}
-	
-	
-
 }
