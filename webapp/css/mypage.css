@@ -20,24 +20,24 @@
 	background-color:#FFFFDD;
 	margin-top:20px;
 	border:1px solid black;
-	height:80px;
 	margin-left:30px;
 	border-radius:10px;
-	padding:5px;
+	padding:15px;
+}
+.contentsImg{
+	width:200px;
 }
 .timeDiv{
 	width:20px;
-	height:100px;
 	position:absolute;
 	left:10px;
 	background-color: rgb(210, 255, 184);
 	opacity: 0.7;
-	margin-top:-25px;
+	margin-top:-15px;
 }
 .date{
 	font-size: 20px;
 	color: white;
-	margin-top: 40px;
 	margin-right: 0px;
 	margin-left: -15px;
 	}

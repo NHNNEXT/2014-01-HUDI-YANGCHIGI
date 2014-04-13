@@ -26,8 +26,8 @@
 			<div id="rightSectionDiv" class="col-xs-7">
 				<div id="writeFormDiv" class="row">					
 					<form class="form-horizontal" role="form" method=post action="writearticle" enctype="multipart/form-data">
-					    <textarea id="contentInput" class="form-control" rows="3" placeholder="생각을 기록하세요" style="resize:none;"></textarea>
-						<input type='file' id="fileInput" accept="image" onchange="readURL(this);" style="display: none;" />
+					    <textarea name="contents" id="contentInput" class="form-control" rows="3" placeholder="생각을 기록하세요" style="resize:none;"></textarea>
+						<input name="img" type='file' id="fileInput" accept="image" onchange="readURL(this);" style="display: none;" />
 						
 						<div id="imgFormDiv">
 							<img src="icon/addimage.png" onclick="chooseFile()" style="height: 30px;" />
@@ -45,7 +45,10 @@
 					<c:forEach items="${todaySet}" var="today" >
 						<div class="row contentsDiv">
 							<div class="timeDiv" ><p class="date">${today.date}</p></div>
-							${today.contents}
+							<c:if test="${empty today.img}">${today.contents}</c:if>
+							<c:if test="${!empty today.img}">
+								<img class="contentsImg" src="img/${today.img}">
+							${today.contents}</c:if>
 						</div>
 					</c:forEach>
 				</div>

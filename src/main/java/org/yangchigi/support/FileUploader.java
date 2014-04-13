@@ -2,6 +2,7 @@ package org.yangchigi.support;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +20,12 @@ public class FileUploader {
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
 
-	public static boolean upload(HttpServletRequest req) {
+	public static ArrayList<String> upload(HttpServletRequest req) {
+		ArrayList<String> contentList = new ArrayList<String>();
+		
 		if (!ServletFileUpload.isMultipartContent(req)) {
 			System.out.println("Error: Form must has enctype=multipart/form-data.");
-			return false;
+			return null;
 		}
 
 		// configures upload settings
@@ -60,15 +63,18 @@ public class FileUploader {
 			if (formItems != null && formItems.size() > 0) {
 				// iterates over form's fields
 				for (FileItem item : formItems) {
+					if(item.getFieldName().equals("contents"))
+						contentList.add(item.getString());
+					
 					// processes only fields that are not form fields
 					if (!item.isFormField()) {
 						String fileName = new File(item.getName()).getName();
 						String filePath = uploadPath + File.separator
 								+ fileName;
 						File storeFile = new File(filePath);
-
-						System.out.println(filePath);
-
+						
+						contentList.add(item.getName());
+						
 						// saves the file on disk
 						item.write(storeFile);
 						req.setAttribute("message",
@@ -81,6 +87,6 @@ public class FileUploader {
 					"There was an error: " + ex.getMessage());
 		}
 		// redirects client to message page
-		return true;
+		return contentList;
 	}
 }

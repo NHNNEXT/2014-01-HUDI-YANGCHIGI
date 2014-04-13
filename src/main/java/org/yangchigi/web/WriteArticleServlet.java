@@ -3,6 +3,7 @@ package org.yangchigi.web;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,18 +29,35 @@ public class WriteArticleServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		 String contents = req.getParameter("contents");
-		 String img = req.getParameter("img");
-		 String date = MyCalendar.getCurrentTime();
-
-		 if(!FileUploader.upload(req)){
-			 // 에러 처리
-		 }
-		
-		 resp.getWriter().write(date);
-		 uploadArticle(contents, img);
+		ArrayList<String> contentList = new ArrayList<String>();
+		String date = MyCalendar.getCurrentTime();
+		String contents = null;
+		 String img = null;
+		System.out.println("gg");
+		 contentList = FileUploader.upload(req);
+		 System.out.println("gg");
 		 
-		 req.getRequestDispatcher("/mypage.jsp").forward(req, resp);
+		 // AJAX
+		 if(contentList == null){
+			 contents = req.getParameter("contents");
+			 img = req.getParameter("img");
+			 resp.getWriter().write(date);
+			 uploadArticle(contents, img);
+		 }
+		 else {
+			// NOT AJAX		 
+			 if(contentList.isEmpty())
+				 System.out.println("empty");
+			 else{
+				 contents = contentList.get(0);
+				 img = contentList.get(1);
+			 }
+			 
+			 resp.getWriter().write(date);
+			 uploadArticle(contents, img);
+			 
+			 resp.sendRedirect("/mypage");
+		 }
 		
     }
 	
