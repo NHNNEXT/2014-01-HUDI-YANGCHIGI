@@ -22,31 +22,39 @@ function chooseFile() {
 }
 
 function submitArticle() {
-	var val = $('#contentInput').val();
+	var postData = $(this).serializeArray();
 	
-	if (val == "") {
-		alert("내용이 없습니다");
-	}
-	else {
-		$.ajax({
-			type : "POST",
-			url : "writearticle",
-			data : {
-				contents : $('#contentInput').val(),
-				img : img_name
-			}
-		}).done(function(date) {
+	
+	var val = $('#contentInput').val();
+	$("body form").submit(function(e){
+		if (val == "") {
+			alert("내용이 없습니다");
+		}
+		else {
+			$.ajax({
+				type : "POST",
+				url : "writearticle",
+				data : {
+					contents : $('#contentInput').val(),
+					img : img_name
+//					imgdata : postData
+				}
+			}).done(function(date) {
+				
+				$('#contentsContainerDiv').append('<div class="row contentsDiv">'
+						+ '<div class="timeDiv" ><p class="date">'
+						+ date
+						+ '</p></div>'
+						+ $('#contentInput').val()
+						+ '</div>').children(':last').hide().fadeIn('slow');
+				$("html, body").animate({ scrollTop: $(document).height() }, "fast");
+				
+				$('#img_prev').attr('src', '').css('display', 'none');
+				$('.form-horizontal')[0].reset();
+			});
 			
-			$('#contentsContainerDiv').append('<div class="row contentsDiv">'
-					+ '<div class="timeDiv" ><p class="date">'
-					+ date
-					+ '</p></div>'
-					+ $('#contentInput').val()
-					+ '</div>').children(':last').hide().fadeIn('slow');
-			$("html, body").animate({ scrollTop: $(document).height() }, "fast");
-			
-			$('#img_prev').attr('src', '').css('display', 'none');
-			$('.form-horizontal')[0].reset();
-		});
-	}
+		}
+	});
+	
+	$('body form').submit();
 }
