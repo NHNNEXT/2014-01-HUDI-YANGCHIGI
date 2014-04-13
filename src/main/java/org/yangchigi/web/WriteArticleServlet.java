@@ -1,20 +1,14 @@
 package org.yangchigi.web;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.yangchigi.repository.Repository;
 import org.yangchigi.repository.TodayRepository;
 import org.yangchigi.support.FileUploader;
@@ -59,14 +53,19 @@ public class WriteArticleServlet extends HttpServlet {
 	}
 
 	private void uploadArticle(String contents, String img) {
-		Repository repository;
 		try {
 			repository = new TodayRepository();
 			Today today = new Today(contents, MyCalendar.getCurrentDateTime(),
 					img);
 			repository.add(today);
 			repository.findByEmail(contents);
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 	}
 }

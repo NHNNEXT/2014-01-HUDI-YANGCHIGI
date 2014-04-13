@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import org.yangchigi.web.Today;
 import org.yangchigi.web.User;
 
 public class UserRepository implements Repository <User> {
@@ -67,5 +67,11 @@ public class UserRepository implements Repository <User> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public ArrayList<User> findListByEmail() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

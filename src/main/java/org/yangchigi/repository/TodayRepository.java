@@ -17,7 +17,6 @@ public class TodayRepository implements Repository<Today> {
 	private final String user = "yangchigi";
 	private final String pw = "yangchigi";
 	private Connection conn;
-	private Today today;
 
 	public TodayRepository() throws ClassNotFoundException, SQLException {
 		super();
@@ -30,29 +29,28 @@ public class TodayRepository implements Repository<Today> {
 	}
 
 	@Override
-	public ArrayList<Today> findByEmail(String email) {
+	public ArrayList<Today> findListByEmail() {
 		PreparedStatement pstmt;
 		ResultSet rs = null;
 		Today today = null;
 		ArrayList<Today> todayList = new ArrayList<Today>();
-		
-		//email 에 의한 select 구현 필
+
+		// email 에 의한 select 구현 필
 		String sql = "SELECT * FROM today";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
-//			pstmt.setString(1, email);
+			// pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				today = new Today(rs.getString("contents"),
-								rs.getString("date").substring(11).substring(0, 5),
-								rs.getString("img"));
-				System.out.println(today.toString());
-				todayList.add(today);				
+				today = new Today(rs.getString("contents"), rs
+						.getString("date").substring(11).substring(0, 5),
+						rs.getString("img"));
+				todayList.add(today);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return todayList;
 	}
 
@@ -60,19 +58,22 @@ public class TodayRepository implements Repository<Today> {
 	public void add(Today user) {
 		PreparedStatement pstmt;
 
-		String sql = "INSERT INTO `today` (`contents`," +
-				"`date`," +
-				"`img`)" +
-				"VALUES " +
-				"(?, ?, ?)";
+		String sql = "INSERT INTO `today` (`contents`," + "`date`," + "`img`)"
+				+ "VALUES " + "(?, ?, ?)";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
-			pstmt.setString(1, today.getContents());
+			pstmt.setString(1, user.getContents());
 			pstmt.setString(2, MyCalendar.getCurrentDateTime());
-			pstmt.setString(3, today.getImg());
+			pstmt.setString(3, user.getImg());
+			System.out.println(pstmt.toString());
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Today findByEmail(String string) {
+		return null;
 	}
 }
