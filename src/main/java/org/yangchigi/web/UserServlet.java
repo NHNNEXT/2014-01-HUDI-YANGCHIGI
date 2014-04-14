@@ -47,12 +47,13 @@ public class UserServlet extends HttpServlet {
 		Repository<User> repository;
 		try {
 			if ("/user/signup".equals(request.getRequestURI())) {
-				logger.debug("UserServlet > /user/signup");
+				// logger.debug("UserServlet > /user/signup");
+				System.out.println("UserServlet > /user/signup");
 				repository = new UserRepository();
 
 				User user = new User(request.getParameter("email"),
 						request.getParameter("nickname"),
-						request.getParameter("password"));
+						request.getParameter("password"), "");
 				repository.add(user);
 				response.getWriter().write("success");
 			} else if ("/user/login".equals(request.getRequestURI())) {
@@ -62,7 +63,7 @@ public class UserServlet extends HttpServlet {
 						.getParameter("email"));
 				if (user.getPassword().equals(request.getParameter("password"))) {
 					HttpSession session = request.getSession();
-					session.setAttribute("user", "logged");
+					session.setAttribute("user", user.getEmail());
 					System.out.println("login success");
 					response.getWriter().write("success");
 				} else {

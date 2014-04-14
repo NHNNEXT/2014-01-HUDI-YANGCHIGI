@@ -43,7 +43,8 @@ public class UserRepository implements Repository <User> {
 				System.out.println("email: " + rs.getString("email"));
 				user = new User(rs.getString("email"),
 								rs.getString("nickname"),
-								rs.getString("password"));
+								rs.getString("password"),
+								rs.getString("thumbnail"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,14 +56,15 @@ public class UserRepository implements Repository <User> {
 	public void add(User user) {
 		PreparedStatement pstmt;
 
-		String sql = "INSERT INTO `user` (`email`, `nickname`, `password`) "
-				+ "VALUES (?, ?, ?)";
+		String sql = "INSERT INTO `user` (`email`, `nickname`, `password`, `thumbnail`) "
+				+ "VALUES (?, ?, ?, ?)";
 		System.out.println("UserRepository > add: " + user.toString());
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, user.getEmail());
 			pstmt.setString(2, user.getNickname());
 			pstmt.setString(3, user.getPassword());
+			pstmt.setString(4, user.getThumbnail());
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

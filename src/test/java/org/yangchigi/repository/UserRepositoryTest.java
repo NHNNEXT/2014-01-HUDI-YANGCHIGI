@@ -39,7 +39,7 @@ public class UserRepositoryTest {
 	
 	@Test
 	public void 회원가입_유저_DB_추가() {
-		User user = new User("hook3748@gamil.com", "hogu", "123456");
+		User user = new User("hook3748@gamil.com", "hogu", "123456", "");
 		repository.add(user);
 		assertEquals(user, is(repository.findByEmail("hook3748@gmail.com")));
 	}

@@ -36,7 +36,7 @@
 		this.logoutBtn = $('#logoutBtn');
 		this.isLogged = function() {
 			// ${user}정보는 세션에 저장되어 있음
-			return 'logged' === '${user}'
+			return '' !== '${user}'
 		}
 		this.popoverTimer;
 		this.init();
@@ -74,8 +74,7 @@
 				this.loginForm.css('display', 'block');
 				this.logoutBtn.css('display', 'none');
 			} else {
-				this.logoutBtn.css('display', 'block');
-				this.loginForm.css('display', 'none');
+				window.location = '/'
 			}
 			fp && fp();
 			// 로그인 실패
