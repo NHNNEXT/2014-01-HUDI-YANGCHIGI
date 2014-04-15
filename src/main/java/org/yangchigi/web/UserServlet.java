@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.yangchigi.repository.Repository;
 import org.yangchigi.repository.UserRepository;
 
@@ -18,8 +16,6 @@ import org.yangchigi.repository.UserRepository;
  * Servlet implementation class UserServlet
  */
 public class UserServlet extends HttpServlet {
-	private final static Logger logger = LogManager.getLogger(UserServlet.class
-			.getName());
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -27,7 +23,6 @@ public class UserServlet extends HttpServlet {
 	 */
 	public UserServlet() {
 		super();
-		logger.entry();
 	}
 
 	/**
@@ -57,7 +52,6 @@ public class UserServlet extends HttpServlet {
 				repository.add(user);
 				response.getWriter().write("success");
 			} else if ("/user/login".equals(request.getRequestURI())) {
-				logger.info("UserServlet > /user/login");
 				repository = new UserRepository();
 				User user = repository.findByEmail(request
 						.getParameter("email"));
@@ -71,7 +65,6 @@ public class UserServlet extends HttpServlet {
 					response.getWriter().write("fail");
 				}
 			} else if ("/user/logout".equals(request.getRequestURI())) {
-				logger.debug("UserServlet > /user/logout");
 				HttpSession session = request.getSession();
 				session.removeAttribute("user");
 				response.getWriter().write("success");
