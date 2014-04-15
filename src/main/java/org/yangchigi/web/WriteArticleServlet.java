@@ -16,7 +16,7 @@ import org.yangchigi.support.MyCalendar;
 
 public class WriteArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Repository repository;
+	private Repository<Today> repository;
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)

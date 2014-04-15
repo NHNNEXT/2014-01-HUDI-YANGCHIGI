@@ -57,7 +57,6 @@ public class FileUploader {
 
 		try {
 			// parses the request's content to extract file data
-			@SuppressWarnings("unchecked")
 			List<FileItem> formItems = upload.parseRequest(req);
 
 			if (formItems != null && formItems.size() > 0) {
