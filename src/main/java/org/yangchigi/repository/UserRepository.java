@@ -46,6 +46,7 @@ public class UserRepository implements Repository <User> {
 								rs.getString("password"),
 								rs.getString("thumbnail"));
 			}
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -54,11 +55,13 @@ public class UserRepository implements Repository <User> {
 
 	@Override
 	public void add(User user) {
+		System.out.println("UserRepository > add: " + user.toString());
 		PreparedStatement pstmt;
 
 		String sql = "INSERT INTO `user` (`email`, `nickname`, `password`, `thumbnail`) "
 				+ "VALUES (?, ?, ?, ?)";
 		System.out.println("UserRepository > add: " + user.toString());
+
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, user.getEmail());
@@ -66,6 +69,7 @@ public class UserRepository implements Repository <User> {
 			pstmt.setString(3, user.getPassword());
 			pstmt.setString(4, user.getThumbnail());
 			pstmt.execute();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
