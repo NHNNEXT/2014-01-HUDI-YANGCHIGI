@@ -27,16 +27,16 @@
 				<div id="writeFormDiv" class="row">					
 					<form class="form-horizontal" role="form" method=post action="writearticle" enctype="multipart/form-data">
 					    <textarea name="content" id="contentInput" class="form-control" rows="3" placeholder="생각을 기록하세요" style="resize:none;"></textarea>
-						<input name="img" type='file' id="fileInput" accept="image" onchange="readURL(this);" style="display: none;" />
+						<input name="img" id="fileInput" type='file' accept="image" style="display: none;" />
 						
 						<div id="imgFormDiv">
-							<img src="icon/addimage.png" onclick="chooseFile()" style="height: 30px;" />
-								<img id="img_prev" src="#" alt="your image" style="display: none;"/>
+							<img id = "uploadImg" src="icon/addimage.png" style="height: 30px;" />
+								<img id="prevImg" src="#" alt="your image" style="display: none;"/>
 						</div>
 						
 						<div id="writeMenuDiv">
 							<div class="form-group">
-								<button type="button" class="btn btn-success" id="submitBtn" onclick="submitArticle()">Submit</button>
+								<button type="button" class="btn btn-success" id="submitBtn" >Submit</button>
 						 	</div>
 						</div>					
 					</form>

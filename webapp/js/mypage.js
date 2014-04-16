@@ -1,23 +1,20 @@
 var img_name;
 
-function readURL(input) {
+function readImg() {
+	var input = $('#fileInput')[0];
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
 
 		reader.onload = function(e) {
-			$('#img_prev').attr('src', e.target.result).height(50).css('display', 'inline');
+			$('#prevImg').attr('src', e.target.result).height(50).css('display', 'inline');
 			
 		};
 		img_name = input.files[0].name;
 		reader.readAsDataURL(input.files[0]);
 	} else {
 		// if cancel selection
-		$('#img_prev').attr('src', '').css('display', 'none');
+		$('#prevImg').attr('src', '').css('display', 'none');
 	}
-}
-
-function chooseFile() {
-	$('#fileInput').click();
 }
 
 function submitArticle() {
@@ -47,9 +44,9 @@ function submitArticle() {
 							+ contentsVal
 							+ '</div>').children(':last').hide().fadeIn('slow');
 					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
-					$('#img_prev').attr('src', '').css('display', 'none');
+					$('#prevImg').attr('src', '').css('display', 'none');
 					$('.form-horizontal')[0].reset();
-					load();
+					setHeightForTimeDiv();
 				});
 				
 			}
@@ -61,11 +58,23 @@ function submitArticle() {
 	}
 }
 
-function load() {
+function setHeightForTimeDiv() {
 	$('.timeDiv').each(function(i){
-		$(this).height($(this).parent().height() + 45);
-		
+		$(this).height($(this).parent().height() + 45);		
 	});
+}
+
+
+function load() {
+	$('#submitBtn').click(submitArticle);
+	
+	$('#uploadImg').click(function(){
+		$('#fileInput').click();
+	});
+	$('#fileInput').change(readImg);
+	
+	
+	setHeightForTimeDiv();
 }
 
 window.onload = load;
