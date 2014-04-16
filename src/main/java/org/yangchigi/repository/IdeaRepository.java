@@ -45,7 +45,7 @@ public class IdeaRepository implements Repository <Idea> {
 				
 				// time이다
 				today = new Idea(rs.getString("content"),
-								rs.getString("time"),
+								rs.getString("time").substring(0, 5),
 								rs.getString("img"),
 								1);
 				todayList.add(today);				

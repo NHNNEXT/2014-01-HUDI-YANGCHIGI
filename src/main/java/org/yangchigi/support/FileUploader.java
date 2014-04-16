@@ -1,8 +1,10 @@
 package org.yangchigi.support;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ public class FileUploader {
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
 
-	public static ArrayList<String> upload(HttpServletRequest req) {
+	public static ArrayList<String> upload(HttpServletRequest req) throws IOException {
 		
 		ArrayList<String> contentList = new ArrayList<String>();
 		
@@ -48,9 +50,10 @@ public class FileUploader {
 
 		// constructs the directory path to store upload file
 		// this path is relative to application's directory
-		// String uploadPath = getServletContext().getRealPath("") +
-		// File.separator + UPLOAD_DIRECTORY;
-		String uploadPath = UPLOAD_DIRECTORY;
+		String uploadPath = req.getSession().getServletContext().getRealPath("") + File.separator + "img22";
+		System.out.println(uploadPath);
+		
+//		String uploadPath = UPLOAD_DIRECTORY;
 
 		// creates the directory if it does not exist
 		File uploadDir = new File(uploadPath);

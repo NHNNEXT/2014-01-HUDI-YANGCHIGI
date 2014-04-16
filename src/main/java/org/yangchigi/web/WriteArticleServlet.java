@@ -1,5 +1,6 @@
 package org.yangchigi.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -42,7 +43,6 @@ public class WriteArticleServlet extends HttpServlet {
 				 contents = contentList.get(0);
 				 img = contentList.get(1);
 			 }
-			 
 			 resp.getWriter().write(date);
 			 uploadArticle(contents, img);
 			 
