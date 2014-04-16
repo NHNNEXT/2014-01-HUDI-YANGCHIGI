@@ -13,7 +13,7 @@ function readImg() {
 		reader.readAsDataURL(input.files[0]);
 	} else {
 		// if cancel selection
-		$('#prevImg').attr('src', '').css('display', 'none');
+		$('#prevImg').css('display', 'none');
 	}
 }
 
@@ -44,7 +44,7 @@ function submitArticle() {
 							+ contentsVal
 							+ '</div>').children(':last').hide().fadeIn('slow');
 					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
-					$('#prevImg').attr('src', '').css('display', 'none');
+					$('#prevImg').css('display', 'none');
 					$('.form-horizontal')[0].reset();
 					setHeightForTimeDiv();
 				});
