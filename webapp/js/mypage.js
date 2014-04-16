@@ -1,4 +1,4 @@
-var img_name;
+var cur_img_name;
 
 function readImg() {
 	var input = $('#fileInput')[0];
@@ -9,7 +9,7 @@ function readImg() {
 			$('#prevImg').attr('src', e.target.result).height(50).css('display', 'inline');
 			
 		};
-		img_name = input.files[0].name;
+		cur_img_name = input.files[0].name;
 		reader.readAsDataURL(input.files[0]);
 	} else {
 		// if cancel selection
@@ -19,7 +19,7 @@ function readImg() {
 
 function submitArticle() {
 	// 일단 이미지가 없을때만 ajax로..
-	if(img_name == undefined){
+	if(cur_img_name == undefined){
 		
 		var contentsVal = $('#contentInput').val();
 //		$("body form").submit(function(e){
@@ -33,13 +33,13 @@ function submitArticle() {
 					url : "writearticle",
 					data : {
 						content : contentsVal,
-						img : img_name,
+						img_name : cur_img_name,
 					}
-				}).done(function(date) {
+				}).done(function(time) {
 					
 					$('#contentsContainerDiv').append('<div class="row contentsDiv">'
 							+ '<div class="timeDiv" ><p class="date">'
-							+ date
+							+ time
 							+ '</p></div>'
 							+ contentsVal
 							+ '</div>').children(':last').hide().fadeIn('slow');

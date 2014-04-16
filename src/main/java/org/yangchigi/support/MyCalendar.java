@@ -33,7 +33,6 @@ public class MyCalendar {
 //		return curTime;
 //		
 		Date today = new Date();
-
 		return new SimpleDateFormat("HH:mm:ss").format(today);
 	}
 	

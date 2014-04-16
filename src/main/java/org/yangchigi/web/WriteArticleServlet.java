@@ -21,18 +21,17 @@ public class WriteArticleServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
 		
 		ArrayList<String> contentList = new ArrayList<String>();
-		String date = MyCalendar.getCurrentTime();
+		String time = MyCalendar.getCurrentTime();
 		String contents = null;
 		 String img = null;
 		 contentList = FileUploader.upload(req);
 		 // AJAX
 		 if(contentList == null){
 			 contents = req.getParameter("content");
-			 img = req.getParameter("img");
-			 resp.getWriter().write(date);
+			 img = req.getParameter("img_name");
+			 resp.getWriter().write(time);
 			 uploadArticle(contents, img);
 		 }
 		 else {
@@ -43,7 +42,7 @@ public class WriteArticleServlet extends HttpServlet {
 				 contents = contentList.get(0);
 				 img = contentList.get(1);
 			 }
-			 resp.getWriter().write(date);
+			 resp.getWriter().write(time);
 			 uploadArticle(contents, img);
 			 
 			 resp.sendRedirect("/mypage");
@@ -55,7 +54,7 @@ public class WriteArticleServlet extends HttpServlet {
 		
 		try {
 			IdeaRepository repository = new IdeaRepository();
-			Idea today = new Idea(contents, MyCalendar.getCurrentTime(), img, 1);
+			Idea today = new Idea(contents, MyCalendar.getCurrentDate(),MyCalendar.getCurrentTime(), img, 1);
 			repository.add(today);
 		} catch (Exception e) {}
 	}

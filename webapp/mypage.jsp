@@ -27,7 +27,7 @@
 				<div id="writeFormDiv" class="row">					
 					<form class="form-horizontal" role="form" method=post action="writearticle" enctype="multipart/form-data">
 					    <textarea name="content" id="contentInput" class="form-control" rows="3" placeholder="생각을 기록하세요" style="resize:none;"></textarea>
-						<input name="img" id="fileInput" type='file' accept="image" style="display: none;" />
+						<input name="img_name" id="fileInput" type='file' accept="image" style="display: none;" />
 						
 						<div id="imgFormDiv">
 							<img id = "uploadImg" src="icon/addimage.png" style="height: 30px;" />
@@ -48,8 +48,8 @@
 								<p class="date">${idea.time}</p>
 							</div>
 							
-							<c:if test="${!empty idea.img}">
-								<img class="contentsImg" src="img/${idea.img}" style="margin-right: 5px;">
+							<c:if test="${!empty idea.img_name}">
+								<img class="contentsImg" src="img/${idea.img_name}" style="margin-right: 5px;">
 							</c:if>
 							
 							<p class="contentsP">${idea.content}</p>

@@ -70,8 +70,8 @@ public class FileUploader {
 				// iterates over form's fields
 				for (FileItem item : formItems) {
 					if(item.getFieldName().equals("content")){
-						System.out.println(item.getString().getBytes("EUC-KR"));
-						contentList.add(item.getString());  // 왜 한글을 못받지?
+						
+						contentList.add(new String(item.getString().getBytes("8859_1"), "UTF-8"));  // 왜 한글을 못받지?
 					}
 					// processes only fields that are not form fields
 					if (!item.isFormField()) {
@@ -95,4 +95,6 @@ public class FileUploader {
 		// redirects client to message page
 		return contentList;
 	}
+	
+	
 }

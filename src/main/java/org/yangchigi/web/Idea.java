@@ -3,15 +3,19 @@ package org.yangchigi.web;
 public class Idea {
 	private int id;
 	private String content;
+	private String date;
 	private String time;
-	private String img;
-	private int today_id;
-		
-	public Idea(String content, String time, String img, int today_id) {
+	private String img_name;
+	private int user_id;
+	
+	
+	public Idea(String content, String date, String time, String img_name,
+			int user_id) {
 		this.content = content;
+		this.date = date;
 		this.time = time;
-		this.img = img;
-		this.today_id = today_id;
+		this.img_name = img_name;
+		this.user_id = user_id;
 	}
 	public int getId() {
 		return id;
@@ -19,18 +23,21 @@ public class Idea {
 	public String getContent() {
 		return content;
 	}
+	public String getDate() {
+		return date;
+	}
 	public String getTime() {
 		return time;
 	}
-	public String getImg() {
-		return img;
+	public String getImg_name() {
+		return img_name;
 	}
-	public int getToday_id() {
-		return today_id;
+	public int getUser_id() {
+		return user_id;
 	}
 	
 	
-
+		
 	
 
 }

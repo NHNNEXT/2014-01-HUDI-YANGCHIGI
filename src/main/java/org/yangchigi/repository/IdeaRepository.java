@@ -45,8 +45,9 @@ public class IdeaRepository implements Repository <Idea> {
 				
 				// time이다
 				today = new Idea(rs.getString("content"),
+								rs.getString("date"),
 								rs.getString("time").substring(0, 5),
-								rs.getString("img"),
+								rs.getString("img_name"),
 								1);
 				todayList.add(today);				
 			}
@@ -62,17 +63,19 @@ public class IdeaRepository implements Repository <Idea> {
 		PreparedStatement pstmt;
 
 		String sql = "INSERT INTO idea (content," +
+				"date," +
 				"time," +
-				"img," +
-				"today_id)" +
+				"img_name," +
+				"user_id)" +
 				"VALUES " +
-				"(?, ?, ?, ?)";
+				"(?, ?, ?, ?, ?)";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, today.getContent());
-			pstmt.setString(2, MyCalendar.getCurrentTime());
-			pstmt.setString(3, today.getImg());
-			pstmt.setInt(4, 1);
+			pstmt.setString(2, MyCalendar.getCurrentDate());
+			pstmt.setString(3, MyCalendar.getCurrentTime());
+			pstmt.setString(4, today.getImg_name());
+			pstmt.setInt(5, 1);
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
