@@ -5,11 +5,10 @@ function readURL(input) {
 		var reader = new FileReader();
 
 		reader.onload = function(e) {
-			$('#img_prev').attr('src', e.target.result).height(50).css(
-					'display', 'inline');
+			$('#img_prev').attr('src', e.target.result).height(50).css('display', 'inline');
+			
 		};
 		img_name = input.files[0].name;
-		console.log(img_name);
 		reader.readAsDataURL(input.files[0]);
 	} else {
 		// if cancel selection
@@ -36,7 +35,7 @@ function submitArticle() {
 					type : "POST",
 					url : "writearticle",
 					data : {
-						contents : contentsVal,
+						content : contentsVal,
 						img : img_name,
 					}
 				}).done(function(date) {
@@ -47,7 +46,7 @@ function submitArticle() {
 							+ '</p></div>'
 							+ contentsVal
 							+ '</div>').children(':last').hide().fadeIn('slow');
-					$("html, body").animate({ scrollTop: $(document).height() }, "fast");
+					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
 					$('#img_prev').attr('src', '').css('display', 'none');
 					$('.form-horizontal')[0].reset();
 					load();

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.yangchigi.repository.Repository;
-import org.yangchigi.repository.TodayRepository;
+import org.yangchigi.repository.IdeaRepository;
 import org.yangchigi.support.FileUploader;
 import org.yangchigi.support.MyCalendar;
 
@@ -20,15 +20,16 @@ public class WriteArticleServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		
 		ArrayList<String> contentList = new ArrayList<String>();
 		String date = MyCalendar.getCurrentTime();
 		String contents = null;
 		 String img = null;
 		 contentList = FileUploader.upload(req);
-		 
 		 // AJAX
 		 if(contentList == null){
-			 contents = req.getParameter("contents");
+			 contents = req.getParameter("content");
 			 img = req.getParameter("img");
 			 resp.getWriter().write(date);
 			 uploadArticle(contents, img);
@@ -53,8 +54,8 @@ public class WriteArticleServlet extends HttpServlet {
 	private void uploadArticle(String contents, String img) {
 		
 		try {
-			TodayRepository repository = new TodayRepository();
-			Today today = new Today(contents, MyCalendar.getCurrentDateTime(), img);
+			IdeaRepository repository = new IdeaRepository();
+			Idea today = new Idea(contents, MyCalendar.getCurrentTime(), img, 1);
 			repository.add(today);
 		} catch (Exception e) {}
 	}
