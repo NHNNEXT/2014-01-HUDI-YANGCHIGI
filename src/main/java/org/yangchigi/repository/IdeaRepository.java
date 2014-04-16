@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.yangchigi.support.MyCalendar;
-import org.yangchigi.web.Today;
+import org.yangchigi.web.Idea;
 
-public class TodayRepository implements Repository<Today> {
+public class IdeaRepository implements Repository <Idea> {
 
 	private final String addr = "jdbc:mysql://localhost/seize";
 	private final String driver = "com.mysql.jdbc.Driver";
@@ -18,7 +18,7 @@ public class TodayRepository implements Repository<Today> {
 	private final String pw = "yangchigi";
 	private Connection conn;
 
-	public TodayRepository() throws ClassNotFoundException, SQLException {
+	public IdeaRepository() throws ClassNotFoundException, SQLException {
 		super();
 		Class.forName(driver);
 		this.conn = DriverManager.getConnection(addr, user, pw);
@@ -29,43 +29,53 @@ public class TodayRepository implements Repository<Today> {
 	}
 
 	@Override
-	public ArrayList<Today> findListByEmail() {
+	public ArrayList<Idea> findListByEmail() {
 		PreparedStatement pstmt;
 		ResultSet rs = null;
-		Today today = null;
-		ArrayList<Today> todayList = new ArrayList<Today>();
-
-		// email 에 의한 select 구현 필
-		String sql = "SELECT * FROM today";
+		Idea today = null;
+		ArrayList<Idea> todayList = new ArrayList<Idea>();
+		
+		//email 에 의한 select 구현 필
+		String sql = "SELECT * FROM idea";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
-			// pstmt.setString(1, email);
+//			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				today = new Today(rs.getString("contents"), rs
-						.getString("date").substring(11).substring(0, 5),
-						rs.getString("img"));
-				todayList.add(today);
+				
+				// time이다
+				today = new Idea(rs.getString("content"),
+								rs.getString("date"),
+								rs.getString("time").substring(0, 5),
+								rs.getString("img_name"),
+								1);
+				todayList.add(today);				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		return todayList;
 	}
 
 	@Override
-	public void add(Today user) {
+	public void add(Idea today) {
 		PreparedStatement pstmt;
 
-		String sql = "INSERT INTO `today` (`contents`," + "`date`," + "`img`)"
-				+ "VALUES " + "(?, ?, ?)";
+		String sql = "INSERT INTO idea (content," +
+				"date," +
+				"time," +
+				"img_name," +
+				"user_id)" +
+				"VALUES " +
+				"(?, ?, ?, ?, ?)";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
-			pstmt.setString(1, user.getContents());
-			pstmt.setString(2, MyCalendar.getCurrentDateTime());
-			pstmt.setString(3, user.getImg());
-			System.out.println(pstmt.toString());
+			pstmt.setString(1, today.getContent());
+			pstmt.setString(2, MyCalendar.getCurrentDate());
+			pstmt.setString(3, MyCalendar.getCurrentTime());
+			pstmt.setString(4, today.getImg_name());
+			pstmt.setInt(5, 1);
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,7 +83,11 @@ public class TodayRepository implements Repository<Today> {
 	}
 
 	@Override
-	public Today findByEmail(String string) {
+	public Idea findByEmail(String string) {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
 }

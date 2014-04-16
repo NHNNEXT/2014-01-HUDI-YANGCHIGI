@@ -24,40 +24,40 @@
 			<div id="calendarDiv" class="col-xs-4">calendar</div>
 
 			<div id="rightSectionDiv" class="col-xs-7">
-				<div id="writeFormDiv" class="row">
-					<form class="form-horizontal" role="form" method=post
-						action="writearticle" enctype="multipart/form-data">
-						    
-						<textarea name="contents" id="contentInput" class="form-control"
-							rows="3" placeholder="생각을 기록하세요" style="resize: none;"></textarea>
-						<input name="img" type='file' id="fileInput" accept="image"
-							onchange="readURL(this);" style="display: none;" />
 
+				<div id="writeFormDiv" class="row">					
+					<form class="form-horizontal" role="form" method=post action="writearticle" enctype="multipart/form-data">
+					    <textarea name="content" id="contentInput" class="form-control" rows="3" placeholder="생각을 기록하세요" style="resize:none;"></textarea>
+						<input name="img_name" id="fileInput" type='file' accept="image" style="display: none;" />
+						
 						<div id="imgFormDiv">
-							<img src="icon/addimage.png" onclick="chooseFile()"
-								style="height: 30px;" /> <img id="img_prev" src="#"
-								alt="your image" style="display: none;" />
+
+							<img id = "uploadImg" src="icon/addimage.png" style="height: 30px;" />
+								<img id="prevImg" src="#" alt="your image" style="display: none;"/>
 						</div>
 
 						<div id="writeMenuDiv">
 							<div class="form-group">
-								<button type="button" class="btn btn-success" id="submitBtn"
-									onclick="submitArticle()">Submit</button>
-								 
-							</div>
-						</div>
+
+								<button type="button" class="btn btn-success" id="submitBtn" >Submit</button>
+						 	</div>
+						</div>					
 					</form>
 				</div>
-				<div id="contentsContainerDiv">
-					<c:forEach items="${todaySet}" var="today">
+
+				<div id = "contentsContainerDiv" >
+					<c:forEach items="${ideaSet}" var="idea" >
 						<div class="row contentsDiv">
-							<div class="timeDiv">
-								<p class="date">${today.date}</p>
+
+							<div class="timeDiv" >
+								<p class="date">${idea.time}</p>
 							</div>
-							<c:if test="${empty today.img}">${today.contents}</c:if>
-							<c:if test="${!empty today.img}">
-								<img class="contentsImg" src="img/${today.img}">
-							${today.contents}</c:if>
+							
+							<c:if test="${!empty idea.img_name}">
+								<img class="contentsImg" src="img/${idea.img_name}" style="margin-right: 5px;">
+							</c:if>
+							
+							<p class="contentsP">${idea.content}</p>
 						</div>
 					</c:forEach>
 				</div>

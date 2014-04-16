@@ -1,29 +1,25 @@
-var img_name;
+var cur_img_name;
 
-function readURL(input) {
+function readImg() {
+	var input = $('#fileInput')[0];
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
 
 		reader.onload = function(e) {
-			$('#img_prev').attr('src', e.target.result).height(50).css(
-					'display', 'inline');
+			$('#prevImg').attr('src', e.target.result).height(50).css('display', 'inline');
+			
 		};
-		img_name = input.files[0].name;
-		console.log(img_name);
+		cur_img_name = input.files[0].name;
 		reader.readAsDataURL(input.files[0]);
 	} else {
 		// if cancel selection
-		$('#img_prev').attr('src', '').css('display', 'none');
+		$('#prevImg').css('display', 'none');
 	}
-}
-
-function chooseFile() {
-	$('#fileInput').click();
 }
 
 function submitArticle() {
 	// 일단 이미지가 없을때만 ajax로..
-	if(img_name == undefined){
+	if(cur_img_name == undefined){
 		
 		var contentsVal = $('#contentInput').val();
 //		$("body form").submit(function(e){
@@ -36,21 +32,21 @@ function submitArticle() {
 					type : "POST",
 					url : "writearticle",
 					data : {
-						contents : contentsVal,
-						img : img_name,
+						content : contentsVal,
+						img_name : cur_img_name,
 					}
-				}).done(function(date) {
+				}).done(function(time) {
 					
 					$('#contentsContainerDiv').append('<div class="row contentsDiv">'
 							+ '<div class="timeDiv" ><p class="date">'
-							+ date
+							+ time
 							+ '</p></div>'
 							+ contentsVal
 							+ '</div>').children(':last').hide().fadeIn('slow');
-					$("html, body").animate({ scrollTop: $(document).height() }, "fast");
-					$('#img_prev').attr('src', '').css('display', 'none');
+					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
+					$('#prevImg').css('display', 'none');
 					$('.form-horizontal')[0].reset();
-					load();
+					setHeightForTimeDiv();
 				});
 				
 			}
@@ -62,11 +58,23 @@ function submitArticle() {
 	}
 }
 
-function load() {
+function setHeightForTimeDiv() {
 	$('.timeDiv').each(function(i){
-		$(this).height($(this).parent().height() + 45);
-		
+		$(this).height($(this).parent().height() + 45);		
 	});
+}
+
+
+function load() {
+	$('#submitBtn').click(submitArticle);
+	
+	$('#uploadImg').click(function(){
+		$('#fileInput').click();
+	});
+	$('#fileInput').change(readImg);
+	
+	
+	setHeightForTimeDiv();
 }
 
 window.onload = load;
