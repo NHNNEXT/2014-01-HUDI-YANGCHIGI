@@ -1,6 +1,7 @@
 package org.yangchigi.web;
 
 public class User {
+	private int id;
 	private String email;
 	private String nickname;
 	private String password;
@@ -33,5 +34,13 @@ public class User {
 	public String toString() {
 		return "User [email=" + email + ", nickname=" + nickname
 				+ ", password=" + password + "]";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

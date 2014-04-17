@@ -20,8 +20,7 @@ public class LandingServlet extends HttpServlet {
 		System.out.println("LandingServlet");
 		HttpSession session = request.getSession();
 		if (null != session.getAttribute("user")) {
-			getServletContext().getRequestDispatcher("/mypage.jsp").forward(
-					request, response);
+			response.sendRedirect("/mypage");
 		} else {
 			getServletContext().getRequestDispatcher("/landing.jsp").forward(
 					request, response);

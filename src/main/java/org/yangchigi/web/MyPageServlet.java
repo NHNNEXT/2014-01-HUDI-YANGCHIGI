@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.yangchigi.repository.IdeaRepository;
 import org.yangchigi.support.FileUploader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.yangchigi.repository.IdeaRepository;
+import org.yangchigi.repository.UserRepository;
 import org.yangchigi.support.MyCalendar;
 
 public class MyPageServlet extends HttpServlet {
@@ -18,74 +21,95 @@ public class MyPageServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = LoggerFactory
+			.getLogger("org.yangchigi.web.MyPageServlet");
+	private IdeaRepository ideaRepository;
+	private UserRepository userRepository;
+
+	public MyPageServlet() {
+		try {
+			ideaRepository = new IdeaRepository();
+			userRepository = new UserRepository();
+		} catch (ClassNotFoundException | SQLException e) {
+			logger.warn("IdeaRepository 초기화 실패");
+		}
+	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String uri = req.getRequestURI();
+		String uri = request.getRequestURI();
 
 		if ("/mypage".equals(uri)) {
-			IdeaRepository repository;
-			try {
-				repository = new IdeaRepository();
-				req.setAttribute("ideaSet", repository.findListByEmail());
-				req.getRequestDispatcher("/mypage.jsp").forward(req, resp);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
+			System.out.println("userEmail: " + userEmail);
+			User user = userRepository.findByEmail(userEmail);
+			String dateTime = MyCalendar.getCurrentDateTime();
+			logger.debug("date: {}", MyCalendar.getDate(dateTime));
+			System.out.println("date: " + MyCalendar.getDate(dateTime));
+			request.setAttribute(
+					"ideaList",
+					ideaRepository.findByUserIdAndDate(user.getId(),
+							MyCalendar.getDate(dateTime)));
+			request.getRequestDispatcher("/mypage.jsp").forward(request,
+					response);
 		}
 
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		String uri = req.getRequestURI();
-		
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String uri = request.getRequestURI();
+
 		if ("/mypage/write".equals(uri)) {
 			ArrayList<String> contentList = new ArrayList<String>();
-			String time = MyCalendar.getCurrentTime().substring(0, 5);
-			String contents = null;
+			String dateTime = MyCalendar.getCurrentDateTime();
+			String date = MyCalendar.getDate(dateTime);
+			String time = MyCalendar.getTime(dateTime);
+			String content = null;
+			String imgName = null;
+			boolean isPrivate = false;
+			// 유저 이메일을 받아옴.
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
+			logger.info("userEmail: {}", userEmail);
+			System.out.println("userEmail: " + userEmail);
+			User user = userRepository.findByEmail(userEmail);
+			contentList = FileUploader.upload(request);
 
-			String img = null;
-			contentList = FileUploader.upload(req);
 			// AJAX
 			if (contentList == null) {
-				contents = req.getParameter("content");
-				img = req.getParameter("img_name");
-				resp.getWriter().write(time);
-				uploadArticle(contents, img);
+				content = request.getParameter("content");
+				imgName = request.getParameter("imgName");
+				isPrivate = request.getParameter("isPrivate") != null;
+				logger.debug("isPrivate: {}", isPrivate);
+				System.out.println("isPrivate: " + isPrivate);
+
+				response.getWriter().write(time);
+				uploadArticle(content, date, time, imgName, isPrivate, user);
 			} else {
 				// NOT AJAX
 				if (contentList.isEmpty())
 					System.out.println("empty");
 				else {
-					contents = contentList.get(0);
-					img = contentList.get(1);
+					content = contentList.get(0);
+					imgName = contentList.get(1);
 				}
-				resp.getWriter().write(time);
-				uploadArticle(contents, img);
+				response.getWriter().write(date);
+				uploadArticle(content, date, time, imgName, isPrivate, user);
 
-				resp.sendRedirect("/mypage");
+				response.sendRedirect("/mypage");
 			}
 		}
 	}
 
-	private void uploadArticle(String contents, String img) {
-		try {
-
-			IdeaRepository repository = new IdeaRepository();
-			Idea today = new Idea(contents, MyCalendar.getCurrentDate(),
-					MyCalendar.getCurrentTime(), img, 1);
-			repository.add(today);
-			repository.findByEmail(contents);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	private void uploadArticle(String content, String date, String time,
+			String imgName, boolean isPrivate, User user) {
+		logger.debug("user.getId(): " + user.getId());
+		Idea idea = new Idea(content, date, time, imgName, isPrivate,
+				user.getId());
+		ideaRepository.add(idea);
 	}
 }

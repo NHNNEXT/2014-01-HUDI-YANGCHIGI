@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level [%thread][%logger{0}] %m%n
+			</pattern>
+		</encoder>
+	</Appenders>
+	<Root level="info">
+		<AppenderRef ref="Console" />
+	</Root>
+	<Loggers>
+
+		<logger name="org.dbunit" level="error" additivity="false" />
+	</Loggers>
+</Configuration>

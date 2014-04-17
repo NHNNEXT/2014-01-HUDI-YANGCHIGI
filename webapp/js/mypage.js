@@ -22,6 +22,7 @@ function submitArticle() {
 	if(cur_img_name == undefined){
 		
 		var contentsVal = $('#contentInput').val();
+		var isPrivate = $('#isPrivateIpnut:checked').val();
 //		$("body form").submit(function(e){
 			
 			if (contentsVal == "") {
@@ -31,20 +32,20 @@ function submitArticle() {
 				$.ajax({
 					type : "POST",
 					url : "/mypage/write",
+					mimeType:"multipart/form-data",
 					data : {
 						content : contentsVal,
-						img_name : cur_img_name,
+						isPrivate: isPrivate
 					}
-				}).done(function(time) {
+				}).done(function(date) {
 					
 					$('#contentsContainerDiv').append('<div class="row contentsDiv">'
 							+ '<div class="timeDiv" ><p class="date">'
-							+ time
+							+ date
 							+ '</p></div>'
 							+ contentsVal
 							+ '</div>').children(':last').hide().fadeIn('slow');
 					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
-					
 					$('#prevImg').hide();
 					$('.form-horizontal')[0].reset();
 					setHeightForTimeDiv();
