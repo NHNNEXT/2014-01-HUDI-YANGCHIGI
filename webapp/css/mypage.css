@@ -60,7 +60,7 @@
 }
 
 #imgFormDiv {
-	
+	display: inline-block;
 }
 
 #imgFormDiv img {
@@ -70,4 +70,8 @@
 }
 #prevImg {
 	
+}
+
+#submitBtn {
+	float: right;
 }

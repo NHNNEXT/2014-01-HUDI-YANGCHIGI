@@ -5,8 +5,8 @@ public class Idea {
 	private String time;
 	private String imgName;
 	private String date;
-	private boolean is_private;
-	private int user_id;
+	private boolean isPrivate;
+	private int userId;
 
 	public Idea(String content, String date, String time, String imgName,
 			boolean is_private, int user_id) {
@@ -14,12 +14,8 @@ public class Idea {
 		this.date = date;
 		this.time = time;
 		this.imgName = imgName;
-		this.is_private = is_private;
-		this.user_id = user_id;
-	}
-
-	public boolean isIs_private() {
-		return is_private;
+		this.isPrivate = is_private;
+		this.userId = user_id;
 	}
 
 	public String getContent() {
@@ -38,17 +34,22 @@ public class Idea {
 		return date;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
 
 	public String getImg() {
 		return imgName;
 	}
 
+	public boolean getIsPrivate() {
+		return isPrivate;
+	}
+
 	@Override
 	public String toString() {
 		return "Idea [content=" + content + ", time=" + time + ", imgName="
-				+ imgName + ", date=" + date + ", user_id=" + user_id + "]";
+				+ imgName + ", date=" + date + ", isPrivate=" + isPrivate
+				+ ", userId=" + userId + "]";
 	}
 }

@@ -26,6 +26,7 @@ function submitArticle() {
 	if(img_name == undefined){
 		
 		var contentsVal = $('#contentInput').val();
+		var isPrivate = $('#isPrivateIpnut:checked').val();
 //		$("body form").submit(function(e){
 			
 			if (contentsVal == "") {
@@ -35,9 +36,10 @@ function submitArticle() {
 				$.ajax({
 					type : "POST",
 					url : "writearticle",
+					mimeType:"multipart/form-data",
 					data : {
-						contents : contentsVal,
-						img : img_name,
+						content : contentsVal,
+						isPrivate: isPrivate
 					}
 				}).done(function(date) {
 					
@@ -48,14 +50,11 @@ function submitArticle() {
 							+ contentsVal
 							+ '</div>').children(':last').hide().fadeIn('slow');
 					$("html, body").animate({ scrollTop: $(document).height() }, "fast");
-					$('#img_prev').attr('src', '').css('display', 'none');
+					$('#prevImg').attr('src', '').css('display', 'none');
 					$('.form-horizontal')[0].reset();
 					load();
 				});
-				
 			}
-		
-		
 	}
 	else {	
 		$('body form').submit();

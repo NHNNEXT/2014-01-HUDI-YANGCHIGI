@@ -56,16 +56,17 @@ public class IdeaRepository implements Repository<Idea> {
 	public void add(Idea idea) {
 		PreparedStatement pstmt;
 
-		String sql = "INSERT INTO `idea` (`content`, `date`, `time`, `img_name`, `user_id`) "
-				+ "VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO `idea` (`content`, `date`, `time`, `img_name`, `is_private`, `user_id`) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 		String dateTime = MyCalendar.getCurrentDateTime();
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, idea.getContent());
-			pstmt.setString(2, MyCalendar.getDate(dateTime));
-			pstmt.setString(3, MyCalendar.getTime(dateTime));
+			pstmt.setString(2, idea.getDate());
+			pstmt.setString(3, idea.getTime());
 			pstmt.setString(4, idea.getImgName());
-			pstmt.setInt(5, 3);
+			pstmt.setBoolean(5, idea.getIsPrivate());
+			pstmt.setInt(6, idea.getUserId());
 			System.out.println(pstmt.toString());
 			pstmt.execute();
 		} catch (SQLException e) {
