@@ -19,6 +19,7 @@
 			<div class="comment">코멘트</div>
 			<div class="comment">코멘트</div>
 			<div class="comment">코멘트</div>
+			<div id="writeCommentDiv">댓글 쓰는 div</div>
 		</div>
 	</div>
 </body>
