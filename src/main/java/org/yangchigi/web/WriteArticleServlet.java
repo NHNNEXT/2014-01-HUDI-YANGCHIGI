@@ -24,7 +24,7 @@ public class WriteArticleServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		ArrayList<String> contentList = new ArrayList<String>();
-		String time = MyCalendar.getCurrentTime();
+		String time = MyCalendar.getCurrentTime().substring(0,5);
 		String contents = null;
 
 		 String img = null;
