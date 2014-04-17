@@ -3,11 +3,13 @@ package org.yangchigi.repository;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.yangchigi.support.MyCalendar;
 import org.yangchigi.web.Comment;
+import org.yangchigi.web.Idea;
 
 public class CommentRepository implements Repository<Comment>{
 	private final String addr = "jdbc:mysql://localhost/seize";
@@ -27,7 +29,8 @@ public class CommentRepository implements Repository<Comment>{
 
 	@Override
 	public Comment findByEmail(String string) {
-		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
 
@@ -55,8 +58,28 @@ public class CommentRepository implements Repository<Comment>{
 
 	@Override
 	public ArrayList<Comment> findListByEmail() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt;
+		ResultSet rs = null;
+		Comment comm = null;
+		ArrayList<Comment> commList = new ArrayList<Comment>();
+		
+		//email 에 의한 select 구현 필
+		String sql = "SELECT * FROM comment";
+		try {
+			pstmt = this.conn.prepareStatement(sql);
+//			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				
+				// time이다
+				comm = new Comment(rs.getString("content"));
+				commList.add(comm);				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return commList;
 	}
 
 }

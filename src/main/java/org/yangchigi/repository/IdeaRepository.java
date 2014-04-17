@@ -31,7 +31,7 @@ public class IdeaRepository implements Repository <Idea> {
 	public ArrayList<Idea> findListByEmail() {
 		PreparedStatement pstmt;
 		ResultSet rs = null;
-		Idea today = null;
+		Idea idea = null;
 		ArrayList<Idea> todayList = new ArrayList<Idea>();
 		
 		//email 에 의한 select 구현 필
@@ -43,12 +43,12 @@ public class IdeaRepository implements Repository <Idea> {
 			while (rs.next()) {
 				
 				// time이다
-				today = new Idea(rs.getString("content"),
+				idea = new Idea(rs.getString("content"),
 								rs.getString("date"),
 								rs.getString("time").substring(0, 5),
 								rs.getString("img_name"),
 								1);
-				todayList.add(today);				
+				todayList.add(idea);				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

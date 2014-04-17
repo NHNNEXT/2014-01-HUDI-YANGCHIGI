@@ -86,7 +86,7 @@ function submitComment() {
 						+ contentsVal
 						+ '</div>').children(':last').hide().fadeIn('slow');
 				$('html, body').animate({ scrollTop: $(document).height() }, "fast");
-				
+				$('#commentInput').val("");
 			});
 		}
 }

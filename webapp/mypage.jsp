@@ -46,7 +46,7 @@
 				</div>
 
 				<div id = "contentsContainerDiv" >
-					<c:forEach items="${ideaSet}" var="idea" >
+					<c:forEach items="${ideaList}" var="idea" >
 						<div class="row contentsDiv">
 
 							<div class="timeDiv" >

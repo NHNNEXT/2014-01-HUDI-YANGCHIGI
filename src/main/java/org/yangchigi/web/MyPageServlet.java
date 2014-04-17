@@ -28,7 +28,7 @@ public class MyPageServlet extends HttpServlet {
 			IdeaRepository repository;
 			try {
 				repository = new IdeaRepository();
-				req.setAttribute("ideaSet", repository.findListByEmail());
+				req.setAttribute("ideaList", repository.findListByEmail());
 				req.getRequestDispatcher("/mypage.jsp").forward(req, resp);
 			} catch (Exception e) {
 				e.printStackTrace();

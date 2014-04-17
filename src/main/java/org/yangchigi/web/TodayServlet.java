@@ -2,6 +2,7 @@ package org.yangchigi.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,15 @@ public class TodayServlet extends HttpServlet {
 		String uri = req.getRequestURI();
 
 		if ("/today".equals(uri)) {
-			req.getRequestDispatcher("/todaymh.jsp").forward(req, resp);
+			CommentRepository repository;
+			try {
+				repository = new CommentRepository();
+				req.setAttribute("commList", repository.findListByEmail());
+				req.getRequestDispatcher("/todaymh.jsp").forward(req, resp);
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 
 		}
