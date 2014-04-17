@@ -9,27 +9,20 @@
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/today.css">
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/mypage.css">
 <script src="js/mypage.js"></script>
 </head>
 <body>
-	<div class="row">
-		
-		<div class="col-lg-6">
-			<div class="input-group">
-				<input type="text" id="commentInput" class="form-control"> <span
-					class="input-group-btn">
-					<button id="uploadCommentBtn" class="btn btn-default" type="button">Go!</button>
-				</span>
-			</div>
-		</div>
+	<div class="input-group">
+		<input type="text" id="commentInput" class="form-control"> <span
+			class="input-group-btn">
+			<button id="uploadCommentBtn" class="btn btn-success" type="button">Go!</button>
+		</span>
 	</div>
 
-	<div id="commentDiv">
-		<div class="comment-set">good</div>
-		<div class="comment-set">good</div>
-	</div>
+	<div id="commentDiv"></div>
 
 
 </body>

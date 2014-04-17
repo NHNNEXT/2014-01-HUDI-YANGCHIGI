@@ -6,10 +6,8 @@ public class Comment {
 	private int user_id;
 	private int today_id;
 	
-	public Comment(String content, int user_id, int today_id) {
+	public Comment(String content) {
 		this.content = content;
-		this.user_id = user_id;
-		this.today_id = today_id;
 	}
 	
 	public int getId() {

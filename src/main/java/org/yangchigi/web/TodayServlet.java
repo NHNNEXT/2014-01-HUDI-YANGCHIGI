@@ -1,11 +1,14 @@
 package org.yangchigi.web;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.yangchigi.repository.CommentRepository;
 
 
 public class TodayServlet extends HttpServlet {
@@ -28,8 +31,17 @@ public class TodayServlet extends HttpServlet {
 		String uri = req.getRequestURI();
 
 		if ("/today/writecomment".equals(uri)) {
-
-			// AJAX
+			try {
+				CommentRepository repository = new CommentRepository();
+				String content = req.getParameter("content");
+				Comment comment = new Comment(content);
+				repository.add(comment);
+				
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 
 		}
 

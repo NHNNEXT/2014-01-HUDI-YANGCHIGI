@@ -1,11 +1,7 @@
 @CHARSET "UTF-8";
 
-#commentDiv {
-	
-}
-
 .comment-set {
-	background-color : red;
+	background-color : rgb(255, 216, 216);
 	margin:10px;
 	padding:5px;
 }

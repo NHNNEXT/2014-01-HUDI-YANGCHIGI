@@ -78,6 +78,7 @@ function submitComment() {
 				type : "POST",
 				url : "/today/writecomment",
 				data : {
+					content : contentsVal
 				}
 			}).done(function(time) {
 				
