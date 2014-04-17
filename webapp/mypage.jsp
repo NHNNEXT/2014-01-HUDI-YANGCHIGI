@@ -43,15 +43,15 @@
 					</form>
 				</div>
 				<div id="contentsContainerDiv">
-					<c:forEach items="${todaySet}" var="today">
+					<c:forEach items="${ideaList}" var="idea">
 						<div class="row contentsDiv">
 							<div class="timeDiv">
-								<p class="date">${today.date}</p>
+								<p class="date">${idea.date}</p>
 							</div>
-							<c:if test="${empty today.imgName}">${today.content}</c:if>
-							<c:if test="${!empty today.imgName}">
-								<img class="contentsImg" src="img/${today.imgName}">
-							${today.content}</c:if>
+							<c:if test="${empty today.imgName}">${idea.content}</c:if>
+							<c:if test="${!empty idea.imgName}">
+								<img class="contentsImg" src="img/${idea.imgName}">
+							${idea.content}</c:if>
 						</div>
 					</c:forEach>
 				</div>

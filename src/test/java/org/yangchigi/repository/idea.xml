@@ -6,4 +6,8 @@
 		is_private="false" user_id="3" />
 	<idea content="hi" date="2014-3-1" time="11:20:02" img_name="haru.jpg"
 		is_private="false" user_id="3" />
+	<idea content="hi" date="2014-3-2" time="11:20:02" img_name="haru.jpg"
+		is_private="false" user_id="3" />
+	<idea content="hi" date="2014-3-1" time="11:20:02" img_name="haru.jpg"
+		is_private="false" user_id="4" />
 </dataset>
