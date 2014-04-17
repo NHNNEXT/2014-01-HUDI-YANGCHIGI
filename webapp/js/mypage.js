@@ -6,14 +6,14 @@ function readImg() {
 		var reader = new FileReader();
 
 		reader.onload = function(e) {
-			$('#prevImg').attr('src', e.target.result).height(50).css('display', 'inline');
+			$('#prevImg').attr('src', e.target.result).height(50).show("slow");
 			
 		};
 		cur_img_name = input.files[0].name;
 		reader.readAsDataURL(input.files[0]);
 	} else {
 		// if cancel selection
-		$('#prevImg').css('display', 'none');
+		$('#prevImg').hide("slow");
 	}
 }
 
@@ -44,14 +44,13 @@ function submitArticle() {
 							+ contentsVal
 							+ '</div>').children(':last').hide().fadeIn('slow');
 					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
-					$('#prevImg').css('display', 'none');
+					
+					$('#prevImg').hide();
 					$('.form-horizontal')[0].reset();
 					setHeightForTimeDiv();
 				});
 				
 			}
-		
-		
 	}
 	else {	
 		$('body form').submit();
@@ -60,7 +59,9 @@ function submitArticle() {
 
 function setHeightForTimeDiv() {
 	$('.timeDiv').each(function(i){
-		$(this).height($(this).parent().height() + 45);		
+		var newHeight = parseInt($(this).parent().height()) + parseInt($(this).parent().css('margin-top')) * 2;
+		
+		$(this).height(newHeight);		
 	});
 }
 
