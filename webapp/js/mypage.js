@@ -30,7 +30,7 @@ function submitArticle() {
 			else {
 				$.ajax({
 					type : "POST",
-					url : "writearticle",
+					url : "/mypage/write",
 					data : {
 						content : contentsVal,
 						img_name : cur_img_name,

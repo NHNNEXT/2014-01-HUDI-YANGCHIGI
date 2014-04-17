@@ -26,7 +26,7 @@
 			<div id="rightSectionDiv" class="col-xs-7">
 
 				<div id="writeFormDiv" class="row">					
-					<form class="form-horizontal" role="form" method=post action="writearticle" enctype="multipart/form-data">
+					<form class="form-horizontal" role="form" method=post action="/mypage/write" enctype="multipart/form-data">
 					    <textarea name="content" id="contentInput" class="form-control" rows="3" placeholder="생각을 기록하세요" style="resize:none;"></textarea>
 						<input name="img_name" id="fileInput" type='file' accept="image" style="display: none;" />
 						
