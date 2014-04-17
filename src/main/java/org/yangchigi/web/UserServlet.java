@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yangchigi.repository.Repository;
 import org.yangchigi.repository.UserRepository;
 
 /**
@@ -19,14 +18,13 @@ import org.yangchigi.repository.UserRepository;
  */
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Repository<User> repository;
 	private static Logger logger = LoggerFactory.getLogger("org.yangchigi.web.UserServlet");
+	private UserRepository repository;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public UserServlet() {
-		super();
 		try {
 			repository = new UserRepository();
 		} catch (ClassNotFoundException | SQLException e) {
@@ -79,7 +77,7 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 
-	public void setRepository(Repository<User> repository) {
+	public void setRepository(UserRepository repository) {
 		this.repository = repository;
 	}
 }

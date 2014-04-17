@@ -3,7 +3,7 @@ package org.yangchigi.support;
 import java.util.Calendar;
 
 public class MyCalendar {
-
+	
 	public static String getCurrentDateTime() {
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -28,5 +28,15 @@ public class MyCalendar {
 		return curTime;
 	}
 	
-	
+	private static String[] getSplitedDateTime(String dateTime) {
+		return dateTime.split(" ");
+	}
+
+	public static String getDate(String dateTime) {
+		return getSplitedDateTime(dateTime)[0];
+	}
+
+	public static String getTime(String dateTime) {
+		return getSplitedDateTime(dateTime)[1];
+	}
 }

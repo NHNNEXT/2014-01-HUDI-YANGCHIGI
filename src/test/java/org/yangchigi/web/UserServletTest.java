@@ -19,14 +19,13 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.yangchigi.repository.Repository;
 import org.yangchigi.repository.UserRepository;
 
 public class UserServletTest {
 	private HttpServletRequest mockedRequest;
 	private HttpServletResponse mockedResponse;
 	private HttpSession mockedSession;
-	private Repository<User> mockedRepository;
+	private UserRepository mockedRepository;
 	private UserServlet userServlet;
 	private PrintWriter printWriter;
 	private User user;

@@ -28,7 +28,7 @@
 					<form class="form-horizontal" role="form" method=post
 						action="writearticle" enctype="multipart/form-data">
 						    
-						<textarea name="contents" id="contentInput" class="form-control"
+						<textarea name="content" id="contentInput" class="form-control"
 							rows="3" placeholder="생각을 기록하세요" style="resize: none;"></textarea>
 						<input name="img" type='file' id="fileInput" accept="image"
 							onchange="readURL(this);" style="display: none;" />
@@ -54,10 +54,10 @@
 							<div class="timeDiv">
 								<p class="date">${today.date}</p>
 							</div>
-							<c:if test="${empty today.img}">${today.contents}</c:if>
-							<c:if test="${!empty today.img}">
-								<img class="contentsImg" src="img/${today.img}">
-							${today.contents}</c:if>
+							<c:if test="${empty today.imgName}">${today.content}</c:if>
+							<c:if test="${!empty today.imgName}">
+								<img class="contentsImg" src="img/${today.imgName}">
+							${today.content}</c:if>
 						</div>
 					</c:forEach>
 				</div>

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.yangchigi.repository.TodayRepository;
+import org.yangchigi.repository.IdeaRepository;
 
 public class MyPageServlet extends HttpServlet {
 	/**
@@ -18,9 +18,9 @@ public class MyPageServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		TodayRepository repository;
+		IdeaRepository repository;
 		try {
-			repository = new TodayRepository();
+			repository = new IdeaRepository();
 			req.setAttribute("todaySet", repository.findListByEmail());
 			req.getRequestDispatcher("/mypage.jsp").forward(req, resp);
 		} catch (Exception e) {

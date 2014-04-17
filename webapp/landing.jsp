@@ -58,8 +58,8 @@
 	// 로그아웃 버튼 이벤트
 	Auth.prototype.addLogoutEvent = function() {
 		var callback = this.callback.bind(this, function() {
-			auth.loginForm[0].reset()
-		});
+			this.loginForm[0].reset();
+		}.bind(this));
 		$('#logoutBtn').click(function() {
 			$.ajax({
 				type : "POST",
