@@ -49,7 +49,6 @@ function submitArticle() {
 					$('.form-horizontal')[0].reset();
 					setHeightForTimeDiv();
 				});
-				
 			}
 	}
 	else {	
