@@ -28,6 +28,15 @@
 		<servlet-name>MyPageServlet</servlet-name>
 		<url-pattern>/mypage/*</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>TodayServlet</servlet-name>
+		<servlet-class>org.yangchigi.web.TodayServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TodayServlet</servlet-name>
+		<url-pattern>/today/*</url-pattern>
+	</servlet-mapping>
 
 
 
