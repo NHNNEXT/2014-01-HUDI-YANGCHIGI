@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+body {
+}
+
+#contentContainerDiv {
+	display: inline;
+	width: 70%;
+	height: 600px;
+	float: left;
+	background-color: green;
+}
+
+#asideDiv {
+	display: inline;
+	width: 30%;
+	height: 400px;
+	float: right;
+	background-color: yellow;
+}
+
+#dateDiv {
+	width: 100%;
+	height: 100px;
+	background-color: red;
+}
+
+#likeDiv {
+	width: 100%;
+	height: 100px;
+	background-color: blue;
+}
+
+#commentDiv {
+	width: 100%;
+	background-color: purple;
+}
+
+.comment {
+	width: 100%;
+	height: 100px;
+	background-color: white;
+}
