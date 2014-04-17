@@ -43,7 +43,7 @@ public class IdeaRepository implements Repository<Idea> {
 			while (rs.next()) {
 				today = new Idea(rs.getString("content"), rs.getString("time"),
 						rs.getString("date"), rs.getString("imgName"),
-						rs.getInt("user_id"));
+						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				todayList.add(today);
 			}
 		} catch (SQLException e) {
@@ -93,7 +93,7 @@ public class IdeaRepository implements Repository<Idea> {
 			while (rs.next()) {
 				idea = new Idea(rs.getString("content"), rs.getString("time"),
 						rs.getString("date"), rs.getString("img_name"),
-						rs.getInt("user_id"));
+						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				ideaList.add(idea);
 			}
 		} catch (SQLException e) {

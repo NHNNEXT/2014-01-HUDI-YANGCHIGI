@@ -5,14 +5,21 @@ public class Idea {
 	private String time;
 	private String imgName;
 	private String date;
+	private boolean is_private;
 	private int user_id;
 
-	public Idea(String content, String date, String time, String imgName, int user_id) {
+	public Idea(String content, String date, String time, String imgName,
+			boolean is_private, int user_id) {
 		this.content = content;
 		this.date = date;
 		this.time = time;
 		this.imgName = imgName;
+		this.is_private = is_private;
 		this.user_id = user_id;
+	}
+
+	public boolean isIs_private() {
+		return is_private;
 	}
 
 	public String getContent() {

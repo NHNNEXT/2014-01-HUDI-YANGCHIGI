@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<idea content="hi" date="2014-3-1" time="11:20:00" img_name="haru.jpg" user_id="3" />
-	<idea content="hi" date="2014-3-1" time="11:20:01" img_name="haru.jpg" user_id="3" />
-	<idea content="hi" date="2014-3-1" time="11:20:02" img_name="haru.jpg" user_id="3" />
+	<idea content="hi" date="2014-3-1" time="11:20:00" img_name="haru.jpg"
+		is_private="true" user_id="3" />
+	<idea content="hi" date="2014-3-1" time="11:20:01" img_name="haru.jpg"
+		is_private="false" user_id="3" />
+	<idea content="hi" date="2014-3-1" time="11:20:02" img_name="haru.jpg"
+		is_private="false" user_id="3" />
 </dataset>

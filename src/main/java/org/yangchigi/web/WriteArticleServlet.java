@@ -36,14 +36,15 @@ public class WriteArticleServlet extends HttpServlet {
 		String date = MyCalendar.getCurrentTime();
 		String content = null;
 		String imgName = null;
+		boolean is_private = true;
 		contentList = FileUploader.upload(request);
 
 		// AJAX
 		if (contentList == null) {
 			content = request.getParameter("content");
-			imgName = request.getParameter("img");
+			imgName = request.getParameter("imgName");
 			response.getWriter().write(date);
-			uploadArticle(content, imgName);
+			uploadArticle(content, imgName, is_private);
 		} else {
 			// NOT AJAX
 			if (contentList.isEmpty())
@@ -54,14 +55,14 @@ public class WriteArticleServlet extends HttpServlet {
 			}
 
 			response.getWriter().write(date);
-			uploadArticle(content, imgName);
+			uploadArticle(content, imgName, is_private);
 
 			response.sendRedirect("/mypage");
 		}
 	}
 
-	private void uploadArticle(String content, String imgName) {
-		Idea today = new Idea(content, "date", "time", imgName, 1);
-		repository.add(today);
+	private void uploadArticle(String content, String imgName, boolean is_private) {
+		Idea idea = new Idea(content, "date", "time", imgName, is_private, 1);
+		repository.add(idea);
 	}
 }
