@@ -29,6 +29,7 @@ public class UserRepositoryTest {
 		repository = new UserRepository();
 		conn = ((UserRepository) repository).getConn();
 		assertThat(conn, is(notNullValue()));
+		logger.info("DB연결 성공");
 	}
 
 	@Test

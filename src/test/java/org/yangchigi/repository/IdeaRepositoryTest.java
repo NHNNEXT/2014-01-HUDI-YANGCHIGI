@@ -9,7 +9,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.LoggerFactory;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.yangchigi.web.Idea;

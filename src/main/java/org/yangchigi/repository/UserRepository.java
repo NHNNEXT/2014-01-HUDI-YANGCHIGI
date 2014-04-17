@@ -56,7 +56,6 @@ public class UserRepository implements Repository<User> {
 
 	@Override
 	public void add(User user) {
-		ResultSet generatedKeys;
 		logger.info("UserRepository > add: " + user.toString());
 		PreparedStatement pstmt;
 
