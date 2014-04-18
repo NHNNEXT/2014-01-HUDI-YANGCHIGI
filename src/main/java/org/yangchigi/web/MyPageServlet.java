@@ -45,13 +45,11 @@ public class MyPageServlet extends HttpServlet {
 					"user");
 			System.out.println("userEmail: " + userEmail);
 			User user = userRepository.findByEmail(userEmail);
-			String dateTime = MyCalendar.getCurrentDateTime();
-			logger.debug("date: {}", MyCalendar.getDate(dateTime));
-			System.out.println("date: " + MyCalendar.getDate(dateTime));
+			logger.debug("date: {}", MyCalendar.getCurrentDate());
 			request.setAttribute(
 					"ideaList",
 					ideaRepository.findByUserIdAndDate(user.getId(),
-							MyCalendar.getDate(dateTime)));
+							MyCalendar.getCurrentDate()));
 			request.getRequestDispatcher("/mypage.jsp").forward(request,
 					response);
 		}
@@ -65,9 +63,8 @@ public class MyPageServlet extends HttpServlet {
 
 		if ("/mypage/write".equals(uri)) {
 			ArrayList<String> contentList = new ArrayList<String>();
-			String dateTime = MyCalendar.getCurrentDateTime();
-			String date = MyCalendar.getDate(dateTime);
-			String time = MyCalendar.getTime(dateTime);
+			String date = MyCalendar.getCurrentDate();
+			String time = MyCalendar.getCurrentTime();
 			String content = null;
 			String imgName = null;
 			boolean isPrivate = false;
@@ -86,9 +83,10 @@ public class MyPageServlet extends HttpServlet {
 				isPrivate = request.getParameter("isPrivate") != null;
 				logger.debug("isPrivate: {}", isPrivate);
 				System.out.println("isPrivate: " + isPrivate);
-
-				response.getWriter().write(time);
 				uploadArticle(content, date, time, imgName, isPrivate, user);
+				
+				time = MyCalendar.getCurrentTimeWithoutSec();
+				response.getWriter().write(time);
 			} else {
 				// NOT AJAX
 				if (contentList.isEmpty())

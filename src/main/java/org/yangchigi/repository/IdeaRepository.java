@@ -90,7 +90,7 @@ public class IdeaRepository implements Repository<Idea> {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				idea = new Idea(rs.getString("content"), rs.getString("date"),
-						rs.getString("time"), rs.getString("img_name"),
+						rs.getString("time").substring(0, 5), rs.getString("img_name"),
 						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				ideaList.add(idea);
 			}
