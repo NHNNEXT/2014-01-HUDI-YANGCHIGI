@@ -16,19 +16,21 @@
 <script src="js/mypage.js"></script>
 </head>
 <body>
-	<div class="input-group">
-		<input type="text" id="commentInput" class="form-control"> <span
-			class="input-group-btn">
-			<button id="uploadCommentBtn" class="btn btn-success" type="button">Go!</button>
-		</span>
-	</div>
+
 
 	<div id="commentDiv">
-		<c:forEach items="${commList}" var="comm" >
+		<c:forEach items="${commList}" var="comm">
 			<div class="comment-set">${comm.content}</div>
 		</c:forEach>
-	</div>
 
+
+		<div id="writeCommentDiv" class="input-group">
+			<input type="text" id="commentInput" class="form-control"> <span
+				class="input-group-btn">
+				<button id="uploadCommentBtn" class="btn btn-success" type="button">Go!</button>
+			</span>
+		</div>
+	</div>
 
 </body>
 </html>

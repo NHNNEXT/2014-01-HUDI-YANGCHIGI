@@ -24,7 +24,7 @@ public class TodayServlet extends HttpServlet {
 			try {
 				repository = new CommentRepository();
 				req.setAttribute("commList", repository.findListByEmail());
-				req.getRequestDispatcher("/todaymh.jsp").forward(req, resp);
+				req.getRequestDispatcher("/today.jsp").forward(req, resp);
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

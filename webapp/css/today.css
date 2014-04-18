@@ -16,7 +16,6 @@ body {
 	width: 30%;
 	height: 400px;
 	float: right;
-	background-color: yellow;
 }
 
 #dateDiv {
@@ -33,7 +32,6 @@ body {
 
 #commentDiv {
 	width: 100%;
-	background-color: purple;
 }
 
 #writeCommentDiv {
@@ -41,11 +39,6 @@ body {
 	height: 50px;
 }
 
-.comment {
-	width: 100%;
-	height: 100px;
-	background-color: white;
-}
 .comment-set {
 	background-color : rgb(255, 216, 216);
 	margin:10px;
