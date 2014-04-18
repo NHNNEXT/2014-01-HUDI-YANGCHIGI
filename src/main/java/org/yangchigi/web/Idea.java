@@ -1,11 +1,12 @@
 package org.yangchigi.web;
 
 public class Idea {
+	private int id;
 	private String content;
-	private String time;
-	private String imgName;
 	private String date;
+	private String time;
 	private boolean isPrivate;
+	private String imgName;
 	private int userId;
 
 	public Idea(String content, String date, String time, String imgName,
@@ -18,6 +19,10 @@ public class Idea {
 		this.userId = user_id;
 	}
 
+	public int getId() {
+		return id;
+	}
+	
 	public String getContent() {
 		return content;
 	}

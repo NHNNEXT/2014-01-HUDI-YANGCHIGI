@@ -31,25 +31,24 @@ public class IdeaRepository implements Repository<Idea> {
 	public ArrayList<Idea> findListByEmail() {
 		PreparedStatement pstmt;
 		ResultSet rs = null;
-		Idea today = null;
-		ArrayList<Idea> todayList = new ArrayList<Idea>();
+		Idea idea = null;
+		ArrayList<Idea> ideaList = new ArrayList<Idea>();
 
-		// email 에 의한 select 구현 필
-		String sql = "SELECT * FROM today";
+		String sql = "SELECT * FROM idea";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				today = new Idea(rs.getString("content"), rs.getString("time"),
+				idea = new Idea(rs.getString("content"), rs.getString("time"),
 						rs.getString("date"), rs.getString("imgName"),
 						rs.getBoolean("is_private"), rs.getInt("user_id"));
-				todayList.add(today);
+				ideaList.add(idea);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return todayList;
+		return ideaList;
 	}
 
 	public void add(Idea idea) {

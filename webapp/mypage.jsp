@@ -56,8 +56,6 @@
 									style="margin-right: 5px;">
 							</c:if>
 							<p class="contentsP">${idea.content}</p>
-							<img src="icon/addimage.png" onclick="chooseFile()" /> <img
-								id="prevImg" src="#" alt="your image" style="display: none;" />
 						</div>
 					</c:forEach>
 				</div>

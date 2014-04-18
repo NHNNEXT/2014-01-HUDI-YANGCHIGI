@@ -1,33 +1,60 @@
 package org.yangchigi.web;
 
 import java.io.IOException;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class TodayServlet
- */
+import org.yangchigi.repository.CommentRepository;
+
+
 public class TodayServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TodayServlet() {
-    }
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String uri = req.getRequestURI();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if ("/today".equals(uri)) {
+			CommentRepository repository;
+			try {
+				repository = new CommentRepository();
+				req.setAttribute("commList", repository.findListByEmail());
+				req.getRequestDispatcher("/todaymh.jsp").forward(req, resp);
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+		}
+		
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String uri = req.getRequestURI();
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if ("/today/writecomment".equals(uri)) {
+			try {
+				CommentRepository repository = new CommentRepository();
+				String content = req.getParameter("content");
+				Comment comment = new Comment(content);
+				repository.add(comment);
+				
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+		}
+
 	}
 
 }
