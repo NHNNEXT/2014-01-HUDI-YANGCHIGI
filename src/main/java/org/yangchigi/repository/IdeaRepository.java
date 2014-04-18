@@ -19,7 +19,6 @@ public class IdeaRepository implements Repository<Idea> {
 	private Connection conn;
 
 	public IdeaRepository() throws ClassNotFoundException, SQLException {
-		super();
 		Class.forName(driver);
 		this.conn = DriverManager.getConnection(addr, user, pw);
 	}

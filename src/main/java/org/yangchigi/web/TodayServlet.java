@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yangchigi.repository.CommentRepository;
-import org.yangchigi.repository.IdeaRepository;
 import org.yangchigi.repository.UserRepository;
 
 
@@ -39,7 +38,6 @@ public class TodayServlet extends HttpServlet {
 			CommentRepository repository;
 			try {
 				repository = new CommentRepository();
-				
 				
 				req.setAttribute("commList", repository.findListByEmail());
 				req.getRequestDispatcher("/today.jsp").forward(req, resp);

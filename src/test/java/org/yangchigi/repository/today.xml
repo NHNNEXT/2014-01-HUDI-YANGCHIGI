@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<today email="hook3748@gmail.com" nickname="hogu" password="123456" thumbnail=""/>
-	<today email="hook3748@daum.com" nickname="hog" password="123456" thumbnail=""/>
+	<today date="2014-4-18" like="11" user_id="3" />
+	<today date="2014-4-17" like="17" user_id="3" />
+	<today date="2014-4-18" like="13" user_id="5" />
 </dataset>

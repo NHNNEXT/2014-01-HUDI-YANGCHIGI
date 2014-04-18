@@ -7,9 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.yangchigi.support.MyCalendar;
 import org.yangchigi.web.Comment;
-import org.yangchigi.web.Idea;
 
 public class CommentRepository implements Repository<Comment>{
 	private final String addr = "jdbc:mysql://localhost/seize";

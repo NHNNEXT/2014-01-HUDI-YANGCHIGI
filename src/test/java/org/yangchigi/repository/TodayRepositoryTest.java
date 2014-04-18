@@ -3,6 +3,7 @@ package org.yangchigi.repository;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,11 +20,23 @@ import org.junit.Test;
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("today.xml")
 public class TodayRepositoryTest {
-
+	private static final Logger logger = LoggerFactory
+			.getLogger("org.yangchigi.web.TodayRepositoryTest");
+	private TodayRepository todayRepository;
+	
+	@Before
+	public void setUp() {
+		try {
+			todayRepository = new TodayRepository();
+		} catch (ClassNotFoundException | SQLException e) {
+			logger.error("TodayRepository 초기화 실패");
+		}
+	}
+	
 	@Test
-	public void 투데이_조회() {
-		TodayRepository todayRepository = new TodayRepository();
+	public void 투데이_조회_SELECT_BY_Date_And_UserId() {
 		Today today = todayRepository.findByDateAndUserId("2014-4-18", 3);
 		assertThat(today, is(notNullValue()));
+		assertThat(today.getLike(), is(11));
 	}
 }
