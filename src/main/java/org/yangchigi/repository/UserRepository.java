@@ -76,7 +76,7 @@ public class UserRepository implements Repository<User> {
 		}
 	}
 
-	public User findById(String id) {
+	public User findById(int id) {
 		return null;
 	}
 }

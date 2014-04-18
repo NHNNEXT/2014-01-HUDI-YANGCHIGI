@@ -1,7 +1,8 @@
-package org.yangchigi.repository;
+package org.yangchigi.web;
 
 public class Today {
 	
+	private int id;
 	private String date;
 	private int like;
 	private int userId;
@@ -11,7 +12,15 @@ public class Today {
 		this.like = like;
 		this.userId = userId;
 	}
-
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
 	public String getDate() {
 		return date;
 	}

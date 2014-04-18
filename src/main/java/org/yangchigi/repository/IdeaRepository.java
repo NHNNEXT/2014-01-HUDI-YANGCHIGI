@@ -71,7 +71,7 @@ public class IdeaRepository implements Repository<Idea> {
 	}
 
 	@Override
-	public Idea findById(String id) {
+	public Idea findById(int id) {
 		return null;
 	}
 

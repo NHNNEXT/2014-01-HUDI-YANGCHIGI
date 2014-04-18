@@ -2,7 +2,6 @@ package org.yangchigi.repository;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.junit.Before;
@@ -13,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
+import org.yangchigi.web.Today;
 
 import static org.unitils.reflectionassert.ReflectionAssert.*;
-import org.junit.Test;
 
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("today.xml")
@@ -35,8 +34,25 @@ public class TodayRepositoryTest {
 	
 	@Test
 	public void 투데이_조회_SELECT_BY_Date_And_UserId() {
-		Today today = todayRepository.findByDateAndUserId("2014-4-18", 3);
+		Today today = todayRepository.findByDateAndUserId("2014-03-01", 3);
 		assertThat(today, is(notNullValue()));
 		assertThat(today.getLike(), is(11));
+	}
+	
+	@Test
+	public void 투데이_조회_SELECT_BY_Id() {
+		Today today = todayRepository.findById(1);
+		assertThat(today, is(notNullValue()));
+		assertThat(today.getLike(), is(11));
+	}
+	
+	@Test
+	@ExpectedDataSet("expected_today.xml")
+	public void 투데이_Insert() {
+		int like = 30;
+		int userId = 3;
+		
+		Today today = new Today("2014-4-20", like, userId);
+		todayRepository.add(today);
 	}
 }

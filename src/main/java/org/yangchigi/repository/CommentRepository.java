@@ -72,7 +72,7 @@ public class CommentRepository implements Repository<Comment>{
 	}
 
 	@Override
-	public Comment findById(String id) {
+	public Comment findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

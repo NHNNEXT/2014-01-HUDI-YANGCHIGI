@@ -2,6 +2,8 @@ package org.yangchigi.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,49 +13,58 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yangchigi.repository.CommentRepository;
+import org.yangchigi.repository.IdeaRepository;
+import org.yangchigi.repository.TodayRepository;
 import org.yangchigi.repository.UserRepository;
-
 
 public class TodayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = LoggerFactory
 			.getLogger("org.yangchigi.web.TodayServlet");
 	private UserRepository userRepository;
+	private TodayRepository todayRepository;
+	private IdeaRepository ideaRepository;
 	
 	public TodayServlet() {
 		try {
 			userRepository = new UserRepository();
+			todayRepository = new TodayRepository();
+			ideaRepository = new IdeaRepository();
 		} catch (ClassNotFoundException | SQLException e) {
-			logger.warn("IdeaRepository 초기화 실패");
+			logger.warn("repository 초기화 실패");
 		}
 	}
-	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		String uri = req.getRequestURI();
 
-	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String uri = request.getRequestURI();
+
 		if ("/today".equals(uri)) {
 			CommentRepository repository;
 			try {
 				repository = new CommentRepository();
-				
-				req.setAttribute("commList", repository.findListByEmail());
-				req.getRequestDispatcher("/today.jsp").forward(req, resp);
+
+				request.setAttribute("commList", repository.findListByEmail());
+				request.getRequestDispatcher("/today.jsp").forward(request, response);
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-
+		} else if(uri.matches("^/today/[0-9]+")) {
+			int todayId = Integer.parseInt(uri.substring(7));
+			
+			Today today = todayRepository.findById(todayId);
+			List<Idea> ideaList = ideaRepository.findByUserIdAndDate(today.getUserId(), today.getDate());
+			
+			request.setAttribute("ideaList", ideaList);
+			request.getRequestDispatcher("/today.jsp").forward(request,
+					response);
 		}
-		
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 
 		if ("/today/writecomment".equals(uri)) {
@@ -63,26 +74,24 @@ public class TodayServlet extends HttpServlet {
 				logger.info("userEmail: {}", userEmail);
 				System.out.println("userEmail: " + userEmail);
 				User user = userRepository.findByEmail(userEmail);
-				
-				
+
 				CommentRepository repository = new CommentRepository();
 				String content = request.getParameter("content");
-				
-				
-				
-//				Comment comment = new Comment(content, user.getId(), today.getId());
+
+				// Comment comment = new Comment(content, user.getId(),
+				// today.getId());
 				Comment comment = new Comment(content, 1, 1);
-				
+
 				repository.add(comment);
-				
+
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-
 		}
-
 	}
 
+	public void setRepository(TodayRepository todayRepository) {
+		this.todayRepository = todayRepository;
+	}
 }
