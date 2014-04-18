@@ -20,7 +20,10 @@
 	<div id="contentContainerDiv"></div>
 	<!-- 날짜, 공감 수, 작성자 닉네임, 댓글 들어가는 곳 -->
 	<div id="asideDiv">
-		<div id="dateDiv"></div>
+		<div id="dateDiv">
+			<p class="date">2014</p>
+			<p class="date">0415</p>
+		</div>
 		<div id="profileDiv"></div>
 		<div id="likeDiv"></div>
 		

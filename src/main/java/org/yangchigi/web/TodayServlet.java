@@ -35,11 +35,11 @@ public class TodayServlet extends HttpServlet {
 
 	
 		if ("/today".equals(uri)) {
-			CommentRepository repository;
 			try {
-				repository = new CommentRepository();
+				CommentRepository commRepository = new CommentRepository();
+				req.setAttribute("commList", commRepository.findListByEmail());
 				
-				req.setAttribute("commList", repository.findListByEmail());
+				
 				req.getRequestDispatcher("/today.jsp").forward(req, resp);
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block

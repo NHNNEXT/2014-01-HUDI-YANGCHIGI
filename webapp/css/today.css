@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
 body {
+	
 }
 
 #contentContainerDiv {
@@ -40,7 +41,12 @@ body {
 }
 
 .comment-set {
-	background-color : rgb(255, 216, 216);
-	margin:10px;
-	padding:5px;
+	background-color: rgb(255, 216, 216);
+	margin: 10px;
+	padding: 5px;
+}
+
+.date {
+	font-size: 2em;
+	text-align: center;
 }
