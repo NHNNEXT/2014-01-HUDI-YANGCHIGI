@@ -41,6 +41,15 @@
 		<url-pattern>/today/*</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>UserModifyServlet</servlet-name>
+		<servlet-class>org.yangchigi.web.UserModifyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserModifyServlet</servlet-name>
+		<url-pattern>/usermodify</url-pattern>
+	</servlet-mapping>
+
 
 	<!-- <filter>
 		<filter-name>CharsetFilter</filter-name>
