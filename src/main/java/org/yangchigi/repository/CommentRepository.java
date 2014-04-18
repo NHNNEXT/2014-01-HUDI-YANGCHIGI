@@ -39,8 +39,8 @@ public class CommentRepository implements Repository<Comment>{
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, comm.getContent());
-//			pstmt.setInt(2, comm.getUser_id());
-//			pstmt.setInt(3, comm.getToday_id());
+//			pstmt.setInt(2, comm.getUserId());
+//			pstmt.setInt(3, comm.getTodayId());
 			pstmt.setInt(2, 1);
 			pstmt.setInt(3, 1);
 			pstmt.execute();
@@ -63,8 +63,7 @@ public class CommentRepository implements Repository<Comment>{
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				
-				// time이다
-				comm = new Comment(rs.getString("content"));
+				comm = new Comment(rs.getString("content"),1, 1);
 				commList.add(comm);				
 			}
 		} catch (SQLException e) {
