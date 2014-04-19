@@ -71,8 +71,6 @@ public class TodayServlet extends HttpServlet {
 		if (uri.matches("^/today/[0-9]+")) {
 			int todayId = Integer.parseInt(uri.substring(7));
 			int like = Integer.parseInt(request.getParameter("like"));
-			like += 1;
-			
 			Today today = todayRepository.findById(todayId);
 			today.setLike(like);
 			todayRepository.update(today);

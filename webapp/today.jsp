@@ -63,18 +63,25 @@
 		var likeBtn = $('#likeBtn');
 		var likeInput = $('#likeInput');
 		var likeSpan = $('#likeSpan');
+		
 		likeBtn.click(function() {
+			var like = Number(likeSpan.text());
+			
+			if (likeBtn.hasClass('btn-primary')) like -= 1;
+			else like += 1;
+			
 			$.ajax({
 				processData : true,
 				type : "POST",
 				url : "",
 				data : {
-					like : likeSpan.text()
+					like : like
 				}
 			}).done(function(like) {
 				like = Number(like);
-				console.log(like);
 				likeSpan.text(like);
+				
+				likeBtn.toggleClass('btn-primary');
 			});
 		});
 	</script>
