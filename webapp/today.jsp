@@ -49,7 +49,6 @@
 			<c:forEach items="${commList}" var="comm">
 				<div class="comment-set">${comm.content}</div>
 			</c:forEach>
-
 		</div>
 
 		<div id="writeCommentDiv" class="input-group">
@@ -63,6 +62,9 @@
 		var likeBtn = $('#likeBtn');
 		var likeInput = $('#likeInput');
 		var likeSpan = $('#likeSpan');
+		var isLiked = ${isLiked};
+	
+		if (isLiked) likeBtn.addClass('btn-primary');
 		
 		likeBtn.click(function() {
 			var like = Number(likeSpan.text());

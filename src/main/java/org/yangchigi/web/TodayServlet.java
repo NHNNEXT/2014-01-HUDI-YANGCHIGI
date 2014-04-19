@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yangchigi.repository.CommentRepository;
 import org.yangchigi.repository.IdeaRepository;
+import org.yangchigi.repository.LikeRepository;
 import org.yangchigi.repository.TodayRepository;
 import org.yangchigi.repository.UserRepository;
 
@@ -23,12 +24,14 @@ public class TodayServlet extends HttpServlet {
 	private UserRepository userRepository;
 	private TodayRepository todayRepository;
 	private IdeaRepository ideaRepository;
+	private LikeRepository likeRepository;
 
 	public TodayServlet() {
 		try {
 			userRepository = new UserRepository();
 			todayRepository = new TodayRepository();
 			ideaRepository = new IdeaRepository();
+			likeRepository = new LikeRepository();
 		} catch (ClassNotFoundException | SQLException e) {
 			logger.warn("repository 초기화 실패");
 		}
@@ -56,8 +59,17 @@ public class TodayServlet extends HttpServlet {
 			List<Idea> ideaList = ideaRepository.findByUserIdAndDate(
 					today.getUserId(), today.getDate());
 
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
+			User user = userRepository.findByEmail(userEmail);
+
+			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
+					today.getId());
+			System.out.println("like: " + like);
+
 			request.setAttribute("ideaList", ideaList);
 			request.setAttribute("today", today);
+			request.setAttribute("isLiked", like != null);
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		}
