@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<like id="1" user_id="3" today_id="1" />
+	<like id="2" user_id="3" today_id="2" />
+	<like id="3" user_id="3" today_id="4" />
+</dataset>

@@ -38,7 +38,7 @@ public class IdeaRepositoryTest {
 //	}
 	
 	@Test
-	public void SELECT_FROM_idea_by_user_id_AND_date() {
+	public void SELECT_FROM_idea_by_userId_AND_date() {
 		List<Idea> ideaList = new ArrayList<Idea>();
 		User user = new User("hook3748@gmail", "hogu", "123456", "");
 		user.setId(3);

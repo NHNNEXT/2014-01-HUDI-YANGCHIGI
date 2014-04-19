@@ -14,8 +14,6 @@ import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
 import org.yangchigi.web.Today;
 
-import static org.unitils.reflectionassert.ReflectionAssert.*;
-
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("today.xml")
 public class TodayRepositoryTest {

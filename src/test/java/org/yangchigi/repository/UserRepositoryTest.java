@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
-import org.unitils.dbunit.datasetloadstrategy.impl.RefreshLoadStrategy;
 
 import static org.unitils.reflectionassert.ReflectionAssert.*;
 import org.yangchigi.web.User;

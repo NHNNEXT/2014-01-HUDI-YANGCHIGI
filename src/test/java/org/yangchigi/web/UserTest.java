@@ -7,9 +7,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//import ch.qos.logback.classic.LoggerContext;
-//import ch.qos.logback.core.util.StatusPrinter;
-
 public class UserTest {
 	private static final Logger logger = LoggerFactory.getLogger("org.yangchigi.web.UserTest");
 	
@@ -22,8 +19,5 @@ public class UserTest {
 	@Test
 	public void 로그백_테스트() {
 		logger.debug("Hello world!");
-		
-//		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
-//		StatusPrinter.print(lc);
 	}
 }
