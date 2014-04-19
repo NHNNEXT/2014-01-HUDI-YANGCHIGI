@@ -65,7 +65,6 @@ public class TodayServlet extends HttpServlet {
 
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
 					today.getId());
-			System.out.println("like: " + like);
 
 			request.setAttribute("ideaList", ideaList);
 			request.setAttribute("today", today);
@@ -82,11 +81,23 @@ public class TodayServlet extends HttpServlet {
 
 		if (uri.matches("^/today/[0-9]+")) {
 			int todayId = Integer.parseInt(uri.substring(7));
-			int like = Integer.parseInt(request.getParameter("like"));
+			int likeNum = Integer.parseInt(request.getParameter("like"));
 			Today today = todayRepository.findById(todayId);
-			today.setLike(like);
+			today.setLike(likeNum);
+
+			String userEmail = (String) request.getSession().getAttribute("user");
+
+			User user = userRepository.findByEmail(userEmail);
+			Like like = likeRepository.findByUserIdAndTodayId(user.getId(), todayId);
+			if (like != null) {
+				likeRepository.delete(like);
+			}
+			else {
+				like = new Like(user.getId(), todayId);
+				likeRepository.add(like);
+			}
 			todayRepository.update(today);
-			response.getWriter().write(String.valueOf(like));
+			response.getWriter().write(String.valueOf(likeNum));
 		} else if ("/today/writecomment".equals(uri)) {
 			try {
 				String userEmail = (String) request.getSession().getAttribute(
