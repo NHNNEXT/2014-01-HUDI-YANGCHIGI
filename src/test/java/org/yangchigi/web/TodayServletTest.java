@@ -69,6 +69,7 @@ public class TodayServletTest {
 		when(mockedRequest.getRequestURI()).thenReturn("/today/2");
 		when(mockedRequest.getRequestDispatcher(anyString())).thenReturn(mockedRequestDispatcher);
 		when(mockedRepository.findById(2)).thenReturn(today);
+		when(mockedSession.getAttribute("user")).thenReturn("hook3748@gmail.com");
 		
 		// when
 		todayServlet.doGet(mockedRequest, mockedResponse);

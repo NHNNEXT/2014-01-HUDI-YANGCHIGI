@@ -64,7 +64,7 @@ public class TodayServlet extends HttpServlet {
 			User user = userRepository.findByEmail(userEmail);
 
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
-					today.getId());
+					todayId);
 
 			request.setAttribute("ideaList", ideaList);
 			request.setAttribute("today", today);
@@ -85,17 +85,20 @@ public class TodayServlet extends HttpServlet {
 			Today today = todayRepository.findById(todayId);
 			today.setLike(likeNum);
 
-			String userEmail = (String) request.getSession().getAttribute("user");
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
 
 			User user = userRepository.findByEmail(userEmail);
-			Like like = likeRepository.findByUserIdAndTodayId(user.getId(), todayId);
+			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
+					todayId);
+
 			if (like != null) {
 				likeRepository.delete(like);
-			}
-			else {
+			} else {
 				like = new Like(user.getId(), todayId);
 				likeRepository.add(like);
 			}
+
 			todayRepository.update(today);
 			response.getWriter().write(String.valueOf(likeNum));
 		} else if ("/today/writecomment".equals(uri)) {
@@ -116,7 +119,6 @@ public class TodayServlet extends HttpServlet {
 				repository.add(comment);
 
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

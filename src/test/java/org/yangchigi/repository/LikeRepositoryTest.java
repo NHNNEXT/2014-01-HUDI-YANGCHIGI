@@ -3,9 +3,6 @@ package org.yangchigi.repository;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
-import org.yangchigi.web.Idea;
 import org.yangchigi.web.Like;
-import org.yangchigi.web.User;
 
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("like.xml")
