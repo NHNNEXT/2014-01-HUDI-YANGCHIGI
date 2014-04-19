@@ -34,4 +34,8 @@ public class Today {
 		return like;
 	}
 
+	public void setLike(int like) {
+		this.like = like;
+	}
+
 }

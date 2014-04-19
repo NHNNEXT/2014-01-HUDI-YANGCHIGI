@@ -38,8 +38,11 @@
 		</div>
 		<div id="profileDiv"></div>
 		<div id="likeDiv">
-			<button type="button" id="likeBtn" class="btn btn-default">Like</button>
-			<span class="badge">${today.like}</span>
+			<form>
+				<button type="button" id="likeBtn" class="btn btn-default">Like</button>
+				<span id="likeSpan" class="badge">${today.like}</span>
+				<input type="hidden" id="likeInput" value="${today.like}" />
+			</form>
 		</div>
 
 		<div id="commentDiv">
@@ -58,16 +61,22 @@
 	</div>
 	<script>
 		var likeBtn = $('#likeBtn');
+		var likeInput = $('#likeInput');
+		var likeSpan = $('#likeSpan');
 		likeBtn.click(function() {
-			$.ajax() {
-				$.ajax({
-					type : "PUT",
-					url : ""
-				}).done(function(msg) {
-					
-				})
-			}
-		})
+			$.ajax({
+				processData : true,
+				type : "POST",
+				url : "",
+				data : {
+					like : likeSpan.text()
+				}
+			}).done(function(like) {
+				like = Number(like);
+				console.log(like);
+				likeSpan.text(like);
+			});
+		});
 	</script>
 </body>
 </html>

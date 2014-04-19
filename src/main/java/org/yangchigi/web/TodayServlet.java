@@ -68,7 +68,16 @@ public class TodayServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 
-		if ("/today/writecomment".equals(uri)) {
+		if (uri.matches("^/today/[0-9]+")) {
+			int todayId = Integer.parseInt(uri.substring(7));
+			int like = Integer.parseInt(request.getParameter("like"));
+			like += 1;
+			
+			Today today = todayRepository.findById(todayId);
+			today.setLike(like);
+			todayRepository.update(today);
+			response.getWriter().write(String.valueOf(like));
+		} else if ("/today/writecomment".equals(uri)) {
 			try {
 				String userEmail = (String) request.getSession().getAttribute(
 						"user");
@@ -89,21 +98,6 @@ public class TodayServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-	}
-
-	@Override
-	protected void doPut(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		String uri = request.getRequestURI();
-
-		if (uri.matches("^/today/[0-9]+")) {
-			int todayId = Integer.parseInt(uri.substring(7));
-
-			Today today = todayRepository.findById(todayId);
-			
-			
-			response.getWriter().write("success");
 		}
 	}
 
