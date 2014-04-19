@@ -23,7 +23,7 @@ public class TodayServlet extends HttpServlet {
 	private UserRepository userRepository;
 	private TodayRepository todayRepository;
 	private IdeaRepository ideaRepository;
-	
+
 	public TodayServlet() {
 		try {
 			userRepository = new UserRepository();
@@ -35,25 +35,29 @@ public class TodayServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 
 		if ("/today".equals(uri)) {
 			try {
 				CommentRepository commRepository = new CommentRepository();
-				request.setAttribute("commList", commRepository.findListByEmail());
-				request.getRequestDispatcher("/today.jsp").forward(request, response);
+				request.setAttribute("commList",
+						commRepository.findListByEmail());
+				request.getRequestDispatcher("/today.jsp").forward(request,
+						response);
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
-		} else if(uri.matches("^/today/[0-9]+")) {
+		} else if (uri.matches("^/today/[0-9]+")) {
 			int todayId = Integer.parseInt(uri.substring(7));
-			
+
 			Today today = todayRepository.findById(todayId);
-			List<Idea> ideaList = ideaRepository.findByUserIdAndDate(today.getUserId(), today.getDate());
-			
+			List<Idea> ideaList = ideaRepository.findByUserIdAndDate(
+					today.getUserId(), today.getDate());
+
 			request.setAttribute("ideaList", ideaList);
+			request.setAttribute("today", today);
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		}
@@ -85,6 +89,21 @@ public class TodayServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+
+	@Override
+	protected void doPut(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String uri = request.getRequestURI();
+
+		if (uri.matches("^/today/[0-9]+")) {
+			int todayId = Integer.parseInt(uri.substring(7));
+
+			Today today = todayRepository.findById(todayId);
+			
+			
+			response.getWriter().write("success");
 		}
 	}
 

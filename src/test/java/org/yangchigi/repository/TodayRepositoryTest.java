@@ -55,4 +55,15 @@ public class TodayRepositoryTest {
 		Today today = new Today("2014-4-20", like, userId);
 		todayRepository.add(today);
 	}
+	
+	@Test
+	@ExpectedDataSet("expected_update_today.xml")
+	public void 투데이_like수_Update() {
+		int like = 20;
+		int userId = 3;
+		Today today = new Today("2014-3-1", like, userId);
+		today.setId(1);
+		
+		todayRepository.update(today);
+	}
 }

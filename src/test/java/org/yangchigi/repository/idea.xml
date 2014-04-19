@@ -2,12 +2,12 @@
 <dataset>
 	<idea id="1" content="hi" date="2014-3-1" time="11:20:00" img_name="haru.jpg"
 		is_private="true" user_id="3" />
-	<idea id="2" content="hi" date="2014-3-1" time="11:20:01" img_name="haru.jpg"
+	<idea id="2" content="hello" date="2014-3-1" time="11:20:01" img_name="haru.jpg"
 		is_private="false" user_id="3" />
-	<idea id="3" content="hi" date="2014-3-1" time="11:20:02" img_name="haru.jpg"
+	<idea id="3" content="yo~" date="2014-3-1" time="11:20:02" img_name="haru.jpg"
 		is_private="false" user_id="3" />
-	<idea id="4" content="hi" date="2014-3-2" time="11:20:02" img_name="haru.jpg"
+	<idea id="4" content="fuck!" date="2014-3-2" time="11:20:02" img_name="haru.jpg"
 		is_private="false" user_id="3" />
-	<idea id="5" content="hi" date="2014-3-1" time="11:20:02" img_name="haru.jpg"
+	<idea id="5" content="yoman" date="2014-3-1" time="11:20:02" img_name="haru.jpg"
 		is_private="false" user_id="4" />
 </dataset>

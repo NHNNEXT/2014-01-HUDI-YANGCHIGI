@@ -85,4 +85,21 @@ public class TodayRepository implements Repository<Today> {
 			e.printStackTrace();
 		}
 	}
+
+	public void update(Today today) {
+		PreparedStatement pstmt;
+
+		String sql = "UPDATE `today` SET `date` = ?, `like` = ?, `user_id` = ? "
+				+ "WHERE `id` = ?";
+		try {
+			pstmt = this.conn.prepareStatement(sql);
+			pstmt.setString(1, today.getDate());
+			pstmt.setInt(2, today.getLike());
+			pstmt.setInt(3, today.getUserId());
+			pstmt.setInt(4, today.getId());
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

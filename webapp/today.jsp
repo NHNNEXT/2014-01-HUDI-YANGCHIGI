@@ -6,15 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/today.css">
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
-
 <script
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/today.css">
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 <script src="js/today.js"></script>
 </head>
 <body>
@@ -40,7 +37,10 @@
 			<p class="date">0415</p>
 		</div>
 		<div id="profileDiv"></div>
-		<div id="likeDiv"></div>
+		<div id="likeDiv">
+			<button type="button" id="likeBtn" class="btn btn-default">Like</button>
+			<span class="badge">${today.like}</span>
+		</div>
 
 		<div id="commentDiv">
 			<c:forEach items="${commList}" var="comm">
@@ -55,8 +55,19 @@
 				<button id="uploadCommentBtn" class="btn btn-success" type="button">Go!</button>
 			</span>
 		</div>
-
-
 	</div>
+	<script>
+		var likeBtn = $('#likeBtn');
+		likeBtn.click(function() {
+			$.ajax() {
+				$.ajax({
+					type : "PUT",
+					url : ""
+				}).done(function(msg) {
+					
+				})
+			}
+		})
+	</script>
 </body>
 </html>
