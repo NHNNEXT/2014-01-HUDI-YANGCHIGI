@@ -68,6 +68,7 @@
 			});
 		},
 		callback : function(fp, msg) {
+			// 로그인 or 로그아웃 성공
 			if ("success" === msg) {
 				if (this.loginForm.is(':hidden')) {
 					this.loginForm.show();
@@ -76,11 +77,12 @@
 					window.location = '/';
 				}
 				fp && fp();
-				// 로그인 실패
+			// 로그인 실패
 			} else {
 				clearTimeout(this.popoverTimer);
 				// 로그인 실패 popover
 				this.loginBtn.popover('destroy');
+				this.loginBtn.popover({content: '로그인 정보가 틀렸어요.'})
 				this.loginBtn.popover('show');
 				// 1초 후 popover 제거 
 				this.popoverTimer = setTimeout(function() {

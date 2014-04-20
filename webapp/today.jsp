@@ -40,8 +40,8 @@
 		<div id="likeDiv">
 			<form>
 				<button type="button" id="likeBtn" class="btn btn-default">Like</button>
-				<span id="likeSpan" class="badge">${today.like}</span>
-				<input type="hidden" id="likeInput" value="${today.like}" />
+				<span id="likeSpan" class="badge">${today.like}</span> <input
+					type="hidden" id="likeInput" value="${today.like}" />
 			</form>
 		</div>
 
@@ -59,33 +59,42 @@
 		</div>
 	</div>
 	<script>
-		var likeBtn = $('#likeBtn');
-		var likeInput = $('#likeInput');
-		var likeSpan = $('#likeSpan');
-		var isLiked = ${isLiked};
-	
-		if (isLiked) likeBtn.addClass('btn-primary');
-		
-		likeBtn.click(function() {
-			var like = Number(likeSpan.text());
+		var like = {
+			likeBtn : $('#likeBtn'),
+			likeInput : $('#likeInput'),
+			likeSpan : $('#likeSpan'),
+			isLiked : ${isLiked},
 			
-			if (likeBtn.hasClass('btn-primary')) like -= 1;
-			else like += 1;
-			
-			$.ajax({
-				processData : true,
-				type : "POST",
-				url : "",
-				data : {
-					like : like
-				}
-			}).done(function(like) {
-				like = Number(like);
-				likeSpan.text(like);
-				
-				likeBtn.toggleClass('btn-primary');
-			});
-		});
+			checkLikeTodayOrNot : function() {
+				if (this.isLiked) this.likeBtn.addClass('btn-primary');
+			},
+			addLikeEvent : function() {
+				this.likeBtn.click(function() {
+					var like = Number(this.likeSpan.text());
+					
+					if (this.likeBtn.hasClass('btn-primary')) like -= 1;
+					else like += 1;
+					
+					$.ajax({
+						processData : true,
+						type : "POST",
+						url : "",
+						data : {
+							like : like
+						}
+					}).done(function(like) {
+						like = Number(like);
+						this.likeSpan.text(like);
+						this.likeBtn.toggleClass('btn-primary');
+					}.bind(this));
+				}.bind(this));
+			},
+			init : function() {
+				this.checkLikeTodayOrNot();
+				this.addLikeEvent();
+			}
+		}
+		like.init();
 	</script>
 </body>
 </html>
