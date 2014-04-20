@@ -44,6 +44,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<img src="img/${fileName}" width=512 height=384></img>
+	<img src="img/${fileName}" width=512 height=384></img>
+	<h1>nickname: ${nickname}</h1>
+
 </body>
 </html>
