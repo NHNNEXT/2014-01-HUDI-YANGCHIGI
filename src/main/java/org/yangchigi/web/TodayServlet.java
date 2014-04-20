@@ -2,6 +2,7 @@ package org.yangchigi.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -53,16 +54,27 @@ public class TodayServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (uri.matches("^/today/[0-9]+")) {
+			// today Id 받기. /today/9 일 경우 todayId == 9
 			int todayId = Integer.parseInt(uri.substring(7));
-
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
+			// 로그인한 유저 & 요청한 투데이
+			User user = userRepository.findByEmail(userEmail);
 			Today today = todayRepository.findById(todayId);
+			
+			// 투데이에 속한 아이디어 리스트
 			List<Idea> ideaList = ideaRepository.findByUserIdAndDate(
 					today.getUserId(), today.getDate());
 
-			String userEmail = (String) request.getSession().getAttribute(
-					"user");
-			User user = userRepository.findByEmail(userEmail);
-
+			// 비공개 설정한 idea 필터
+			if (user.getId() != today.getUserId()) {
+				for (int i = 0; i < ideaList.size(); i++) {
+					if (ideaList.get(i).getIsPrivate())
+						ideaList.remove(i);
+				}
+			}
+			
+			// 사용자가 투데이 like 상태인지 확인
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
 					todayId);
 
@@ -78,10 +90,14 @@ public class TodayServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-
+		
+		// 투데이 like column 업데이트.
 		if (uri.matches("^/today/[0-9]+")) {
+			// today Id 받기. /today/9 일 경우 todayId == 9
 			int todayId = Integer.parseInt(uri.substring(7));
+			// 현재 투데이 like 수
 			int likeNum = Integer.parseInt(request.getParameter("like"));
+			// 현재 보고있는 투데이
 			Today today = todayRepository.findById(todayId);
 			today.setLike(likeNum);
 
@@ -91,9 +107,11 @@ public class TodayServlet extends HttpServlet {
 			User user = userRepository.findByEmail(userEmail);
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
 					todayId);
-
+			
+			// 현재 유저가 이미 like를 누른 상태라면
 			if (like != null) {
 				likeRepository.delete(like);
+			// 현재 유저가 like을 누르지 않은 상태라면
 			} else {
 				like = new Like(user.getId(), todayId);
 				likeRepository.add(like);
