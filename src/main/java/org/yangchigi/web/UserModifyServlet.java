@@ -32,15 +32,31 @@ public class UserModifyServlet extends HttpServlet {
 		}
 	}
 
-	// @Override
-	// protected void doGet(HttpServletRequest req, HttpServletResponse res)
-	// throws ServletException, IOException {
-	//
-	// }
+	 @Override
+	 protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	 throws ServletException, IOException {
+		 String uri = request.getRequestURI();
+		 if("/usermodify".equals(uri)) {
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
+			logger.info("userEmail: {}", userEmail);
+			System.out.println("userEmail: " + userEmail);
+			User user = userRepository.findByEmail(userEmail);// 세션에서 로그인된 사용자 받아옴
+			String nickname = user.getNickname();
+			String thumbnailName = user.getThumbnail();
+			
+			request.setAttribute("nickname", nickname);
+			request.setAttribute("thumbnailName", thumbnailName);
+			
+			request.getRequestDispatcher("/userModify.jsp").forward(request, response);
+		 }
+	
+	 }
 
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		// System.out.println("UserModifyServlet > doPost call");
 		// String msg = req.getParameter("msg");
 		// String pwd = req.getParameter("pwd");
@@ -54,19 +70,20 @@ public class UserModifyServlet extends HttpServlet {
 		// out.println("</html>");
 		String uri = request.getRequestURI();
 
-		if ("/usermodify".equals(uri)) {
+		//ajax 처리
+		if ("/usermodify/uploadThumbnail".equals(uri)) {
 			//TodayServlet 베끼기
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");
 			logger.info("userEmail: {}", userEmail);
 			System.out.println("userEmail: " + userEmail);
-			User user = userRepository.findByEmail(userEmail);
+			User user = userRepository.findByEmail(userEmail);//세션에서 로그인된 사용자 받아옴
 			String nickname = user.getNickname();
 
-			//코딩하기
+			//이미지받아오는코딩하기
 			request.setCharacterEncoding("euc-kr");
 			String realFolder = "";
-			String filename1 = "";
+			String thumbnailName = "";
 			int maxSize = 1024 * 1024 * 5;
 			String encType = "euc-kr";
 			String savefile = "img";
@@ -78,14 +95,14 @@ public class UserModifyServlet extends HttpServlet {
 						maxSize, encType, new DefaultFileRenamePolicy());
 				Enumeration<?> files = multi.getFileNames();
 				String file1 = (String) files.nextElement();
-				filename1 = multi.getFilesystemName(file1);
+				thumbnailName = multi.getFilesystemName(file1);
 				
-				System.out.println(file1 + "," + filename1);
+				System.out.println(file1 + "," + thumbnailName);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-			request.setAttribute("fileName", filename1);
+			request.setAttribute("thumbnailName", thumbnailName);
 			request.setAttribute("nickname", nickname);
 			
 			request.getRequestDispatcher("/upload.jsp").forward(request, response);

@@ -79,4 +79,23 @@ public class UserRepository implements Repository<User> {
 	public User findById(int id) {
 		return null;
 	}
+	
+	//썸네일 이름을 받아서 저장
+	public void modifyThumbnail(User user, String thumbnail) {
+		logger.info("UserRepository > modifyThumbnail: " + user.toString());
+		PreparedStatement pstmt;
+
+		String sql = "UPDATE `user` SET thumbnail = ? WHERE email=?";
+		System.out.println("UserRepository > modifyThumbnail: " + user.toString());
+
+		try {
+			pstmt = this.conn.prepareStatement(sql);
+			pstmt.setString(1, thumbnail);
+			pstmt.setString(2, user.getEmail());
+			pstmt.execute();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

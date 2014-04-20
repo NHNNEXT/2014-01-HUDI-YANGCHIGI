@@ -44,7 +44,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<img src="img/${fileName}" width=512 height=384></img>
+	<h1>변경되었습니당(아마도)</h1>
+	<img src="img/${thumbnailName}" width=512 height=384></img> </br>
 	<h1>nickname: ${nickname}</h1>
 
 </body>

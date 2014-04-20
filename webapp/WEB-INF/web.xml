@@ -47,8 +47,9 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>UserModifyServlet</servlet-name>
-		<url-pattern>/usermodify</url-pattern>
+		<url-pattern>/usermodify/*</url-pattern>
 	</servlet-mapping>
+
 
 
 	<!-- <filter>

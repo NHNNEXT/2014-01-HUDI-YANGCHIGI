@@ -8,14 +8,24 @@
 </head>
 <body>
 	<h1>User Modify Page</h1>
-	<form method="post" action="usermodify" enctype="multipart/form-data">
-	<!-- <form method="post" action="upload.jsp" enctype="multipart/form-data"> -->
-		<input type="file" name="filename1" size=40>
+	<form method="post" action="usermodify/uploadThumbnail" enctype="multipart/form-data">
+		<h1>내 기존의 닉네임</h1>
+		<h2>nickname: ${nickname}</h2>
+		<h1>바꾸고싶은 닉네임</h1>
+		<input type="text" name="nickName">
+		<input type="submit" value="변경">
+		
+		<h1>내 기존의 사진</h1>
+		<h2>thumbnailName: ${thumbnailName}</h2>
+		<img src="img/${thumbnailName}" width=100 height=100></img> 
+		<h1>바꾸고싶은 사진</h1>
+		<input type="file" name="thumbnailName" size=20>
+		<img id="prevImg" src="#" alt="your image" style="display: none;" />
 		<input type="submit" value="업로드">
 		
-		<p>메시지: <input type="text" name="msg"> </p>
+	<!-- 	<p>메시지: <input type="text" name="msg"> </p>
 		<p>패스워드: <input type="password" name="pwd"> </p>
-		<p> <input type="submit" value="전송"> </p>
+		<p> <input type="submit" value="전송"> </p> -->
 	</form>
 </body>
 </html>
