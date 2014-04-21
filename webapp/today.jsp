@@ -6,15 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/today.css">
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
-
 <script
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/today.css">
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 <script src="js/today.js"></script>
 </head>
 <body>
@@ -40,13 +37,18 @@
 			<p class="date">0415</p>
 		</div>
 		<div id="profileDiv"></div>
-		<div id="likeDiv"></div>
+		<div id="likeDiv">
+			<form>
+				<button type="button" id="likeBtn" class="btn btn-default">Like</button>
+				<span id="likeSpan" class="badge">${today.like}</span> <input
+					type="hidden" id="likeInput" value="${today.like}" />
+			</form>
+		</div>
 
 		<div id="commentDiv">
 			<c:forEach items="${commList}" var="comm">
 				<div class="comment-set">${comm.content}</div>
 			</c:forEach>
-
 		</div>
 
 		<div id="writeCommentDiv" class="input-group">
@@ -55,8 +57,44 @@
 				<button id="uploadCommentBtn" class="btn btn-success" type="button">Go!</button>
 			</span>
 		</div>
-
-
 	</div>
+	<script>
+		var like = {
+			likeBtn : $('#likeBtn'),
+			likeInput : $('#likeInput'),
+			likeSpan : $('#likeSpan'),
+			isLiked : ${isLiked},
+			
+			checkLikeTodayOrNot : function() {
+				if (this.isLiked) this.likeBtn.addClass('btn-primary');
+			},
+			addLikeEvent : function() {
+				this.likeBtn.click(function() {
+					var like = Number(this.likeSpan.text());
+					
+					if (this.likeBtn.hasClass('btn-primary')) like -= 1;
+					else like += 1;
+					
+					$.ajax({
+						processData : true,
+						type : "POST",
+						url : "",
+						data : {
+							like : like
+						}
+					}).done(function(like) {
+						like = Number(like);
+						this.likeSpan.text(like);
+						this.likeBtn.toggleClass('btn-primary');
+					}.bind(this));
+				}.bind(this));
+			},
+			init : function() {
+				this.checkLikeTodayOrNot();
+				this.addLikeEvent();
+			}
+		}
+		like.init();
+	</script>
 </body>
 </html>

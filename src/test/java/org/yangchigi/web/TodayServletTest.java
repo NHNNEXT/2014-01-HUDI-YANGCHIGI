@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -56,7 +57,8 @@ public class TodayServletTest {
 		// then
 		verify(mockedRequest, times(1)).getRequestURI();
 		verify(mockedRepository).findById(1);
-		verify(mockedRequest, times(1)).setAttribute(anyString(), anyCollection());
+		verify(mockedRequest, times(1)).setAttribute(anyString(), isA(List.class));
+		verify(mockedRequest, times(1)).setAttribute(anyString(), isA(Today.class));
 	}
 	
 	@Test
@@ -67,6 +69,7 @@ public class TodayServletTest {
 		when(mockedRequest.getRequestURI()).thenReturn("/today/2");
 		when(mockedRequest.getRequestDispatcher(anyString())).thenReturn(mockedRequestDispatcher);
 		when(mockedRepository.findById(2)).thenReturn(today);
+		when(mockedSession.getAttribute("user")).thenReturn("hook3748@gmail.com");
 		
 		// when
 		todayServlet.doGet(mockedRequest, mockedResponse);
@@ -74,6 +77,7 @@ public class TodayServletTest {
 		// then
 		verify(mockedRequest, times(1)).getRequestURI();
 		verify(mockedRepository).findById(2);
-		verify(mockedRequest, times(1)).setAttribute(anyString(), anyCollection());
+		verify(mockedRequest, times(1)).setAttribute(anyString(), isA(List.class));
+		verify(mockedRequest, times(1)).setAttribute(anyString(), isA(Today.class));
 	}
 }
