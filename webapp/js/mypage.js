@@ -1,31 +1,28 @@
-var img_name;
+var cur_img_name;
 
-function readURL(input) {
+function readImg() {
+	var input = $('#fileInput')[0];
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
 
 		reader.onload = function(e) {
-			$('#img_prev').attr('src', e.target.result).height(50).css(
-					'display', 'inline');
+			$('#prevImg').attr('src', e.target.result).height(50).show("slow");
+			
 		};
-		img_name = input.files[0].name;
-		console.log(img_name);
+		cur_img_name = input.files[0].name;
 		reader.readAsDataURL(input.files[0]);
 	} else {
 		// if cancel selection
-		$('#img_prev').attr('src', '').css('display', 'none');
+		$('#prevImg').hide("slow");
 	}
-}
-
-function chooseFile() {
-	$('#fileInput').click();
 }
 
 function submitArticle() {
 	// 일단 이미지가 없을때만 ajax로..
-	if(img_name == undefined){
+	if(cur_img_name == undefined){
 		
 		var contentsVal = $('#contentInput').val();
+		var isPrivate = $('#isPrivateIpnut:checked').val();
 //		$("body form").submit(function(e){
 			
 			if (contentsVal == "") {
@@ -34,10 +31,11 @@ function submitArticle() {
 			else {
 				$.ajax({
 					type : "POST",
-					url : "writearticle",
+					url : "/mypage/write",
+					mimeType:"multipart/form-data",
 					data : {
-						contents : contentsVal,
-						img : img_name,
+						content : contentsVal,
+						isPrivate: isPrivate
 					}
 				}).done(function(date) {
 					
@@ -47,26 +45,41 @@ function submitArticle() {
 							+ '</p></div>'
 							+ contentsVal
 							+ '</div>').children(':last').hide().fadeIn('slow');
-					$("html, body").animate({ scrollTop: $(document).height() }, "fast");
-					$('#img_prev').attr('src', '').css('display', 'none');
+					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
+					$('#prevImg').hide();
 					$('.form-horizontal')[0].reset();
-					load();
+					setHeightForTimeDiv();
 				});
-				
 			}
-		
-		
 	}
 	else {	
 		$('body form').submit();
 	}
 }
 
-function load() {
+function setHeightForTimeDiv() {
 	$('.timeDiv').each(function(i){
-		$(this).height($(this).parent().height() + 45);
+		var newHeight = parseInt($(this).parent().height()) + parseInt($(this).parent().css('margin-top')) * 2;
 		
+		$(this).height(newHeight);		
 	});
+}
+
+
+
+
+
+
+function load() {
+	$('#submitBtn').click(submitArticle);
+	
+	$('#uploadImg').click(function(){
+		$('#fileInput').click();
+	});
+	$('#fileInput').change(readImg);
+	
+	setHeightForTimeDiv();
+	
 }
 
 window.onload = load;

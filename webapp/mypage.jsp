@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,36 +19,43 @@
 </head>
 <body>
 	<div class="container">
-
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-xs-4">calendar</div>
 
 			<div id="rightSectionDiv" class="col-xs-7">
-				<div id="writeFormDiv" class="row">					
-					<form class="form-horizontal" role="form" method=post action="writearticle" enctype="multipart/form-data">
-					    <textarea name="contents" id="contentInput" class="form-control" rows="3" placeholder="생각을 기록하세요" style="resize:none;"></textarea>
-						<input name="img" type='file' id="fileInput" accept="image" onchange="readURL(this);" style="display: none;" />
-						
+				<div id="writeFormDiv" class="row">
+					<form class="form-horizontal" role="form" method=post
+						action="/mypage/write" enctype="multipart/form-data">
+						<textarea name="content" id="contentInput" class="form-control"
+							rows="3" placeholder="생각을 기록하세요" style="resize: none;"></textarea>
+						<input name="imgName" type='file' id="fileInput" accept="image"
+							onchange="readURL(this);" style="display: none;" /> <input
+							name="isPrivate" id="isPrivateIpnut" type="checkbox" />비공개
+
 						<div id="imgFormDiv">
-							<img src="icon/addimage.png" onclick="chooseFile()" style="height: 30px;" />
-								<img id="img_prev" src="#" alt="your image" style="display: none;"/>
+							<img id="uploadImg" src="icon/addimage.png" style="height: 30px;" />
+							<img id="prevImg" src="#" alt="your image" style="display: none;" />
 						</div>
-						
+
 						<div id="writeMenuDiv">
 							<div class="form-group">
-								<button type="button" class="btn btn-success" id="submitBtn" onclick="submitArticle()">Submit</button>
-						 	</div>
-						</div>					
+								<button type="button" class="btn btn-success" id="submitBtn">Submit</button>
+							</div>
+						</div>
 					</form>
 				</div>
-				<div id = "contentsContainerDiv" >
-					<c:forEach items="${todaySet}" var="today" >
+
+				<div id="contentsContainerDiv">
+					<c:forEach items="${ideaList}" var="idea">
 						<div class="row contentsDiv">
-							<div class="timeDiv" ><p class="date">${today.date}</p></div>
-							<c:if test="${empty today.img}">${today.contents}</c:if>
-							<c:if test="${!empty today.img}">
-								<img class="contentsImg" src="img/${today.img}">
-							${today.contents}</c:if>
+							<div class="timeDiv">
+								<p class="date">${idea.time}</p>
+							</div>
+							<c:if test="${!empty idea.imgName}">
+								<img class="contentsImg" src="img/${idea.imgName}"
+									style="margin-right: 5px;">
+							</c:if>
+							<p class="contentsP">${idea.content}</p>
 						</div>
 					</c:forEach>
 				</div>

@@ -1,43 +1,41 @@
 package org.yangchigi.web;
 
 public class Today {
+	
 	private int id;
-	private String contents;
 	private String date;
-	private String img;
+	private int like;
+	private int userId;
 
-	public Today(String contents, String date, String img) {
-		this.contents = contents;
+	public Today(String date, int like, int userId) {
 		this.date = date;
-		this.img = img;
+		this.like = like;
+		this.userId = userId;
 	}
 	
-	public Today(int id, String contents, String date, String img) {
+	public void setId(int id) {
 		this.id = id;
-		this.contents = contents;
-		this.date = date;
-		this.img = img;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
-
-	public String getContents() {
-		return contents;
-	}
-
+	
 	public String getDate() {
 		return date;
 	}
 
-	public String getImg() {
-		return img;
+
+	public int getUserId() {
+		return userId;
 	}
 
-	@Override
-	public String toString() {
-		return "Today [id=" + id + ", contents=" + contents + ", date=" + date
-				+ ", img=" + img + "]";
+	public int getLike() {
+		return like;
 	}
+
+	public void setLike(int like) {
+		this.like = like;
+	}
+
 }

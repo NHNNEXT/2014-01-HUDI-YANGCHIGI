@@ -5,13 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import org.yangchigi.support.MyCalendar;
 import org.yangchigi.web.Today;
 
 public class TodayRepository implements Repository<Today> {
-
 	private final String addr = "jdbc:mysql://localhost/seize";
 	private final String driver = "com.mysql.jdbc.Driver";
 	private final String user = "yangchigi";
@@ -19,7 +16,6 @@ public class TodayRepository implements Repository<Today> {
 	private Connection conn;
 
 	public TodayRepository() throws ClassNotFoundException, SQLException {
-		super();
 		Class.forName(driver);
 		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
@@ -28,43 +24,61 @@ public class TodayRepository implements Repository<Today> {
 		return this.conn;
 	}
 
-	@Override
-	public ArrayList<Today> findListByEmail() {
+	public Today findByDateAndUserId(String date, int userId) {
 		PreparedStatement pstmt;
 		ResultSet rs = null;
 		Today today = null;
-		ArrayList<Today> todayList = new ArrayList<Today>();
 
-		// email 에 의한 select 구현 필
-		String sql = "SELECT * FROM today";
+		String sql = "SELECT * FROM `today` WHERE (user_id = ? AND date = ?)";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
-			// pstmt.setString(1, email);
+			pstmt.setInt(1, userId);
+			pstmt.setString(2, date);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				today = new Today(rs.getString("contents"), rs
-						.getString("date").substring(11).substring(0, 5),
-						rs.getString("img"));
-				todayList.add(today);
+				today = new Today(rs.getString("date"), rs.getInt("like"),
+						rs.getInt("user_id"));
+				today.setId(rs.getInt("id"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return todayList;
+		return today;
 	}
 
 	@Override
-	public void add(Today user) {
+	public Today findById(int id) {
 		PreparedStatement pstmt;
+		ResultSet rs = null;
+		Today today = null;
 
-		String sql = "INSERT INTO `today` (`contents`," + "`date`," + "`img`)"
-				+ "VALUES " + "(?, ?, ?)";
+		String sql = "SELECT * FROM `today` WHERE id = ?";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
-			pstmt.setString(1, user.getContents());
-			pstmt.setString(2, MyCalendar.getCurrentDateTime());
-			pstmt.setString(3, user.getImg());
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				today = new Today(rs.getString("date"), rs.getInt("like"),
+						rs.getInt("user_id"));
+				today.setId(rs.getInt("id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return today;
+	}
+
+	@Override
+	public void add(Today today) {
+		PreparedStatement pstmt;
+
+		String sql = "INSERT INTO `today` (`date`, `like`, `user_id`) "
+				+ "VALUES (?, ?, ?)";
+		try {
+			pstmt = this.conn.prepareStatement(sql);
+			pstmt.setString(1, today.getDate());
+			pstmt.setInt(2, today.getLike());
+			pstmt.setInt(3, today.getUserId());
 			System.out.println(pstmt.toString());
 			pstmt.execute();
 		} catch (SQLException e) {
@@ -72,8 +86,20 @@ public class TodayRepository implements Repository<Today> {
 		}
 	}
 
-	@Override
-	public Today findByEmail(String string) {
-		return null;
+	public void update(Today today) {
+		PreparedStatement pstmt;
+
+		String sql = "UPDATE `today` SET `date` = ?, `like` = ?, `user_id` = ? "
+				+ "WHERE `id` = ?";
+		try {
+			pstmt = this.conn.prepareStatement(sql);
+			pstmt.setString(1, today.getDate());
+			pstmt.setInt(2, today.getLike());
+			pstmt.setInt(3, today.getUserId());
+			pstmt.setInt(4, today.getId());
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

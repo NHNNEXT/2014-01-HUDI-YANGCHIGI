@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<user id="3" email="hook3748@gmail.com" nickname="hogu" password="123456"
+		thumbnail="" />
+	<user id="4" email="hook3748@daum.com" nickname="hog" password="123456"
+		thumbnail="" />
+	<user id="5" email="hook3748@naver.com" nickname="hogang"
+		password="123456" thumbnail="" />
+</dataset>

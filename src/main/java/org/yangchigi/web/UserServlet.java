@@ -9,25 +9,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.yangchigi.repository.Repository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yangchigi.repository.UserRepository;
 
 /**
  * Servlet implementation class UserServlet
  */
 public class UserServlet extends HttpServlet {
-	private final static Logger logger = LogManager.getLogger(UserServlet.class
-			.getName());
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = LoggerFactory.getLogger("org.yangchigi.web.UserServlet");
+	private UserRepository repository;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public UserServlet() {
-		super();
-		logger.entry();
+		try {
+			repository = new UserRepository();
+		} catch (ClassNotFoundException | SQLException e) {
+			logger.warn("UserRepository 초기화 실패");
+		}
 	}
 
 	/**
@@ -44,43 +46,38 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Repository<User> repository;
+		String uri = request.getRequestURI();
 		try {
-			if ("/user/signup".equals(request.getRequestURI())) {
-				logger.debug("UserServlet > /user/signup");
-				repository = new UserRepository();
-
+			if ("/user/signup".equals(uri)) {
 				User user = new User(request.getParameter("email"),
 						request.getParameter("nickname"),
-						request.getParameter("password"));
+						request.getParameter("password"), "");
 				repository.add(user);
 				response.getWriter().write("success");
-			} else if ("/user/login".equals(request.getRequestURI())) {
-				logger.info("UserServlet > /user/login");
-				repository = new UserRepository();
+			} else if ("/user/login".equals(uri)) {
 				User user = repository.findByEmail(request
 						.getParameter("email"));
+				logger.info("user.getPassword(): {}", user.getPassword());
 				if (user.getPassword().equals(request.getParameter("password"))) {
+					logger.info("login success");
 					HttpSession session = request.getSession();
-					session.setAttribute("user", "logged");
-					System.out.println("login success");
+					session.setAttribute("user", user.getEmail());
 					response.getWriter().write("success");
 				} else {
-					System.out.println("login fail");
+					logger.info("login fail");
 					response.getWriter().write("fail");
 				}
-			} else if ("/user/logout".equals(request.getRequestURI())) {
-				logger.debug("UserServlet > /user/logout");
+			} else if ("/user/logout".equals(uri)) {
 				HttpSession session = request.getSession();
 				session.removeAttribute("user");
 				response.getWriter().write("success");
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void setRepository(UserRepository repository) {
+		this.repository = repository;
 	}
 }

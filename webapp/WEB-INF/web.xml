@@ -3,6 +3,7 @@
 	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<javaee:display-name>Archetype Created Web Application
 	</javaee:display-name>
+
 	<servlet>
 		<servlet-name>LandingServlet</servlet-name>
 		<servlet-class>org.yangchigi.web.LandingServlet</servlet-class>
@@ -11,6 +12,7 @@
 		<servlet-name>LandingServlet</servlet-name>
 		<url-pattern></url-pattern>
 	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>UserServlet</servlet-name>
 		<servlet-class>org.yangchigi.web.UserServlet</servlet-class>
@@ -20,42 +22,37 @@
 		<url-pattern>/user/*</url-pattern>
 	</servlet-mapping>
 
-<servlet>
-    <servlet-name>MyPageServlet</servlet-name>
-    <servlet-class>org.yangchigi.web.MyPageServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MyPageServlet</servlet-name>
-    <url-pattern>/mypage</url-pattern>
-  </servlet-mapping>
-  
-  
-  <servlet>
-    <servlet-name>WriteArticleServlet</servlet-name>
-    <servlet-class>org.yangchigi.web.WriteArticleServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WriteArticleServlet</servlet-name>
-    <url-pattern>/writearticle</url-pattern>
-  </servlet-mapping>
+	<servlet>
+		<servlet-name>MyPageServlet</servlet-name>
+		<servlet-class>org.yangchigi.web.MyPageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MyPageServlet</servlet-name>
+		<url-pattern>/mypage/*</url-pattern>
+	</servlet-mapping>
 
 
-	<!-- <listener>
-		<listener-class>org.apache.logging.log4j.core.web.Log4jServletContextListener</listener-class>
-	</listener>
+	<servlet>
+		<servlet-name>TodayServlet</servlet-name>
+		<servlet-class>org.yangchigi.web.TodayServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TodayServlet</servlet-name>
+		<url-pattern>/today/*</url-pattern>
+	</servlet-mapping>
 
-	<filter>
-		<filter-name>log4jServletFilter</filter-name>
-		<filter-class>org.apache.logging.log4j.core.web.Log4jServletFilter</filter-class>
+
+	<!-- <filter>
+		<filter-name>CharsetFilter</filter-name>
+		<filter-class>org.yangchigi.support.CharsetFilter</filter-class>
+		<init-param>
+			<javaee:param-name>requestEncoding</javaee:param-name>
+			<javaee:param-value>UTF-8</javaee:param-value>
+		</init-param>
 	</filter>
+
 	<filter-mapping>
-		<filter-name>log4jServletFilter</filter-name>
+		<filter-name>CharsetFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>INCLUDE</dispatcher>
-		<dispatcher>ERROR</dispatcher>
-		<dispatcher>ASYNC</dispatcher>Servlet 3.0 w/ disabled auto-initialization 
-			only; not supported in 2.5
 	</filter-mapping> -->
 </web-app>

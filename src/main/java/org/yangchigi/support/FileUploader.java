@@ -1,6 +1,7 @@
 package org.yangchigi.support;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,15 +12,14 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class FileUploader {
-	// location to store file uploaded
-	private static final String UPLOAD_DIRECTORY = "/Users/jehyeok/yangchigi/2014-01-HUDI-YANGCHIGI/webapp/img";
-
 	// upload settings
 	private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
 
-	public static ArrayList<String> upload(HttpServletRequest req) {
+	public static ArrayList<String> upload(HttpServletRequest req)
+			throws IOException {
+
 		ArrayList<String> contentList = new ArrayList<String>();
 
 		if (!ServletFileUpload.isMultipartContent(req)) {
@@ -45,9 +45,12 @@ public class FileUploader {
 
 		// constructs the directory path to store upload file
 		// this path is relative to application's directory
-		// String uploadPath = getServletContext().getRealPath("") +
-		// File.separator + UPLOAD_DIRECTORY;
-		String uploadPath = UPLOAD_DIRECTORY;
+		String uploadPath = req.getSession().getServletContext()
+				.getRealPath("")
+				+ File.separator + "img";
+		System.out.println(uploadPath);
+
+		// String uploadPath = UPLOAD_DIRECTORY;
 
 		// creates the directory if it does not exist
 		File uploadDir = new File(uploadPath);
@@ -57,22 +60,22 @@ public class FileUploader {
 
 		try {
 			// parses the request's content to extract file data
-			@SuppressWarnings("unchecked")
 			List<FileItem> formItems = upload.parseRequest(req);
 
 			if (formItems != null && formItems.size() > 0) {
 				// iterates over form's fields
 				for (FileItem item : formItems) {
-					if (item.getFieldName().equals("contents"))
-						contentList.add(item.getString());
-
+					if (item.getFieldName().equals("content")) {
+						System.out.println(item.getString());
+						contentList.add(new String(item.getString().getBytes(
+								"8859_1"), "UTF-8")); // 왜 한글을 못받지?
+					}
 					// processes only fields that are not form fields
 					if (!item.isFormField()) {
 						String fileName = new File(item.getName()).getName();
 						String filePath = uploadPath + File.separator
 								+ fileName;
 						File storeFile = new File(filePath);
-
 						contentList.add(item.getName());
 
 						// saves the file on disk
@@ -89,4 +92,5 @@ public class FileUploader {
 		// redirects client to message page
 		return contentList;
 	}
+
 }
