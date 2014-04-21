@@ -80,12 +80,33 @@ public class UserRepository implements Repository<User> {
 		return null;
 	}
 	
-	//썸네일 이름을 받아서 저장
+	//유져 닉네임을 받아서 변경 
+	public void modifyNickname(User user, String nickname) {
+		System.out.println("*********" + nickname);
+		logger.info("UserRepository > modifyNickname: " + user.toString());
+		PreparedStatement pstmt;
+		
+		String sql = "UPDATE `user` SET nickname = ? WHERE email=?";
+		System.out.println("UserRepository > modifyThumbnail: " + user.toString());
+		
+		try {
+			pstmt = this.conn.prepareStatement(sql);
+			pstmt.setString(1, nickname);
+			pstmt.setString(2, user.getEmail());
+			pstmt.execute();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	//썸네일 이름을 받아서 변경
 	public void modifyThumbnail(User user, String thumbnail) {
 		logger.info("UserRepository > modifyThumbnail: " + user.toString());
 		PreparedStatement pstmt;
 
-		String sql = "UPDATE `user` SET thumbnail = ? WHERE email=?";
+		String sql = "UPDATE user SET thumbnail = 'haha' WHERE email='jayjinjay@gmail.com'";
+//		String sql = "UPDATE user SET (thumbnail = ?) WHERE (email=?)";
 		System.out.println("UserRepository > modifyThumbnail: " + user.toString());
 
 		try {
