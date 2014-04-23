@@ -11,8 +11,6 @@ import java.util.List;
 import org.yangchigi.web.Idea;
 
 public class IdeaRepository implements Repository<Idea> {
-
-	
 	private Connection conn;
 
 	public IdeaRepository() throws ClassNotFoundException, SQLException {
@@ -40,6 +38,9 @@ public class IdeaRepository implements Repository<Idea> {
 						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				ideaList.add(idea);
 			}
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -61,6 +62,9 @@ public class IdeaRepository implements Repository<Idea> {
 			pstmt.setBoolean(5, idea.getIsPrivate());
 			pstmt.setInt(6, idea.getUserId());
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -89,6 +93,10 @@ public class IdeaRepository implements Repository<Idea> {
 						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				ideaList.add(idea);
 			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

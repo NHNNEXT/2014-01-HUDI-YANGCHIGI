@@ -14,9 +14,6 @@ import org.slf4j.LoggerFactory;
 
 @WebServlet(name = "LandingServlet", urlPatterns = {""}) 
 public class LandingServlet extends HttpServlet {
-	/**
-	 * 
-	 */
 	private static final Logger logger = LoggerFactory
 			.getLogger("org.yangchigi.web.LandingServlet");
 	private static final long serialVersionUID = 1L;

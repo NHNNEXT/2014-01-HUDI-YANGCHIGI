@@ -26,17 +26,15 @@ public class UserModifyServlet extends HttpServlet {
 	private static Logger logger = LoggerFactory.getLogger("org.yangchigi.web.UserModifyServlet");
 	private UserRepository userRepository;
 	
-	public UserModifyServlet() {
-		try {
-			userRepository = new UserRepository();
-		} catch (ClassNotFoundException | SQLException e) {
-			logger.warn("UserRepository 초기화 실패");
-		}
-	}
-
 	 @Override
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	 throws ServletException, IOException {
+		 try {
+				userRepository = new UserRepository();
+			} catch (ClassNotFoundException | SQLException e) {
+				logger.warn("UserRepository 초기화 실패");
+			}
+		 
 		 String uri = request.getRequestURI();
 		 if("/usermodify".equals(uri)) {
 			String userEmail = (String) request.getSession().getAttribute(
@@ -57,6 +55,12 @@ public class UserModifyServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			userRepository = new UserRepository();
+		} catch (ClassNotFoundException | SQLException e) {
+			logger.warn("UserRepository 초기화 실패");
+		}
+		
 		
 		String uri = request.getRequestURI();
 

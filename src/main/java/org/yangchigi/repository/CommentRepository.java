@@ -38,6 +38,9 @@ public class CommentRepository implements Repository<Comment>{
 			pstmt.setInt(2, 1);
 			pstmt.setInt(3, 1);
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -60,6 +63,10 @@ public class CommentRepository implements Repository<Comment>{
 				comm = new Comment(rs.getString("content"),1, 1);
 				commList.add(comm);				
 			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

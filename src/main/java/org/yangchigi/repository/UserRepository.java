@@ -41,7 +41,10 @@ public class UserRepository implements Repository<User> {
 						rs.getString("thumbnail"));
 				user.setId(rs.getInt("id"));
 			}
+			
 			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -63,7 +66,9 @@ public class UserRepository implements Repository<User> {
 			pstmt.setString(3, user.getPassword());
 			pstmt.setString(4, user.getThumbnail());
 			pstmt.execute();
+			
 			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -85,7 +90,9 @@ public class UserRepository implements Repository<User> {
 			pstmt.setString(1, nickname);
 			pstmt.setString(2, user.getEmail());
 			pstmt.execute();
+			
 			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -104,7 +111,9 @@ public class UserRepository implements Repository<User> {
 			pstmt.setString(1, thumbnail);
 			pstmt.setString(2, user.getEmail());
 			pstmt.execute();
+			
 			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

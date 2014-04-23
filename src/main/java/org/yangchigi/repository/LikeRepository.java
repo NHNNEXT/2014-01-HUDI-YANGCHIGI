@@ -37,6 +37,10 @@ public class LikeRepository implements Repository<Like>{
 				like = new Like(rs.getInt("user_id"), rs.getInt("today_id"));
 				like.setId(rs.getInt("id"));
 			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,6 +57,9 @@ public class LikeRepository implements Repository<Like>{
 			pstmt.setInt(1, like.getUserId());
 			pstmt.setInt(2, like.getTodayId());
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -67,6 +74,9 @@ public class LikeRepository implements Repository<Like>{
 			pstmt.setInt(1, like.getUserId());
 			pstmt.setInt(2, like.getTodayId());
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

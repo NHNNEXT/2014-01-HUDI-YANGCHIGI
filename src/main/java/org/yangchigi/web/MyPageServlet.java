@@ -27,20 +27,17 @@ public class MyPageServlet extends HttpServlet {
 	private IdeaRepository ideaRepository;
 	private UserRepository userRepository;
 	
-
-	public MyPageServlet() {
-		try {
-			ideaRepository = new IdeaRepository();
-			userRepository = new UserRepository();
-		} catch (ClassNotFoundException | SQLException e) {
-		}
-	}
-
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String uri = request.getRequestURI();
-
+		try {
+			ideaRepository = new IdeaRepository();
+			userRepository = new UserRepository();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
 		if ("/mypage".equals(uri)) {
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");
@@ -57,9 +54,15 @@ public class MyPageServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws IOException  {
 		String uri = request.getRequestURI();
 		HashMap<String, String> contentsMap;
+			try {
+				ideaRepository = new IdeaRepository();
+				userRepository = new UserRepository();
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
 		
 		if ("/mypage/write".equals(uri)) {
 			contentsMap = getContentsListAndUpload(request);

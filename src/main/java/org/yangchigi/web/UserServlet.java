@@ -23,10 +23,9 @@ public class UserServlet extends HttpServlet {
 	private static Logger logger = LoggerFactory.getLogger("org.yangchigi.web.UserServlet");
 	private UserRepository repository;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public UserServlet() {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		
 		try {
 			repository = new UserRepository();
 		} catch (ClassNotFoundException | SQLException e) {
@@ -34,20 +33,14 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			repository = new UserRepository();
+		} catch (ClassNotFoundException | SQLException e) {
+			logger.warn("UserRepository 초기화 실패");
+		}
+		
 		String uri = request.getRequestURI();
 		try {
 			if ("/user/signup".equals(uri)) {

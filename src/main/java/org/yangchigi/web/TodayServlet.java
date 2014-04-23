@@ -29,7 +29,9 @@ public class TodayServlet extends HttpServlet {
 	private IdeaRepository ideaRepository;
 	private LikeRepository likeRepository;
 
-	public TodayServlet() {
+	@Override
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			userRepository = new UserRepository();
 			todayRepository = new TodayRepository();
@@ -38,11 +40,7 @@ public class TodayServlet extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException e) {
 			logger.warn("repository 초기화 실패");
 		}
-	}
-
-	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+		
 		String uri = request.getRequestURI();
 
 		if ("/today".equals(uri)) {
@@ -102,6 +100,15 @@ public class TodayServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			userRepository = new UserRepository();
+			todayRepository = new TodayRepository();
+			ideaRepository = new IdeaRepository();
+			likeRepository = new LikeRepository();
+		} catch (ClassNotFoundException | SQLException e) {
+			logger.warn("repository 초기화 실패");
+		}
+		
 		String uri = request.getRequestURI();
 		
 		// 투데이 like column 업데이트.

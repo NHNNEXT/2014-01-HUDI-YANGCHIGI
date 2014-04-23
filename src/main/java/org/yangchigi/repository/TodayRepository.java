@@ -36,6 +36,10 @@ public class TodayRepository implements Repository<Today> {
 						rs.getInt("user_id"));
 				today.setId(rs.getInt("id"));
 			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -58,6 +62,10 @@ public class TodayRepository implements Repository<Today> {
 						rs.getInt("user_id"));
 				today.setId(rs.getInt("id"));
 			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -76,6 +84,9 @@ public class TodayRepository implements Repository<Today> {
 			pstmt.setInt(2, today.getLike());
 			pstmt.setInt(3, today.getUserId());
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -93,6 +104,9 @@ public class TodayRepository implements Repository<Today> {
 			pstmt.setInt(3, today.getUserId());
 			pstmt.setInt(4, today.getId());
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
