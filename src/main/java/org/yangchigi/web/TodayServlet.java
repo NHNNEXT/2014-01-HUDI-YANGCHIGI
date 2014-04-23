@@ -28,6 +28,7 @@ public class TodayServlet extends HttpServlet {
 	private TodayRepository todayRepository;
 	private IdeaRepository ideaRepository;
 	private LikeRepository likeRepository;
+	private CommentRepository commRepository;
 
 	@Override
 	protected void doGet(HttpServletRequest request,
@@ -37,23 +38,14 @@ public class TodayServlet extends HttpServlet {
 			todayRepository = new TodayRepository();
 			ideaRepository = new IdeaRepository();
 			likeRepository = new LikeRepository();
+			commRepository = new CommentRepository();
 		} catch (ClassNotFoundException | SQLException e) {
 			logger.warn("repository 초기화 실패");
 		}
 		
 		String uri = request.getRequestURI();
 
-		if ("/today".equals(uri)) {
-			try {
-				CommentRepository commRepository = new CommentRepository();
-				request.setAttribute("commList",
-						commRepository.findListByEmail());
-				request.getRequestDispatcher("/today.jsp").forward(request,
-						response);
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
-			}
-		} else if (uri.matches("^/today/[0-9]+")) {
+		if (uri.matches("^/today/[0-9]+")) {
 			// today Id 받기. /today/9 일 경우 todayId == 9
 			int todayId = Integer.parseInt(uri.substring(7));
 			String userEmail = (String) request.getSession().getAttribute(
@@ -61,17 +53,6 @@ public class TodayServlet extends HttpServlet {
 			// 로그인한 유저 & 요청한 투데이
 			User user = userRepository.findByEmail(userEmail);
 			Today today = todayRepository.findById(todayId);
-			
-			CommentRepository commRepository;
-			try {
-				commRepository = new CommentRepository();
-			request.setAttribute("commList",
-					commRepository.findListByEmail());
-			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 			
 			// 투데이에 속한 아이디어 리스트
 			List<Idea> ideaList = ideaRepository.findByUserIdAndDate(
@@ -92,6 +73,7 @@ public class TodayServlet extends HttpServlet {
 			request.setAttribute("ideaList", ideaList);
 			request.setAttribute("today", today);
 			request.setAttribute("isLiked", like != null);
+			request.setAttribute("commList",commRepository.findListByEmail());
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		}
