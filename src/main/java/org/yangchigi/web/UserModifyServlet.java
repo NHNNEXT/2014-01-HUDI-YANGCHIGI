@@ -7,6 +7,7 @@ import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import org.yangchigi.repository.UserRepository;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+@WebServlet(name = "UserModifyServlet", urlPatterns = {"/usermodify/*"}) 
 public class UserModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = LoggerFactory.getLogger("org.yangchigi.web.UserModifyServlet");

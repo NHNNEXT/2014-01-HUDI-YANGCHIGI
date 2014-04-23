@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import org.yangchigi.repository.LikeRepository;
 import org.yangchigi.repository.TodayRepository;
 import org.yangchigi.repository.UserRepository;
 
+@WebServlet(name = "TodayServlet", urlPatterns = {"/today/*"}) 
 public class TodayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = LoggerFactory

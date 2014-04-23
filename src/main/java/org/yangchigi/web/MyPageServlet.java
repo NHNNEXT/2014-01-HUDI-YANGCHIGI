@@ -72,7 +72,6 @@ public class MyPageServlet extends HttpServlet {
 			if(contentsMap.containsKey("imgName")) imgName = contentsMap.get("imgName");			
 			boolean isPrivate = contentsMap.containsKey("isPrivate");
 			
-			// 유저 이메일을 받아옴.
 			String userEmail = (String) request.getSession().getAttribute("user");
 			User user = userRepository.findByEmail(userEmail);
 			
@@ -89,7 +88,6 @@ public class MyPageServlet extends HttpServlet {
 		HashMap<String, String> contentsMap = new HashMap<String, String>();
 		String fileName = null;
         try {
-        	System.out.println(request.getParts().size());
 			for (Part part : request.getParts()) { 
 				if (part.getName().equals("content")) { 
 					String paramValue = getStringFromStream(part.getInputStream()); 
