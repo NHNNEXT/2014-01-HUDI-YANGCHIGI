@@ -10,7 +10,7 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
-
+<script src="http://malsup.github.com/jquery.form.js"></script> 
 <script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/mypage.css">
@@ -38,7 +38,7 @@
 
 						<div id="writeMenuDiv">
 							<div class="form-group">
-								<button type="submit" class="btn btn-success" id="submitBtn">Submit</button>
+								<button type="button" class="btn btn-success" id="submitBtn">Submit</button>
 							</div>
 						</div>
 					</form>

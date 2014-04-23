@@ -68,8 +68,8 @@ public class MyPageServlet extends HttpServlet {
 			String content = contentsMap.get("content");
 			String date = MyCalendar.getCurrentDate();
 			String time = MyCalendar.getCurrentTime();
-			String imgName = contentsMap.get("imgName");
-			if(imgName.equals("")) imgName = null;
+			String imgName = null;
+			if(contentsMap.containsKey("imgName")) imgName = contentsMap.get("imgName");			
 			boolean isPrivate = contentsMap.containsKey("isPrivate");
 			
 			// 유저 이메일을 받아옴.
@@ -81,7 +81,6 @@ public class MyPageServlet extends HttpServlet {
 			time = MyCalendar.getCurrentTimeWithoutSec();
 			response.getWriter().write(time);
 			
-			response.sendRedirect("/mypage");
 		}
 	}
 
@@ -89,8 +88,8 @@ public class MyPageServlet extends HttpServlet {
 		Part filePart = null; 
 		HashMap<String, String> contentsMap = new HashMap<String, String>();
 		String fileName = null;
-		
         try {
+        	System.out.println(request.getParts().size());
 			for (Part part : request.getParts()) { 
 				if (part.getName().equals("content")) { 
 					String paramValue = getStringFromStream(part.getInputStream()); 
@@ -105,14 +104,19 @@ public class MyPageServlet extends HttpServlet {
 					for (String headerName : part.getHeaderNames()) { 
 						if(part.getHeader(headerName).contains("filename=")){
 							String filePartHeader = part.getHeader(headerName);
+							System.out.println(filePartHeader);
 							fileName = filePartHeader.split("filename=\"")[1];
+							
 							fileName = fileName.substring(0, fileName.length()-1);
 							contentsMap.put("imgName", fileName);
 						}
 					} 
 				} 
 			}
-			filePart.write(fileName);
+			
+			if(fileName != null)
+				filePart.write(fileName);
+			
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();
 		} 
