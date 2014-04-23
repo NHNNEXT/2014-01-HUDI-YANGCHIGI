@@ -4,17 +4,17 @@
 	<javaee:display-name>Archetype Created Web Application
 	</javaee:display-name>
 
-	<!-- <filter>
+	<filter>
 		<filter-name>CharsetFilter</filter-name>
 		<filter-class>org.yangchigi.support.CharsetFilter</filter-class>
 		<init-param>
-			<javaee:param-name>requestEncoding</javaee:param-name>
-			<javaee:param-value>UTF-8</javaee:param-value>
+			<param-name>requestEncoding</param-name>
+			<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
 
 	<filter-mapping>
 		<filter-name>CharsetFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	</filter-mapping>
 </web-app>
