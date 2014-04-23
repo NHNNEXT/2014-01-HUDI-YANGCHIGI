@@ -9,11 +9,7 @@ import java.sql.SQLException;
 import org.yangchigi.web.Like;
 import org.yangchigi.web.Today;
 
-public class LikeRepository {
-	private final String addr = "jdbc:mysql://localhost/seize";
-	private final String driver = "com.mysql.jdbc.Driver";
-	private final String user = "yangchigi";
-	private final String pw = "yangchigi";
+public class LikeRepository implements Repository<Like>{
 	private Connection conn;
 
 	public LikeRepository() throws ClassNotFoundException, SQLException {
@@ -74,5 +70,11 @@ public class LikeRepository {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Like findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

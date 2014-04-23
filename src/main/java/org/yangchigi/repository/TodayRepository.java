@@ -9,10 +9,6 @@ import java.sql.SQLException;
 import org.yangchigi.web.Today;
 
 public class TodayRepository implements Repository<Today> {
-	private final String addr = "jdbc:mysql://localhost/seize";
-	private final String driver = "com.mysql.jdbc.Driver";
-	private final String user = "yangchigi";
-	private final String pw = "yangchigi";
 	private Connection conn;
 
 	public TodayRepository() throws ClassNotFoundException, SQLException {

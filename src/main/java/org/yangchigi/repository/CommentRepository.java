@@ -10,10 +10,6 @@ import java.util.ArrayList;
 import org.yangchigi.web.Comment;
 
 public class CommentRepository implements Repository<Comment>{
-	private final String addr = "jdbc:mysql://localhost/seize";
-	private final String driver = "com.mysql.jdbc.Driver";
-	private final String user = "yangchigi";
-	private final String pw = "yangchigi";
 	private Connection conn;
 	
 	public CommentRepository() throws ClassNotFoundException, SQLException {

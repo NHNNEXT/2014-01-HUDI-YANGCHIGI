@@ -13,10 +13,6 @@ import org.yangchigi.web.User;
 public class UserRepository implements Repository<User> {
 	private static final Logger logger = LoggerFactory
 			.getLogger("org.yangchigi.web.UserRepository");
-	private final String addr = "jdbc:mysql://localhost/seize";
-	private final String driver = "com.mysql.jdbc.Driver";
-	private final String user = "yangchigi";
-	private final String pw = "yangchigi";
 	private Connection conn;
 
 	public UserRepository() throws ClassNotFoundException, SQLException {
