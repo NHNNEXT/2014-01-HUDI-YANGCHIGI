@@ -28,7 +28,7 @@
 					<form action="/mypage/write" method="post" enctype="multipart/form-data"> 
 						<textarea name="content" id="contentInput" class="form-control"
 							rows="3" placeholder="생각을 기록하세요" style="resize: none;"></textarea>
-						<input name="imgName" type='file' id="fileInput" accept="image" style="display: none;" />
+						<input name="imgName" type='file' id="fileInput" accept="image/*" style="display: none;" />
 						<input name="isPrivate" id="isPrivateIpnut" type="checkbox"/>비공개
 
 						<div id="imgFormDiv">

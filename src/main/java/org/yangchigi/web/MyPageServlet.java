@@ -67,6 +67,8 @@ public class MyPageServlet extends HttpServlet {
 		if ("/mypage/write".equals(uri)) {
 			contentsMap = getContentsListAndUpload(request);
 			
+			if(hasError(contentsMap)) return;
+			
 			String content = contentsMap.get("content");
 			String date = MyCalendar.getCurrentDate();
 			String time = MyCalendar.getCurrentTime();
@@ -83,6 +85,17 @@ public class MyPageServlet extends HttpServlet {
 			response.getWriter().write(time);
 			
 		}
+	}
+
+	private boolean hasError(HashMap<String, String> contentsMap) {
+		for(String key : contentsMap.keySet()){
+			String value = contentsMap.get(key);
+			// 스크립트 태그를 넣을 경우 
+			if(value.contains("<script>")) return true;
+		}
+		
+		return false;
+		
 	}
 
 	private HashMap<String, String> getContentsListAndUpload(HttpServletRequest request) {

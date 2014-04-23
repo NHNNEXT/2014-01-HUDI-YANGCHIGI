@@ -21,7 +21,9 @@ function submitArticle() {
 	var content = $('#contentInput').val();
 	var isPrivate = $('#isPrivateIpnut:checked').val();
 	var imgName = $('#fileInput').val().split('\\')[2];
-	// $("body form").submit(function(e){
+
+	if(hasError(content, imgName)) return;
+	
 	if (content == "") {
 		alert("내용이 없습니다");
 	} else {
@@ -36,10 +38,9 @@ function submitArticle() {
 		};
 		$('body form').ajaxSubmit(option);
 	}
-	
-	
-	
 }
+
+
 
 function addDivAfterAjax(content, time, imgName){
 	if(imgName == undefined){
@@ -74,6 +75,15 @@ function setHeightForTimeDiv() {
 						+ parseInt($(this).parent().css('margin-top')) * 2;
 				$(this).height(newHeight);
 			});
+}
+
+function hasError(content, imgName){
+	if(content.indexOf("<script>") != -1 || imgName.indexOf("<script>") != -1){
+		alert("정확한 문자를 입력하세요");
+		return true;
+	}
+	
+	return false;
 }
 
 function load() {
