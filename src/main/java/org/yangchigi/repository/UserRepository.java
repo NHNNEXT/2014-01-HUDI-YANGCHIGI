@@ -32,8 +32,6 @@ public class UserRepository implements Repository<User> {
 		PreparedStatement pstmt;
 		ResultSet rs;
 		User user = null;
-		System.out.println("UserRepository > findByEmail");
-		System.out.println("email: " + email);
 		String sql = "SELECT * FROM `user` WHERE (email = ?)";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
@@ -61,7 +59,6 @@ public class UserRepository implements Repository<User> {
 
 		String sql = "INSERT INTO `user` (`email`, `nickname`, `password`, `thumbnail`) "
 				+ "VALUES (?, ?, ?, ?)";
-		System.out.println("UserRepository > add: " + user.toString());
 
 		try {
 			pstmt = this.conn.prepareStatement(sql);
@@ -82,12 +79,10 @@ public class UserRepository implements Repository<User> {
 	
 	//유져 닉네임을 받아서 변경 
 	public void modifyNickname(User user, String nickname) {
-		System.out.println("*********" + nickname);
 		logger.info("UserRepository > modifyNickname: " + user.toString());
 		PreparedStatement pstmt;
 		
 		String sql = "UPDATE `user` SET nickname = ? WHERE email=?";
-		System.out.println("UserRepository > modifyThumbnail: " + user.toString());
 		
 		try {
 			pstmt = this.conn.prepareStatement(sql);
@@ -107,7 +102,6 @@ public class UserRepository implements Repository<User> {
 
 		String sql = "UPDATE user SET thumbnail = 'haha' WHERE email='jayjinjay@gmail.com'";
 //		String sql = "UPDATE user SET (thumbnail = ?) WHERE (email=?)";
-		System.out.println("UserRepository > modifyThumbnail: " + user.toString());
 
 		try {
 			pstmt = this.conn.prepareStatement(sql);

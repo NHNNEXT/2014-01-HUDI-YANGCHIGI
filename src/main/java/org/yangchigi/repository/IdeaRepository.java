@@ -63,7 +63,6 @@ public class IdeaRepository implements Repository<Idea> {
 			pstmt.setString(4, idea.getImgName());
 			pstmt.setBoolean(5, idea.getIsPrivate());
 			pstmt.setInt(6, idea.getUserId());
-			System.out.println(pstmt.toString());
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

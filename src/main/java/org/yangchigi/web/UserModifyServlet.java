@@ -42,7 +42,6 @@ public class UserModifyServlet extends HttpServlet {
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");
 			logger.info("userEmail: {}", userEmail);
-			System.out.println("userEmail: " + userEmail);
 			User user = userRepository.findByEmail(userEmail);// 세션에서 로그인된 사용자 받아옴
 			String nickname = user.getNickname();
 			String thumbnailName = user.getThumbnail();
@@ -59,32 +58,18 @@ public class UserModifyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		 System.out.println("UserModifyServlet > doPost call");
-//		 String msg = request.getParameter("msg");
-//		 String pwd = request.getParameter("pwd");
-//		
-//		 response.setContentType("text/html;charset=euc-kr");
-//		 PrintWriter out =response.getWriter();
-//		 out.println("<html>");
-//		 out.println("<p>haha</p>");
-//		 out.println("<p>param msg: </b>" + msg + "</p>");
-//		 out.println("<p>param pwd: </b>" + pwd + "</p>");
-//		 out.println("</html>");
 		String uri = request.getRequestURI();
 
 		//ajax 처리
 		if ("/usermodify/uploadThumbnail".equals(uri)) {
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");
-			System.out.println("**********userEmail:" + userEmail);//이건 받아와짐.
 			logger.info("userEmail: {}", userEmail);
-			System.out.println("userEmail: " + userEmail);
 			User user = userRepository.findByEmail(userEmail);// 세션에서 로그인된 사용자 받아옴
 			
 			String nickname = request.getParameter("nickname");
 			String thumbnailName = request.getParameter("thumbnailName");
 			
-			System.out.println("@@@@**********nickname, thumbnailName:" + nickname + thumbnailName);//안받아와져!
 			
 			user.setNickname(nickname);
 			
@@ -108,7 +93,6 @@ public class UserModifyServlet extends HttpServlet {
 				String file1 = (String) files.nextElement();
 				imgName = multi.getFilesystemName(file1);
 				
-				System.out.println(file1 + "," + imgName);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

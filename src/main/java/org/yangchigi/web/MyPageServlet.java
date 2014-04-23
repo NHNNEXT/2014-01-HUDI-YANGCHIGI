@@ -44,7 +44,6 @@ public class MyPageServlet extends HttpServlet {
 		if ("/mypage".equals(uri)) {
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");
-			System.out.println("userEmail: " + userEmail);
 			User user = userRepository.findByEmail(userEmail);
 			request.setAttribute(
 					"ideaList",
@@ -102,7 +101,6 @@ public class MyPageServlet extends HttpServlet {
 					for (String headerName : part.getHeaderNames()) { 
 						if(part.getHeader(headerName).contains("filename=")){
 							String filePartHeader = part.getHeader(headerName);
-							System.out.println(filePartHeader);
 							fileName = filePartHeader.split("filename=\"")[1];
 							
 							fileName = fileName.substring(0, fileName.length()-1);

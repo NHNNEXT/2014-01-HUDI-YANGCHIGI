@@ -137,7 +137,6 @@ public class TodayServlet extends HttpServlet {
 				String userEmail = (String) request.getSession().getAttribute(
 						"user");
 				logger.info("userEmail: {}", userEmail);
-				System.out.println("userEmail: " + userEmail);
 				User user = userRepository.findByEmail(userEmail);
 
 				CommentRepository repository = new CommentRepository();

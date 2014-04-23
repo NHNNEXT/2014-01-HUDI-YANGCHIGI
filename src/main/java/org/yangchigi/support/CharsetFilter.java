@@ -24,9 +24,6 @@ public class CharsetFilter implements Filter {
 		if (null == request.getCharacterEncoding())
 			request.setCharacterEncoding(encoding);
 
-		/**
-		 * Set the default response content type and encoding
-		 */
 		
 		response.setContentType(String.format("text/html; charset=%s", DEFAULT_ENCODING));
 		response.setCharacterEncoding(DEFAULT_ENCODING);

@@ -79,7 +79,6 @@ public class TodayRepository implements Repository<Today> {
 			pstmt.setString(1, today.getDate());
 			pstmt.setInt(2, today.getLike());
 			pstmt.setInt(3, today.getUserId());
-			System.out.println(pstmt.toString());
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

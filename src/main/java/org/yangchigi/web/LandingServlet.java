@@ -24,7 +24,6 @@ public class LandingServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("LandingServlet");
 		logger.info("LandingServlet");
 		HttpSession session = request.getSession();
 		if (null != session.getAttribute("user")) {
