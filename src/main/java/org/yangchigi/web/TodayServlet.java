@@ -2,7 +2,6 @@ package org.yangchigi.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,6 +16,11 @@ import org.yangchigi.repository.IdeaRepository;
 import org.yangchigi.repository.LikeRepository;
 import org.yangchigi.repository.TodayRepository;
 import org.yangchigi.repository.UserRepository;
+import org.yangchigi.web.Comment;
+import org.yangchigi.web.Idea;
+import org.yangchigi.web.Like;
+import org.yangchigi.web.Today;
+import org.yangchigi.web.User;
 
 public class TodayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -1,7 +1,6 @@
 package org.yangchigi.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Enumeration;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yangchigi.repository.CommentRepository;
 import org.yangchigi.repository.UserRepository;
 
 import com.oreilly.servlet.MultipartRequest;

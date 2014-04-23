@@ -12,7 +12,7 @@
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 <script
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
-<script src="js/today.js"></script>
+<script src="/js/today.js"></script>
 </head>
 <body>
 	<!-- 단상 목록 들어가는 곳 -->
