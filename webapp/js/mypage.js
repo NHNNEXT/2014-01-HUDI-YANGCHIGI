@@ -35,24 +35,9 @@ function submitArticle() {
 			}
 		};
 		$('body form').ajaxSubmit(option);
-// })
-// .done(
-// function(date) {
-//
-// $('#contentsContainerDiv').append(
-// '<div class="row contentsDiv">'
-// + '<div class="timeDiv" ><p class="date">'
-// + date + '</p></div>' + contentsVal
-// + '</div>').children(':last').hide()
-// .fadeIn('slow');
-// $('html, body').animate({
-// scrollTop : $(document).height()
-// }, "fast");
-// $('#prevImg').hide();
-// $('.form-horizontal')[0].reset();
-// setHeightForTimeDiv();
-// });
 	}
+	
+	
 	
 }
 
@@ -69,7 +54,7 @@ function addDivAfterAjax(content, time, imgName){
 	else{
 		$('#contentsContainerDiv').append(
 				'<div class="row contentsDiv">'
-						+ '<div class="timeDiv" ><p class="date">'
+						+ '<div class="timeDiv"><p class="date">'
 						+ time + '</p></div>' 		
 						+ '<img class="contentsImg" src="img/' + imgName
 						+ '" style="margin-right:5px;">'
@@ -77,10 +62,9 @@ function addDivAfterAjax(content, time, imgName){
 						+ content + '</p></div>')
 				.children(':last').hide().fadeIn('slow');
 	}
-	$('html, body').animate({scrollTop : $(document).height()}, "fast");
+	$('html, body').animate({scrollTop : $(document).height()}, "fast", setHeightForTimeDiv);
 	$('#prevImg').hide();
 	$('body form')[0].reset();
-	setHeightForTimeDiv();
 }
 
 function setHeightForTimeDiv() {
@@ -88,7 +72,6 @@ function setHeightForTimeDiv() {
 			function(i) {
 				var newHeight = parseInt($(this).parent().height())
 						+ parseInt($(this).parent().css('margin-top')) * 2;
-
 				$(this).height(newHeight);
 			});
 }
@@ -102,6 +85,7 @@ function load() {
 	$('#fileInput').change(readImg);
 
 	setHeightForTimeDiv();
+	$('body').hide().delay(200).fadeIn('slow');
 
 }
 
