@@ -23,6 +23,8 @@ function submitComment() {
 		}
 }
 
+
+
 function load() {
 	$('#uploadCommentBtn').click(submitComment);
 }

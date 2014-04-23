@@ -62,6 +62,17 @@ public class TodayServlet extends HttpServlet {
 			User user = userRepository.findByEmail(userEmail);
 			Today today = todayRepository.findById(todayId);
 			
+			CommentRepository commRepository;
+			try {
+				commRepository = new CommentRepository();
+			request.setAttribute("commList",
+					commRepository.findListByEmail());
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 			// 투데이에 속한 아이디어 리스트
 			List<Idea> ideaList = ideaRepository.findByUserIdAndDate(
 					today.getUserId(), today.getDate());
