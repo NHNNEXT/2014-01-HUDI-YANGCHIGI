@@ -1,37 +1,38 @@
 package org.yangchigi.web;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
-import org.yangchigi.support.FileUploader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.yangchigi.repository.IdeaRepository;
 import org.yangchigi.repository.UserRepository;
 import org.yangchigi.support.MyCalendar;
 
+
+
+@MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/img", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
+@WebServlet(name = "MyPageServlet", urlPatterns = {"/mypage/*"}) 
 public class MyPageServlet extends HttpServlet {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory
-			.getLogger("org.yangchigi.web.MyPageServlet");
 	private IdeaRepository ideaRepository;
 	private UserRepository userRepository;
+	
 
 	public MyPageServlet() {
 		try {
 			ideaRepository = new IdeaRepository();
 			userRepository = new UserRepository();
 		} catch (ClassNotFoundException | SQLException e) {
-			logger.warn("IdeaRepository 초기화 실패");
 		}
 	}
 
@@ -45,7 +46,6 @@ public class MyPageServlet extends HttpServlet {
 					"user");
 			System.out.println("userEmail: " + userEmail);
 			User user = userRepository.findByEmail(userEmail);
-			logger.debug("date: {}", MyCalendar.getCurrentDate());
 			request.setAttribute(
 					"ideaList",
 					ideaRepository.findByUserIdAndDate(user.getId(),
@@ -60,52 +60,91 @@ public class MyPageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-
+		HashMap<String, String> contentsMap;
+		
 		if ("/mypage/write".equals(uri)) {
-			ArrayList<String> contentList = new ArrayList<String>();
+			contentsMap = getContentsListAndUpload(request);
+			
+			String content = contentsMap.get("content");
 			String date = MyCalendar.getCurrentDate();
 			String time = MyCalendar.getCurrentTime();
-			String content = null;
-			String imgName = null;
-			boolean isPrivate = false;
+			String imgName = contentsMap.get("imgName");
+			if(imgName.equals("")) imgName = null;
+			boolean isPrivate = contentsMap.containsKey("isPrivate");
+			
 			// 유저 이메일을 받아옴.
-			String userEmail = (String) request.getSession().getAttribute(
-					"user");
-			logger.info("userEmail: {}", userEmail);
-			System.out.println("userEmail: " + userEmail);
+			String userEmail = (String) request.getSession().getAttribute("user");
 			User user = userRepository.findByEmail(userEmail);
-			contentList = FileUploader.upload(request);
-
-			// AJAX
-			if (contentList == null) {
-				content = request.getParameter("content");
-				imgName = request.getParameter("imgName");
-				isPrivate = request.getParameter("isPrivate") != null;
-				logger.debug("isPrivate: {}", isPrivate);
-				System.out.println("isPrivate: " + isPrivate);
-				uploadArticle(content, date, time, imgName, isPrivate, user);
-				
-				time = MyCalendar.getCurrentTimeWithoutSec();
-				response.getWriter().write(time);
-			} else {
-				// NOT AJAX
-				if (contentList.isEmpty())
-					System.out.println("empty");
-				else {
-					content = contentList.get(0);
-					imgName = contentList.get(1);
-				}
-				response.getWriter().write(date);
-				uploadArticle(content, date, time, imgName, isPrivate, user);
-
-				response.sendRedirect("/mypage");
-			}
+			
+			uploadArticle(content,date,time,imgName,isPrivate,user);
+			
+			time = MyCalendar.getCurrentTimeWithoutSec();
+			response.getWriter().write(time);
+			
+			response.sendRedirect("/mypage");
 		}
 	}
 
+	private HashMap<String, String> getContentsListAndUpload(HttpServletRequest request) {
+		Part filePart = null; 
+		HashMap<String, String> contentsMap = new HashMap<String, String>();
+		String fileName = null;
+		
+        try {
+			for (Part part : request.getParts()) { 
+				if (part.getName().equals("content")) { 
+					String paramValue = getStringFromStream(part.getInputStream()); 
+					contentsMap.put("content", paramValue.trim());
+				} 
+				if (part.getName().equals("isPrivate")) { 
+					String paramValue = getStringFromStream(part.getInputStream());
+					contentsMap.put("isPrivate", paramValue.trim());
+				} 
+				if (part.getName().equals("imgName")) { 
+					filePart = part;
+					for (String headerName : part.getHeaderNames()) { 
+						if(part.getHeader(headerName).contains("filename=")){
+							String filePartHeader = part.getHeader(headerName);
+							fileName = filePartHeader.split("filename=\"")[1];
+							fileName = fileName.substring(0, fileName.length()-1);
+							contentsMap.put("imgName", fileName);
+						}
+					} 
+				} 
+			}
+			filePart.write(fileName);
+		} catch (IOException | ServletException e) {
+			e.printStackTrace();
+		} 
+
+        return contentsMap;
+		
+	}
+	
+	public String getStringFromStream(InputStream stream) 
+            throws IOException { 
+        BufferedReader br = new BufferedReader(new InputStreamReader(stream, "UTF-8")); 
+        StringBuilder sb = new StringBuilder(); 
+        String line = null; 
+
+        try { 
+            while ((line = br.readLine()) != null) { 
+                sb.append(line + "\n"); 
+            } 
+        } catch (IOException e) { 
+            e.printStackTrace(); 
+        } finally { 
+            try { 
+                stream.close(); 
+            } catch (IOException e) { 
+                e.printStackTrace(); 
+            } 
+        } 
+        return sb.toString(); 
+    } 
+
 	private void uploadArticle(String content, String date, String time,
 			String imgName, boolean isPrivate, User user) {
-		logger.debug("user.getId(): " + user.getId());
 		Idea idea = new Idea(content, date, time, imgName, isPrivate,
 				user.getId());
 		ideaRepository.add(idea);

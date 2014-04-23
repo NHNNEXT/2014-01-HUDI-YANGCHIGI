@@ -20,12 +20,13 @@ function readImg() {
 
 function submitArticle() {
 	// 일단 이미지가 없을때만 ajax로..
-	if(cur_img_name == undefined){
+//	if(cur_img_name == undefined){
 		
 		var contentsVal = $('#contentInput').val();
 		var isPrivate = $('#isPrivateIpnut:checked').val();
 //		$("body form").submit(function(e){
-			
+		var postData = $('body form').serializeArray();
+			debugger;
 			if (contentsVal == "") {
 				alert("내용이 없습니다");
 			}
@@ -34,10 +35,11 @@ function submitArticle() {
 					type : "POST",
 					url : "/mypage/write",
 					mimeType:"multipart/form-data",
-					data : {
-						content : contentsVal,
-						isPrivate: isPrivate
-					}
+					data : postData
+//					{
+//						content : contentsVal,
+//						isPrivate: isPrivate
+//					}
 				}).done(function(date) {
 					
 					$('#contentsContainerDiv').append('<div class="row contentsDiv">'
@@ -52,10 +54,10 @@ function submitArticle() {
 					setHeightForTimeDiv();
 				});
 			}
-	}
-	else {	
-		$('body form').submit();
-	}
+//	}
+//	else {	
+//		$('body form').submit();
+//	}
 }
 
 function setHeightForTimeDiv() {
@@ -72,7 +74,7 @@ function setHeightForTimeDiv() {
 
 
 function load() {
-	$('#submitBtn').click(submitArticle);
+//	$('#submitBtn').click(submitArticle);
 	
 	$('#uploadImg').click(function(){
 		$('#fileInput').click();
