@@ -16,7 +16,7 @@
 </head>
 <body>
 	<!-- 단상 목록 들어가는 곳 -->
-	<div id="contentContainerDiv">
+	<div id="contentContainerDiv" class="col-xs-7">
 		<c:forEach items="${ideaList}" var="idea">
 			<div class="row contentsDiv">
 				<div class="timeDiv">
@@ -31,7 +31,7 @@
 		</c:forEach>
 	</div>
 	<!-- 날짜, 공감 수, 작성자 닉네임, 댓글 들어가는 곳 -->
-	<div id="asideDiv">
+	<div id="asideDiv" class="col-xs-4">
 		<div id="dateDiv">
 			<p class="date">2014</p>
 			<p class="date">0415</p>

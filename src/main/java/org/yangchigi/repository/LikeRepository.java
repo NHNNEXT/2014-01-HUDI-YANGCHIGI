@@ -14,6 +14,7 @@ public class LikeRepository implements Repository<Like>{
 
 	public LikeRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
+		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
 
 	public Connection getConn() throws SQLException {
