@@ -75,6 +75,9 @@ public class TodayServlet extends HttpServlet {
 
 			request.setAttribute("ideaList", ideaList);
 			request.setAttribute("today", today);
+			request.setAttribute("year", today.getDate().split("-")[0]);
+			request.setAttribute("month", today.getDate().split("-")[1]);
+			request.setAttribute("day", today.getDate().split("-")[2]);
 			request.setAttribute("isLiked", like != null);
 			request.setAttribute("commList", commRepository.findListByEmail());
 			request.getRequestDispatcher("/today.jsp").forward(request,

@@ -35,8 +35,8 @@
 	<!-- 날짜, 공감 수, 작성자 닉네임, 댓글 들어가는 곳 -->
 	<div id="asideDiv">
 		<div id="dateDiv">
-			<p class="date">2014</p>
-			<p class="date">0415</p>
+			<p class="date">${year}</p>
+			<p class="date">${month}${day}</p>
 		</div>
 		<div id="profileDiv"></div>
 		<div id="likeDiv">
