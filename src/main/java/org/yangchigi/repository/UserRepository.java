@@ -17,7 +17,6 @@ public class UserRepository implements Repository<User> {
 
 	public UserRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
-		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
 
 	public Connection getConn() throws SQLException {
@@ -30,6 +29,8 @@ public class UserRepository implements Repository<User> {
 		User user = null;
 		String sql = "SELECT * FROM `user` WHERE (email = ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, this.user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
@@ -60,6 +61,8 @@ public class UserRepository implements Repository<User> {
 				+ "VALUES (?, ?, ?, ?)";
 
 		try {
+			this.conn = DriverManager.getConnection(addr, this.user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, user.getEmail());
 			pstmt.setString(2, user.getNickname());
@@ -86,6 +89,8 @@ public class UserRepository implements Repository<User> {
 		String sql = "UPDATE `user` SET nickname = ? WHERE email=?";
 		
 		try {
+			this.conn = DriverManager.getConnection(addr, this.user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, nickname);
 			pstmt.setString(2, user.getEmail());
@@ -107,6 +112,8 @@ public class UserRepository implements Repository<User> {
 //		String sql = "UPDATE user SET (thumbnail = ?) WHERE (email=?)";
 
 		try {
+			this.conn = DriverManager.getConnection(addr, this.user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, thumbnail);
 			pstmt.setString(2, user.getEmail());

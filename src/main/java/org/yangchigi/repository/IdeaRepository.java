@@ -15,19 +15,20 @@ public class IdeaRepository implements Repository<Idea> {
 
 	public IdeaRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
-		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
 
 	public Connection getConn() throws SQLException {
 		return this.conn;
 	}
 
-	public ArrayList<Idea> findListByEmail() {
+	public ArrayList<Idea> findListByEmail() throws SQLException {
 		PreparedStatement pstmt;
 		ResultSet rs = null;
 		Idea idea = null;
 		ArrayList<Idea> ideaList = new ArrayList<Idea>();
 
+		this.conn = DriverManager.getConnection(addr, user, pw);
+		
 		String sql = "SELECT * FROM idea";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
@@ -53,7 +54,9 @@ public class IdeaRepository implements Repository<Idea> {
 
 		String sql = "INSERT INTO `idea` (`content`, `date`, `time`, `img_name`, `is_private`, `user_id`) "
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
+
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, idea.getContent());
 			pstmt.setString(2, idea.getDate());
@@ -83,6 +86,8 @@ public class IdeaRepository implements Repository<Idea> {
 
 		String sql = "SELECT * FROM `idea` WHERE (user_id = ? AND date = ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			pstmt.setString(2, date);

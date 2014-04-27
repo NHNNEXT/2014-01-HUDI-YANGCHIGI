@@ -13,7 +13,6 @@ public class TodayRepository implements Repository<Today> {
 
 	public TodayRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
-		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
 
 	public Connection getConn() throws SQLException {
@@ -27,6 +26,8 @@ public class TodayRepository implements Repository<Today> {
 
 		String sql = "SELECT * FROM `today` WHERE (user_id = ? AND date = ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			pstmt.setString(2, date);
@@ -54,6 +55,8 @@ public class TodayRepository implements Repository<Today> {
 
 		String sql = "SELECT * FROM `today` WHERE id = ?";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
@@ -79,6 +82,8 @@ public class TodayRepository implements Repository<Today> {
 		String sql = "INSERT INTO `today` (`date`, `like`, `user_id`) "
 				+ "VALUES (?, ?, ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, today.getDate());
 			pstmt.setInt(2, today.getLike());
@@ -98,6 +103,8 @@ public class TodayRepository implements Repository<Today> {
 		String sql = "UPDATE `today` SET `date` = ?, `like` = ?, `user_id` = ? "
 				+ "WHERE `id` = ?";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, today.getDate());
 			pstmt.setInt(2, today.getLike());

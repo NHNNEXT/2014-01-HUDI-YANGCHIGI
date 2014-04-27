@@ -20,23 +20,26 @@ import org.yangchigi.repository.UserRepository;
 import org.yangchigi.support.MyCalendar;
 
 
-
 @MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/img", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 @WebServlet(name = "MyPageServlet", urlPatterns = {"/mypage/*"}) 
 public class MyPageServlet extends HttpServlet {
 	private IdeaRepository ideaRepository;
 	private UserRepository userRepository;
 	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String uri = request.getRequestURI();
+	public MyPageServlet() {
 		try {
 			ideaRepository = new IdeaRepository();
 			userRepository = new UserRepository();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String uri = request.getRequestURI();
+		
 		
 		if ("/mypage".equals(uri)) {
 			String userEmail = (String) request.getSession().getAttribute(
@@ -57,12 +60,6 @@ public class MyPageServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException  {
 		String uri = request.getRequestURI();
 		HashMap<String, String> contentsMap;
-			try {
-				ideaRepository = new IdeaRepository();
-				userRepository = new UserRepository();
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
-			}
 		
 		if ("/mypage/write".equals(uri)) {
 			contentsMap = getContentsListAndUpload(request);
@@ -79,7 +76,8 @@ public class MyPageServlet extends HttpServlet {
 			String userEmail = (String) request.getSession().getAttribute("user");
 			User user = userRepository.findByEmail(userEmail);
 			
-			uploadArticle(content,date,time,imgName,isPrivate,user);
+			Idea idea = new Idea(content, date, time, imgName, isPrivate, user.getId());
+			ideaRepository.add(idea);
 			
 			time = MyCalendar.getCurrentTimeWithoutSec();
 			response.getWriter().write(time);
@@ -118,7 +116,6 @@ public class MyPageServlet extends HttpServlet {
 						if(part.getHeader(headerName).contains("filename=")){
 							String filePartHeader = part.getHeader(headerName);
 							fileName = filePartHeader.split("filename=\"")[1];
-							
 							fileName = fileName.substring(0, fileName.length()-1);
 							contentsMap.put("imgName", fileName);
 						}
@@ -158,11 +155,5 @@ public class MyPageServlet extends HttpServlet {
         } 
         return sb.toString(); 
     } 
-
-	private void uploadArticle(String content, String date, String time,
-			String imgName, boolean isPrivate, User user) {
-		Idea idea = new Idea(content, date, time, imgName, isPrivate,
-				user.getId());
-		ideaRepository.add(idea);
-	}
+		
 }

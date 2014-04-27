@@ -22,7 +22,7 @@ function submitArticle() {
 	var isPrivate = $('#isPrivateIpnut:checked').val();
 	var imgName = $('#fileInput').val().split('\\')[2];
 
-	if(hasError(content, imgName)) return;
+//	if(hasError(content, imgName)) return;
 	
 	if (content == "") {
 		alert("내용이 없습니다");
@@ -43,7 +43,7 @@ function submitArticle() {
 
 
 function addDivAfterAjax(content, time, imgName){
-	if(imgName == undefined){
+	if(imgName === undefined){
 		$('#contentsContainerDiv').append(
 				'<div class="row contentsDiv">'
 						+ '<div class="timeDiv" ><p class="date">'
@@ -63,6 +63,7 @@ function addDivAfterAjax(content, time, imgName){
 						+ content + '</p></div>')
 				.children(':last').hide().fadeIn('slow');
 	}
+	
 	$('html, body').animate({scrollTop : $(document).height()}, "fast", setHeightForTimeDiv);
 	$('#prevImg').hide();
 	$('body form')[0].reset();

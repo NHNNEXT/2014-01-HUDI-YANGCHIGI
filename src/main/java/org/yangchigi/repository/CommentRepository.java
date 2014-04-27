@@ -14,7 +14,6 @@ public class CommentRepository implements Repository<Comment>{
 	
 	public CommentRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
-		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
 
 	public Connection getConn() throws SQLException {
@@ -22,7 +21,7 @@ public class CommentRepository implements Repository<Comment>{
 	}
 
 	@Override
-	public void add(Comment comm) {
+	public void add(Comment comm){
 		PreparedStatement pstmt;
 
 		String sql = "INSERT INTO comment (content," +
@@ -31,6 +30,7 @@ public class CommentRepository implements Repository<Comment>{
 				"VALUES " +
 				"(?, ?, ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, comm.getContent());
 //			pstmt.setInt(2, comm.getUserId());
@@ -46,15 +46,18 @@ public class CommentRepository implements Repository<Comment>{
 		}
 	}
 
-	public ArrayList<Comment> findListByEmail() {
+	public ArrayList<Comment> findListByEmail(){
 		PreparedStatement pstmt;
 		ResultSet rs = null;
 		Comment comm = null;
 		ArrayList<Comment> commList = new ArrayList<Comment>();
 		
+
+		
 		//email 에 의한 select 구현 필
 		String sql = "SELECT * FROM comment";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
 			pstmt = this.conn.prepareStatement(sql);
 //			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();

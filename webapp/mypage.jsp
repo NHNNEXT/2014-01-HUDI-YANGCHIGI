@@ -24,7 +24,6 @@
 
 			<div id="rightSectionDiv" class="col-xs-7">
 				<div id="writeFormDiv" class="row">
-					<!-- <form class="form-horizontal" role="form" method="post"	action="/mypage/write" enctype="multipart/form-data"> -->
 					<form action="/mypage/write" method="post" enctype="multipart/form-data"> 
 						<textarea name="content" id="contentInput" class="form-control"
 							rows="3" placeholder="생각을 기록하세요" style="resize: none;"></textarea>
