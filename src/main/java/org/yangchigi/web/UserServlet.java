@@ -26,8 +26,6 @@ public class UserServlet extends HttpServlet {
 			.getLogger("org.yangchigi.web.UserServlet");
 	private UserRepository repository;
 
-	
-	
 	public UserServlet() {
 		try {
 			repository = new UserRepository();
@@ -51,7 +49,7 @@ public class UserServlet extends HttpServlet {
 				boolean isValidPassword = password.length() > 0 && password.length() <= 20;
 				boolean isValidNickname = nickname.length() > 0 && nickname.length() <= 10;
 				
-				if (isValidEmail && isValidPassword) {
+				if (isValidEmail && isValidPassword && isValidNickname) {
 					User user = new User(request.getParameter("email"),
 							request.getParameter("nickname"),
 							password, "");

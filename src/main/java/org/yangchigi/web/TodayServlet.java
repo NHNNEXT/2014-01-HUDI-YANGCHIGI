@@ -17,6 +17,7 @@ import org.yangchigi.repository.IdeaRepository;
 import org.yangchigi.repository.LikeRepository;
 import org.yangchigi.repository.TodayRepository;
 import org.yangchigi.repository.UserRepository;
+import org.yangchigi.support.MyCalendar;
 import org.yangchigi.web.Comment;
 import org.yangchigi.web.Idea;
 import org.yangchigi.web.Like;
@@ -86,6 +87,11 @@ public class TodayServlet extends HttpServlet {
 			request.setAttribute("commList", commRepository.findListByEmail());
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
+		} else if ("/today".equals(uri)) {
+			List todayLust = todayRepository.findAll();
+			request.setAttribute("todayList", todayLust);
+			request.getRequestDispatcher("/todays.jsp").forward(request,
+					response);
 		}
 	}
 
@@ -127,7 +133,6 @@ public class TodayServlet extends HttpServlet {
 				String userEmail = (String) request.getSession().getAttribute(
 						"user");
 				logger.info("userEmail: {}", userEmail);
-				User user = userRepository.findByEmail(userEmail);
 
 				CommentRepository repository = new CommentRepository();
 				String content = request.getParameter("content");
@@ -141,6 +146,15 @@ public class TodayServlet extends HttpServlet {
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
+		} else if ("/today".equals(uri)) {
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
+			User user = userRepository.findByEmail(userEmail);
+			
+			Today today = new Today(MyCalendar.getCurrentDate(), 0, user.getId());
+			todayRepository.add(today);
+			
+			response.getWriter().write("success");
 		}
 	}
 

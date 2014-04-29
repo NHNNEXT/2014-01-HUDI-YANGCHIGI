@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+#headerBarDiv {
+	height: 100%;
+}
+
+#btnsDiv {
+	height: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#btnsUl {
+	display: inline-block;
+	padding-top: 20px;
+}
+
+.menu-btn {
+	display: inline-block;
+	margin: 5px;
+}

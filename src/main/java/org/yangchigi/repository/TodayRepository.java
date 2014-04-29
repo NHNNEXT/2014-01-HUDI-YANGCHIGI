@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.yangchigi.web.Today;
 
@@ -119,5 +121,33 @@ public class TodayRepository implements Repository<Today> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public List<Today> findAll() {
+		List<Today> todayList = new ArrayList<Today>();
+		PreparedStatement pstmt;
+		ResultSet rs = null;
+		Today today = null;
+
+		String sql = "SELECT * FROM `today`";
+		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
+			pstmt = this.conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				today = new Today(rs.getString("date"), rs.getInt("like"),
+						rs.getInt("user_id"));
+				today.setId(rs.getInt("id"));
+				todayList.add(today);
+			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return todayList;
 	}
 }

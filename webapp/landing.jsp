@@ -155,6 +155,9 @@
 					}).done(function(msg) {
 						console.log(msg);
 						if ('success' === msg) {
+							this.signUpForm[0].reset();
+							// display none 
+							$('.validate-form').hide();
 							$('#myModal').modal('hide');
 						} else if ('duplicate email' === msg) {
 							var email = this.formInputs['email'];

@@ -44,8 +44,8 @@ function submitArticle() {
 function addDivAfterAjax(content, time, imgName){
 	if(imgName === undefined){
 		$('#contentsContainerDiv').append(
-				'<div class="row contentsDiv">'
-						+ '<div class="timeDiv" ><p class="date">'
+				'<div class="row contents">'
+						+ '<div class="time" ><p class="date">'
 						+ time + '</p></div>' 		
 						+ '<p class="contentsP">'
 						+ content + '</p></div>')
@@ -53,8 +53,8 @@ function addDivAfterAjax(content, time, imgName){
 	}
 	else{
 		$('#contentsContainerDiv').append(
-				'<div class="row contentsDiv">'
-						+ '<div class="timeDiv"><p class="date">'
+				'<div class="row contents">'
+						+ '<div class="time"><p class="date">'
 						+ time + '</p></div>' 		
 						+ '<img class="contentsImg" src="image/' + imgName
 						+ '" style="margin-right:5px;">'

@@ -8,12 +8,11 @@
 <title>Insert title here</title>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
-
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 <link rel="stylesheet" href="css/mypage.css">
+<link rel="stylesheet" href="css/header.css">
 <script src="js/mypage.js"></script>
 
 </head>
@@ -21,8 +20,8 @@
 	<div id="headerBarDiv">
 		<div id="btnsDiv">
 			<ul id="btnsUl">
-				<li class="menu-btn"><button class="btn btn-default btn-lg">MyPage</button></li>
-				<li class="menu-btn"><button class="btn btn-default btn-lg">Todays</button></li>
+				<li id="showMyPageBtn" class="menu-btn"><button class="btn btn-default btn-lg">MyPage</button></li>
+				<li id="showTodaysBtn" class="menu-btn"><button class="btn btn-default btn-lg">Todays</button></li>
 				<li class="menu-btn"><button class="btn btn-default btn-lg">Settings</button></li>
 				<li id="logoutBtn" class="menu-btn"><button class="btn btn-default btn-lg">Logout</button></li>
 			</ul>
@@ -57,8 +56,8 @@
 
 				<div id="contentsContainerDiv">
 					<c:forEach items="${ideaList}" var="idea">
-						<div class="row contentsDiv">
-							<div class="timeDiv">
+						<div class="row contents">
+							<div class="time">
 								<p class="date">${idea.time}</p>
 							</div>
 							<c:if test="${!empty idea.imgName}">
@@ -69,11 +68,13 @@
 						</div>
 					</c:forEach>
 				</div>
+				<button id="addTodayBtn" class="btn btn-default" style="float: right">Create Today</button>
 			</div>
 		</div>
 	</div>
 </body>
 <script>
+	// header events
 	function addLogoutEvent() {
 		$('#logoutBtn').click(function() {
 			$.ajax({
@@ -88,6 +89,40 @@
 		});
 	}
 	
+	function addShowTodaysEvent() {
+		$('#showTodaysBtn').click(function() {
+			window.location = '/today';
+		});
+	}
+	
+	
+	function addShowMyPageEvent() {
+		$('#showMyPageBtn').click(function() {
+			window.location = '/';
+		});
+	}
 	addLogoutEvent();
+	addShowTodaysEvent();
+	addShowMyPageEvent();
+	
+	// 각 내용 받아오기	
+	/* var contents = $('.contents');
+	$.each(contents, function(key, value) {
+		console.log('time: ' + $(value).find('.time').text());
+		console.log('imgName: ' + $(value).find('img').attr('src'));
+		console.log('content: ' + $(value).find('.contentsP').text());
+	}); */
+	
+	var addTodayBtn = $('#addTodayBtn');
+	addTodayBtn.click(function() {
+		$.ajax({
+			type : "POST",
+			url : "today",
+		}).done(function(msg) {
+			if ('success' === msg) {
+				alert('투데이 생성');
+			}
+		});
+	});
 </script>
 </html>

@@ -19,7 +19,7 @@ ul {
 	background-color: #AFAFAF;
 }
 
-.contentsDiv {
+.contents {
 	background-color: #FFFFDD;
 	margin-top: 20px;
 	border: 1px solid black;
@@ -32,7 +32,7 @@ ul {
 	width: 200px;
 }
 
-.timeDiv {
+.time {
 	width: 20px;
 	position: absolute;
 	left: 10px;
@@ -84,26 +84,6 @@ ul {
 #textlength {
 	display: inline;
 	float: right;
-}
-
-#headerBarDiv {
-	height: 100%;
-}
-
-#btnsDiv {
-	height: 100%;
-	margin: 0 auto;
-	text-align: center;
-}
-
-#btnsUl {
-	display: inline-block;
-	padding-top: 20px;
-}
-
-.menu-btn {
-	display: inline-block;
-	margin: 5px;
 }
 
 /* responsive */
