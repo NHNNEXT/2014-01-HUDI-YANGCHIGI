@@ -73,10 +73,12 @@ public class UserServlet extends HttpServlet {
 					User user = repository.findByEmail(request
 							.getParameter("email"));
 					logger.info("user.getPassword(): {}", user.getPassword());
+					if (user.getPassword().equals(request.getParameter("password"))) {
 						logger.info("login success");
 						HttpSession session = request.getSession();
 						session.setAttribute("user", user.getEmail());
 						response.getWriter().write("success");
+					}
 				} catch(Exception e) {
 					logger.info("login fail");
 					response.getWriter().write("fail");
