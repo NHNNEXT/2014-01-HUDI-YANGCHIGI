@@ -3,7 +3,6 @@
 .container {
 	background-color: #424242;
 	margin-top: 50px;
-	max-width: none !important;
 	width: 1000px;
 }
 
