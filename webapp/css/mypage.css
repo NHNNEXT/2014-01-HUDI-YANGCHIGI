@@ -76,3 +76,10 @@
 	bottom: 0;
 	margin-left: 10px;
 }
+
+/* responsive */
+@media (min-width: 1px) and (max-width: 991px) {
+  #calendarDiv{
+  	display:none !important;
+  }
+}

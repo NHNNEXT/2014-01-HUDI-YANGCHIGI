@@ -8,9 +8,10 @@
 <title>Insert title here</title>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.css">
+<!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 <link rel="stylesheet" href="css/mypage.css">
 <script src="js/mypage.js"></script>
