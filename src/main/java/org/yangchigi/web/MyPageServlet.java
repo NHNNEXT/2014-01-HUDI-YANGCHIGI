@@ -19,7 +19,10 @@ import org.yangchigi.repository.IdeaRepository;
 import org.yangchigi.repository.UserRepository;
 import org.yangchigi.support.MyCalendar;
 
+// server path
+//@MultipartConfig(location = "img", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 
+// test local path
 @MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/img", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 @WebServlet(name = "MyPageServlet", urlPatterns = {"/mypage/*"}) 
 public class MyPageServlet extends HttpServlet {
