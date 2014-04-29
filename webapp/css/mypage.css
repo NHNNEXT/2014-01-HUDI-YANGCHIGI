@@ -1,8 +1,12 @@
 @CHARSET "UTF-8";
 
+ul {
+	-webkit-padding-start: 0px;
+	list-style-type: none;
+}
+
 .container {
 	background-color: #424242;
-	margin-top: 50px;
 	max-width: none !important;
 	width: 1000px;
 }
@@ -76,4 +80,25 @@
 	left: 100%;
 	bottom: 0;
 	margin-left: 10px;
+}
+
+#headerBarDiv {
+	height: 100px;
+}
+
+#btnsDiv {
+	height: 100%;
+	width: 40%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#btnsUl {
+	display: inline-block;
+	padding-top: 20px;
+}
+
+.menu-btn {
+	display: inline-block;
+	margin: 5px;
 }

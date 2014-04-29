@@ -39,7 +39,8 @@
 		// 로그인 되어있으면 true 리턴
 		isLogged : function() {
 			// ${user}정보는 세션에 저장되어 있음
-			return '' !== '${user}';
+			//return '' !== '${user}';
+			return !!'${user}'
 		},
 		// 로그인 버튼에 로그인 이벤트 add
 		addLoginEvent : function() {
@@ -108,20 +109,26 @@
 				input : $('#emailInput'),
 				inputReg : /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/,
 				warnMsg : '이메일 형식에 맞게 입력하세요.',
+				showValidityDiv : $('#emailInput').next(),
+				warnDuplicateMsg : '이미 사용중인 이메일 입니다.',
 				valid : false
 			},
 			nickname : {
 				input : $('#nicknameInput'),
 				warnMsg : '닉네임을 입력하세요.',
+				showValidityDiv : $('#nicknameInput').next(),
+				warnDuplicateMsg : '이미 사용중인 닉네임 입니다.',
 				valid : false
 			},
 			password : {
 				input : $('#passwordInput'),
 				warnMsg : '비밀번호를 입력하세요.',
+				showValidityDiv : $('#passwordInput').next(),
 				valid : false
 			}
 		},
-		
+		signUpForm : $('#signUpForm'),
+		popoverTimer : '',
 		// form 입력이 유효한가?
 		isValid : function() {
 			var valid = true;
@@ -143,6 +150,26 @@
 						data : data
 					}).done(function(msg) {
 						console.log(msg);
+						if ('success' === msg) {
+							$('#myModal').modal('hide');
+						} else if ('duplicate email' === msg) {
+							var email = this.formInputs['email'];
+							email['showValidityDiv'].text(email['warnDuplicateMsg']);
+							email['showValidityDiv'].css('color', 'red');
+						} else if ('duplicate nickname' === msg) {
+							var nickname = this.formInputs['nickname'];
+							nickname['showValidityDiv'].text(nickname['warnDuplicateMsg']);
+							nickname['showValidityDiv'].css('color', 'red');
+						}
+					}.bind(this));
+				} else {
+					// 로그인 정보가 올바르지 않을 경우, 제대로 입력하지 않은 input 경고
+					$.each(this.formInputs, function(key, value) {
+						if (!value['valid']) {
+							value['showValidityDiv'].show();
+							value['showValidityDiv'].html(value['warnMsg']);
+							value['showValidityDiv'].css('color', 'red');
+						}
 					});
 				}
 			}.bind(this));
@@ -158,8 +185,11 @@
 			var input = $(this).val();
 
 			var showValidityDiv = $(this).next();
+			// display!
+			showValidityDiv.show();
+			
 			if (!input || !input.match(value['inputReg'])) {
-				showValidityDiv.html(value['warnMsg']);
+				showValidityDiv.text(value['warnMsg']);
 				showValidityDiv.css('color', 'red');
 				value['valid'] = false;
 			} else {
@@ -168,9 +198,18 @@
 				value['valid'] = true;
 			}
 		},
+		addClearFormEvent : function() {
+			var closeBtn = $('#closeBtn');
+			closeBtn.click(function() {
+				this.signUpForm[0].reset();
+				// display none 
+				$('.validate-form').hide();
+			}.bind(this));
+		},
 		init : function() {
 			this.addSignUpEvent();
 			this.addValidateEvent();
+			this.addClearFormEvent();
 		}
 	}
 	

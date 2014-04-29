@@ -21,4 +21,16 @@ public class UserTest {
 	public void 로그백_테스트() {
 		logger.debug("Hello world!");
 	}
+	
+	@Test
+	public void 이메일_정규식_테스트() {
+		boolean isValidEmail = "hook3748@gmail.com".matches("^(\\w+@\\w+\\.\\w{2,})$");
+		assertTrue(isValidEmail);
+	}
+	
+	@Test
+	public void 이메일_정규식_테스트_점_없을_때_실패() {
+		boolean isValidEmail = "hook3748@gmailcom".matches("\\w+@\\w+\\.\\w{2,}$");
+		assertFalse(isValidEmail);
+	}
 }

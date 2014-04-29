@@ -91,6 +91,7 @@ public class TodayRepository implements Repository<Today> {
 
 		String sql = "UPDATE `today` SET `date` = ?, `like` = ?, `user_id` = ? "
 				+ "WHERE `id` = ?";
+		
 		try {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, today.getDate());
