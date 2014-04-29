@@ -7,7 +7,6 @@ function readImg() {
 
 		reader.onload = function(e) {
 			$('#prevImg').attr('src', e.target.result).height(50).show("slow");
-
 		};
 		cur_img_name = input.files[0].name;
 		reader.readAsDataURL(input.files[0]);

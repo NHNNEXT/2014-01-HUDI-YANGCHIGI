@@ -18,7 +18,7 @@
 	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<img id="logo" src="img/logo_grass.png">
+	<img id="logo" src="image/logo_grass.png">
 	<p id="slogan">seize the moment</p>
 	<!-- Button trigger modal -->
 	<div id="signinDiv">
