@@ -74,7 +74,7 @@ public class UserModifyServlet extends HttpServlet {
 			String thumbnailName = request.getParameter("thumbnailName");
 			
 			
-			user.setNickname(nickname);
+			//user.setNickname(nickname);
 			
 			userRepository.modifyNickname(user, nickname);//DB 수정
 			userRepository.modifyThumbnail(user, thumbnailName);
