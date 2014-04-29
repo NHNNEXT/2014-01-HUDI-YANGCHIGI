@@ -79,6 +79,9 @@
 
 /* responsive */
 @media (min-width: 1px) and (max-width: 991px) {
+	.container{
+		max-width:90% !important;
+	}
   #calendarDiv{
   	display:none !important;
   }
