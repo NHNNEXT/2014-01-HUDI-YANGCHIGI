@@ -22,7 +22,7 @@ function submitArticle() {
 	var isPrivate = $('#isPrivateIpnut:checked').val();
 	var imgName = $('#fileInput').val().split('\\')[2];
 
-//	if(hasError(content, imgName)) return;
+	if(hasError(content, imgName)) return;
 	
 	if (content == "") {
 		alert("내용이 없습니다");
