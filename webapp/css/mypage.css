@@ -87,12 +87,11 @@ ul {
 }
 
 #headerBarDiv {
-	height: 100px;
+	height: 100%;
 }
 
 #btnsDiv {
 	height: 100%;
-	width: 40%;
 	margin: 0 auto;
 	text-align: center;
 }
