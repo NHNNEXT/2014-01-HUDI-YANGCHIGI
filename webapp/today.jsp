@@ -24,7 +24,7 @@
 				</span>
 				<span>
 					<c:if test="${!empty idea.imgName}">
-						<img class="contentsImg" src="img/${idea.imgName}"
+						<img class="contentsImg" src="image/${idea.imgName}"
 							style="margin-right: 5px;">
 					</c:if>
 					<p class="contentsP">${idea.content}</p>
