@@ -31,7 +31,7 @@
 							rows="3" placeholder="생각을 기록하세요" style="resize: none;"></textarea>
 						<input name="imgName" type='file' id="fileInput" accept="image/*" style="display: none;" />
 						<input name="isPrivate" id="isPrivateIpnut" type="checkbox"/>비공개
-
+						<p id="textlength">0/200</p>
 						<div id="imgFormDiv">
 							<img id="uploadImg" src="icon/addimage.png" style="height: 30px;" />
 							<img id="prevImg" src="#" alt="your image" style="display: none;" />

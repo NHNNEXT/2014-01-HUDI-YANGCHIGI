@@ -67,6 +67,7 @@ function addDivAfterAjax(content, time, imgName){
 	$('html, body').animate({scrollTop : $(document).height()}, "fast", setHeightForTimeDiv);
 	$('#prevImg').hide();
 	$('body form')[0].reset();
+	$('#textlength').text("0/200");
 }
 
 function setHeightForTimeDiv() {
@@ -91,6 +92,11 @@ function hasError(content, imgName){
 	return false;
 }
 
+function getLength(){
+	console.log("1");
+	$('#textlength').text($('#contentInput').val().length + "/200");
+}
+
 function load() {
 	$('#submitBtn').click(submitArticle);
 
@@ -98,6 +104,7 @@ function load() {
 		$('#fileInput').click();
 	});
 	$('#fileInput').change(readImg);
+	$('#contentInput').keyup(getLength);
 
 	setHeightForTimeDiv();
 	$('body').hide().delay(200).fadeIn('slow');
