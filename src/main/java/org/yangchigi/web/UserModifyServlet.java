@@ -84,7 +84,7 @@ public class UserModifyServlet extends HttpServlet {
 			
 			System.out.println("@@@@**********nickname, thumbnailName:" + nickname + thumbnailName);//안받아와져!
 			
-			user.setNickname(nickname);
+			//user.setNickname(nickname);
 			
 			userRepository.modifyNickname(user, nickname);//DB 수정
 			userRepository.modifyThumbnail(user, thumbnailName);
