@@ -48,7 +48,7 @@ public class UserServletTest {
 	}
 	
 	@Test
-	public void 회원가입() throws ServletException, IOException {
+	public void 회원가입() throws Exception {
 		// create mock
 
 		// given

@@ -1,21 +1,46 @@
 @CHARSET "US-ASCII";
 
+body {
+	background-color: #ede8e1;
+}
+
+#logo {
+	width: 700px;
+	display:table;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+}
+
+#slogan {
+	text-align: center;
+	font-family: 'Raleway', 'sans-serif';
+	/* font-family: 'Maven Pro', 'sans-serif'; */
+	font-size: 3em;
+	margin-top:30px;
+	color: #afaca8;
+	font-weight: 200;
+}
+
 #signinDiv {
 	padding: 1%;
+	text-align: center;
 }
 
 #loginForm {
 	display: inline-block;
-	float: right;
+	/* float: right; */
 }
 
 #logoutBtn {
 	display: inline-block;
-	float: right;
+	/* float: right; */
 }
 
 #signupBtn {
-	display: inline-block;
-	float: right;
-	margin-left: 3px;
+	display: inline-block;  
+ 	/* float:right;  */
+	margin-left: 2%;
+	margin-top:15%; 
+	background-color:gray !important;
 }

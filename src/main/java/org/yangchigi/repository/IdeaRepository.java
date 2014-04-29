@@ -11,11 +11,6 @@ import java.util.List;
 import org.yangchigi.web.Idea;
 
 public class IdeaRepository implements Repository<Idea> {
-
-	private final String addr = "jdbc:mysql://localhost/seize";
-	private final String driver = "com.mysql.jdbc.Driver";
-	private final String user = "yangchigi";
-	private final String pw = "yangchigi";
 	private Connection conn;
 
 	public IdeaRepository() throws ClassNotFoundException, SQLException {
@@ -27,12 +22,14 @@ public class IdeaRepository implements Repository<Idea> {
 		return this.conn;
 	}
 
-	public ArrayList<Idea> findListByEmail() {
+	public ArrayList<Idea> findListByEmail() throws SQLException {
 		PreparedStatement pstmt;
 		ResultSet rs = null;
 		Idea idea = null;
 		ArrayList<Idea> ideaList = new ArrayList<Idea>();
 
+		this.conn = DriverManager.getConnection(addr, user, pw);
+		
 		String sql = "SELECT * FROM idea";
 		try {
 			pstmt = this.conn.prepareStatement(sql);
@@ -43,6 +40,9 @@ public class IdeaRepository implements Repository<Idea> {
 						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				ideaList.add(idea);
 			}
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -55,7 +55,9 @@ public class IdeaRepository implements Repository<Idea> {
 
 		String sql = "INSERT INTO `idea` (`content`, `date`, `time`, `img_name`, `is_private`, `user_id`) "
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
+
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, idea.getContent());
 			pstmt.setString(2, idea.getDate());
@@ -63,8 +65,10 @@ public class IdeaRepository implements Repository<Idea> {
 			pstmt.setString(4, idea.getImgName());
 			pstmt.setBoolean(5, idea.getIsPrivate());
 			pstmt.setInt(6, idea.getUserId());
-			System.out.println(pstmt.toString());
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -83,6 +87,8 @@ public class IdeaRepository implements Repository<Idea> {
 
 		String sql = "SELECT * FROM `idea` WHERE (user_id = ? AND date = ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			pstmt.setString(2, date);
@@ -93,6 +99,10 @@ public class IdeaRepository implements Repository<Idea> {
 						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				ideaList.add(idea);
 			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

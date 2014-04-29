@@ -9,11 +9,7 @@ import java.sql.SQLException;
 import org.yangchigi.web.Like;
 import org.yangchigi.web.Today;
 
-public class LikeRepository {
-	private final String addr = "jdbc:mysql://localhost/seize";
-	private final String driver = "com.mysql.jdbc.Driver";
-	private final String user = "yangchigi";
-	private final String pw = "yangchigi";
+public class LikeRepository implements Repository<Like>{
 	private Connection conn;
 
 	public LikeRepository() throws ClassNotFoundException, SQLException {
@@ -32,6 +28,8 @@ public class LikeRepository {
 
 		String sql = "SELECT * FROM `like` WHERE (user_id = ? AND today_id = ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			pstmt.setInt(2, todayId);
@@ -41,6 +39,10 @@ public class LikeRepository {
 				like = new Like(rs.getInt("user_id"), rs.getInt("today_id"));
 				like.setId(rs.getInt("id"));
 			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,10 +55,15 @@ public class LikeRepository {
 		String sql = "INSERT INTO `like` (`user_id`, `today_id`) "
 				+ "VALUES (?, ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setInt(1, like.getUserId());
 			pstmt.setInt(2, like.getTodayId());
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -67,12 +74,23 @@ public class LikeRepository {
 
 		String sql = "DELETE FROM `like` WHERE (`user_id` = ? AND `today_id` = ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setInt(1, like.getUserId());
 			pstmt.setInt(2, like.getTodayId());
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Like findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
