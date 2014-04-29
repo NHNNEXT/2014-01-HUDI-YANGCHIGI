@@ -79,7 +79,7 @@ function setHeightForTimeDiv() {
 }
 
 function hasError(content, imgName){
-	if(content.indexOf("<script>") != -1 || imgName.indexOf("<script>") != -1){
+	if(content.indexOf("<script>") != -1 || (imgName && imgName.indexOf("<script>") != -1)){
 		alert("정확한 문자를 입력하세요");
 		return true;
 	}

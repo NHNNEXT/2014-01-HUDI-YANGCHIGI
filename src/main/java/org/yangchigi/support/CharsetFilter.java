@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 
 public class CharsetFilter implements Filter {
 	private static final String DEFAULT_ENCODING = "UTF-8";
-	private String encoding = DEFAULT_ENCODING;	
+	private String encoding;	
 
 	public void init(FilterConfig config) throws ServletException {
 		encoding = config.getInitParameter("requestEncoding");
