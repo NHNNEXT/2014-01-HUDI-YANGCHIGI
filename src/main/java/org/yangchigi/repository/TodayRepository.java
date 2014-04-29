@@ -103,6 +103,7 @@ public class TodayRepository implements Repository<Today> {
 
 		String sql = "UPDATE `today` SET `date` = ?, `like` = ?, `user_id` = ? "
 				+ "WHERE `id` = ?";
+		
 		try {
 			this.conn = DriverManager.getConnection(addr, user, pw);
 

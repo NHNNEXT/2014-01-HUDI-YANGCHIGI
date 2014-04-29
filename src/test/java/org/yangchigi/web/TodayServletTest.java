@@ -45,6 +45,7 @@ public class TodayServletTest {
 		// given
 		Today today = new Today("2014-4-18", 17, 3);
 		today.setId(1);
+		
 		when(mockedRequest.getRequestURI()).thenReturn("/today/1");
 		when(mockedRequest.getParameter("date")).thenReturn("2014-4-18");
 		when(mockedRequest.getRequestDispatcher(anyString())).thenReturn(mockedRequestDispatcher);

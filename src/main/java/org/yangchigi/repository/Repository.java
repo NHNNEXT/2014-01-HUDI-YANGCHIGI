@@ -9,5 +9,5 @@ public interface Repository <T> {
 	final String pw = "yangchigi";
 	
 	T findById(int id);
-	void add(T data);
+	void add(T data) throws Exception;
 }

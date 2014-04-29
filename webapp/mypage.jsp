@@ -18,6 +18,16 @@
 
 </head>
 <body>
+	<div id="headerBarDiv">
+		<div id="btnsDiv">
+			<ul id="btnsUl">
+				<li class="menu-btn"><button class="btn btn-default btn-lg">MyPage</button></li>
+				<li class="menu-btn"><button class="btn btn-default btn-lg">Todays</button></li>
+				<li class="menu-btn"><button class="btn btn-default btn-lg">Settings</button></li>
+				<li id="logoutBtn" class="menu-btn"><button class="btn btn-default btn-lg">Logout</button></li>
+			</ul>
+		</div>
+	</div>
 	<div class="container">
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-md-4">calendar
@@ -63,4 +73,21 @@
 		</div>
 	</div>
 </body>
+<script>
+	function addLogoutEvent() {
+		$('#logoutBtn').click(function() {
+			$.ajax({
+				type : "POST",
+				url : "user/logout"
+			}).done(function(msg) {
+				console.log(msg);
+				if ('success' === msg) {
+					window.location = '/';
+				}
+			});
+		});
+	}
+	
+	addLogoutEvent();
+</script>
 </html>
