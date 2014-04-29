@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import org.yangchigi.web.Like;
 import org.yangchigi.web.Today;
 import org.yangchigi.web.User;
 
+@WebServlet(name = "TodayServlet", urlPatterns = { "/today/*" })
 public class TodayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = LoggerFactory
@@ -30,6 +32,7 @@ public class TodayServlet extends HttpServlet {
 	private TodayRepository todayRepository;
 	private IdeaRepository ideaRepository;
 	private LikeRepository likeRepository;
+	private CommentRepository commRepository;
 
 	public TodayServlet() {
 		try {
@@ -37,6 +40,7 @@ public class TodayServlet extends HttpServlet {
 			todayRepository = new TodayRepository();
 			ideaRepository = new IdeaRepository();
 			likeRepository = new LikeRepository();
+			commRepository = new CommentRepository();
 		} catch (ClassNotFoundException | SQLException e) {
 			logger.warn("repository 초기화 실패");
 		}
@@ -45,19 +49,10 @@ public class TodayServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+
 		String uri = request.getRequestURI();
 
-		if ("/today".equals(uri)) {
-			try {
-				CommentRepository commRepository = new CommentRepository();
-				request.setAttribute("commList",
-						commRepository.findListByEmail());
-				request.getRequestDispatcher("/today.jsp").forward(request,
-						response);
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
-			}
-		} else if (uri.matches("^/today/[0-9]+")) {
+		if (uri.matches("^/today/[0-9]+")) {
 			// today Id 받기. /today/9 일 경우 todayId == 9
 			int todayId = Integer.parseInt(uri.substring(7));
 			String userEmail = (String) request.getSession().getAttribute(
@@ -65,7 +60,7 @@ public class TodayServlet extends HttpServlet {
 			// 로그인한 유저 & 요청한 투데이
 			User user = userRepository.findByEmail(userEmail);
 			Today today = todayRepository.findById(todayId);
-			
+
 			// 투데이에 속한 아이디어 리스트
 			List<Idea> ideaList = ideaRepository.findByUserIdAndDate(
 					today.getUserId(), today.getDate());
@@ -77,14 +72,18 @@ public class TodayServlet extends HttpServlet {
 						ideaList.remove(i);
 				}
 			}
-			
+
 			// 사용자가 투데이 like 상태인지 확인
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
 					todayId);
 
 			request.setAttribute("ideaList", ideaList);
 			request.setAttribute("today", today);
+			request.setAttribute("year", today.getDate().split("-")[0]);
+			request.setAttribute("month", today.getDate().split("-")[1]);
+			request.setAttribute("day", today.getDate().split("-")[2]);
 			request.setAttribute("isLiked", like != null);
+			request.setAttribute("commList", commRepository.findListByEmail());
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		}
@@ -94,7 +93,7 @@ public class TodayServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		
+
 		// 투데이 like column 업데이트.
 		if (uri.matches("^/today/[0-9]+")) {
 			// today Id 받기. /today/9 일 경우 todayId == 9
@@ -111,11 +110,11 @@ public class TodayServlet extends HttpServlet {
 			User user = userRepository.findByEmail(userEmail);
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
 					todayId);
-			
+
 			// 현재 유저가 이미 like를 누른 상태라면
 			if (like != null) {
 				likeRepository.delete(like);
-			// 현재 유저가 like을 누르지 않은 상태라면
+				// 현재 유저가 like을 누르지 않은 상태라면
 			} else {
 				like = new Like(user.getId(), todayId);
 				likeRepository.add(like);
@@ -128,7 +127,6 @@ public class TodayServlet extends HttpServlet {
 				String userEmail = (String) request.getSession().getAttribute(
 						"user");
 				logger.info("userEmail: {}", userEmail);
-				System.out.println("userEmail: " + userEmail);
 				User user = userRepository.findByEmail(userEmail);
 
 				CommentRepository repository = new CommentRepository();

@@ -3,7 +3,6 @@
 .container {
 	background-color: #424242;
 	margin-top: 50px;
-	max-width: none !important;
 	width: 1000px;
 }
 
@@ -49,6 +48,7 @@
 .contentsP {
 	display: inline;
 	vertical-align: top;
+	word-wrap: break-word;
 }
 
 #writeFormDiv {
@@ -76,4 +76,19 @@
 	left: 100%;
 	bottom: 0;
 	margin-left: 10px;
+}
+
+#textlength{
+	display:inline;
+	float:right;
+}
+
+/* responsive */
+@media ( min-width : 1px) and (max-width: 991px) {
+	.container {
+		max-width: 95% !important;
+	}
+	#calendarDiv {
+		display: none !important;
+	}
 }

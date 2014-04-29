@@ -48,7 +48,6 @@ public class FileUploader {
 		String uploadPath = req.getSession().getServletContext()
 				.getRealPath("")
 				+ File.separator + "img";
-		System.out.println(uploadPath);
 
 		// String uploadPath = UPLOAD_DIRECTORY;
 
@@ -66,7 +65,6 @@ public class FileUploader {
 				// iterates over form's fields
 				for (FileItem item : formItems) {
 					if (item.getFieldName().equals("content")) {
-						System.out.println(item.getString());
 						contentList.add(new String(item.getString().getBytes(
 								"8859_1"), "UTF-8")); // 왜 한글을 못받지?
 					}

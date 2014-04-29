@@ -44,10 +44,10 @@
 		$.ajax({
 			type : "POST",
 			url : "usermodify/uploadThumbnail",
-			//mimeType:"multipart/form-data",
+			mimeType:"multipart/form-data",
 			data : nickname,
-		    contentType : "multipart/form-data",
-		   	//processData : false
+		    contentType : false,
+		   	processData : false
 		}).done(function(msg) {
 			console.log('success');
 		})

@@ -8,11 +8,11 @@
 <title>Insert title here</title>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
 
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+<script src="http://malsup.github.com/jquery.form.js"></script> 
 <link rel="stylesheet" href="css/mypage.css">
 <script src="js/mypage.js"></script>
 
@@ -20,18 +20,18 @@
 <body>
 	<div class="container">
 		<div id="myPageAllDiv" class="row">
-			<div id="calendarDiv" class="col-xs-4">calendar</div>
+			<div id="calendarDiv" class="col-md-4">calendar
+				<br><a href="today/1"> TEST: go to today page!</a>
+			</div>
 
-			<div id="rightSectionDiv" class="col-xs-7">
+			<div id="rightSectionDiv" class="col-md-7">
 				<div id="writeFormDiv" class="row">
-					<form class="form-horizontal" role="form" method=post
-						action="/mypage/write" enctype="multipart/form-data">
+					<form action="/mypage/write" method="post" enctype="multipart/form-data"> 
 						<textarea name="content" id="contentInput" class="form-control"
 							rows="3" placeholder="생각을 기록하세요" style="resize: none;"></textarea>
-						<input name="imgName" type='file' id="fileInput" accept="image"
-							onchange="readURL(this);" style="display: none;" /> <input
-							name="isPrivate" id="isPrivateIpnut" type="checkbox" />비공개
-
+						<input name="imgName" type='file' id="fileInput" accept="image/*" style="display: none;" />
+						<input name="isPrivate" id="isPrivateIpnut" type="checkbox"/>비공개
+						<p id="textlength">0/200</p>
 						<div id="imgFormDiv">
 							<img id="uploadImg" src="icon/addimage.png" style="height: 30px;" />
 							<img id="prevImg" src="#" alt="your image" style="display: none;" />
