@@ -21,7 +21,9 @@ function submitArticle() {
 	var content = $('#contentInput').val();
 	var isPrivate = $('#isPrivateIpnut:checked').val();
 	var imgName = $('#fileInput').val().split('\\')[2];
-	// $("body form").submit(function(e){
+
+//	if(hasError(content, imgName)) return;
+	
 	if (content == "") {
 		alert("내용이 없습니다");
 	} else {
@@ -36,13 +38,12 @@ function submitArticle() {
 		};
 		$('body form').ajaxSubmit(option);
 	}
-	
-	
-	
 }
 
+
+
 function addDivAfterAjax(content, time, imgName){
-	if(imgName == undefined){
+	if(imgName === undefined){
 		$('#contentsContainerDiv').append(
 				'<div class="row contentsDiv">'
 						+ '<div class="timeDiv" ><p class="date">'
@@ -62,6 +63,7 @@ function addDivAfterAjax(content, time, imgName){
 						+ content + '</p></div>')
 				.children(':last').hide().fadeIn('slow');
 	}
+	
 	$('html, body').animate({scrollTop : $(document).height()}, "fast", setHeightForTimeDiv);
 	$('#prevImg').hide();
 	$('body form')[0].reset();
@@ -74,6 +76,15 @@ function setHeightForTimeDiv() {
 						+ parseInt($(this).parent().css('margin-top')) * 2;
 				$(this).height(newHeight);
 			});
+}
+
+function hasError(content, imgName){
+	if(content.indexOf("<script>") != -1 || imgName.indexOf("<script>") != -1){
+		alert("정확한 문자를 입력하세요");
+		return true;
+	}
+	
+	return false;
 }
 
 function load() {

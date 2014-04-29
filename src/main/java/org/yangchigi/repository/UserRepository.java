@@ -13,10 +13,6 @@ import org.yangchigi.web.User;
 public class UserRepository implements Repository<User> {
 	private static final Logger logger = LoggerFactory
 			.getLogger("org.yangchigi.web.UserRepository");
-	private final String addr = "jdbc:mysql://localhost/seize";
-	private final String driver = "com.mysql.jdbc.Driver";
-	private final String user = "yangchigi";
-	private final String pw = "yangchigi";
 	private Connection conn;
 
 	public UserRepository() throws ClassNotFoundException, SQLException {
@@ -32,10 +28,10 @@ public class UserRepository implements Repository<User> {
 		PreparedStatement pstmt;
 		ResultSet rs;
 		User user = null;
-		System.out.println("UserRepository > findByEmail");
-		System.out.println("email: " + email);
 		String sql = "SELECT * FROM `user` WHERE (email = ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, this.user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
@@ -47,7 +43,10 @@ public class UserRepository implements Repository<User> {
 						rs.getString("thumbnail"));
 				user.setId(rs.getInt("id"));
 			}
+			
 			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -61,16 +60,19 @@ public class UserRepository implements Repository<User> {
 
 		String sql = "INSERT INTO `user` (`email`, `nickname`, `password`, `thumbnail`) "
 				+ "VALUES (?, ?, ?, ?)";
-		System.out.println("UserRepository > add: " + user.toString());
 
 		try {
+			this.conn = DriverManager.getConnection(addr, this.user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, user.getEmail());
 			pstmt.setString(2, user.getNickname());
 			pstmt.setString(3, user.getPassword());
 			pstmt.setString(4, user.getThumbnail());
 			pstmt.execute();
+			
 			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -82,19 +84,21 @@ public class UserRepository implements Repository<User> {
 	
 	//유져 닉네임을 받아서 변경 
 	public void modifyNickname(User user, String nickname) {
-		System.out.println("*********" + nickname);
 		logger.info("UserRepository > modifyNickname: " + user.toString());
 		PreparedStatement pstmt;
 		
 		String sql = "UPDATE `user` SET nickname = ? WHERE email=?";
-		System.out.println("UserRepository > modifyThumbnail: " + user.toString());
 		
 		try {
+			this.conn = DriverManager.getConnection(addr, this.user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, nickname);
 			pstmt.setString(2, user.getEmail());
 			pstmt.execute();
+			
 			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -107,14 +111,17 @@ public class UserRepository implements Repository<User> {
 
 		String sql = "UPDATE user SET thumbnail = 'haha' WHERE email='jayjinjay@gmail.com'";
 //		String sql = "UPDATE user SET (thumbnail = ?) WHERE (email=?)";
-		System.out.println("UserRepository > modifyThumbnail: " + user.toString());
 
 		try {
+			this.conn = DriverManager.getConnection(addr, this.user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, thumbnail);
 			pstmt.setString(2, user.getEmail());
 			pstmt.execute();
+			
 			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

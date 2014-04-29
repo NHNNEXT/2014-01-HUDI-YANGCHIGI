@@ -20,19 +20,18 @@ import org.yangchigi.repository.UserRepository;
 import org.yangchigi.support.MyCalendar;
 
 
-
 @MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/img", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 @WebServlet(name = "MyPageServlet", urlPatterns = {"/mypage/*"}) 
 public class MyPageServlet extends HttpServlet {
 	private IdeaRepository ideaRepository;
 	private UserRepository userRepository;
 	
-
 	public MyPageServlet() {
 		try {
 			ideaRepository = new IdeaRepository();
 			userRepository = new UserRepository();
 		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -40,11 +39,11 @@ public class MyPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String uri = request.getRequestURI();
-
+		
+		
 		if ("/mypage".equals(uri)) {
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");
-			System.out.println("userEmail: " + userEmail);
 			User user = userRepository.findByEmail(userEmail);
 			request.setAttribute(
 					"ideaList",
@@ -58,12 +57,14 @@ public class MyPageServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws IOException  {
 		String uri = request.getRequestURI();
 		HashMap<String, String> contentsMap;
 		
 		if ("/mypage/write".equals(uri)) {
 			contentsMap = getContentsListAndUpload(request);
+			
+			if(hasError(contentsMap)) return;
 			
 			String content = contentsMap.get("content");
 			String date = MyCalendar.getCurrentDate();
@@ -72,11 +73,11 @@ public class MyPageServlet extends HttpServlet {
 			if(contentsMap.containsKey("imgName")) imgName = contentsMap.get("imgName");			
 			boolean isPrivate = contentsMap.containsKey("isPrivate");
 			
-			// 유저 이메일을 받아옴.
 			String userEmail = (String) request.getSession().getAttribute("user");
 			User user = userRepository.findByEmail(userEmail);
 			
-			uploadArticle(content,date,time,imgName,isPrivate,user);
+			Idea idea = new Idea(content, date, time, imgName, isPrivate, user.getId());
+			ideaRepository.add(idea);
 			
 			time = MyCalendar.getCurrentTimeWithoutSec();
 			response.getWriter().write(time);
@@ -84,12 +85,22 @@ public class MyPageServlet extends HttpServlet {
 		}
 	}
 
+	private boolean hasError(HashMap<String, String> contentsMap) {
+		for(String key : contentsMap.keySet()){
+			String value = contentsMap.get(key);
+			// 스크립트 태그를 넣을 경우 
+			if(value.contains("<script>")) return true;
+		}
+		
+		return false;
+		
+	}
+
 	private HashMap<String, String> getContentsListAndUpload(HttpServletRequest request) {
 		Part filePart = null; 
 		HashMap<String, String> contentsMap = new HashMap<String, String>();
 		String fileName = null;
         try {
-        	System.out.println(request.getParts().size());
 			for (Part part : request.getParts()) { 
 				if (part.getName().equals("content")) { 
 					String paramValue = getStringFromStream(part.getInputStream()); 
@@ -104,9 +115,7 @@ public class MyPageServlet extends HttpServlet {
 					for (String headerName : part.getHeaderNames()) { 
 						if(part.getHeader(headerName).contains("filename=")){
 							String filePartHeader = part.getHeader(headerName);
-							System.out.println(filePartHeader);
 							fileName = filePartHeader.split("filename=\"")[1];
-							
 							fileName = fileName.substring(0, fileName.length()-1);
 							contentsMap.put("imgName", fileName);
 						}
@@ -146,11 +155,5 @@ public class MyPageServlet extends HttpServlet {
         } 
         return sb.toString(); 
     } 
-
-	private void uploadArticle(String content, String date, String time,
-			String imgName, boolean isPrivate, User user) {
-		Idea idea = new Idea(content, date, time, imgName, isPrivate,
-				user.getId());
-		ideaRepository.add(idea);
-	}
+		
 }

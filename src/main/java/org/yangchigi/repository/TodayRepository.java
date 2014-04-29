@@ -9,10 +9,6 @@ import java.sql.SQLException;
 import org.yangchigi.web.Today;
 
 public class TodayRepository implements Repository<Today> {
-	private final String addr = "jdbc:mysql://localhost/seize";
-	private final String driver = "com.mysql.jdbc.Driver";
-	private final String user = "yangchigi";
-	private final String pw = "yangchigi";
 	private Connection conn;
 
 	public TodayRepository() throws ClassNotFoundException, SQLException {
@@ -31,6 +27,8 @@ public class TodayRepository implements Repository<Today> {
 
 		String sql = "SELECT * FROM `today` WHERE (user_id = ? AND date = ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			pstmt.setString(2, date);
@@ -40,6 +38,10 @@ public class TodayRepository implements Repository<Today> {
 						rs.getInt("user_id"));
 				today.setId(rs.getInt("id"));
 			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -54,6 +56,8 @@ public class TodayRepository implements Repository<Today> {
 
 		String sql = "SELECT * FROM `today` WHERE id = ?";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
@@ -62,6 +66,10 @@ public class TodayRepository implements Repository<Today> {
 						rs.getInt("user_id"));
 				today.setId(rs.getInt("id"));
 			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -75,12 +83,16 @@ public class TodayRepository implements Repository<Today> {
 		String sql = "INSERT INTO `today` (`date`, `like`, `user_id`) "
 				+ "VALUES (?, ?, ?)";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, today.getDate());
 			pstmt.setInt(2, today.getLike());
 			pstmt.setInt(3, today.getUserId());
-			System.out.println(pstmt.toString());
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -92,12 +104,17 @@ public class TodayRepository implements Repository<Today> {
 		String sql = "UPDATE `today` SET `date` = ?, `like` = ?, `user_id` = ? "
 				+ "WHERE `id` = ?";
 		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, today.getDate());
 			pstmt.setInt(2, today.getLike());
 			pstmt.setInt(3, today.getUserId());
 			pstmt.setInt(4, today.getId());
 			pstmt.execute();
+			
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
