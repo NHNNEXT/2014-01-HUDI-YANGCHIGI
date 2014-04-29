@@ -56,7 +56,7 @@ function addDivAfterAjax(content, time, imgName){
 				'<div class="row contentsDiv">'
 						+ '<div class="timeDiv"><p class="date">'
 						+ time + '</p></div>' 		
-						+ '<img class="contentsImg" src="img/' + imgName
+						+ '<img class="contentsImg" src="image/' + imgName
 						+ '" style="margin-right:5px;">'
 						+ '<p class="contentsP">'
 						+ content + '</p></div>')
