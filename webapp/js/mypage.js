@@ -83,6 +83,10 @@ function hasError(content, imgName){
 		alert("정확한 문자를 입력하세요");
 		return true;
 	}
+	if(content.length > 200 || (imgName && imgName.length > 200)){
+		alert("200자 미만의 글자만 입력 가능합니다");
+		return true;
+	}
 	
 	return false;
 }

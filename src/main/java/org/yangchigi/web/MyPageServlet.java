@@ -93,6 +93,8 @@ public class MyPageServlet extends HttpServlet {
 			String value = contentsMap.get(key);
 			// 스크립트 태그를 넣을 경우 
 			if(value.contains("<script>")) return true;
+			// 200자 이상일 경우 
+			if(value.length() > 200) return true;
 		}
 		
 		return false;
