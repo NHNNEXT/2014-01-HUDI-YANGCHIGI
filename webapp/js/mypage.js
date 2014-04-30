@@ -70,7 +70,7 @@ function addDivAfterAjax(content, time, imgName){
 }
 
 function setHeightForTimeDiv() {
-	$('.timeDiv').each(
+	$('.time').each(
 			function(i) {
 				var newHeight = parseInt($(this).parent().height())
 						+ parseInt($(this).parent().css('margin-top')) * 2;
@@ -92,7 +92,6 @@ function hasError(content, imgName){
 }
 
 function getLength(){
-	console.log("1");
 	$('#textlength').text($('#contentInput').val().length + "/200");
 }
 
