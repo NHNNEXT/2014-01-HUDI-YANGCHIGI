@@ -8,8 +8,11 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'> <!-- 웹폰트 -->
-<link href='http://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,300'
+	rel='stylesheet' type='text/css'>
+<!-- 웹폰트 -->
+<link href='http://fonts.googleapis.com/css?family=Maven+Pro'
+	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/landing.css">
 
 <script
@@ -26,9 +29,10 @@
 		<jsp:include page="login.jspf" />
 		<!-- Logout -->
 		<jsp:include page="logout.jspf" />
-	<!-- Modal -->
+		<!-- Modal -->
 	</div>
-		<button id="signupBtn" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Sign up</button>
+	<button id="signupBtn" class="btn btn-primary" data-toggle="modal"
+		data-target="#myModal">Sign up</button>
 	<jsp:include page="signup.jspf" />
 </body>
 
@@ -151,7 +155,7 @@
 					$.ajax({
 						type : "POST",
 						url : "user/signup",
-						data : data
+						data : data,
 					}).done(function(msg) {
 						console.log(msg);
 						if ('success' === msg) {
