@@ -47,7 +47,7 @@
 	text-align: center;
 }
 
-.contentsDiv {
+.contents {
 	background-color: #FFFFDD;
 	margin-top: 20px;
 	border: 1px solid black;
@@ -60,7 +60,7 @@
 	width: 200px;
 }
 
-.timeDiv {
+.time {
 	width: 20px;
 	position: absolute;
 	left: 20px;
