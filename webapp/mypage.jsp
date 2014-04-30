@@ -25,19 +25,19 @@
 				<li class="menu-btn"><button class="btn btn-default btn-lg">Settings</button></li>
 				<li id="logoutBtn" class="menu-btn"><button class="btn btn-default btn-lg">Logout</button></li>
 			</ul>
+			<button id="addTodayBtn" class="btn btn-warning" style="float: right">Create Today</button>
 		</div>
 	</div>
 	<div class="container">
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-md-4">calendar
 				<br>
-				<button id="addTodayBtn" class="btn btn-default" style="float: right">Create Today</button>
 			</div>
 
 			<div id="rightSectionDiv" class="col-md-7">
 				<div id="writeFormDiv" class="row">
 					<form action="/mypage/write" method="post" enctype="multipart/form-data"> 
-						<textarea name="content" id="contentInput" class="form-control"
+						<textarea maxlength="200" name="content" id="contentInput" class="form-control"
 							rows="3" placeholder="생각을 기록하세요" style="resize: none;"></textarea>
 						<input name="imgName" type='file' id="fileInput" accept="image/*" style="display: none;" />
 						<input name="isPrivate" id="isPrivateIpnut" type="checkbox"/>비공개

@@ -18,8 +18,8 @@
 	<!-- 단상 목록 들어가는 곳 -->
 	<div id="contentContainerDiv">
 		<c:forEach items="${ideaList}" var="idea">
-			<div class="contentsDiv">
-				<span class="timeDiv">
+			<div class="contents">
+				<span class="time">
 					<p class="date">${idea.time}</p>
 				</span>
 				<span>
