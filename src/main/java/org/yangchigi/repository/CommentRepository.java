@@ -34,10 +34,8 @@ public class CommentRepository implements Repository<Comment>{
 			this.conn = DriverManager.getConnection(addr, user, pw);
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, comm.getContent());
-//			pstmt.setInt(2, comm.getUserId());
-//			pstmt.setInt(3, comm.getTodayId());
-			pstmt.setInt(2, 1);
-			pstmt.setInt(3, 1);
+			pstmt.setInt(2, comm.getUserId());
+			pstmt.setInt(3, comm.getTodayId());
 			pstmt.execute();
 			
 			pstmt.close();
@@ -47,7 +45,7 @@ public class CommentRepository implements Repository<Comment>{
 		}
 	}
 
-	public ArrayList<Comment> findListByEmail(){
+	public ArrayList<Comment> findListByTodayId(int todayId){
 		PreparedStatement pstmt;
 		ResultSet rs = null;
 		Comment comm = null;
@@ -56,16 +54,17 @@ public class CommentRepository implements Repository<Comment>{
 
 		
 		//email 에 의한 select 구현 필
-		String sql = "SELECT * FROM comment";
+		String sql = "SELECT * FROM comment WHERE today_id = ?";
 		try {
 			this.conn = DriverManager.getConnection(addr, user, pw);
 			pstmt = this.conn.prepareStatement(sql);
-//			pstmt.setString(1, email);
+			pstmt.setInt(1, todayId);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				
-				comm = new Comment(rs.getString("content"),1, 1);
+				comm = new Comment(rs.getString("content"),rs.getInt("user_id"), rs.getInt("today_id"));
 				commList.add(comm);				
+				System.out.println(comm.toString());
 			}
 			
 			pstmt.close();

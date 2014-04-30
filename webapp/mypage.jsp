@@ -30,7 +30,8 @@
 	<div class="container">
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-md-4">calendar
-				<br><a href="today/1"> TEST: go to today page!</a>
+				<br>
+				<button id="addTodayBtn" class="btn btn-default" style="float: right">Create Today</button>
 			</div>
 
 			<div id="rightSectionDiv" class="col-md-7">
@@ -68,7 +69,7 @@
 						</div>
 					</c:forEach>
 				</div>
-				<button id="addTodayBtn" class="btn btn-default" style="float: right">Create Today</button>
+				
 			</div>
 		</div>
 	</div>
