@@ -8,7 +8,7 @@ function submitComment() {
 		else {
 			$.ajax({
 				type : "POST",
-				url : "/today/writecomment",
+				url : "/today/2/writecomment",
 				data : {
 					content : contentsVal
 				}

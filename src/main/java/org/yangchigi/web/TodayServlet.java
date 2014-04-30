@@ -84,7 +84,7 @@ public class TodayServlet extends HttpServlet {
 			request.setAttribute("month", today.getDate().split("-")[1]);
 			request.setAttribute("day", today.getDate().split("-")[2]);
 			request.setAttribute("isLiked", like != null);
-			request.setAttribute("commList", commRepository.findListByEmail());
+			request.setAttribute("commList", commRepository.findListByTodayId(todayId));
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		} else if ("/today".equals(uri)) {
@@ -110,8 +110,7 @@ public class TodayServlet extends HttpServlet {
 			Today today = todayRepository.findById(todayId);
 			today.setLike(likeNum);
 
-			String userEmail = (String) request.getSession().getAttribute(
-					"user");
+			String userEmail = (String) request.getSession().getAttribute("user");
 
 			User user = userRepository.findByEmail(userEmail);
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
@@ -128,18 +127,19 @@ public class TodayServlet extends HttpServlet {
 
 			todayRepository.update(today);
 			response.getWriter().write(String.valueOf(likeNum));
-		} else if ("/today/writecomment".equals(uri)) {
+		} else if (uri.matches("^/today/[0-9]+/writecomment")) {
 			try {
+				int todayId = Integer.parseInt(uri.split("/")[2]);
+				System.out.println("todayid = " + todayId);
 				String userEmail = (String) request.getSession().getAttribute(
 						"user");
+				User user = userRepository.findByEmail(userEmail);
 				logger.info("userEmail: {}", userEmail);
 
 				CommentRepository repository = new CommentRepository();
 				String content = request.getParameter("content");
 
-				// Comment comment = new Comment(content, user.getId(),
-				// today.getId());
-				Comment comment = new Comment(content, 1, 1);
+				 Comment comment = new Comment(content, user.getId(), todayId);
 
 				repository.add(comment);
 
