@@ -43,7 +43,7 @@ public class UserRepository implements Repository<User> {
 						rs.getString("thumbnail"));
 				user.setId(rs.getInt("id"));
 			}
-			
+
 			pstmt.close();
 			rs.close();
 			conn.close();
@@ -70,7 +70,7 @@ public class UserRepository implements Repository<User> {
 			pstmt.setString(3, user.getPassword());
 			pstmt.setString(4, user.getThumbnail());
 			pstmt.execute();
-			
+
 			pstmt.close();
 			conn.close();
 		} catch (SQLException e) {
@@ -81,22 +81,24 @@ public class UserRepository implements Repository<User> {
 	public User findById(int id) {
 		return null;
 	}
-	
-	//유져 닉네임을 받아서 변경 
+
+	// 유져 닉네임을 받아서 변경
 	public void modifyNickname(User user, String nickname) {
 		logger.info("UserRepository > modifyNickname: " + user.toString());
 		PreparedStatement pstmt;
-		
+
 		String sql = "UPDATE `user` SET nickname = ? WHERE email=?";
-		
+
 		try {
 			this.conn = DriverManager.getConnection(addr, this.user, pw);
 
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, nickname);
 			pstmt.setString(2, user.getEmail());
+			System.out.println("nickname: " + nickname + " user.getEmail(): "
+					+ user.getEmail());
+			System.out.println(pstmt.toString());
 			pstmt.execute();
-			
 			pstmt.close();
 			conn.close();
 		} catch (SQLException e) {
@@ -104,13 +106,14 @@ public class UserRepository implements Repository<User> {
 		}
 	}
 
-	//썸네일 이름을 받아서 변경
+	// 썸네일 이름을 받아서 변경
 	public void modifyThumbnail(User user, String thumbnail) {
 		logger.info("UserRepository > modifyThumbnail: " + user.toString());
 		PreparedStatement pstmt;
 
-		String sql = "UPDATE user SET thumbnail = 'haha' WHERE email='jayjinjay@gmail.com'";
-//		String sql = "UPDATE user SET (thumbnail = ?) WHERE (email=?)";
+		// String sql =
+		// "UPDATE user SET thumbnail = 'haha' WHERE email='jayjinjay@gmail.com'";
+		String sql = "UPDATE user SET thumbnail = ? WHERE (email=?)";
 
 		try {
 			this.conn = DriverManager.getConnection(addr, this.user, pw);
@@ -118,8 +121,9 @@ public class UserRepository implements Repository<User> {
 			pstmt = this.conn.prepareStatement(sql);
 			pstmt.setString(1, thumbnail);
 			pstmt.setString(2, user.getEmail());
+			System.out.println(pstmt.toString());
 			pstmt.execute();
-			
+
 			pstmt.close();
 			conn.close();
 		} catch (SQLException e) {
