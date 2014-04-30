@@ -32,7 +32,7 @@ function submitArticle() {
 		mimeType : "multipart/form-data",
 		data : $('body form').serialize(),	//이건 뭐지
 		success : function(time) {
-			alert("변경되었습니다.") //하면 될랑가 
+			alert("변경되었습니다.새로고침 하세여...(미안)") //하면 될랑가 
 			//addDivAfterAjax(content, time, imgName);
 		}	
 	};
