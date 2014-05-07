@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/today.css">
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -21,9 +22,7 @@
 			<div class="contents">
 				<span class="time">
 					<p class="date">${idea.time}</p>
-				</span>
-				<span>
-					<c:if test="${!empty idea.imgName}">
+				</span> <span> <c:if test="${!empty idea.imgName}">
 						<img class="contentsImg" src="/image/${idea.imgName}"
 							style="margin-right: 5px;">
 					</c:if>
@@ -38,7 +37,6 @@
 			<p class="date">${year}</p>
 			<p class="date">${month}${day}</p>
 		</div>
-		<div id="profileDiv"></div>
 		<div id="likeDiv">
 			<form>
 				<button type="button" id="likeBtn" class="btn btn-default">Like</button>
@@ -46,6 +44,7 @@
 					type="hidden" id="likeInput" value="${today.like}" />
 			</form>
 		</div>
+		<div id="profileDiv"></div>
 
 		<div id="commentDiv">
 			<c:forEach items="${commList}" var="comm">
@@ -61,31 +60,30 @@
 		</div>
 	</div>
 	<script>
-	
-function submitComment() {
-		
-		var contentsVal = $('#commentInput').val();
-		
-		if (contentsVal == "") {
-			alert("내용이 없습니다");
+		function submitComment() {
+			
+			var contentsVal = $('#commentInput').val();
+			
+			if (contentsVal == "") {
+				alert("내용이 없습니다");
+			}
+			else {
+				$.ajax({
+					type : "POST",
+					url : "/today/" + ${today.id} + "/writecomment",
+					data : {
+						content : contentsVal
+					}
+				}).done(function(time) {
+					
+					$('#commentDiv').append('<div class="comment-set">'
+							+ contentsVal
+							+ '</div>').children(':last').hide().fadeIn('slow');
+					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
+					$('#commentInput').val("");
+				});
+			}
 		}
-		else {
-			$.ajax({
-				type : "POST",
-				url : "/today/" + ${today.id} + "/writecomment",
-				data : {
-					content : contentsVal
-				}
-			}).done(function(time) {
-				
-				$('#commentDiv').append('<div class="comment-set">'
-						+ contentsVal
-						+ '</div>').children(':last').hide().fadeIn('slow');
-				$('html, body').animate({ scrollTop: $(document).height() }, "fast");
-				$('#commentInput').val("");
-			});
-		}
-}
 		var like = {
 			likeBtn : $('#likeBtn'),
 			likeInput : $('#likeInput'),
