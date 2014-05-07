@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>My Page</title>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 <script src="http://malsup.github.com/jquery.form.js"></script> 
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/mypage.css">
 <link rel="stylesheet" href="css/header.css">
 <script src="js/mypage.js"></script>
@@ -22,7 +23,7 @@
 			<ul id="btnsUl">
 				<li id="showMyPageBtn" class="menu-btn"><button class="btn btn-default btn-lg">MyPage</button></li>
 				<li id="showTodaysBtn" class="menu-btn"><button class="btn btn-default btn-lg">Todays</button></li>
-				<li class="menu-btn"><button class="btn btn-default btn-lg">Settings</button></li>
+				<li id="showSettingBtn" class="menu-btn"><button class="btn btn-default btn-lg">Settings</button></li>
 				<li id="logoutBtn" class="menu-btn"><button class="btn btn-default btn-lg">Logout</button></li>
 			</ul>
 			<button id="addTodayBtn" class="btn btn-warning" style="float: right">Create Today</button>
@@ -102,9 +103,16 @@
 			window.location = '/';
 		});
 	}
+
+	function addShowSettingEvent() {
+		$('#showSettingBtn').click(function() {
+			window.location = '/usermodify';
+		});
+	}
 	addLogoutEvent();
 	addShowTodaysEvent();
 	addShowMyPageEvent();
+	addShowSettingEvent();
 	
 	// 각 내용 받아오기	
 	/* var contents = $('.contents');

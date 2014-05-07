@@ -20,7 +20,7 @@
 						class="btn btn-default btn-lg">MyPage</button></li>
 				<li id="showTodaysBtn" class="menu-btn"><button
 						class="btn btn-default btn-lg">Todays</button></li>
-				<li class="menu-btn"><button class="btn btn-default btn-lg">Settings</button></li>
+				<li id="showSettingBtn" class="menu-btn"><button class="btn btn-default btn-lg">Settings</button></li>
 				<li id="logoutBtn" class="menu-btn"><button
 						class="btn btn-default btn-lg">Logout</button></li>
 			</ul>
@@ -65,9 +65,16 @@
 			window.location = '/';
 		});
 	}
+	function addShowSettingEvent() {
+		$('#showSettingBtn').click(function() {
+			window.location = '/usermodify';
+		});
+	}
 	addLogoutEvent();
 	addShowTodaysEvent();
 	addShowMyPageEvent();
+	addShowSettingEvent();
+
 	
 	var todays = $('.today');
 	$.each(todays, function(key, value) {
