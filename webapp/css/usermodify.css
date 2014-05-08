@@ -2,6 +2,17 @@ body {
 	background-color: #ede8e1;
 }
 
+#header {
+	/* height:71px; */
+}
+
+#logo {
+	width: 200px;
+	margin-top: 30px;
+	margin-left: 80px;
+	float: left;
+}
+
 /* F6F3ef */
 
 #thumbnail {
@@ -11,4 +22,37 @@ body {
 #prevImg {
 	border-radius: 30px;
 
+}
+
+#triangle {
+	width:0px; height:0px;
+	border: 40px solid #fcf8f0; 
+	border-top-width:0;
+	border-right-color: transparent;
+	border-left-color: transparent;
+
+	position: relative;
+	top:-20px;
+	left:60%;
+}
+
+#baloon {
+	background-color: #fcf8f0;
+	border-radius: 2em;
+	margin-top:1%;
+	margin-left: 5%;
+	margin-right: 5%;
+	min-height: 550px;
+}
+
+#footer {
+	text-align: center;
+}
+
+.footer_links li {
+	display: inline-block;
+	list-style: none;
+	color:#a09e98;
+	font-weight: 200;
+	padding:5px;
 }
