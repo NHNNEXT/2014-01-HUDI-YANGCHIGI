@@ -20,7 +20,8 @@
 						class="btn btn-default btn-lg">MyPage</button></li>
 				<li id="showTodaysBtn" class="menu-btn"><button
 						class="btn btn-default btn-lg">Todays</button></li>
-				<li id="showSettingBtn" class="menu-btn"><button class="btn btn-default btn-lg">Settings</button></li>
+				<li id="showSettingBtn" class="menu-btn"><button
+						class="btn btn-default btn-lg">Settings</button></li>
 				<li id="logoutBtn" class="menu-btn"><button
 						class="btn btn-default btn-lg">Logout</button></li>
 			</ul>
@@ -28,11 +29,16 @@
 	</div>
 	<div id="contentContainer">
 		<div id="todayContainer">
-			<c:forEach items="${todayList}" var="today">
+			<c:forEach items="${todayAndIdeasMap}" var="today">
 				<div class="today">
-					<input type="hidden" value="${today.id}">
-					<div class="date">Date: ${today.date}</div>
-					<div class="like">Like: ${today.like}</div>
+					<input type="hidden" value="${today.key.id}">
+					<div class="date">Date: ${today.key.date}</div>
+					<div class="like">Like: ${today.key.like}</div>
+					<div class="contents">
+						<c:forEach items="${today.value}" var="idea">
+							<div class="content">${idea.content}</div>
+						</c:forEach>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -75,7 +81,6 @@
 	addShowMyPageEvent();
 	addShowSettingEvent();
 
-	
 	var todays = $('.today');
 	$.each(todays, function(key, value) {
 		var todayId = $(value).find(':input').val();
