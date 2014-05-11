@@ -79,6 +79,7 @@ public class MyPageServlet extends HttpServlet {
 			User user = userRepository.findByEmail(userEmail);
 			
 			Idea idea = new Idea(content, date, time, imgName, isPrivate, user.getId());
+			System.out.println(idea.toString());
 			ideaRepository.add(idea);
 			
 			time = MyCalendar.getCurrentTimeWithoutSec();
@@ -90,7 +91,10 @@ public class MyPageServlet extends HttpServlet {
 	private boolean hasError(HashMap<String, String> contentsMap) {
 		for(String key : contentsMap.keySet()){
 			String value = contentsMap.get(key);
-			// 스크립트 태그를 넣을 경우 
+			// 스크립트 태그를 넣을 경우
+			// <script> => db : &lt;script&gt; 
+			// &lt;script&gt; => <script>
+			// <p>&lt;script&gt;</p>
 			if(value.contains("<script>")) return true;
 			// 200자 이상일 경우 
 			if(value.length() > 200) return true;

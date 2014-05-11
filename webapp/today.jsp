@@ -71,6 +71,7 @@
 				$.ajax({
 					type : "POST",
 					url : "/today/" + ${today.id} + "/writecomment",
+					
 					data : {
 						content : contentsVal
 					}
