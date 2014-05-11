@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.print.css">
+
 <link rel="stylesheet" href="css/mypage.css">
 <link rel="stylesheet" href="css/header.css">
 <script src="js/mypage.js"></script>
@@ -31,9 +35,7 @@
 	</div>
 	<div class="container">
 		<div id="myPageAllDiv" class="row">
-			<div id="calendarDiv" class="col-md-4">calendar
-				<br>
-			</div>
+			<div id="calendarDiv" class="col-md-4"></div>
 
 			<div id="rightSectionDiv" class="col-md-7">
 				<div id="writeFormDiv" class="row">
@@ -133,5 +135,17 @@
 			}
 		});
 	});
+	
+	
+	//test calendar
+	$(document).ready(function(){
+		$('#calendarDiv').fullCalendar({
+			dayClick: function(date) {
+				date.setDate(date.getDate() + 1);
+		        alert(date.toISOString().substring(0,10));
+		    }
+		
+		})
+	})
 </script>
 </html>
