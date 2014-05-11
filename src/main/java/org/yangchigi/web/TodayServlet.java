@@ -90,18 +90,13 @@ public class TodayServlet extends HttpServlet {
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		} else if ("/today".equals(uri)) {
-			String userEmail = (String) request.getSession().getAttribute(
-					"user");
-			// 로그인한 유저 & 요청한 투데이
-			User user = userRepository.findByEmail(userEmail);
-			
 			List<Today> todayList = todayRepository.findAll();
 			Map<Today, List<Idea>> todayAndIdeasMap = new HashMap<Today, List<Idea>>();
 			
 			Iterator<Today> todayIterator = todayList.iterator();
 			while (todayIterator.hasNext()) {
 				Today today = todayIterator.next();
-				todayAndIdeasMap.put(today, ideaRepository.findByUserIdAndDate(user.getId(), today.getDate()));
+				todayAndIdeasMap.put(today, ideaRepository.findByUserIdAndDate(today.getUserId(), today.getDate()));
 			}
 			
 			request.setAttribute("todayAndIdeasMap", todayAndIdeasMap);
