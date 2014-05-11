@@ -56,8 +56,7 @@ public class TodayServlet extends HttpServlet {
 		if (uri.matches("^/today/[0-9]+")) {
 			// today Id 받기. /today/9 일 경우 todayId == 9
 			int todayId = Integer.parseInt(uri.substring(7));
-			String userEmail = (String) request.getSession().getAttribute(
-					"user");
+			String userEmail = (String) request.getSession().getAttribute("user");
 			// 로그인한 유저 & 요청한 투데이
 			User user = userRepository.findByEmail(userEmail);
 			Today today = todayRepository.findById(todayId);
@@ -92,6 +91,19 @@ public class TodayServlet extends HttpServlet {
 			request.setAttribute("todayList", todayLust);
 			request.getRequestDispatcher("/todays.jsp").forward(request,
 					response);
+		} else if("/today/get".equals(uri)){
+			String userEmail = (String) request.getSession().getAttribute("user");
+			User user = userRepository.findByEmail(userEmail);
+			
+			String date = (String) request.getParameter("date");
+			
+			System.out.println(date);
+			
+			Today today = todayRepository.findByDateAndUserId(date, user.getId());
+			
+			String todayId = String.valueOf(today.getId());
+			
+			response.getWriter().write(todayId);
 		}
 	}
 
