@@ -9,8 +9,8 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/todays.css">
+<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/todays.css">
 </head>
 <body>
 	<div id="headerBarDiv">
