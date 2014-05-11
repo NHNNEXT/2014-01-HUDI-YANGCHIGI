@@ -116,19 +116,19 @@
 	$('.pre-idea').click(function(e) {
 		e.stopPropagation();
 		var contents = $(e.target.parentNode).find('.contents');
-		var contentsLeft = parseInt(contents.css('left'));
-		var contentLastChildLeft = parseInt(contents.find('.content:last-child').css('left'));
-		if (contentsLeft !== (-1) * contentLastChildLeft) {
-			contents.filter(':not(:animated)').animate({ 'left': '-=150px' }, 'slow');
+		if (contents.css('left') !== '0px') {
+			contents.filter(':not(:animated)').animate({ 'left': '+=150px' }, 'slow');
 		}
 	});
 	
 	$('.next-idea').click(function(e) {
 		e.stopPropagation();
 		var contents = $(e.target.parentNode).find('.contents');
-		if (contents.css('left') !== '0px') {
-			contents.filter(':not(:animated)').animate({ 'left': '+=150px' }, 'slow');
-		}
+		var contentsLeft = parseInt(contents.css('left'));
+		var contentLastChildLeft = parseInt(contents.find('.content:last-child').css('left'));
+		if (contentsLeft !== (-1) * contentLastChildLeft) {
+			contents.filter(':not(:animated)').animate({ 'left': '-=150px' }, 'slow');
+		}		
 	});
 </script>
 </html>
