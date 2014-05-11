@@ -105,7 +105,6 @@ public class TodayServlet extends HttpServlet {
 				todayAndIdeasMap.put(today, ideaRepository.findByUserIdAndDate(user.getId(), today.getDate()));
 			}
 			
-//			request.setAttribute("todayList", todayList);
 			request.setAttribute("todayAndIdeasMap", todayAndIdeasMap);
 			request.getRequestDispatcher("/todays.jsp").forward(request,
 					response);

@@ -39,6 +39,8 @@
 							<div class="content">${idea.content}</div>
 						</c:forEach>
 					</div>
+					<button class="btn btn-default next-idea change-idea"></button>
+					<button class="btn btn-default pre-idea change-idea"></button>
 				</div>
 			</c:forEach>
 		</div>
@@ -82,11 +84,48 @@
 	addShowSettingEvent();
 
 	var todays = $('.today');
+
 	$.each(todays, function(key, value) {
 		var todayId = $(value).find(':input').val();
 		$(value).click(function() {
 			window.location = 'today/' + todayId;
 		});
+	});
+
+	var contents = $('.contents');
+
+	$.each(contents, function(key, value) {
+		//debugger;
+		setIdeaContents(value.children);
+	});
+
+	function setIdeaContents(contents) {
+		$.each(contents, function(key, value) {
+			$(value).css('left', '150' * key);
+		});
+	};
+
+	todays.hover(function(e) {
+		//debugger;
+		$(e.currentTarget).find('.change-idea').show();
+	}, function(e) {
+		$(e.currentTarget).find('.change-idea').hide();
+	});
+
+	$('.pre-idea').click(function(e) {
+		e.stopPropagation();
+		var contents = $(e.target.parentNode).find('.contents');
+		if (contents.css('left') !== '-' + contents.find('.content:last-child').css('left')) {
+			contents.animate({ 'left': '-=150px' }, 'slow');
+		}
+	});
+	
+	$('.next-idea').click(function(e) {
+		e.stopPropagation();
+		var contents = $(e.target.parentNode).find('.contents');
+		if (contents.css('left') !== '0px') {
+			contents.animate({ 'left': '+=150px' }, 'slow');
+		}
 	});
 </script>
 </html>
