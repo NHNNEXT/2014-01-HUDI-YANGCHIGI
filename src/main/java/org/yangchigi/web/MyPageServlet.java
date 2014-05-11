@@ -22,7 +22,7 @@ import org.yangchigi.support.MyCalendar;
 // server path
 @MultipartConfig(location = "/home/yangchigi/apache-tomcat-7.0.52/webapps/ROOT/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 
-//@MultipartConfig(location = "/Users/yurim/Documents/workspace2/2014-01-HUDI-YANGCHIGI/webapp/img", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
+//@MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 @WebServlet(name = "MyPageServlet", urlPatterns = {"/mypage/*"}) 
 public class MyPageServlet extends HttpServlet {
 	private IdeaRepository ideaRepository;
@@ -79,6 +79,7 @@ public class MyPageServlet extends HttpServlet {
 			User user = userRepository.findByEmail(userEmail);
 			
 			Idea idea = new Idea(content, date, time, imgName, isPrivate, user.getId());
+			System.out.println(idea.toString());
 			ideaRepository.add(idea);
 			
 			time = MyCalendar.getCurrentTimeWithoutSec();
@@ -90,7 +91,10 @@ public class MyPageServlet extends HttpServlet {
 	private boolean hasError(HashMap<String, String> contentsMap) {
 		for(String key : contentsMap.keySet()){
 			String value = contentsMap.get(key);
-			// 스크립트 태그를 넣을 경우 
+			// 스크립트 태그를 넣을 경우
+			// <script> => db : &lt;script&gt; 
+			// &lt;script&gt; => <script>
+			// <p>&lt;script&gt;</p>
 			if(value.contains("<script>")) return true;
 			// 200자 이상일 경우 
 			if(value.length() > 200) return true;

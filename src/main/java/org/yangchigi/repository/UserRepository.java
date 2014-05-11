@@ -55,6 +55,14 @@ public class UserRepository implements Repository<User> {
 
 	@Override
 	public void add(User user) throws Exception {
+//		User user = findByEmail(user.getEmail());
+//		if (user != null) {
+//			throw new DuplicateEmailException();
+//		}
+//		
+//		user = findByNickname(user.getNickname());
+		
+		
 		logger.info("UserRepository > add: " + user.toString());
 		PreparedStatement pstmt;
 
@@ -75,8 +83,8 @@ public class UserRepository implements Repository<User> {
 			conn.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			if(e.getMessage().contains("email_UNIQUE")) throw new DuplicateEmailException();
-			if(e.getMessage().contains("nickname_UNIQUE")) throw new DuplicateNicknameException();
+			if(e.getMessage().contains("email_UNIQUE")) throw new DuplicateEmailException("duplicate.email");
+//			if(e.getMessage().contains("nickname_UNIQUE")) throw new DuplicateNicknameException("duplicate.nickname");
 		}
 	}
 

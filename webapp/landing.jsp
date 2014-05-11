@@ -93,7 +93,7 @@
 				this.loginBtn.popover('destroy');
 				this.loginBtn.popover({
 					content : '로그인 정보가 틀렸어요.'
-				})
+			});
 				this.loginBtn.popover('show');
 				// 1초 후 popover 제거 
 				this.popoverTimer = setTimeout(function() {
@@ -152,30 +152,34 @@
 			var signUpBtn = $('#signUpBtn');
 
 			signUpBtn.click(function() {
-				if (this.isValid()) {
-					var data = $('#signUpForm :input');
-					$.ajax({
-						type : "POST",
-						url : "user/signup",
-						data : data,
-					}).done(function(msg) {
-						console.log(msg);
-						if ('success' === msg) {
-							this.signUpForm[0].reset();
-							// display none 
-							$('.validate-form').hide();
-							$('#myModal').modal('hide');
-						} else if ('duplicate email' === msg) {
-							var email = this.formInputs['email'];
-							email['showValidityDiv'].text(email['warnDuplicateMsg']);
-							email['showValidityDiv'].css('color', 'red');
-						} else if ('duplicate nickname' === msg) {
-							var nickname = this.formInputs['nickname'];
-							nickname['showValidityDiv'].text(nickname['warnDuplicateMsg']);
-							nickname['showValidityDiv'].css('color', 'red');
-						}
-					}.bind(this));
-				} else {
+			if (this.isValid()) {
+				var data = $('#signUpForm :input');
+				$.ajax({
+					type : "POST",
+					url : "user/signup",
+					data : data,
+				}).done(function(msg) {
+					console.log(msg);
+					if ('success' === msg) {
+						this.signUpForm[0].reset();
+						// display none 
+						$('.validate-form').hide();
+						$('#myModal').modal('hide');
+					} else if ('duplicate email' === msg) {
+						var email = this.formInputs['email'];
+						email['showValidityDiv']
+								.text(email['warnDuplicateMsg']);
+						email['showValidityDiv']
+								.css('color', 'red');
+					} else if ('duplicate nickname' === msg) {
+						var nickname = this.formInputs['nickname'];
+						nickname['showValidityDiv']
+								.text(nickname['warnDuplicateMsg']);
+						nickname['showValidityDiv']
+								.css('color', 'red');
+					}
+				}.bind(this));
+			} else {
 					// 로그인 정보가 올바르지 않을 경우, 제대로 입력하지 않은 input 경고
 					$.each(this.formInputs, function(key, value) {
 						if (!value['valid']) {
@@ -200,7 +204,7 @@
 			var showValidityDiv = $(this).next();
 			// display!
 			showValidityDiv.show();
-			
+
 			if (!input || !input.match(value['inputReg'])) {
 				showValidityDiv.text(value['warnMsg']);
 				showValidityDiv.css('color', 'red');

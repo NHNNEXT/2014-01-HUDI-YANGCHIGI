@@ -2,7 +2,10 @@ package org.yangchigi.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,8 +59,7 @@ public class TodayServlet extends HttpServlet {
 		if (uri.matches("^/today/[0-9]+")) {
 			// today Id 받기. /today/9 일 경우 todayId == 9
 			int todayId = Integer.parseInt(uri.substring(7));
-			String userEmail = (String) request.getSession().getAttribute(
-					"user");
+			String userEmail = (String) request.getSession().getAttribute("user");
 			// 로그인한 유저 & 요청한 투데이
 			User user = userRepository.findByEmail(userEmail);
 			Today today = todayRepository.findById(todayId);
@@ -73,7 +75,7 @@ public class TodayServlet extends HttpServlet {
 						ideaList.remove(i);
 				}
 			}
-
+			System.out.println(ideaList.toString());
 			// 사용자가 투데이 like 상태인지 확인
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
 					todayId);
@@ -88,10 +90,36 @@ public class TodayServlet extends HttpServlet {
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		} else if ("/today".equals(uri)) {
-			List todayLust = todayRepository.findAll();
-			request.setAttribute("todayList", todayLust);
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
+			// 로그인한 유저 & 요청한 투데이
+			User user = userRepository.findByEmail(userEmail);
+			
+			List<Today> todayList = todayRepository.findAll();
+			Map<Today, List<Idea>> todayAndIdeasMap = new HashMap<Today, List<Idea>>();
+			
+			Iterator<Today> todayIterator = todayList.iterator();
+			while (todayIterator.hasNext()) {
+				Today today = todayIterator.next();
+				todayAndIdeasMap.put(today, ideaRepository.findByUserIdAndDate(user.getId(), today.getDate()));
+			}
+			
+			request.setAttribute("todayAndIdeasMap", todayAndIdeasMap);
 			request.getRequestDispatcher("/todays.jsp").forward(request,
 					response);
+		} else if("/today/get".equals(uri)){
+			String userEmail = (String) request.getSession().getAttribute("user");
+			User user = userRepository.findByEmail(userEmail);
+			
+			String date = (String) request.getParameter("date");
+			
+			System.out.println(date);
+			
+			Today today = todayRepository.findByDateAndUserId(date, user.getId());
+			
+			String todayId = String.valueOf(today.getId());
+			
+			response.getWriter().write(todayId);
 		}
 	}
 
