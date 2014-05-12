@@ -11,10 +11,38 @@
 }
 
 .today {
+	position: relative;
 	display: inline-block;
+	overflow: hidden;
 	background-color: yellow;
 	margin: 10px;
 	width: 150px;
 	height: 200px;
 	cursor: pointer;
+}
+
+.next-idea {
+	position: absolute;
+	display: none;
+	right: 20%;
+	top: 30%;
+}
+
+.pre-idea {
+	position: absolute;
+	display: none;
+	left: 20%;
+	top: 30%;
+}
+
+.contents {
+	position: relative;
+	left: 0px;
+	height: 160px;
+	width: 150px
+}
+
+.content {
+	position: absolute;
+	width: 150px;
 }

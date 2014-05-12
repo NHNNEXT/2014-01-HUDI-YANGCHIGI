@@ -26,6 +26,10 @@ public class Idea {
 	public String getContent() {
 		return content;
 	}
+	
+//	public String getEscapedContent() {
+//		return ReplaceUtils.replace()
+//	}
 
 	public String getTime() {
 		return time;
