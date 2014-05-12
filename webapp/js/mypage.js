@@ -107,35 +107,20 @@ function load() {
 }
 
 var checkHasToday = function() {
-	$.each($('td.fc-day'), function(i, val) {
-		$.ajax({
-			type : 'GET',
-			url : '/today/get',
-			data : {
-				'date' : $(this).attr('data-date')
-			},
-			success : function(todayid) {
-				$(this).css('background-color', 'rgb(88, 194, 147)')
-			}.bind(this)
-		});
-	});
-
-}
-
-var testfoo = function() {
 	$.ajax({
 		url : "/today/getList",
 		dataType : "json",
 		success : function(data) {
 
 			$.each($('td.fc-day'), function(i, val) {
-				$.each(data, function(j, day) {
-					debugger;
-					if ($(this).attr('data-date') == day.date.toString()){
-						console.log(day.date);
-//						$(this).css('background-color', 'rgb(88, 194, 147)');
+				$.each(data, function(j, today) {
+					if ($(this).attr('data-date') == today.date.toString()){
+						$(this).css('background-color', 'rgb(88, 194, 147)');
+						$(this).click(function(){
+							window.location.href = "/today/" + today.id;
+						});
 					}
-				});
+				}.bind(this));
 			});
 
 		}
@@ -159,26 +144,11 @@ $(document).ready(function() {
 			// 선택한 날짜
 			var clickedDate = date.toISOString().substring(0, 10);
 
-			// 클릭한 날짜가 오늘보다 작아야 투데이 페이지로 이동가능하도록 한다
-			// 오늘 날짜꺼는 이미 오늘 입력되고 있는 중이므로 이하가 아닌 미만이다.
-			if (clickedDate < curDate) {
-				$.ajax({
-					type : 'GET',
-					url : '/today/get',
-					data : {
-						'date' : clickedDate
-					},
-					success : function(todayid) {
-						window.location.href = "/today/" + todayid;
-					}
-				});
-
 			}
-		}
+		
 	});
 
 	checkHasToday();
-	testfoo();
 	$('.fc-button').click(checkHasToday);
 
 });

@@ -152,4 +152,34 @@ public class TodayRepository implements Repository<Today> {
 		return todayList;
 	}
 	
+	public List<Today> findListByUserId(int userid) {
+		List<Today> todayList = new ArrayList<Today>();
+		PreparedStatement pstmt;
+		ResultSet rs = null;
+		Today today = null;
+
+		String sql = "SELECT * FROM `today` WHERE user_id = ?";
+		try {
+			this.conn = DriverManager.getConnection(addr, user, pw);
+
+			pstmt = this.conn.prepareStatement(sql);
+			pstmt.setInt(1, userid);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				today = new Today(rs.getString("date"), rs.getInt("like"),
+						rs.getInt("user_id"));
+				today.setId(rs.getInt("id"));
+				todayList.add(today);
+			}
+			
+			pstmt.close();
+			rs.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return todayList;
+	}
+	
 }

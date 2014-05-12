@@ -107,8 +107,7 @@ public class TodayServlet extends HttpServlet {
 			request.getRequestDispatcher("/todays.jsp").forward(request,
 					response);
 		} else if ("/today/get".equals(uri)) {
-			String userEmail = (String) request.getSession().getAttribute(
-					"user");
+			String userEmail = (String) request.getSession().getAttribute("user");
 			User user = userRepository.findByEmail(userEmail);
 
 			String date = (String) request.getParameter("date");
@@ -122,12 +121,13 @@ public class TodayServlet extends HttpServlet {
 
 			response.getWriter().write(todayId);
 		} else if ("/today/getList".equals(uri)) {
+			String userEmail = (String) request.getSession().getAttribute("user");
+			User user = userRepository.findByEmail(userEmail);
 
-			List<Today> todayList = todayRepository.findAll();
+			List<Today> todayList = todayRepository.findListByUserId(user.getId());
 
 			// list를 json으로 변환
 			 response.getWriter().write(new Gson().toJson(todayList));
-//			System.out.println(new Gson().toJson(todayList));
 		}
 	}
 
