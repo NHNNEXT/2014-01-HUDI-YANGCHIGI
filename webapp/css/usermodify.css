@@ -2,13 +2,134 @@ body {
 	background-color: #ede8e1;
 }
 
-/* F6F3ef */
+#header {
+	/* height:71px; */
+	display:block;
+	margin:auto;
+	position:relative;
+}
+
+#logo {
+	width: 200px;
+	margin-top: 30px;
+	float: left;
+}
+
+#myInfo {
+	/* display: inline; */
+}
+#myThumbnail {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: inline-block;
+}
+#myNickname {
+	display: inline-block;
+	font-size:25px;
+	font-weight: bold;
+}
 
 #thumbnail {
-	border-radius: 30px;
+	border-radius: 50%;
 }
 
 #prevImg {
-	border-radius: 30px;
+	border-radius: 50%;
+
+}
+
+#triangle {
+
+}
+
+#baloon {
+	background-color: #fcf8f0;
+	border-radius: 1em;
+	margin-top:1%;
+	margin-left: 5%;
+	margin-right: 5%;
+	min-height: 550px;
+}
+
+#userInfo {
+	background-color:white;
+	border-radius:1em;
+	padding: 10px;
+	float:left;
+	width:600px;
+}
+
+#userStats {
+	background-color:white;
+	border-radius:1em;
+	padding: 10px;
+	float:right;
+	width: 220px;
+	min-height: 450px;
+}
+#footer {
+	text-align: center;
+}
+
+.footer_links li {
+	display: inline-block;
+	list-style: none;
+	color:#a09e98;
+	font-weight: 200;
+	padding:5px;
+}
+
+
+/* 핸드폰 */
+@media all and (max-width:401px) {
+	body {
+		background-color:#d3dde3;
+	}
+	
+	#logo {
+		margin: 0 auto;
+		text-align: center;
+		float:none;
+		display: inline-block;
+	}
+}
+
+/* 타블렛 */ 
+@media all and (min-width:402px) and (max-width:876px){
+	body {
+		background-color:#fad2b5;
+	}
+}
+
+/* 데탑 */
+@media all and (min-width:876px){
+	#header {
+		width: 876px !important;
+	}
+	
+	#logo {
+		margin: 30px 13px 0 15px;
+		float:left;	
+	}
+	#baloon {
+		width: 876px;
+		margin:0 auto;
+		margin-top:1%;
+		padding: 15px;
+		
+	}
+	
+	1#triangle  {
+		width: 0px;
+		height: 0px;
+		border: 40px solid #fcf8f0;
+		border-top-width: 0;
+		border-right-color: transparent;
+		border-left-color: transparent;
+		position: relative;
+		top: -20px;
+		left: 530px;
+	}
 
 }
