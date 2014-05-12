@@ -148,6 +148,8 @@ public class TodayRepository implements Repository<Today> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return todayList;
 	}
+	
 }

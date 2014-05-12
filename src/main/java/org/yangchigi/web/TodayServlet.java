@@ -24,6 +24,8 @@ import org.yangchigi.web.Like;
 import org.yangchigi.web.Today;
 import org.yangchigi.web.User;
 
+import com.google.gson.Gson;
+
 @WebServlet(name = "TodayServlet", urlPatterns = { "/today/*" })
 public class TodayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -56,7 +58,8 @@ public class TodayServlet extends HttpServlet {
 		if (uri.matches("^/today/[0-9]+")) {
 			// today Id 받기. /today/9 일 경우 todayId == 9
 			int todayId = Integer.parseInt(uri.substring(7));
-			String userEmail = (String) request.getSession().getAttribute("user");
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
 			// 로그인한 유저 & 요청한 투데이
 			User user = userRepository.findByEmail(userEmail);
 			Today today = todayRepository.findById(todayId);
@@ -83,7 +86,8 @@ public class TodayServlet extends HttpServlet {
 			request.setAttribute("month", today.getDate().split("-")[1]);
 			request.setAttribute("day", today.getDate().split("-")[2]);
 			request.setAttribute("isLiked", like != null);
-			request.setAttribute("commList", commRepository.findListByTodayId(todayId));
+			request.setAttribute("commList",
+					commRepository.findListByTodayId(todayId));
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		} else if ("/today".equals(uri)) {
@@ -91,19 +95,28 @@ public class TodayServlet extends HttpServlet {
 			request.setAttribute("todayList", todayLust);
 			request.getRequestDispatcher("/todays.jsp").forward(request,
 					response);
-		} else if("/today/get".equals(uri)){
-			String userEmail = (String) request.getSession().getAttribute("user");
+		} else if ("/today/get".equals(uri)) {
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
 			User user = userRepository.findByEmail(userEmail);
-			
+
 			String date = (String) request.getParameter("date");
-			
+
 			System.out.println(date);
-			
-			Today today = todayRepository.findByDateAndUserId(date, user.getId());
-			
+
+			Today today = todayRepository.findByDateAndUserId(date,
+					user.getId());
+
 			String todayId = String.valueOf(today.getId());
-			
+
 			response.getWriter().write(todayId);
+		} else if ("/today/getList".equals(uri)) {
+
+			List<Today> todayList = todayRepository.findAll();
+
+			// list를 json으로 변환
+			 response.getWriter().write(new Gson().toJson(todayList));
+//			System.out.println(new Gson().toJson(todayList));
 		}
 	}
 
@@ -122,7 +135,8 @@ public class TodayServlet extends HttpServlet {
 			Today today = todayRepository.findById(todayId);
 			today.setLike(likeNum);
 
-			String userEmail = (String) request.getSession().getAttribute("user");
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
 
 			User user = userRepository.findByEmail(userEmail);
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
@@ -151,7 +165,7 @@ public class TodayServlet extends HttpServlet {
 				CommentRepository repository = new CommentRepository();
 				String content = request.getParameter("content");
 
-				 Comment comment = new Comment(content, user.getId(), todayId);
+				Comment comment = new Comment(content, user.getId(), todayId);
 
 				repository.add(comment);
 
@@ -162,10 +176,11 @@ public class TodayServlet extends HttpServlet {
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");
 			User user = userRepository.findByEmail(userEmail);
-			
-			Today today = new Today(MyCalendar.getCurrentDate(), 0, user.getId());
+
+			Today today = new Today(MyCalendar.getCurrentDate(), 0,
+					user.getId());
 			todayRepository.add(today);
-			
+
 			response.getWriter().write("success");
 		}
 	}
