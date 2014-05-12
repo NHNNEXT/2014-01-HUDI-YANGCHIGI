@@ -33,11 +33,11 @@
 	<!-- 		<div id="myInfo"> -->
 			<!-- </div> -->
 		</div>
+		<p id="triangle"></p>
 	</div>	
 	
 	
 	<div id="baloon">
-		<p id="triangle"></p>
 		
 		<div id="userInfo">
 			<form id="userModifyForm" method="post" action="usermodify/upload" enctype="multipart/form-data">
