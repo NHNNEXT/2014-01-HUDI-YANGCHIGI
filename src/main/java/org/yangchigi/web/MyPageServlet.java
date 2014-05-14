@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import org.yangchigi.repository.IdeaRepository;
+import org.yangchigi.repository.SingletonRepository;
 import org.yangchigi.repository.UserRepository;
 import org.yangchigi.support.MyCalendar;
 
@@ -24,26 +24,25 @@ import org.yangchigi.support.MyCalendar;
 
 //@MultipartConfig(location = "/Users/jehyeok/yangchigi/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 @MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
-@WebServlet(name = "MyPageServlet", urlPatterns = {"/mypage/*"}) 
+@WebServlet(name = "MyPageServlet", urlPatterns = { "/mypage/*" })
 public class MyPageServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private IdeaRepository ideaRepository;
 	private UserRepository userRepository;
-	
+
 	public MyPageServlet() {
-		try {
-			ideaRepository = new IdeaRepository();
-			userRepository = new UserRepository();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
+		ideaRepository = SingletonRepository.getIdeaRepository();
+		userRepository = SingletonRepository.getUserRepository();
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		
-		
+
 		if ("/mypage".equals(uri)) {
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");
@@ -60,109 +59,119 @@ public class MyPageServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws IOException  {
+			HttpServletResponse response) throws IOException {
 		String uri = request.getRequestURI();
 		HashMap<String, String> contentsMap;
-		
+
 		if ("/mypage/write".equals(uri)) {
 			contentsMap = getContentsListAndUpload(request);
-			
-			if(hasError(contentsMap)) return;
-			
+
+			if (hasError(contentsMap))
+				return;
+
 			String content = contentsMap.get("content");
 			String date = MyCalendar.getCurrentDate();
 			String time = MyCalendar.getCurrentTime();
 			String imgName = null;
-			if(contentsMap.containsKey("imgName")) imgName = contentsMap.get("imgName");			
+			if (contentsMap.containsKey("imgName"))
+				imgName = contentsMap.get("imgName");
 			boolean isPrivate = contentsMap.containsKey("isPrivate");
-			
-			String userEmail = (String) request.getSession().getAttribute("user");
+
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
 			User user = userRepository.findByEmail(userEmail);
-			
-			Idea idea = new Idea(content, date, time, imgName, isPrivate, user.getId());
+
+			Idea idea = new Idea(content, date, time, imgName, isPrivate,
+					user.getId());
 			System.out.println(idea.toString());
 			ideaRepository.add(idea);
-			
+
 			time = MyCalendar.getCurrentTimeWithoutSec();
 			response.getWriter().write(time);
-			
+
 		}
 	}
 
 	private boolean hasError(HashMap<String, String> contentsMap) {
-		for(String key : contentsMap.keySet()){
+		for (String key : contentsMap.keySet()) {
 			String value = contentsMap.get(key);
 			// 스크립트 태그를 넣을 경우
-			// <script> => db : &lt;script&gt; 
+			// <script> => db : &lt;script&gt;
 			// &lt;script&gt; => <script>
 			// <p>&lt;script&gt;</p>
-			if(value.contains("<script>")) return true;
-			// 200자 이상일 경우 
-			if(value.length() > 200) return true;
+			if (value.contains("<script>"))
+				return true;
+			// 200자 이상일 경우
+			if (value.length() > 200)
+				return true;
 		}
-		
+
 		return false;
-		
+
 	}
 
-	private HashMap<String, String> getContentsListAndUpload(HttpServletRequest request) {
-		Part filePart = null; 
+	private HashMap<String, String> getContentsListAndUpload(
+			HttpServletRequest request) {
+		Part filePart = null;
 		HashMap<String, String> contentsMap = new HashMap<String, String>();
 		String fileName = null;
-        try {
-			for (Part part : request.getParts()) { 
-				if (part.getName().equals("content")) { 
-					String paramValue = getStringFromStream(part.getInputStream()); 
+		try {
+			for (Part part : request.getParts()) {
+				if (part.getName().equals("content")) {
+					String paramValue = getStringFromStream(part
+							.getInputStream());
 					contentsMap.put("content", paramValue.trim());
-				} 
-				if (part.getName().equals("isPrivate")) { 
-					String paramValue = getStringFromStream(part.getInputStream());
+				}
+				if (part.getName().equals("isPrivate")) {
+					String paramValue = getStringFromStream(part
+							.getInputStream());
 					contentsMap.put("isPrivate", paramValue.trim());
-				} 
-				if (part.getName().equals("imgName")) { 
+				}
+				if (part.getName().equals("imgName")) {
 					filePart = part;
-					for (String headerName : part.getHeaderNames()) { 
-						if(part.getHeader(headerName).contains("filename=")){
+					for (String headerName : part.getHeaderNames()) {
+						if (part.getHeader(headerName).contains("filename=")) {
 							String filePartHeader = part.getHeader(headerName);
 							fileName = filePartHeader.split("filename=\"")[1];
-							fileName = fileName.substring(0, fileName.length()-1);
+							fileName = fileName.substring(0,
+									fileName.length() - 1);
 							contentsMap.put("imgName", fileName);
 						}
-					} 
-				} 
+					}
+				}
 			}
-			
-			if(fileName != null)
+
+			if (fileName != null)
 				filePart.write(fileName);
-			
+
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();
-		} 
+		}
 
-        return contentsMap;
-		
+		return contentsMap;
+
 	}
-	
-	public String getStringFromStream(InputStream stream) 
-            throws IOException { 
-        BufferedReader br = new BufferedReader(new InputStreamReader(stream, "UTF-8")); 
-        StringBuilder sb = new StringBuilder(); 
-        String line = null; 
 
-        try { 
-            while ((line = br.readLine()) != null) { 
-                sb.append(line + "\n"); 
-            } 
-        } catch (IOException e) { 
-            e.printStackTrace(); 
-        } finally { 
-            try { 
-                stream.close(); 
-            } catch (IOException e) { 
-                e.printStackTrace(); 
-            } 
-        } 
-        return sb.toString(); 
-    } 
-		
+	public String getStringFromStream(InputStream stream) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(stream,
+				"UTF-8"));
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+
+		try {
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return sb.toString();
+	}
+
 }

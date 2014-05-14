@@ -13,8 +13,12 @@ import org.yangchigi.web.Idea;
 public class IdeaRepository implements Repository<Idea> {
 	private Connection conn;
 
-	public IdeaRepository() throws ClassNotFoundException, SQLException {
-		Class.forName(driver);
+	public IdeaRepository() {
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Connection getConn() throws SQLException {

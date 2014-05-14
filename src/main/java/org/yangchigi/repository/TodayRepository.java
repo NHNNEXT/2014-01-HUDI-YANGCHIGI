@@ -13,8 +13,12 @@ import org.yangchigi.web.Today;
 public class TodayRepository implements Repository<Today> {
 	private Connection conn;
 
-	public TodayRepository() throws ClassNotFoundException, SQLException {
-		Class.forName(driver);
+	public TodayRepository() {
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Connection getConn() throws SQLException {

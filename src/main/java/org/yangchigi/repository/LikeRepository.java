@@ -11,8 +11,12 @@ import org.yangchigi.web.Like;
 public class LikeRepository implements Repository<Like>{
 	private Connection conn;
 
-	public LikeRepository() throws ClassNotFoundException, SQLException {
-		Class.forName(driver);
+	public LikeRepository() {
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Connection getConn() throws SQLException {

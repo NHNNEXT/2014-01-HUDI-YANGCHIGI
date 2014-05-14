@@ -15,8 +15,12 @@ public class UserRepository implements Repository<User> {
 			.getLogger("org.yangchigi.web.UserRepository");
 	private Connection conn;
 
-	public UserRepository() throws ClassNotFoundException, SQLException {
-		Class.forName(driver);
+	public UserRepository() {
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Connection getConn() throws SQLException {

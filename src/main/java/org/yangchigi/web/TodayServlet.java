@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.yangchigi.repository.CommentRepository;
 import org.yangchigi.repository.IdeaRepository;
 import org.yangchigi.repository.LikeRepository;
+import org.yangchigi.repository.SingletonRepository;
 import org.yangchigi.repository.TodayRepository;
 import org.yangchigi.repository.UserRepository;
 import org.yangchigi.support.MyCalendar;
@@ -41,15 +42,12 @@ public class TodayServlet extends HttpServlet {
 	private CommentRepository commRepository;
 
 	public TodayServlet() {
-		try {
-			userRepository = new UserRepository();
-			todayRepository = new TodayRepository();
-			ideaRepository = new IdeaRepository();
-			likeRepository = new LikeRepository();
-			commRepository = new CommentRepository();
-		} catch (ClassNotFoundException | SQLException e) {
-			logger.warn("repository 초기화 실패");
-		}
+		userRepository = SingletonRepository.getUserRepository();
+		todayRepository = SingletonRepository.getTodayRepository();
+		ideaRepository = SingletonRepository.getIdeaRepository();
+		likeRepository = SingletonRepository.getLikeRepository();
+		commRepository = SingletonRepository.getCommentRepository();
+		logger.warn("repository 초기화 실패");
 	}
 
 	@Override
@@ -96,18 +94,20 @@ public class TodayServlet extends HttpServlet {
 		} else if ("/today".equals(uri)) {
 			List<Today> todayList = todayRepository.findAll();
 			Map<Today, List<Idea>> todayAndIdeasMap = new HashMap<Today, List<Idea>>();
-			
+
 			Iterator<Today> todayIterator = todayList.iterator();
 			while (todayIterator.hasNext()) {
 				Today today = todayIterator.next();
-				todayAndIdeasMap.put(today, ideaRepository.findByUserIdAndDate(today.getUserId(), today.getDate()));
+				todayAndIdeasMap.put(today, ideaRepository.findByUserIdAndDate(
+						today.getUserId(), today.getDate()));
 			}
-			
+
 			request.setAttribute("todayAndIdeasMap", todayAndIdeasMap);
 			request.getRequestDispatcher("/todays.jsp").forward(request,
 					response);
 		} else if ("/today/get".equals(uri)) {
-			String userEmail = (String) request.getSession().getAttribute("user");
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
 			User user = userRepository.findByEmail(userEmail);
 
 			String date = (String) request.getParameter("date");
@@ -121,13 +121,15 @@ public class TodayServlet extends HttpServlet {
 
 			response.getWriter().write(todayId);
 		} else if ("/today/getList".equals(uri)) {
-			String userEmail = (String) request.getSession().getAttribute("user");
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
 			User user = userRepository.findByEmail(userEmail);
 
-			List<Today> todayList = todayRepository.findListByUserId(user.getId());
+			List<Today> todayList = todayRepository.findListByUserId(user
+					.getId());
 
 			// list를 json으로 변환
-			 response.getWriter().write(new Gson().toJson(todayList));
+			response.getWriter().write(new Gson().toJson(todayList));
 		}
 	}
 
@@ -165,24 +167,19 @@ public class TodayServlet extends HttpServlet {
 			todayRepository.update(today);
 			response.getWriter().write(String.valueOf(likeNum));
 		} else if (uri.matches("^/today/[0-9]+/writecomment")) {
-			try {
-				int todayId = Integer.parseInt(uri.split("/")[2]);
-				System.out.println("todayid = " + todayId);
-				String userEmail = (String) request.getSession().getAttribute(
-						"user");
-				User user = userRepository.findByEmail(userEmail);
-				logger.info("userEmail: {}", userEmail);
+			int todayId = Integer.parseInt(uri.split("/")[2]);
+			System.out.println("todayid = " + todayId);
+			String userEmail = (String) request.getSession().getAttribute(
+					"user");
+			User user = userRepository.findByEmail(userEmail);
+			logger.info("userEmail: {}", userEmail);
 
-				CommentRepository repository = new CommentRepository();
-				String content = request.getParameter("content");
+			CommentRepository repository = new CommentRepository();
+			String content = request.getParameter("content");
 
-				Comment comment = new Comment(content, user.getId(), todayId);
+			Comment comment = new Comment(content, user.getId(), todayId);
 
-				repository.add(comment);
-
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
-			}
+			repository.add(comment);
 		} else if ("/today".equals(uri)) {
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");

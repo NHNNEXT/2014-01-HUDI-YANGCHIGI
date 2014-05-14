@@ -12,8 +12,12 @@ import org.yangchigi.web.Comment;
 public class CommentRepository implements Repository<Comment>{
 	private Connection conn;
 	
-	public CommentRepository() throws ClassNotFoundException, SQLException {
-		Class.forName(driver);
+	public CommentRepository() {
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Connection getConn() throws SQLException {
@@ -50,9 +54,6 @@ public class CommentRepository implements Repository<Comment>{
 		Comment comm = null;
 		ArrayList<Comment> commList = new ArrayList<Comment>();
 		
-
-		
-		//email 에 의한 select 구현 필
 		String sql = "SELECT * FROM comment WHERE today_id = ?";
 		try {
 			this.conn = DriverManager.getConnection(addr, user, pw);
@@ -60,7 +61,6 @@ public class CommentRepository implements Repository<Comment>{
 			pstmt.setInt(1, todayId);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				
 				comm = new Comment(rs.getString("content"),rs.getInt("user_id"), rs.getInt("today_id"));
 				commList.add(comm);				
 				System.out.println(comm.toString());
@@ -78,7 +78,6 @@ public class CommentRepository implements Repository<Comment>{
 
 	@Override
 	public Comment findById(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
