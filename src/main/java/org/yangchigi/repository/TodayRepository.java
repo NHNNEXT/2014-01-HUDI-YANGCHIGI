@@ -15,7 +15,6 @@ public class TodayRepository implements Repository<Today> {
 
 	public TodayRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
-		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
 
 	public Connection getConn() throws SQLException {

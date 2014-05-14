@@ -17,7 +17,6 @@ public class UserRepository implements Repository<User> {
 
 	public UserRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
-		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
 
 	public Connection getConn() throws SQLException {

@@ -7,14 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.yangchigi.web.Like;
-import org.yangchigi.web.Today;
 
 public class LikeRepository implements Repository<Like>{
 	private Connection conn;
 
 	public LikeRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
-		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
 
 	public Connection getConn() throws SQLException {
