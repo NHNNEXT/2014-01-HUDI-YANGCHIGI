@@ -96,7 +96,7 @@
 			},
 			addLikeEvent : function() {
 				this.likeBtn.click(function() {
-					var like = Number(this.likeSpan.text());
+					var like = parseInt(this.likeSpan.text(), 10);
 					
 					if (this.likeBtn.hasClass('btn-primary')) like -= 1;
 					else like += 1;

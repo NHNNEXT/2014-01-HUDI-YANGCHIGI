@@ -14,7 +14,6 @@ public class CommentRepository implements Repository<Comment>{
 	
 	public CommentRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
-		this.conn = DriverManager.getConnection(addr, user, pw);
 	}
 
 	public Connection getConn() throws SQLException {
