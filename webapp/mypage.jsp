@@ -83,6 +83,7 @@
 									style="margin-right: 5px;">
 							</c:if>
 							<p class="contentsP">${idea.content}</p>
+							<img class="trash" src="image/trash_orange.png" > 
 						</div>
 					</c:forEach>
 				</div>

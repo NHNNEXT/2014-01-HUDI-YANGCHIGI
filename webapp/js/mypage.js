@@ -58,8 +58,16 @@ var write = {
 					'<div class="row contents">'
 							+ '<div class="time" ><p class="date">' + time
 							+ '</p></div>' + '<p class="contentsP">' + content
-							+ '</p></div>').children(':last').hide().fadeIn(
+							+ '</p>' + '<img class="trash" src="image/trash_orange.png" >' +'</div>'
+							).children(':last').hide().fadeIn(
 					'slow');
+//			if (imgName === undefined) {
+//				$('#contentsContainerDiv').append(
+//						'<div class="row contents">'
+//						+ '<div class="time" ><p class="date">' + time
+//						+ '</p></div>' + '<p class="contentsP">' + content
+//						+ '</p></div>').children(':last').hide().fadeIn(
+//						'slow');
 		} else {
 			$('#contentsContainerDiv').append(
 					'<div class="row contents">'
@@ -67,9 +75,20 @@ var write = {
 							+ '</p></div>'
 							+ '<img class="contentsImg" src="image/' + imgName
 							+ '" style="margin-right:5px;">'
-							+ '<p class="contentsP">' + content + '</p></div>')
+							+ '<p class="contentsP">' + content 
+							+ '</p>' + '<img class="trash" src="image/trash_orange.png" >' +'</div>')
 					.children(':last').hide().fadeIn('slow');
 		}
+//	} else {
+//		$('#contentsContainerDiv').append(
+//				'<div class="row contents">'
+//				+ '<div class="time"><p class="date">' + time
+//				+ '</p></div>'
+//				+ '<img class="contentsImg" src="image/' + imgName
+//				+ '" style="margin-right:5px;">'
+//				+ '<p class="contentsP">' + content + '</p></div>')
+//				.children(':last').hide().fadeIn('slow');
+//	}
 
 		$('html, body').animate({
 			scrollTop : $(document).height()
@@ -77,6 +96,9 @@ var write = {
 		$('#prevImg').hide();
 		$('body form')[0].reset();
 		$('#textlength').text("0/200");
+//		$('.row.contents').append('<img class="trash" src="image/trash_orange.png" >');   //으앙 
+//		$('#contentsContainerDiv').append('<img class="trash" src="image/trash_orange.png" >');   //으앙 
+		//$('#contentsContainerDiv').append('kakakakakakakakako');
 	},
 
 	setHeightForTimeDiv : function() {
@@ -88,9 +110,23 @@ var write = {
 					$(this).height(newHeight);
 				});
 	},
+	
+//	addTrash : function() {
+//		$('.row contents').each(
+//				function() {
+//					$(this).append('<img class="trash" src="image/trash_orange.png" >');
+//				});
+//	},
+
+//	addTrash : function() {
+//		$('.row contents').append('<img class="trash" src="image/trash_orange.png" >');
+//			
+//	},
+	
 	init : function() {
 		$('#submitBtn').click(this.submitArticle.bind(this));
 		this.setHeightForTimeDiv();
+		this.addTrash();
 		$('body').hide().delay(200).fadeIn('slow'); // check
 	}
 }

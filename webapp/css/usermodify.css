@@ -39,6 +39,34 @@ body {
 
 }
 
+#overlay {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	cursor: pointer;
+	visibility: hidden;
+}
+
+#uploadImg {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	cursor: pointer;
+	/* position: relative; */
+	
+}
+
+/*  #uploadImg:HOVER {
+	background-image: url('/image/pencil.png');
+	background-size: 150px;
+	border-radius: 10%;
+	1background-position: -100px;
+	
+ 	position: relative;
+	z-index: 3; 
+	
+}  */
+
 #triangle {
 
 }
