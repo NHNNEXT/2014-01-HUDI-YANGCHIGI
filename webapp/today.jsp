@@ -53,7 +53,7 @@
 		</div>
 
 		<div id="writeCommentDiv" class="input-group">
-			<input type="text" id="commentInput" class="form-control"> <span
+			<input type="text" id="commentInput" class="form-control" maxlength="100"> <span
 				class="input-group-btn">
 				<button id="uploadCommentBtn" class="btn btn-success" type="button">Go!</button>
 			</span>
@@ -78,12 +78,19 @@
 				}).done(function(time) {
 					
 					$('#commentDiv').append('<div class="comment-set">'
-							+ contentsVal
+							+ replace(contentsVal)
 							+ '</div>').children(':last').hide().fadeIn('slow');
 					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
 					$('#commentInput').val("");
 				});
 			}
+		}
+		
+		var replace = function(val) {
+			val = val.replace('<', '&lt;');
+			val = val.replace('>', '&gt;');
+			
+			return val;
 		}
 		var like = {
 			likeBtn : $('#likeBtn'),

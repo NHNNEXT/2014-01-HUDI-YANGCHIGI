@@ -21,11 +21,6 @@ import org.yangchigi.repository.LikeRepository;
 import org.yangchigi.repository.TodayRepository;
 import org.yangchigi.repository.UserRepository;
 import org.yangchigi.support.MyCalendar;
-import org.yangchigi.web.Comment;
-import org.yangchigi.web.Idea;
-import org.yangchigi.web.Like;
-import org.yangchigi.web.Today;
-import org.yangchigi.web.User;
 
 import com.google.gson.Gson;
 

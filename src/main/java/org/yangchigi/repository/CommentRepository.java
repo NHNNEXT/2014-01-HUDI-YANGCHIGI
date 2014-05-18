@@ -7,17 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.yangchigi.support.MyString;
 import org.yangchigi.web.Comment;
 
 public class CommentRepository implements Repository<Comment>{
-	private Connection conn;
 	
 	public CommentRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
-	}
-
-	public Connection getConn() throws SQLException {
-		return this.conn;
 	}
 
 	@Override
@@ -30,8 +26,8 @@ public class CommentRepository implements Repository<Comment>{
 				"VALUES " +
 				"(?, ?, ?)";
 		try {
-			this.conn = DriverManager.getConnection(addr, user, pw);
-			pstmt = this.conn.prepareStatement(sql);
+			Connection conn = DriverManager.getConnection(addr, user, pw);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, comm.getContent());
 			pstmt.setInt(2, comm.getUserId());
 			pstmt.setInt(3, comm.getTodayId());
@@ -55,13 +51,13 @@ public class CommentRepository implements Repository<Comment>{
 		//email 에 의한 select 구현 필
 		String sql = "SELECT * FROM comment WHERE today_id = ?";
 		try {
-			this.conn = DriverManager.getConnection(addr, user, pw);
-			pstmt = this.conn.prepareStatement(sql);
+			Connection conn = DriverManager.getConnection(addr, user, pw);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, todayId);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				
-				comm = new Comment(rs.getString("content"),rs.getInt("user_id"), rs.getInt("today_id"));
+				comm = new Comment(MyString.replace(rs.getString("content")),rs.getInt("user_id"), rs.getInt("today_id"));
 				commList.add(comm);				
 				System.out.println(comm.toString());
 			}

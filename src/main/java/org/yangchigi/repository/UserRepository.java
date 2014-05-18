@@ -13,14 +13,9 @@ import org.yangchigi.web.User;
 public class UserRepository implements Repository<User> {
 	private static final Logger logger = LoggerFactory
 			.getLogger("org.yangchigi.web.UserRepository");
-	private Connection conn;
 
 	public UserRepository() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
-	}
-
-	public Connection getConn() throws SQLException {
-		return this.conn;
 	}
 
 	public User findByEmail(String email) {
@@ -29,9 +24,9 @@ public class UserRepository implements Repository<User> {
 		User user = null;
 		String sql = "SELECT * FROM `user` WHERE (email = ?)";
 		try {
-			this.conn = DriverManager.getConnection(addr, this.user, pw);
+			Connection conn = DriverManager.getConnection(addr, this.user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 
@@ -69,9 +64,9 @@ public class UserRepository implements Repository<User> {
 				+ "VALUES (?, ?, ?, ?)";
 
 		try {
-			this.conn = DriverManager.getConnection(addr, this.user, pw);
+			Connection conn = DriverManager.getConnection(addr, this.user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getEmail());
 			pstmt.setString(2, user.getNickname());
 			pstmt.setString(3, user.getPassword());
@@ -99,9 +94,9 @@ public class UserRepository implements Repository<User> {
 		String sql = "UPDATE `user` SET nickname = ? WHERE email=?";
 
 		try {
-			this.conn = DriverManager.getConnection(addr, this.user, pw);
+			Connection conn = DriverManager.getConnection(addr, this.user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, nickname);
 			pstmt.setString(2, user.getEmail());
 			System.out.println("nickname: " + nickname + " user.getEmail(): "
@@ -125,9 +120,9 @@ public class UserRepository implements Repository<User> {
 		String sql = "UPDATE user SET thumbnail = ? WHERE (email=?)";
 
 		try {
-			this.conn = DriverManager.getConnection(addr, this.user, pw);
+			Connection conn = DriverManager.getConnection(addr, this.user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, thumbnail);
 			pstmt.setString(2, user.getEmail());
 			System.out.println(pstmt.toString());
