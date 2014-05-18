@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no">
 <title>Today page</title>
 <link rel="stylesheet" href="/css/today.css">
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -53,8 +54,8 @@
 		</div>
 
 		<div id="writeCommentDiv" class="input-group">
-			<input type="text" id="commentInput" class="form-control" maxlength="100"> <span
-				class="input-group-btn">
+			<input type="text" id="commentInput" class="form-control"
+				maxlength="100"> <span class="input-group-btn">
 				<button id="uploadCommentBtn" class="btn btn-success" type="button">Go!</button>
 			</span>
 		</div>
