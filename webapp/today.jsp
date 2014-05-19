@@ -5,8 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<title>Insert title here</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Today page</title>
 <link rel="stylesheet" href="/css/today.css">
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet"
@@ -53,8 +56,8 @@
 		</div>
 
 		<div id="writeCommentDiv" class="input-group">
-			<input type="text" id="commentInput" class="form-control"> <span
-				class="input-group-btn">
+			<input type="text" id="commentInput" class="form-control"
+				maxlength="100"> <span class="input-group-btn">
 				<button id="uploadCommentBtn" class="btn btn-success" type="button">Go!</button>
 			</span>
 		</div>
@@ -78,12 +81,19 @@
 				}).done(function(time) {
 					
 					$('#commentDiv').append('<div class="comment-set">'
-							+ contentsVal
+							+ replace(contentsVal)
 							+ '</div>').children(':last').hide().fadeIn('slow');
 					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
 					$('#commentInput').val("");
 				});
 			}
+		}
+		
+		var replace = function(val) {
+			val = val.replace('<', '&lt;');
+			val = val.replace('>', '&gt;');
+			
+			return val;
 		}
 		var like = {
 			likeBtn : $('#likeBtn'),
@@ -96,7 +106,7 @@
 			},
 			addLikeEvent : function() {
 				this.likeBtn.click(function() {
-					var like = Number(this.likeSpan.text());
+					var like = parseInt(this.likeSpan.text(), 10);
 					
 					if (this.likeBtn.hasClass('btn-primary')) like -= 1;
 					else like += 1;

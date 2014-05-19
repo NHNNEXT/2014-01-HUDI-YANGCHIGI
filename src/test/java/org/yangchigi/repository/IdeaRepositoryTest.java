@@ -11,8 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
-import org.yangchigi.web.Idea;
-import org.yangchigi.web.User;
+import org.yangchigi.dto.Idea;
+import org.yangchigi.dto.User;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package org.yangchigi.web;
+package org.yangchigi.dto;
 
 public class User {
 	private int id;
@@ -27,7 +27,11 @@ public class User {
 	}
 	
 	public String getThumbnail() {
+		if(thumbnail.length()==0){
+			return "default_thumbnail.jpg";
+		} 
 		return thumbnail;
+		
 	}
 	
 	@Override

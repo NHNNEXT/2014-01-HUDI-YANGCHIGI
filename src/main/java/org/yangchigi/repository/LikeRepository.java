@@ -6,19 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.yangchigi.web.Like;
-import org.yangchigi.web.Today;
+import org.yangchigi.dto.Like;
 
 public class LikeRepository implements Repository<Like>{
-	private Connection conn;
 
-	public LikeRepository() throws ClassNotFoundException, SQLException {
-		Class.forName(driver);
-		this.conn = DriverManager.getConnection(addr, user, pw);
-	}
-
-	public Connection getConn() throws SQLException {
-		return this.conn;
+	public LikeRepository() {
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Like findByUserIdAndTodayId(int userId, int todayId) {
@@ -28,9 +25,9 @@ public class LikeRepository implements Repository<Like>{
 
 		String sql = "SELECT * FROM `like` WHERE (user_id = ? AND today_id = ?)";
 		try {
-			this.conn = DriverManager.getConnection(addr, user, pw);
+			Connection conn = DriverManager.getConnection(addr, user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			pstmt.setInt(2, todayId);
 			rs = pstmt.executeQuery();
@@ -55,9 +52,9 @@ public class LikeRepository implements Repository<Like>{
 		String sql = "INSERT INTO `like` (`user_id`, `today_id`) "
 				+ "VALUES (?, ?)";
 		try {
-			this.conn = DriverManager.getConnection(addr, user, pw);
+			Connection conn = DriverManager.getConnection(addr, user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, like.getUserId());
 			pstmt.setInt(2, like.getTodayId());
 			pstmt.execute();
@@ -74,9 +71,9 @@ public class LikeRepository implements Repository<Like>{
 
 		String sql = "DELETE FROM `like` WHERE (`user_id` = ? AND `today_id` = ?)";
 		try {
-			this.conn = DriverManager.getConnection(addr, user, pw);
+			Connection conn = DriverManager.getConnection(addr, user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, like.getUserId());
 			pstmt.setInt(2, like.getTodayId());
 			pstmt.execute();

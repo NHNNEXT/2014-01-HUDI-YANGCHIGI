@@ -8,18 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yangchigi.web.Idea;
+import org.yangchigi.dto.Idea;
+import org.yangchigi.support.MyString;
 
 public class IdeaRepository implements Repository<Idea> {
-	private Connection conn;
 
-	public IdeaRepository() throws ClassNotFoundException, SQLException {
-		Class.forName(driver);
-		this.conn = DriverManager.getConnection(addr, user, pw);
-	}
-
-	public Connection getConn() throws SQLException {
-		return this.conn;
+	public IdeaRepository() {
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public ArrayList<Idea> findListByEmail() throws SQLException {
@@ -28,15 +27,16 @@ public class IdeaRepository implements Repository<Idea> {
 		Idea idea = null;
 		ArrayList<Idea> ideaList = new ArrayList<Idea>();
 
-		this.conn = DriverManager.getConnection(addr, user, pw);
+		Connection conn = DriverManager.getConnection(addr, user, pw);
+		
 		
 		String sql = "SELECT * FROM idea";
 		try {
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				idea = new Idea(rs.getString("content"), rs.getString("time"),
-						rs.getString("date"), rs.getString("imgName"),
+				idea = new Idea(MyString.replace(rs.getString("content")), MyString.replace(rs.getString("time")),
+						MyString.replace(rs.getString("date")), MyString.replace(rs.getString("imgName")),
 						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				ideaList.add(idea);
 			}
@@ -57,8 +57,8 @@ public class IdeaRepository implements Repository<Idea> {
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
-			this.conn = DriverManager.getConnection(addr, user, pw);
-			pstmt = this.conn.prepareStatement(sql);
+			Connection conn = DriverManager.getConnection(addr, user, pw);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, idea.getContent());
 			pstmt.setString(2, idea.getDate());
 			pstmt.setString(3, idea.getTime());
@@ -87,15 +87,17 @@ public class IdeaRepository implements Repository<Idea> {
 
 		String sql = "SELECT * FROM `idea` WHERE (user_id = ? AND date = ?)";
 		try {
-			this.conn = DriverManager.getConnection(addr, user, pw);
+			Connection conn = DriverManager.getConnection(addr, user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			pstmt.setString(2, date);
+			
 			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
-				idea = new Idea(rs.getString("content"), rs.getString("date"),
-						rs.getString("time").substring(0, 5), rs.getString("img_name"),
+				idea = new Idea(MyString.replace(rs.getString("content")), MyString.replace(rs.getString("date")),
+						MyString.replace(rs.getString("time").substring(0, 5)), MyString.replace(rs.getString("img_name")),
 						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				ideaList.add(idea);
 			}

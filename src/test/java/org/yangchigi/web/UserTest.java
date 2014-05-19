@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yangchigi.web.User;
+import org.yangchigi.dto.User;
 
 public class UserTest {
 	private static final Logger logger = LoggerFactory.getLogger("org.yangchigi.web.UserTest");

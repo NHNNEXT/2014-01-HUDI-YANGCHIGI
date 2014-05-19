@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
-import org.yangchigi.web.Like;
+import org.yangchigi.dto.Like;
 
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("like.xml")

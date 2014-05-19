@@ -1,22 +1,3 @@
-//var userModifyForm = $('#userModifyForm');
-//var userModifyBtn = $('#userModifyBtn');
-//var modifyBtn = $('#modifyBtn');
-
-//modifyBtn.click(function() {
-//	var nickname = $('#userModifyForm :input');
-//
-//	$.ajax({
-//		type : "POST",
-//		url : "usermodify/uploadThumbnail",
-//		mimeType : "multipart/form-data",
-//		data : nickname,
-//		contentType : false,
-//		processData : false
-//	}).done(function(msg) {
-//		console.log('success');
-//	})
-//});
-
 var cur_img_name;
 
 //제출 누르면 나오는거 
@@ -29,40 +10,81 @@ function submitArticle() {
 		type : "POST",
 		url : "/usermodify/upload",
 		mimeType : "multipart/form-data",
-		data : $('body form').serialize(),	//이건 뭐지
-		success : function(time) {
+		data : $('body form').serialize(),	
+		success : function() {
 			alert("변경되었습니다.새로고침 하세여...(미안)") //하면 될랑가 
-			//addDivAfterAjax(content, time, imgName);
+			//변경시 함수 추가(addDiv같은거) 
 		}	
 	};
 	$('body form').ajaxSubmit(option);
 }
 
-function addDivAfterAjax(content, time, imgName) {
-	
-}
 
+
+//function readImg() {
+//	var input = $('#uploadImg')[0];  
+//	if(input.files&&input.files[0]) {
+//		var reader = new FileReader();
+//		
+//		reader.onload = function(e) {
+//			$("#uploadImg").attr('src', e.target.result).width(150).height(150).show("slow");
+//		};
+//		cur_img_name = input.files[0].name;
+//		reader.readAsDataURL(input.files[0]);
+//	} else {
+//		$("#uploadImg").hide("slow")
+//	}
+//
+//}
 function readImg() {
-	var input = $('#fileInput')[0]; //뭐가 어케되는걸까 
+	var input = $('#fileInput')[0];  
 	if(input.files&&input.files[0]) {
 		var reader = new FileReader();
 		
 		reader.onload = function(e) {
-			$("#prevImg").attr('src', e.target.result).height(300).show("slow");
+			$("#uploadImg").attr('src', e.target.result);
 		};
 		cur_img_name = input.files[0].name;
 		reader.readAsDataURL(input.files[0]);
 	} else {
-		$("#prevImg").hide("slow")
+		$("#uploadImg").hide("slow")
 	}
+}
+//function readImg() {
+//	var input = $('#fileInput')[0];  
+//	if(input.files&&input.files[0]) {
+//		var reader = new FileReader();
+//		
+//		reader.onload = function(e) {
+//			$("#prevImg").attr('src', e.target.result).width(150).height(150).show("slow");
+//		};
+//		cur_img_name = input.files[0].name;
+//		reader.readAsDataURL(input.files[0]);
+//	} else {
+//		$("#prevImg").hide("slow")
+//	}
+//	
+//}
 
+function hoverImg() {
+	$('#uploadImg').hover(function(){
+		$('#overlay').css("visibility","visible");
+	}, function(){
+		//$('#overlay').css("visibility","hidden");
+		$('#overlay').fadeOut('fast',1);
+		//$('#overlay').unbind('mouseenter mouseleave');
+	});
 }
 
 function load() {
 	$('#submitBtn').click(submitArticle); //제출 누르기
-	$('#uploadImg').click(function() { //이미지 업로드 누르는거
+	//$('#uploadImg').click();
+	hoverImg();
+	$('#overlay').click(function() { //이미지 업로드 누르는거
+//	$('#uploadImg').click(function() { //이미지 업로드 누르는거
 		$('#fileInput').click(); 
 	});
+//	$('#uploadImg').change(readImg);
 	$('#fileInput').change(readImg);
 
 }

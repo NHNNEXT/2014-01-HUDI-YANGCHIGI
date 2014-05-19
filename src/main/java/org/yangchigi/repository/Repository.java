@@ -1,7 +1,5 @@
 package org.yangchigi.repository;
 
-import java.sql.SQLException;
-
 public interface Repository <T> {
 	final String addr = "jdbc:mysql://localhost/seize";
 	final String driver = "com.mysql.jdbc.Driver";

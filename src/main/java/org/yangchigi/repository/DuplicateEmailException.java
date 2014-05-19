@@ -12,6 +12,4 @@ public class DuplicateEmailException extends Exception {
 	public DuplicateEmailException(String errorCode) {
 		this.errorCode = errorCode;
 	}
-	
-	
 }

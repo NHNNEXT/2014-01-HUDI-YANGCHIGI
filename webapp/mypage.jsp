@@ -83,6 +83,7 @@
 									style="margin-right: 5px;">
 							</c:if>
 							<p class="contentsP">${idea.content}</p>
+							<img class="trash" src="image/trash_orange.png" > 
 						</div>
 					</c:forEach>
 				</div>
@@ -149,57 +150,6 @@
 		});
 	});
 
-	//test calendar
-	$(document).ready(
-			function() {
-				$('#calendarDiv').fullCalendar(
-						{
-							header: {
-								left: '',
-								center: 'title',
-								right: 'prev,next'
-							},
-							
-							dayClick : function(date) {
-								// 하루를 추가해 한국 날짜로 변환
-								date.setDate(date.getDate() + 1);
-								// 오늘 날짜
-								var curDate = new Date().toISOString().substring(0,
-										10);
-								// 선택한 날짜
-								var clickedDate = date.toISOString().substring(
-										0, 10);
-
-								// 클릭한 날짜가 오늘보다 작아야 투데이 페이지로 이동가능하도록 한다
-								// 오늘 날짜꺼는 이미 오늘 입력되고 있는 중이므로 이하가 아닌 미만이다.
-								if (clickedDate < curDate){
-									$.ajax({
-										type:'GET',
-										url:'/today/get',
-										data:{
-											'date' : clickedDate
-										},
-										success : function(todayid){
-											window.location.href = "/today/" + todayid;
-										}
-									});
-									
-								}
-							}
-						});
-				
-				$.each($('td.fc-day'), function(i,val){
-					$.ajax({
-						type:'GET',
-						url:'/today/get',
-						data:{
-							'date' : $(this).attr('data-date')
-						},
-						success : function(todayid){
-							$(this).css('background-color' , 'rgb(88, 194, 147)')
-						}.bind(this)
-					});
-				});
-			})
+	
 </script>
 </html>

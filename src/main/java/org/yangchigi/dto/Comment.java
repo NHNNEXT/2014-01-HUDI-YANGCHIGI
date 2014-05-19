@@ -1,4 +1,4 @@
-package org.yangchigi.web;
+package org.yangchigi.dto;
 
 public class Comment {
 	private int id;

@@ -14,7 +14,8 @@ import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
 
 import static org.unitils.reflectionassert.ReflectionAssert.*;
-import org.yangchigi.web.User;
+
+import org.yangchigi.dto.User;
 
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("user.xml")
@@ -27,9 +28,6 @@ public class UserRepositoryTest {
 	@Before
 	public void setUp() throws Exception {
 		repository = new UserRepository();
-		conn = ((UserRepository) repository).getConn();
-		assertThat(conn, is(notNullValue()));
-		logger.info("DB연결 성공");
 	}
 
 	@Test
