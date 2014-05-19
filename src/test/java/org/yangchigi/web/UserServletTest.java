@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.yangchigi.dto.User;
 import org.yangchigi.repository.UserRepository;
 
 public class UserServletTest {

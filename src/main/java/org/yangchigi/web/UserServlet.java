@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yangchigi.dto.User;
 import org.yangchigi.repository.DuplicateEmailException;
 import org.yangchigi.repository.DuplicateNicknameException;
 import org.yangchigi.repository.SingletonRepository;

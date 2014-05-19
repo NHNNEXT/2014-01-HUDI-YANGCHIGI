@@ -6,13 +6,27 @@
 	float: left;
 	background-color: #DDDDDD;
 	padding: 10px;
+	
+	/* transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	-moz-transition: all .5s ease-in-out;
+	-webkit-transition: all .5s ease-in-out; */
+	transition: 0.8s;
+	-webkit-transition: 0.8s;
 }
 
 #asideDiv {
 	display: inline;
 	width: 30%;
 	float: right;
+	/* transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	-moz-transition: all .5s ease-in-out;
+	-webkit-transition: all .5s ease-in-out; */
+	transition: 0.8s;
+	-webkit-transition: 0.8s;
 }
+
 #dateDiv {
 	display: inline-block;
 	float: left;
@@ -85,9 +99,8 @@
 	vertical-align: top;
 }
 
-@media
-all and (max-width: 480px),
-all and (-webkit-min-device-pixel-ratio: 2) {
+@media all and (max-width: 480px) , all and
+	(-webkit-min-device-pixel-ratio: 2) {
 	#contentContainerDiv {
 		width: 100%;
 		background-color: #DDDDDD;

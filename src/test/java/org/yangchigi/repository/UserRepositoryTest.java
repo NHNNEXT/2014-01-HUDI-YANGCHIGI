@@ -14,7 +14,8 @@ import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
 
 import static org.unitils.reflectionassert.ReflectionAssert.*;
-import org.yangchigi.web.User;
+
+import org.yangchigi.dto.User;
 
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("user.xml")

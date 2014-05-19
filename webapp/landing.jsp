@@ -11,9 +11,9 @@
 <link href='http://fonts.googleapis.com/css?family=Raleway:400,300'
 	rel='stylesheet' type='text/css'>
 <!-- 웹폰트 -->
-<link href='http://fonts.googleapis.com/css?family=Maven+Pro'
-	rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/landing.css">
+<link href="http://fonts.googleapis.com/css?family=Maven+Pro"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/css/landing.css">
 
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.yangchigi.dto.Idea;
+import org.yangchigi.dto.User;
 import org.yangchigi.repository.IdeaRepository;
 import org.yangchigi.repository.SingletonRepository;
 import org.yangchigi.repository.UserRepository;

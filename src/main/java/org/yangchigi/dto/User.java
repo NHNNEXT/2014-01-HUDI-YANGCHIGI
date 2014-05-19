@@ -1,4 +1,4 @@
-package org.yangchigi.web;
+package org.yangchigi.dto;
 
 public class User {
 	private int id;

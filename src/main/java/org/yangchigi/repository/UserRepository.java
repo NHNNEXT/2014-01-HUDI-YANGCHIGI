@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yangchigi.web.User;
+import org.yangchigi.dto.User;
 
 public class UserRepository implements Repository<User> {
 	private static final Logger logger = LoggerFactory

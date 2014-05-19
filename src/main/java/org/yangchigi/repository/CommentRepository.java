@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.yangchigi.web.Comment;
+import org.yangchigi.dto.Comment;
 
 public class CommentRepository implements Repository<Comment>{
 	private Connection conn;

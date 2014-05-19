@@ -1,7 +1,6 @@
 package org.yangchigi.web;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yangchigi.dto.Comment;
+import org.yangchigi.dto.Idea;
+import org.yangchigi.dto.Like;
+import org.yangchigi.dto.Today;
+import org.yangchigi.dto.User;
 import org.yangchigi.repository.CommentRepository;
 import org.yangchigi.repository.IdeaRepository;
 import org.yangchigi.repository.LikeRepository;
@@ -22,11 +26,6 @@ import org.yangchigi.repository.SingletonRepository;
 import org.yangchigi.repository.TodayRepository;
 import org.yangchigi.repository.UserRepository;
 import org.yangchigi.support.MyCalendar;
-import org.yangchigi.web.Comment;
-import org.yangchigi.web.Idea;
-import org.yangchigi.web.Like;
-import org.yangchigi.web.Today;
-import org.yangchigi.web.User;
 
 import com.google.gson.Gson;
 
@@ -165,6 +164,7 @@ public class TodayServlet extends HttpServlet {
 			}
 
 			todayRepository.update(today);
+			System.out.println(String.valueOf(likeNum));
 			response.getWriter().write(String.valueOf(likeNum));
 		} else if (uri.matches("^/today/[0-9]+/writecomment")) {
 			int todayId = Integer.parseInt(uri.split("/")[2]);

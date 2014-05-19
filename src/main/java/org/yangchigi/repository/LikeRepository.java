@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.yangchigi.web.Like;
+import org.yangchigi.dto.Like;
 
 public class LikeRepository implements Repository<Like>{
 	private Connection conn;

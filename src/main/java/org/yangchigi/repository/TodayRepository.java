@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yangchigi.web.Today;
+import org.yangchigi.dto.Today;
 
 public class TodayRepository implements Repository<Today> {
 	private Connection conn;

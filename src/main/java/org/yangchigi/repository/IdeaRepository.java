@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yangchigi.web.Idea;
+import org.yangchigi.dto.Idea;
 
 public class IdeaRepository implements Repository<Idea> {
 	private Connection conn;
