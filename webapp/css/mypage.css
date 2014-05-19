@@ -86,6 +86,11 @@ ul {
 	float: right;
 }
 
+.trash {
+	width: 25px;
+	float:right;
+}
+
 /* responsive */
 @media ( min-width : 1px) and (max-width: 991px) {
 	.container {

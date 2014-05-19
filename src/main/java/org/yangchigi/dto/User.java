@@ -27,7 +27,11 @@ public class User {
 	}
 	
 	public String getThumbnail() {
+		if(thumbnail.length()==0){
+			return "default_thumbnail.jpg";
+		} 
 		return thumbnail;
+		
 	}
 	
 	@Override

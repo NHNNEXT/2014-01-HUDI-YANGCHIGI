@@ -41,10 +41,19 @@
 		
 		<div id="userInfo">
 			<form id="userModifyForm" method="post" action="usermodify/upload" enctype="multipart/form-data">
-				<input name="imgName" type='file' id="fileInput" accept="image/*" style="display: none;" />
-				<img src="image/${thumbnailName}" id="thumbnail" width=150 height=150> 
-				<img id="uploadImg" src="icon/addimage.png" style="height: 30px;" />
-				<img id="prevImg" src="#" alt="your image" style="display: none;" />
+				<input name="imgName" type='file' id="fileInput" accept="image/*" style="display: none;" /> 
+				<%-- <input src="image/${thumbnailName}" id="uploadImg" name="imgName" type='file'/> --%>
+				<%-- <img src="image/${thumbnailName}" id="thumbnail" width=150 height=150> --%> 
+ 				<!--<img id="uploadImg" src="icon/addimage.png" style="height: 30px;" /> -->
+				
+				<div id="uploadBlock">
+					<img src="image/pencil.png" id="overlay" style="1display:none; position: absolute; top: 0px; left: 0px; z-index: 2">
+					<img src="image/${thumbnailName}" id="uploadImg" style="display: block; position: absolute; top: 0px; left: 0px; z-index: 1"> 
+						
+					<%-- <img id="overlay" src="image/pencil.png">
+					<img id="uploadImg" src="image/${thumbnailName}"/>  --%>
+				</div>
+				<!-- <img id="prevImg" src="#" alt="your image" style="display: none;" /> -->
 				<h3><div>nickname: ${nickname} -> <input type="text" name="nickname" id="nicknameInput"></div></h3>
 				
 				<!-- 제출 -->
@@ -59,6 +68,31 @@
 			user stats
 		</div>
 	</div>
+	
+<%-- 	<div id="baloon">
+		
+		<div id="userInfo">
+			<form id="userModifyForm" method="post" action="usermodify/upload" enctype="multipart/form-data">
+				<input name="imgName" type='file' id="fileInput" accept="image/*" style="display: none;" /> 
+				<input type="image" src="image/${thumbnailName}" name="imgName" type='file' id="fileInput" accept="image/*" style="width:150; height:150; border-radius:50%;" />
+				<img src="image/${thumbnailName}" id="thumbnail" width=150 height=150> 
+ 				<!--<img id="uploadImg" src="icon/addimage.png" style="height: 30px;" /> -->
+				<img id="uploadImg" src="image/${thumbnailName}" style="border-radius:50%;" width=150 height=150 />
+				<img id="prevImg" src="#" alt="your image" style="display: none;" />
+				<h3><div>nickname: ${nickname} -> <input type="text" name="nickname" id="nicknameInput"></div></h3>
+				
+				<!-- 제출 -->
+				<div id="writeMenuDiv">
+					<div class="form-group">
+						<button type="button" class="btn btn-success" id="submitBtn">변경</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div id="userStats">
+			user stats
+		</div>
+	</div> --%>
 	
 	<div id="footer">
 		<ul class="footer_links">

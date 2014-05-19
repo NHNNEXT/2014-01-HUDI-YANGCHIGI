@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import org.yangchigi.dto.Like;
 
 public class LikeRepository implements Repository<Like>{
-	private Connection conn;
 
 	public LikeRepository() {
 		try {
@@ -19,10 +18,6 @@ public class LikeRepository implements Repository<Like>{
 		}
 	}
 
-	public Connection getConn() throws SQLException {
-		return this.conn;
-	}
-
 	public Like findByUserIdAndTodayId(int userId, int todayId) {
 		PreparedStatement pstmt;
 		ResultSet rs = null;
@@ -30,9 +25,9 @@ public class LikeRepository implements Repository<Like>{
 
 		String sql = "SELECT * FROM `like` WHERE (user_id = ? AND today_id = ?)";
 		try {
-			this.conn = DriverManager.getConnection(addr, user, pw);
+			Connection conn = DriverManager.getConnection(addr, user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			pstmt.setInt(2, todayId);
 			rs = pstmt.executeQuery();
@@ -57,9 +52,9 @@ public class LikeRepository implements Repository<Like>{
 		String sql = "INSERT INTO `like` (`user_id`, `today_id`) "
 				+ "VALUES (?, ?)";
 		try {
-			this.conn = DriverManager.getConnection(addr, user, pw);
+			Connection conn = DriverManager.getConnection(addr, user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, like.getUserId());
 			pstmt.setInt(2, like.getTodayId());
 			pstmt.execute();
@@ -76,9 +71,9 @@ public class LikeRepository implements Repository<Like>{
 
 		String sql = "DELETE FROM `like` WHERE (`user_id` = ? AND `today_id` = ?)";
 		try {
-			this.conn = DriverManager.getConnection(addr, user, pw);
+			Connection conn = DriverManager.getConnection(addr, user, pw);
 
-			pstmt = this.conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, like.getUserId());
 			pstmt.setInt(2, like.getTodayId());
 			pstmt.execute();
