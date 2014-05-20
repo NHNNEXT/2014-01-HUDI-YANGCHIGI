@@ -1,10 +1,10 @@
 @CHARSET "UTF-8";
 
-#contentContainer {
+#contentContainerDiv {
 	width: 100%;
 }
 
-#todayContainer {
+#todayContainerDiv {
 	width: 90%;
 	text-align: center;
 	margin: 0 auto;
@@ -45,4 +45,26 @@
 .content {
 	position: absolute;
 	width: 150px;
+}
+
+@media all and (max-width: 480px) , all and
+	(-webkit-min-device-pixel-ratio: 2) {
+	#contentContainerDiv {
+		width: 100%;
+		background-color: #DDDDDD;
+		padding: 10px;
+	}
+	.contents {
+		position: relative;
+		left: 0px;
+		height: 160px;
+		width: 100%;
+	}
+	.content {
+		position: absolute;
+		width: 100%;
+	}
+	.today {
+		width: 100%;
+	}
 }
