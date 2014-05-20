@@ -11,22 +11,12 @@
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/todays.css">
+<link href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css" rel="stylesheet">	
+<script src="js/header.js"></script>
+
 </head>
 <body>
-	<div id="headerBarDiv">
-		<div id="btnsDiv">
-			<ul id="btnsUl">
-				<li id="showMyPageBtn" class="menu-btn"><button
-						class="btn btn-default btn-lg">MyPage</button></li>
-				<li id="showTodaysBtn" class="menu-btn"><button
-						class="btn btn-default btn-lg">Todays</button></li>
-				<li id="showSettingBtn" class="menu-btn"><button
-						class="btn btn-default btn-lg">Settings</button></li>
-				<li id="logoutBtn" class="menu-btn"><button
-						class="btn btn-default btn-lg">Logout</button></li>
-			</ul>
-		</div>
-	</div>
+	<%@include file="header.jspf" %> 
 	<div id="contentContainer">
 		<div id="todayContainer">
 			<c:forEach items="${todayAndIdeasMap}" var="today">

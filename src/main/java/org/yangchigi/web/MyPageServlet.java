@@ -24,8 +24,8 @@ import org.yangchigi.support.MyCalendar;
 // server path
 //@MultipartConfig(location = "/home/yangchigi/apache-tomcat-7.0.52/webapps/ROOT/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 //@MultipartConfig(location = "/Users/jehyeok/yangchigi/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
-//@MultipartConfig(location = "/Users/yurim/Documents/workspace2/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
-@MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
+@MultipartConfig(location = "/Users/yurim/Documents/workspace2/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
+//@MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 @WebServlet(name = "MyPageServlet", urlPatterns = { "/mypage/*" })
 public class MyPageServlet extends HttpServlet {
 	/**
@@ -53,6 +53,13 @@ public class MyPageServlet extends HttpServlet {
 					"ideaList",
 					ideaRepository.findByUserIdAndDate(user.getId(),
 							MyCalendar.getCurrentDate()));
+			String nickname = user.getNickname();
+			String thumbnailName = user.getThumbnail();
+
+			//헤더때문에 추가
+			request.setAttribute("nickname", nickname);
+			request.setAttribute("thumbnailName", thumbnailName);
+			
 			request.getRequestDispatcher("/mypage.jsp").forward(request,
 					response);
 		}

@@ -88,6 +88,14 @@ public class TodayServlet extends HttpServlet {
 			request.setAttribute("isLiked", like != null);
 			request.setAttribute("commList",
 					commRepository.findListByTodayId(todayId));
+			
+			String nickname = user.getNickname();
+			String thumbnailName = user.getThumbnail();
+
+			request.setAttribute("nickname", nickname);
+			request.setAttribute("thumbnailName", thumbnailName);
+			
+			
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		} else if ("/today".equals(uri)) {
@@ -102,6 +110,16 @@ public class TodayServlet extends HttpServlet {
 			}
 
 			request.setAttribute("todayAndIdeasMap", todayAndIdeasMap);
+			
+//			헤더때문에 추가 
+			String userEmail = (String) request.getSession().getAttribute("user");
+			User user = userRepository.findByEmail(userEmail);
+			String nickname = user.getNickname();
+			String thumbnailName = user.getThumbnail();
+
+			request.setAttribute("nickname", nickname);
+			request.setAttribute("thumbnailName", thumbnailName);
+			
 			request.getRequestDispatcher("/todays.jsp").forward(request,
 					response);
 		} else if ("/today/get".equals(uri)) {

@@ -1,34 +1,4 @@
-body {
-	background-color: #ede8e1;
-}
 
-#header {
-	/* height:71px; */
-	display:block;
-	margin:auto;
-	position:relative;
-}
-
-#logo {
-	width: 200px;
-	margin-top: 30px;
-	float: left;
-}
-
-#myInfo {
-	/* display: inline; */
-}
-#myThumbnail {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	display: inline-block;
-}
-#myNickname {
-	display: inline-block;
-	font-size:25px;
-	font-weight: bold;
-}
 
 #thumbnail {
 	border-radius: 50%;
@@ -70,6 +40,12 @@ body {
 #triangle {
 
 }
+
+/* 폰트아이콘 */
+.icon-book-read-streamline {
+	font-size: 50pt !important;
+	color: red;
+} 
 
 #baloon {
 	background-color: #fcf8f0;
@@ -115,12 +91,12 @@ body {
 		background-color:#d3dde3;
 	}
 	
-	#logo {
+/* 	#logo {
 		margin: 0 auto;
 		text-align: center;
 		float:none;
 		display: inline-block;
-	}
+	} */
 }
 
 /* 타블렛 */ 
@@ -136,10 +112,10 @@ body {
 		width: 876px !important;
 	}
 	
-	#logo {
+/* 	#logo {
 		margin: 30px 13px 0 15px;
 		float:left;	
-	}
+	} */
 	#baloon {
 		width: 876px;
 		margin:0 auto;

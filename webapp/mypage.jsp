@@ -24,26 +24,12 @@
 
 <link rel="stylesheet" href="css/mypage.css">
 <link rel="stylesheet" href="css/header.css">
+<link href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css" rel="stylesheet">	
 <script src="js/mypage.js"></script>
 
 </head>
 <body>
-	<div id="headerBarDiv">
-		<div id="btnsDiv">
-			<ul id="btnsUl">
-				<li id="showMyPageBtn" class="menu-btn"><button
-						class="btn btn-default btn-lg">MyPage</button></li>
-				<li id="showTodaysBtn" class="menu-btn"><button
-						class="btn btn-default btn-lg">Todays</button></li>
-				<li id="showSettingBtn" class="menu-btn"><button
-						class="btn btn-default btn-lg">Settings</button></li>
-				<li id="logoutBtn" class="menu-btn"><button
-						class="btn btn-default btn-lg">Logout</button></li>
-			</ul>
-			<button id="addTodayBtn" class="btn btn-warning" style="float: right">Create
-				Today</button>
-		</div>
-	</div>
+	<%@include file="header.jspf" %> 
 	<div class="container">
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-md-4"></div>

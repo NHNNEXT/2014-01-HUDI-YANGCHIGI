@@ -78,39 +78,9 @@ public class UserModifyServlet extends HttpServlet {
 			System.out.println(contentsMap.toString());
 			if (contentsMap.containsKey("imgName"))
 				imgName = contentsMap.get("imgName");
-			// String nickname = request.getParameter("nickname");
-			// String thumbnailName = request.getParameter("thumbnailName");
-			//
-			//
-			// //user.setNickname(nickname);
-			//
+	
 			userRepository.modifyNickname(user, nickname);// DB 수정
 			userRepository.modifyThumbnail(user, imgName);
-			//
-			// //이미지받아오는코딩하기
-			// request.setCharacterEncoding("euc-kr");
-			// String realFolder = "";
-			// String imgName = "";
-			// int maxSize = 1024 * 1024 * 5;
-			// String encType = "euc-kr";
-			// String savefile = "img";
-			// ServletContext scontext = getServletContext();
-			// realFolder =
-			// "/Users/yurim/Documents/workspace2/2014-01-HUDI-YANGCHIGI/webapp/img";
-			//
-			// try {
-			// MultipartRequest multi = new MultipartRequest(request,
-			// realFolder,
-			// maxSize, encType, new DefaultFileRenamePolicy());
-			// Enumeration<?> files = multi.getFileNames();
-			// String file1 = (String) files.nextElement();
-			// imgName = multi.getFilesystemName(file1);
-			//
-			// } catch (Exception e) {
-			// e.printStackTrace();
-			// }
-			//
-
 			request.getRequestDispatcher("/userModify.jsp").forward(request,
 					response);
 		}

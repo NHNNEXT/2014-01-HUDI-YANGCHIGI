@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/usermodify.css">
 	<link rel="stylesheet" href="css/header.css">
+	<link href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css" rel="stylesheet">	
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
@@ -16,27 +17,8 @@
 	<script src="http://malsup.github.com/jquery.form.js"></script> 						
 </head>
 <body>
-	<div id="header">
-		<a href="/"><img id="logo" src="image/logo_grass.png" /></a>
-		<div id="headerBarDiv">
-			<div id="btnsDiv">
-				<ul id="btnsUl">
-					<li id="showMyPageBtn" class="menu-btn"><button class="btn btn-default btn-lg">MyPage</button></li>
-					<li id="showTodaysBtn" class="menu-btn"><button class="btn btn-default btn-lg">Todays</button></li>
-					<li id="showSettingBtn" class="menu-btn"><button class="btn btn-default btn-lg">Settings</button></li>
-					<li id="logoutBtn" class="menu-btn"><button class="btn btn-default btn-lg">Logout</button></li>
-				</ul>
-				<!-- <button id="addTodayBtn" class="btn btn-warning" style="float: right">Create Today</button> -->
-				<img id="myThumbnail" src="image/${thumbnailName}">
-				<p id="myNickname">${nickname}</p>
-			</div>
-	<!-- 		<div id="myInfo"> -->
-			<!-- </div> -->
-		</div>
-		<p id="triangle"></p>
-	</div>	
-	
-	
+		<%@include file="header.jspf" %> 
+
 	<div id="baloon">
 		
 		<div id="userInfo">

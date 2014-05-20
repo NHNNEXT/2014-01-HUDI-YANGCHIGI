@@ -1,4 +1,37 @@
 @CHARSET "UTF-8";
+/* 공통 CSS */
+body {
+	background-color: #ede8e1;
+}
+
+
+/* 헤더 CSS */ 
+#header {
+	/* height:71px; */
+	display:block;
+	margin:auto;
+	position:relative;
+}
+
+#logo {
+	width: 200px;
+	float: left;
+}
+
+#myInfo {
+	/* display: inline; */
+}
+#myThumbnail {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: inline-block;
+}
+#myNickname {
+	display: inline-block;
+	font-size:25px;
+	font-weight: bold;
+}
 
 #headerBarDiv {
 	height: 100%;
@@ -12,10 +45,16 @@
 
 #btnsUl {
 	display: inline-block;
-	padding-top: 20px;
+	1padding-top: 20px;
 }
 
 .menu-btn {
 	display: inline-block;
-	margin: 5px;
+	margin-left: 5px;
+	font-size:3em; 
+	color: #86827a;
+}
+
+.menu-btn:HOVER {
+	color: white;
 }
