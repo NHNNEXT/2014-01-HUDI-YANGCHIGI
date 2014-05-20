@@ -7,10 +7,6 @@
 	background-color: #DDDDDD;
 	padding: 10px;
 	
-	/* transition: all .5s ease-in-out;
-	-o-transition: all .5s ease-in-out;
-	-moz-transition: all .5s ease-in-out;
-	-webkit-transition: all .5s ease-in-out; */
 	transition: 0.8s;
 	-webkit-transition: 0.8s;
 }
@@ -19,10 +15,7 @@
 	display: inline;
 	width: 30%;
 	float: right;
-	/* transition: all .5s ease-in-out;
-	-o-transition: all .5s ease-in-out;
-	-moz-transition: all .5s ease-in-out;
-	-webkit-transition: all .5s ease-in-out; */
+
 	transition: 0.8s;
 	-webkit-transition: 0.8s;
 }

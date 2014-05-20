@@ -36,9 +36,16 @@
 					<input type="hidden" value="${today.key.id}">
 					<div class="date">Date: ${today.key.date}</div>
 					<div class="like">Like: ${today.key.like}</div>
+					<div class="profile">
+						<img src="/image/${today.value['user'].thumbnail}" />
+						${today.value['user'].nickname}
+					</div>
 					<div class="contents">
-						<c:forEach items="${today.value}" var="idea">
-							<div class="content">${idea.content}</div>
+						${today.value[0].content}
+						<c:forEach items="${today.value['ideas']}" var="idea">
+						<div class="content">
+							${idea.content}
+						</div>
 						</c:forEach>
 					</div>
 					<button class="btn btn-default next-idea change-idea"></button>
@@ -89,11 +96,11 @@
 
 	$.each(todays, function(key, value) {
 		var todayId = $(value).find(':input').val();
-		/* $(value).click(function() {
+		$(value).click(function() {
 			window.location = 'today/' + todayId;
-		}); */
+		});
 	});
-	
+
 	var contents = $('.contents');
 
 	$.each(contents, function(key, value) {
@@ -119,20 +126,26 @@
 		e.stopPropagation();
 		var contents = $(e.target.parentNode).find('.contents');
 		if (contents.css('left') !== '0px') {
-			contents.filter(':not(:animated)').animate({ 'left': '+=100%' }, 'slow');
+			contents.filter(':not(:animated)').animate({
+				'left' : '+=100%'
+			}, 'slow');
 		}
 	});
-	
-	$('.next-idea').click(function(e) {
-		e.stopPropagation();
-		var contents = $(e.target.parentNode).find('.contents');
-		var contentsLeft = parseInt(contents.css('left'));
-		var contentLastChildLeft = parseInt(contents.find('.content:last-child').css('left'));
-		if (contentsLeft !== (-1) * contentLastChildLeft) {
-			contents.filter(':not(:animated)').animate({ 'left': '-=100%' }, 'slow');
-		}		
-	});
-	
+
+	$('.next-idea').click(
+			function(e) {
+				e.stopPropagation();
+				var contents = $(e.target.parentNode).find('.contents');
+				var contentsLeft = parseInt(contents.css('left'));
+				var contentLastChildLeft = parseInt(contents.find(
+						'.content:last-child').css('left'));
+				if (contentsLeft !== (-1) * contentLastChildLeft) {
+					contents.filter(':not(:animated)').animate({
+						'left' : '-=100%'
+					}, 'slow');
+				}
+			});
+
 	$.each(todays, function(key, value) {
 		value.addEventListener('touchstart', function(e) {
 			console.log('touch start');

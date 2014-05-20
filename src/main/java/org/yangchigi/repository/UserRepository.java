@@ -87,7 +87,32 @@ public class UserRepository implements Repository<User> {
 	}
 
 	public User findById(int id) {
-		return null;
+		PreparedStatement pstmt;
+		ResultSet rs;
+		User user = null;
+		String sql = "SELECT * FROM `user` WHERE (id = ?)";
+		try {
+			Connection conn = DriverManager.getConnection(addr, this.user, pw);
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				logger.info("email: " + rs.getString("email"));
+				user = new User(rs.getString("email"),
+						rs.getString("nickname"), rs.getString("password"),
+						rs.getString("thumbnail"));
+				user.setId(rs.getInt("id"));
+			}
+
+			pstmt.close();
+			rs.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	// 유져 닉네임을 받아서 변경

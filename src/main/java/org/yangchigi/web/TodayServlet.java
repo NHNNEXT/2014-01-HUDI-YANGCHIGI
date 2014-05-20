@@ -1,6 +1,7 @@
 package org.yangchigi.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -92,15 +93,20 @@ public class TodayServlet extends HttpServlet {
 					response);
 		} else if ("/today".equals(uri)) {
 			List<Today> todayList = todayRepository.findAll();
-			Map<Today, List<Idea>> todayAndIdeasMap = new HashMap<Today, List<Idea>>();
-
+			// Map<Today, List> todayAndIdeasMap = new HashMap<Today, List>();
+			Map<Today, Map> todayAndIdeasMap = new HashMap<Today, Map>();
+			Map<String, Object> userAndIdeasMap = new HashMap(); 
 			Iterator<Today> todayIterator = todayList.iterator();
 			while (todayIterator.hasNext()) {
 				Today today = todayIterator.next();
-				todayAndIdeasMap.put(today, ideaRepository.findByUserIdAndDate(
+				
+				userAndIdeasMap.put("ideas", ideaRepository.findByUserIdAndDate(
 						today.getUserId(), today.getDate()));
+				userAndIdeasMap.put("user", userRepository.findById(today.getUserId()));
+				todayAndIdeasMap.put(today, userAndIdeasMap);
+//				todayAndIdeasMap.put(today, ideaRepository.findByUserIdAndDate(
+//						today.getUserId(), today.getDate()));
 			}
-
 			request.setAttribute("todayAndIdeasMap", todayAndIdeasMap);
 			request.getRequestDispatcher("/todays.jsp").forward(request,
 					response);

@@ -1,4 +1,7 @@
 @CHARSET "UTF-8";
+body {
+	background-color: #ede8e1	
+}
 
 #contentContainerDiv {
 	width: 100%;
@@ -6,19 +9,24 @@
 
 #todayContainerDiv {
 	width: 90%;
-	text-align: center;
+	text-align: initial;
 	margin: 0 auto;
 }
 
 .today {
 	position: relative;
+	text-align: center;
 	display: inline-block;
 	overflow: hidden;
-	background-color: yellow;
+	background-color: #fcf8f0;
 	margin: 10px;
 	width: 150px;
 	height: 200px;
 	cursor: pointer;
+	border-radius: 1em;
+	
+	transition: 0.8s;
+	-webkit-transition: 0.8s;
 }
 
 .next-idea {
@@ -45,13 +53,26 @@
 .content {
 	position: absolute;
 	width: 150px;
+	
+	transition: 0.8s;
+	-webkit-transition: 0.8s;
+}
+
+.profile {
+	text-align: initial;
+	position: absolute;
+	bottom: 0;
+}
+
+.profile img {
+	width: 20%;
+	border-radius: 50%;
 }
 
 @media all and (max-width: 480px) , all and
 	(-webkit-min-device-pixel-ratio: 2) {
 	#contentContainerDiv {
 		width: 100%;
-		background-color: #DDDDDD;
 		padding: 10px;
 	}
 	.contents {
