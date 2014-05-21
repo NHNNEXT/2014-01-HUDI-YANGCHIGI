@@ -89,6 +89,7 @@ public class TodayServlet extends HttpServlet {
 			request.setAttribute("isLiked", like != null);
 			request.setAttribute("commList",
 					commRepository.findListByTodayId(todayId));
+			request.setAttribute("user", userRepository.findById(today.getUserId()));
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		} else if ("/today".equals(uri)) {

@@ -10,12 +10,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>Today page</title>
-<link rel="stylesheet" href="/css/today.css">
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 <script
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/today.css">
 <script src="/js/today.js"></script>
 </head>
 <body>
@@ -23,14 +23,12 @@
 	<div id="contentContainerDiv">
 		<c:forEach items="${ideaList}" var="idea">
 			<div class="contents">
-				<span class="time">
-					<p class="date">${idea.time}</p>
-				</span> <span> <c:if test="${!empty idea.imgName}">
-						<img class="contentsImg" src="/image/${idea.imgName}"
-							style="margin-right: 5px;">
-					</c:if>
-					<p class="contentsP">${idea.content}</p>
-				</span>
+				<span class="time"><p class="timeWrapper">${idea.time}</p></span>
+				<c:if test="${!empty idea.imgName}">
+					<img class="contentsImg" src="/image/${idea.imgName}"
+						style="margin-right: 5px;">
+				</c:if>
+				<p class="contentsP">${idea.content}</p>
 			</div>
 		</c:forEach>
 	</div>
@@ -47,7 +45,10 @@
 					type="hidden" id="likeInput" value="${today.like}" />
 			</form>
 		</div>
-		<div id="profileDiv"></div>
+		<div id="profileDiv">
+			<img src="/image/${user.thumbnail}" />
+			Nickname: ${user.nickname}
+		</div>
 
 		<div id="commentDiv">
 			<c:forEach items="${commList}" var="comm">
@@ -55,11 +56,10 @@
 			</c:forEach>
 		</div>
 
-		<div id="writeCommentDiv" class="input-group">
+		<div id="writeCommentDiv">
 			<input type="text" id="commentInput" class="form-control"
-				maxlength="100"> <span class="input-group-btn">
-				<button id="uploadCommentBtn" class="btn btn-success" type="button">Go!</button>
-			</span>
+				maxlength="100">
+			<button id="uploadCommentBtn" class="btn btn-default" type="button">입력</button>
 		</div>
 	</div>
 	<script>
