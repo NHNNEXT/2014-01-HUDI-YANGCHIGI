@@ -96,17 +96,16 @@ public class TodayServlet extends HttpServlet {
 			List<Today> todayList = todayRepository.findAll();
 			// Map<Today, List> todayAndIdeasMap = new HashMap<Today, List>();
 			Map<Today, Map> todayAndIdeasMap = new HashMap<Today, Map>();
-			Map<String, Object> userAndIdeasMap = new HashMap(); 
 			Iterator<Today> todayIterator = todayList.iterator();
+			
+			List<Idea> list = new ArrayList<Idea>();
 			while (todayIterator.hasNext()) {
 				Today today = todayIterator.next();
-				
+				Map<String, Object> userAndIdeasMap = new HashMap<String, Object>();
 				userAndIdeasMap.put("ideas", ideaRepository.findByUserIdAndDate(
 						today.getUserId(), today.getDate()));
 				userAndIdeasMap.put("user", userRepository.findById(today.getUserId()));
 				todayAndIdeasMap.put(today, userAndIdeasMap);
-//				todayAndIdeasMap.put(today, ideaRepository.findByUserIdAndDate(
-//						today.getUserId(), today.getDate()));
 			}
 			request.setAttribute("todayAndIdeasMap", todayAndIdeasMap);
 			request.getRequestDispatcher("/todays.jsp").forward(request,

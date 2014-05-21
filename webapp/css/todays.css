@@ -43,11 +43,16 @@ body {
 	top: 30%;
 }
 
+.viewport {
+	height: 60%;
+	overflow: hidden;
+}
+
 .contents {
 	position: relative;
 	left: 0px;
-	height: 160px;
-	width: 150px
+	width: 150px;
+	word-break: break-all;
 }
 
 .content {

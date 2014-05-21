@@ -35,8 +35,6 @@ body {
 #signupBtn {
 	display: inline-block;
 	/* float:right;  */
-	margin-left: 2%;
-	margin-top: 15%;
 	background-color: gray !important;
 }
 

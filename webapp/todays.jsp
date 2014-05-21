@@ -40,13 +40,14 @@
 						<img src="/image/${today.value['user'].thumbnail}" />
 						${today.value['user'].nickname}
 					</div>
+					<div class="viewport">
 					<div class="contents">
-						${today.value[0].content}
 						<c:forEach items="${today.value['ideas']}" var="idea">
 						<div class="content">
 							${idea.content}
 						</div>
 						</c:forEach>
+					</div>
 					</div>
 					<button class="btn btn-default next-idea change-idea"></button>
 					<button class="btn btn-default pre-idea change-idea"></button>

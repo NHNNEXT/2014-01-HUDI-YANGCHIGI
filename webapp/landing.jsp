@@ -31,9 +31,9 @@
 		<!-- Login form -->
 		<jsp:include page="login.jspf" />
 		<!-- Modal -->
-	</div>
-	<button id="signupBtn" class="btn btn-primary" data-toggle="modal"
+		<button id="signupBtn" class="btn btn-primary" data-toggle="modal"
 		data-target="#myModal">Sign up</button>
+	</div>
 	<jsp:include page="signup.jspf" />
 </body>
 </html>

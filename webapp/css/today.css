@@ -82,7 +82,8 @@ body {
 }
 
 .comment-set {
-	background-color: rgb(255, 216, 216);
+	border:1px solid #ccc;
+	border-radius: 3px;
 	margin-top: 1%;
 	padding: 5px;
 }
@@ -129,7 +130,6 @@ body {
 	(-webkit-min-device-pixel-ratio: 2) {
 	#contentContainerDiv {
 		width: 100%;
-		background-color: #DDDDDD;
 		padding: 10px;
 	}
 	#asideDiv {
