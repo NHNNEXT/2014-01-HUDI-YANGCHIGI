@@ -36,18 +36,20 @@ function submitArticle() {
 //	}
 //
 //}
+
 function readImg() {
 	var input = $('#fileInput')[0];  
 	if(input.files&&input.files[0]) {
 		var reader = new FileReader();
 		
 		reader.onload = function(e) {
-			$("#uploadImg").attr('src', e.target.result);
+//			debugger;
+			$("#box").css('background-image','url("'+e.target.result+'")');
 		};
 		cur_img_name = input.files[0].name;
 		reader.readAsDataURL(input.files[0]);
 	} else {
-		$("#uploadImg").hide("slow")
+		$("#box").hide("slow")
 	}
 }
 //function readImg() {

@@ -171,7 +171,8 @@ var myCalendar = {
 																	$(this)
 																			.css(
 																					'background-color',
-																					'rgb(88, 194, 147)');
+																					'#fdf6ec')
+																			.css('border-radius', '50%');
 																	$(this)
 																			.click(
 																					function() {

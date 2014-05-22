@@ -29,7 +29,7 @@
 				
 				<div id="uploadBlock">
 					<%-- <img src="image/pencil.png" id="overlay" style="1display:none; position: absolute; top: 0px; left: 0px; z-index: 2">
-					<img src="image/${thumbnailName}" id="uploadImg" style="display: block; position: absolute; top: 0px; left: 0px; z-index: 1"> --%>
+					<img src="image/${thumbnailName}" id="uploadImg" style="display: block; position: absolute; top: 0px; left: 0px; z-index: 1"> --%> 
 
 					<div id="box">
 						<div id="overlay">
@@ -89,9 +89,10 @@
 
 	
 	$(document).ready(function() {
-		$('#box').click(function() {
-			('this').css('background-image', 'url("http://ianfarb.com/wp-content/uploads/2013/10/nicholas-hodag.jpg")';	
-		};
+		//$('#box').hover(function() {
+			//debugger;
+			$("#box").css('background-image', 'url("image/${thumbnailName}")');	
+		//});
 
 	});
 	/* window.onload = setUserBackgroundImage(); */

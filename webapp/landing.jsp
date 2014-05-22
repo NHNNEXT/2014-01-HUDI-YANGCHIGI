@@ -30,6 +30,16 @@
 		<!-- Logout -->
 		<jsp:include page="logout.jspf" />
 		<!-- Modal -->
+		
+		<h3>이 문제를 풀어주세요</h3>
+		<div style="background-color:#fde47d; ">
+		1+3=6<br>
+		2+4=10<br>
+		3+5=18<br>
+		4+6=27<br>
+		5+7=43<br>
+		6+8=?
+		</div>
 	</div>
 	<button id="signupBtn" class="btn btn-primary" data-toggle="modal"
 		data-target="#myModal">Sign up</button>
