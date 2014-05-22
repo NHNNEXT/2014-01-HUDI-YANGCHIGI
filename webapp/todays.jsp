@@ -5,37 +5,47 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/todays.css">
-<link href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css" rel="stylesheet">	
-<script src="js/header.js"></script>
-
+<link
+	href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css"
+	rel="stylesheet">
 </head>
 <body>
-	<%@include file="header.jspf" %> 
-	<div id="baloon">
-		<div id="todayContainer">
-			<c:forEach items="${todayAndIdeasMap}" var="today">
-				<div class="today">
-					<input type="hidden" value="${today.key.id}">
-					<div class="date">Date: ${today.key.date}</div>
-					<div class="like">Like: ${today.key.like}</div>
-					<div class="contents">
-						<c:forEach items="${today.value}" var="idea">
-							<div class="content">${idea.content}</div>
-						</c:forEach>
+	<%@include file="header.jspf"%>
+	<div id="contentContainerDiv">
+		<div id="baloon">
+			<div id="todayContainerDiv">
+				<c:forEach items="${todayAndIdeasMap}" var="today">
+					<div class="today">
+						<input type="hidden" value="${today.key.id}">
+						<div class="date">Date: ${today.key.date}</div>
+						<div class="like">Like: ${today.key.like}</div>
+						<div class="profile">
+							<img src="/image/${today.value['user'].thumbnail}" />
+							${today.value['user'].nickname}
+						</div>
+						<div class="viewport">
+							<div class="contents">
+								<c:forEach items="${today.value['ideas']}" var="idea">
+									<div class="content">${idea.content}</div>
+								</c:forEach>
+							</div>
+						</div>
+						<button class="btn btn-default next-idea change-idea"></button>
+						<button class="btn btn-default pre-idea change-idea"></button>
 					</div>
-					<button class="btn btn-default next-idea change-idea"></button>
-					<button class="btn btn-default pre-idea change-idea"></button>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
-	<%@include file="footer.jspf" %>
+	<%@include file="footer.jspf"%>
 </body>
 <script>
 	//header events
@@ -92,7 +102,7 @@
 
 	function setIdeaContents(contents) {
 		$.each(contents, function(key, value) {
-			$(value).css('left', '150' * key);
+			$(value).css('left', 100 * key + '%');
 		});
 	};
 
@@ -107,19 +117,35 @@
 	$('.pre-idea').click(function(e) {
 		e.stopPropagation();
 		var contents = $(e.target.parentNode).find('.contents');
-		var contentsLeft = parseInt(contents.css('left'));
-		var contentLastChildLeft = parseInt(contents.find('.content:last-child').css('left'));
-		if (contentsLeft !== (-1) * contentLastChildLeft) {
-			contents.filter(':not(:animated)').animate({ 'left': '-=150px' }, 'slow');
+		if (contents.css('left') !== '0px') {
+			contents.filter(':not(:animated)').animate({
+				'left' : '+=100%'
+			}, 'slow');
 		}
 	});
-	
-	$('.next-idea').click(function(e) {
-		e.stopPropagation();
-		var contents = $(e.target.parentNode).find('.contents');
-		if (contents.css('left') !== '0px') {
-			contents.filter(':not(:animated)').animate({ 'left': '+=150px' }, 'slow');
-		}
+
+	$('.next-idea').click(
+			function(e) {
+				e.stopPropagation();
+				var contents = $(e.target.parentNode).find('.contents');
+				var contentsLeft = parseInt(contents.css('left'));
+				var contentLastChildLeft = parseInt(contents.find(
+						'.content:last-child').css('left'));
+				if (contentsLeft !== (-1) * contentLastChildLeft) {
+					contents.filter(':not(:animated)').animate({
+						'left' : '-=100%'
+					}, 'slow');
+				}
+			});
+
+	$.each(todays, function(key, value) {
+		value.addEventListener('touchstart', function(e) {
+			console.log('touch start');
+			this.addEventListener('touchmove', function(e) {
+				console.log('touch move');
+				console.log(e.touches);
+			});
+		}, false);
 	});
 </script>
 </html>

@@ -1,11 +1,16 @@
 package org.yangchigi.dto;
 
+import java.util.List;
+
 public class Today {
 	
 	private int id;
 	private String date;
 	private int like;
 	private int userId;
+	
+	private User user;
+	private List<Idea> ideaList;
 
 	public Today(String date, int like, int userId) {
 		this.date = date;
@@ -38,4 +43,21 @@ public class Today {
 		this.like = like;
 	}
 
+	public boolean isSameUser(User user) {
+		if (user == null) {
+			return false;
+		}
+		return this.userId == user.getId();
+	}
+
+	public void removePrivateIdea(User user) {
+		if (isSameUser(user)) {
+			return;
+		}
+		
+		for (int i = 0; i < ideaList.size(); i++) {
+			if (ideaList.get(i).getIsPrivate())
+				ideaList.remove(i);
+		}
+	}
 }

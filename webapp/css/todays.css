@@ -1,24 +1,33 @@
 @CHARSET "UTF-8";
 .icon-comment-quotes{color:white !important;}
 #contentContainer {
+	
+}
+body {
+	background-color: #ede8e1
 	width: 100%;
 }
 
-#todayContainer {
+#todayContainerDiv {
 	width: 90%;
-	text-align: center;
+	text-align: initial;
 	margin: 0 auto;
 }
 
 .today {
 	position: relative;
+	text-align: center;
 	display: inline-block;
 	overflow: hidden;
-	background-color: yellow;
+	background-color: #fcf8f0;
 	margin: 10px;
 	width: 150px;
 	height: 200px;
 	cursor: pointer;
+	border-radius: 1em;
+	
+	transition: 0.8s;
+	-webkit-transition: 0.8s;
 }
 
 .next-idea {
@@ -35,14 +44,54 @@
 	top: 30%;
 }
 
+.viewport {
+	height: 60%;
+	overflow: hidden;
+}
+
 .contents {
 	position: relative;
 	left: 0px;
-	height: 160px;
-	width: 150px
+	width: 150px;
+	word-break: break-all;
 }
 
 .content {
 	position: absolute;
 	width: 150px;
+	
+	transition: 0.8s;
+	-webkit-transition: 0.8s;
+}
+
+.profile {
+	text-align: initial;
+	position: absolute;
+	bottom: 0;
+}
+
+.profile img {
+	width: 20%;
+	border-radius: 50%;
+}
+
+@media all and (max-width: 480px) , all and
+	(-webkit-min-device-pixel-ratio: 2) {
+	#contentContainerDiv {
+		width: 100%;
+		padding: 10px;
+	}
+	.contents {
+		position: relative;
+		left: 0px;
+		height: 160px;
+		width: 100%;
+	}
+	.content {
+		position: absolute;
+		width: 100%;
+	}
+	.today {
+		width: 100%;
+	}
 }

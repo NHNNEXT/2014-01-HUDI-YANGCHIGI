@@ -1,6 +1,7 @@
 package org.yangchigi.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -69,12 +70,8 @@ public class TodayServlet extends HttpServlet {
 					today.getUserId(), today.getDate());
 
 			// 비공개 설정한 idea 필터
-			if (user.getId() != today.getUserId()) {
-				for (int i = 0; i < ideaList.size(); i++) {
-					if (ideaList.get(i).getIsPrivate())
-						ideaList.remove(i);
-				}
-			}
+			today.removePrivateIdea(user);
+			
 			System.out.println(ideaList.toString());
 			// 사용자가 투데이 like 상태인지 확인
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
@@ -88,27 +85,22 @@ public class TodayServlet extends HttpServlet {
 			request.setAttribute("isLiked", like != null);
 			request.setAttribute("commList",
 					commRepository.findListByTodayId(todayId));
-			
-			String nickname = user.getNickname();
-			String thumbnailName = user.getThumbnail();
-
-			request.setAttribute("nickname", nickname);
-			request.setAttribute("thumbnailName", thumbnailName);
-			
-			
+			request.setAttribute("user", userRepository.findById(today.getUserId()));
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		} else if ("/today".equals(uri)) {
 			List<Today> todayList = todayRepository.findAll();
-			Map<Today, List<Idea>> todayAndIdeasMap = new HashMap<Today, List<Idea>>();
-
+			Map<Today, Map> todayAndIdeasMap = new HashMap<Today, Map>();
 			Iterator<Today> todayIterator = todayList.iterator();
+			
 			while (todayIterator.hasNext()) {
 				Today today = todayIterator.next();
-				todayAndIdeasMap.put(today, ideaRepository.findByUserIdAndDate(
+				Map<String, Object> userAndIdeasMap = new HashMap<String, Object>();
+				userAndIdeasMap.put("ideas", ideaRepository.findByUserIdAndDate(
 						today.getUserId(), today.getDate()));
+				userAndIdeasMap.put("user", userRepository.findById(today.getUserId()));
+				todayAndIdeasMap.put(today, userAndIdeasMap);
 			}
-
 			request.setAttribute("todayAndIdeasMap", todayAndIdeasMap);
 			
 //			헤더때문에 추가 
