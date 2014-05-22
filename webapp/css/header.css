@@ -3,6 +3,7 @@
 body {
 	background-color: #ede8e1;
 	-webkit-font-smoothing: antialiased;
+	font-family: 'Roboto', sans-serif; 
 }
 
 #baloon {

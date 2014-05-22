@@ -21,6 +21,7 @@
 	href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css">
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.print.css">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower' rel='stylesheet' type='text/css'>	
 
 <link rel="stylesheet" href="css/mypage.css">
 <link rel="stylesheet" href="css/header.css">
