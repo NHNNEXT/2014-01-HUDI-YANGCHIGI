@@ -70,12 +70,8 @@ public class TodayServlet extends HttpServlet {
 					today.getUserId(), today.getDate());
 
 			// 비공개 설정한 idea 필터
-			if (user.getId() != today.getUserId()) {
-				for (int i = 0; i < ideaList.size(); i++) {
-					if (ideaList.get(i).getIsPrivate())
-						ideaList.remove(i);
-				}
-			}
+			today.removePrivateIdea(user);
+			
 			System.out.println(ideaList.toString());
 			// 사용자가 투데이 like 상태인지 확인
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
@@ -94,11 +90,9 @@ public class TodayServlet extends HttpServlet {
 					response);
 		} else if ("/today".equals(uri)) {
 			List<Today> todayList = todayRepository.findAll();
-			// Map<Today, List> todayAndIdeasMap = new HashMap<Today, List>();
 			Map<Today, Map> todayAndIdeasMap = new HashMap<Today, Map>();
 			Iterator<Today> todayIterator = todayList.iterator();
 			
-			List<Idea> list = new ArrayList<Idea>();
 			while (todayIterator.hasNext()) {
 				Today today = todayIterator.next();
 				Map<String, Object> userAndIdeasMap = new HashMap<String, Object>();

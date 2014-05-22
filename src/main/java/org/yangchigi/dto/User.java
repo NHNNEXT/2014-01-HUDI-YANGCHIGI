@@ -7,6 +7,10 @@ public class User {
 	private String password;
 	private String thumbnail;
 	
+	public User(int id) {
+		this.id = id;
+	}
+	
 	public User(String email, String nickname, String password, String thumbnail) {
 		this.email = email;
 		this.nickname = nickname;
