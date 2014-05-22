@@ -17,7 +17,7 @@
 </head>
 <body>
 	<%@include file="header.jspf" %> 
-	<div id="contentContainer">
+	<div id="baloon">
 		<div id="todayContainer">
 			<c:forEach items="${todayAndIdeasMap}" var="today">
 				<div class="today">
@@ -35,6 +35,7 @@
 			</c:forEach>
 		</div>
 	</div>
+	<%@include file="footer.jspf" %>
 </body>
 <script>
 	//header events

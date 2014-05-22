@@ -7,8 +7,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0" > 
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/usermodify.css">
 	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/usermodify.css">
 	<link href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css" rel="stylesheet">	
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -17,8 +17,7 @@
 	<script src="http://malsup.github.com/jquery.form.js"></script> 						
 </head>
 <body>
-		<%@include file="header.jspf" %> 
-
+	<%@include file="header.jspf" %> 
 	<div id="baloon">
 		
 		<div id="userInfo">
@@ -29,9 +28,15 @@
  				<!--<img id="uploadImg" src="icon/addimage.png" style="height: 30px;" /> -->
 				
 				<div id="uploadBlock">
-					<img src="image/pencil.png" id="overlay" style="1display:none; position: absolute; top: 0px; left: 0px; z-index: 2">
-					<img src="image/${thumbnailName}" id="uploadImg" style="display: block; position: absolute; top: 0px; left: 0px; z-index: 1"> 
-						
+					<%-- <img src="image/pencil.png" id="overlay" style="1display:none; position: absolute; top: 0px; left: 0px; z-index: 2">
+					<img src="image/${thumbnailName}" id="uploadImg" style="display: block; position: absolute; top: 0px; left: 0px; z-index: 1"> --%>
+
+					<div id="box">
+						<div id="overlay">
+							<span id="plus"><span class="icon-pencil"></span></span>
+						</div>
+					</div>
+
 					<%-- <img id="overlay" src="image/pencil.png">
 					<img id="uploadImg" src="image/${thumbnailName}"/>  --%>
 				</div>
@@ -76,16 +81,22 @@
 		</div>
 	</div> --%>
 	
-	<div id="footer">
-		<ul class="footer_links">
-			<li>©Seize, Inc</li>
-			<li>Team Yangchigi</li>
-			<li>NHN NEXT</li>
-			<li>2014 human design project</li>
-			<li>help</li>
-		</ul>
-	</div>
+	<%@include file="footer.jspf" %> 
+
 </body>
+<script>
+
+
+	
+	$(document).ready(function() {
+		$('#box').click(function() {
+			('this').css('background-image', 'url("http://ianfarb.com/wp-content/uploads/2013/10/nicholas-hodag.jpg")';	
+		};
+
+	});
+	/* window.onload = setUserBackgroundImage(); */
+</script>
+
 <script>
 	// header events
 	function addLogoutEvent() {

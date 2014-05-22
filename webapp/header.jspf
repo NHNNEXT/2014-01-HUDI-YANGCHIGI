@@ -7,10 +7,11 @@
 				<li id="showTodaysBtn" class="menu-btn icon-comment-quotes"></li>
 				<li id="showSettingBtn" class="menu-btn icon-widget"></li>
 				<li id="logoutBtn" class="menu-btn icon-fontawesome-webfont-4"></li>
+				<div id="myInfo"> 
+					<img id="myThumbnail" src="image/${thumbnailName}">
+					<span id="myNickname">${nickname}</span>
+				</div> 
 			</ul>
-			<button id="addTodayBtn" class="btn btn-warning" style="float: right">Create Today</button>
-			<img id="myThumbnail" src="image/${thumbnailName}">
-			<p id="myNickname">${nickname}</p>
 		</div>
 	</div>
 	<p id="triangle"></p>

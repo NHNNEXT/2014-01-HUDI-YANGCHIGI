@@ -76,6 +76,7 @@ function hoverImg() {
 	});
 }
 
+
 function load() {
 	$('#submitBtn').click(submitArticle); //제출 누르기
 	//$('#uploadImg').click();

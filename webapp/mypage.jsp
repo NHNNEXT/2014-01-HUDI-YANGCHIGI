@@ -30,7 +30,9 @@
 </head>
 <body>
 	<%@include file="header.jspf" %> 
-	<div class="container">
+	<button id="addTodayBtn" class="btn btn-warning" style="float: right">Create Today</button>
+	<!-- <div class="container"> --> 
+	<div id= "baloon">
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-md-4"></div>
 
@@ -77,6 +79,7 @@
 			</div>
 		</div>
 	</div>
+	<%@include file="footer.jspf" %>
 </body>
 <script>
 	// header events

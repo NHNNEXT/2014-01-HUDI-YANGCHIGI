@@ -1,4 +1,4 @@
-
+.icon-widget {color: white !important; }
 
 #thumbnail {
 	border-radius: 50%;
@@ -9,13 +9,13 @@
 
 }
 
-#overlay {
+/* #overlay {
 	width: 150px;
 	height: 150px;
 	border-radius: 50%;
 	cursor: pointer;
 	visibility: hidden;
-}
+} */
 
 #uploadImg {
 	width: 150px;
@@ -39,21 +39,6 @@
 
 #triangle {
 
-}
-
-/* 폰트아이콘 */
-.icon-book-read-streamline {
-	font-size: 50pt !important;
-	color: red;
-} 
-
-#baloon {
-	background-color: #fcf8f0;
-	border-radius: 1em;
-	margin-top:1%;
-	margin-left: 5%;
-	margin-right: 5%;
-	min-height: 550px;
 }
 
 #userInfo {
@@ -87,9 +72,7 @@
 
 /* 핸드폰 */
 @media all and (max-width:401px) {
-	body {
-		background-color:#d3dde3;
-	}
+
 	
 /* 	#logo {
 		margin: 0 auto;
@@ -100,14 +83,12 @@
 }
 
 /* 타블렛 */ 
-@media all and (min-width:402px) and (max-width:876px){
-	body {
-		background-color:#fad2b5;
-	}
+@media all and (min-width:402px) and (max-width:920px){
+
 }
 
 /* 데탑 */
-@media all and (min-width:876px){
+@media all and (min-width:920px){
 	#header {
 		width: 876px !important;
 	}
@@ -117,9 +98,8 @@
 		float:left;	
 	} */
 	#baloon {
-		width: 876px;
+		width: 920px;
 		margin:0 auto;
-		margin-top:1%;
 		padding: 15px;
 		
 	}
@@ -137,3 +117,48 @@
 	}
 
 }
+
+
+
+
+
+
+/* 오버레이 따라하기 */
+#box {
+	width: 300px;
+	height: 200px;
+	box-shadow: inset 1px 1px 40px 0 rgba(0, 0, 0, .45);
+	border-bottom: 2px solid #fff;
+	border-right: 2px solid #fff;
+	margin: 5% auto 0 auto;
+	1background:
+		url(http://ianfarb.com/wp-content/uploads/2013/10/nicholas-hodag.jpg);
+	background-size: cover;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+#overlay {
+	background: rgba(0, 0, 0, .75);
+	text-align: center;
+	padding: 45px 0 66px 0;
+	opacity: 0;
+	-webkit-transition: opacity .25s ease;
+}
+
+#box:hover #overlay {
+	opacity: 1;
+}
+
+#plus {
+	font-family: Helvetica;
+	font-weight: 900;
+	color: rgba(255, 255, 255, .85);
+	font-size: 96px;
+}
+
+
+
+
+
+

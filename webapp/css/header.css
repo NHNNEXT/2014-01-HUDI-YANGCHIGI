@@ -2,8 +2,39 @@
 /* 공통 CSS */
 body {
 	background-color: #ede8e1;
+	-webkit-font-smoothing: antialiased;
 }
 
+#baloon {
+	1background-color: #fcf8f0;
+	1background-color: #f3bf76;
+	1background-color: #dcd8d0;
+
+	background: -webkit-linear-gradient(#dcd8d0, #ede8e1); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#dcd8d0, #ede8e1); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#dcd8d0, #ede8e1); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#dcd8d0, #ede8e1); /* Standard syntax */
+	
+	border-radius: 1em;
+	margin-left: 5%;
+	margin-right: 5%;
+	min-height: 550px;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+#footer {
+	text-align: center;
+}
+
+.footer_links li {
+	display: inline-block;
+	list-style: none;
+	color:#a09e98;
+	font-weight: 200;
+	padding:5px;
+}
 
 /* 헤더 CSS */ 
 #header {
@@ -16,36 +47,41 @@ body {
 #logo {
 	width: 200px;
 	float: left;
+	margin-left: 2%;
 }
 
 #myInfo {
-	/* display: inline; */
+	display: inline; 
+	margin-left: 300px;
 }
 #myThumbnail {
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
 	display: inline-block;
+	vertical-align: inherit !important;
 }
 #myNickname {
 	display: inline-block;
 	font-size:25px;
 	font-weight: bold;
+	color: #413f3c;
+	vertical-align: middle;
+	padding-bottom: 30px;
 }
 
 #headerBarDiv {
 	height: 100%;
+	margin-top: 20px;
 }
 
 #btnsDiv {
-	height: 100%;
-	margin: 0 auto;
-	text-align: center;
+	display: inline-block;
 }
 
 #btnsUl {
 	display: inline-block;
-	1padding-top: 20px;
+	margin-bottom: 0 !important;
 }
 
 .menu-btn {
@@ -56,5 +92,47 @@ body {
 }
 
 .menu-btn:HOVER {
-	color: white;
+	color: #fdf6ec;
+	-webkit-transition: all 100ms ease;
+	-moz-transition: all 100ms ease;
+	-ms-transition: all 100ms ease;
+	-o-transition: all 100ms ease;
+	transition: all 100ms ease;
+}
+
+/* 미디어쿼리 CSS */
+/* 타블렛 */ 
+@media all and (min-width:402px) and (max-width:920px){
+	body {
+		background-color:#fad2b5;
+	}
+}
+
+/* 데탑 */
+@media all and (min-width:920px){
+	#header {
+		width: 876px !important;
+	}
+	
+/* 	#logo {
+		margin: 30px 13px 0 15px;
+		float:left;	
+	} */
+	#baloon {
+		width: 920px;
+		margin:0 auto;
+	}
+	
+	1#triangle  {
+		width: 0px;
+		height: 0px;
+		border: 40px solid #fcf8f0;
+		border-top-width: 0;
+		border-right-color: transparent;
+		border-left-color: transparent;
+		position: relative;
+		top: -20px;
+		left: 530px;
+	}
+
 }

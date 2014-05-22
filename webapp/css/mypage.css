@@ -1,13 +1,14 @@
 @CHARSET "UTF-8";
+.icon-pencil {color: white !important; }
 
 ul {
-	-webkit-padding-start: 0px;
+	/* -webkit-padding-start: 0px; */
 	list-style-type: none;
 }
 
 .container {
 	background-color: #424242;
-}
+} 
 
 #myPageAllDiv {
 	padding: 20px;
@@ -16,13 +17,24 @@ ul {
 #calendarDiv {
 	height: 300px;
 	margin-right: 20px;
-	background-color: #AFAFAF;
+	background-color: #efa87b;
+	border-radius: 10px;
 }
 
 .contents {
-	background-color: #FFFFDD;
+	1background-color: #FFFFDD;
+	background-color: #fdf6ec;
+	
+	background: -webkit-linear-gradient(left, #fbefdd, #fdf6ec); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, #fbefdd, #fdf6ec); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #fbefdd, #fdf6ec)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #fbefdd, #fdf6ec)); /* Standard syntax */
+/* 	background: -webkit-linear-gradient(left, #fdf6ec , #fbecd6); For Safari 5.1 to 6.0
+	background: -o-linear-gradient(right, #fdf6ec , #fbecd6); For Opera 11.1 to 12.0
+	background: -moz-linear-gradient(right, #fdf6ec , #fbecd6); For Firefox 3.6 to 15
+	background: linear-gradient(to right, #fdf6ec , #fbecd6); Standard syntax */
+	
 	margin-top: 20px;
-	border: 1px solid black;
 	margin-left: 30px;
 	border-radius: 10px;
 	padding: 15px;
@@ -30,13 +42,14 @@ ul {
 
 .contentsImg {
 	width: 200px;
+	border-radius: 10px;
 }
 
 .time {
 	width: 20px;
 	position: absolute;
 	left: 10px;
-	background-color: rgb(210, 255, 184);
+	background-color: #418270;
 	opacity: 0.7;
 	margin-top: -15px;
 }
@@ -93,10 +106,12 @@ ul {
 
 /* responsive */
 @media ( min-width : 1px) and (max-width: 991px) {
-	.container {
+	#baloon {
 		max-width: 95% !important;
 	}
 	#calendarDiv {
 		/* display: none !important; */
 	}
 }
+
+
