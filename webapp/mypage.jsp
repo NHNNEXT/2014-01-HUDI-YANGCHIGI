@@ -21,19 +21,24 @@
 	href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css">
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.print.css">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower' rel='stylesheet' type='text/css'>	
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower'
+	rel='stylesheet' type='text/css'>
 
 <link rel="stylesheet" href="css/mypage.css">
+<link rel="stylesheet" href="css/today.css">
 <link rel="stylesheet" href="css/header.css">
-<link href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css" rel="stylesheet">	
+<link
+	href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css"
+	rel="stylesheet">
 <script src="js/mypage.js"></script>
 
 </head>
 <body>
-	<%@include file="header.jspf" %> 
-	<button id="addTodayBtn" class="btn btn-warning" style="float: right">Create Today</button>
-	<!-- <div class="container"> --> 
-	<div id= "baloon">
+	<%@include file="header.jspf"%>
+	<button id="addTodayBtn" class="btn btn-warning" style="float: right">Create
+		Today</button>
+	<div id="baloon">
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-md-4"></div>
 
@@ -63,16 +68,18 @@
 
 				<div id="contentsContainerDiv">
 					<c:forEach items="${ideaList}" var="idea">
-						<div class="row contents">
+						<div class="row">
 							<div class="time">
 								<p class="date">${idea.time}</p>
 							</div>
-							<c:if test="${!empty idea.imgName}">
-								<img class="contentsImg" src="image/${idea.imgName}"
-									style="margin-right: 5px;">
-							</c:if>
-							<p class="contentsP">${idea.content}</p>
-							<img class="trash" src="image/trash_orange.png" > 
+							<div class="contents">
+								<c:if test="${!empty idea.imgName}">
+									<img class="contentsImg" src="image/${idea.imgName}"
+										style="margin-right: 5px;">
+								</c:if>
+								<p class="contentsP">${idea.content}</p>
+							<img class="trash" src="image/trash_orange.png">
+							</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -80,7 +87,9 @@
 			</div>
 		</div>
 	</div>
-	<%@include file="footer.jspf" %>
+	<%@include file="footer.jspf"%>
+	<%-- <%@include file="today_modal.jspf"%> --%>
+	<jsp:include page="today_modal.jspf" />
 </body>
 <script>
 	// header events
@@ -139,7 +148,5 @@
 			}
 		});
 	});
-
-	
 </script>
 </html>

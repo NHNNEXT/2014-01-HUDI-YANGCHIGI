@@ -6,10 +6,6 @@ ul {
 	list-style-type: none;
 }
 
-.container {
-	background-color: #424242;
-} 
-
 #myPageAllDiv {
 	padding: 20px;
 }
@@ -56,10 +52,8 @@ ul {
 .time {
 	width: 20px;
 	position: absolute;
-	left: 10px;
 	background-color: #418270;
 	opacity: 0.7;
-	margin-top: -15px;
 }
 
 .date {
@@ -111,6 +105,10 @@ ul {
 	width: 25px;
 	float:right;
 }
+
+.modal-dialog{
+	width:80%;
+} 
 
 /* responsive */
 @media ( min-width : 1px) and (max-width: 991px) {

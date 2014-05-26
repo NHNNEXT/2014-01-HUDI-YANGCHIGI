@@ -53,10 +53,11 @@ var write = {
 		if (imgName === undefined) {
 			$('#contentsContainerDiv')
 					.append(
-							'<div class="row contents">'
+							'<div class="row"'
 									+ '<div class="time" ><p class="date">'
 									+ this.replace(time)
 									+ '</p></div>'
+									+ '<div class="contents">'
 									+ '<p class="contentsP">'
 									+ this.replace(content)
 									+ '</p>'
@@ -73,10 +74,11 @@ var write = {
 		} else {
 			$('#contentsContainerDiv')
 					.append(
-							'<div class="row contents">'
+							'<div class="row">'
 									+ '<div class="time"><p class="date">'
 									+ replace(time)
 									+ '</p></div>'
+									+ '<div class="contents">'
 									+ '<img class="contentsImg" src="image/'
 									+ imgName
 									+ '" style="margin-right:5px;">'
@@ -114,10 +116,12 @@ var write = {
 	setHeightForTimeDiv : function() {
 		$('.time').each(
 				function(i) {
-					var newHeight = parseInt($(this).parent().height(), 10)
-							+ parseInt($(this).parent().css('margin-top'), 10)
+					var newHeight = parseInt($(this).next().height(), 10)
+							+ parseInt($(this).next().css('margin-top'), 10)
 							* 2;
+					
 					$(this).height(newHeight);
+					$(this).css('margin-top', $(this).next().css('margin-top'));
 				});
 	},
 
@@ -178,8 +182,22 @@ var myCalendar = {
 																	$(this)
 																			.click(
 																					function() {
-																						window.location.href = "/today/"
-																								+ today.id;
+																						$.ajax({
+//																							url:"/today/" + today.id,
+																							url:"/today/1",
+																							type:"GET",
+																							success:function(data){
+																								data = data.split('<body>')[1];
+																								data = data.split('</body>')[0];
+																								$('#todayModal .modal-body').html(data).change(
+																										function(){
+																											todayLoad();
+																										});
+																								$('#todayModal').modal();
+																							}
+																				
+																							
+																						});
 																					});
 																}
 															}.bind(this));

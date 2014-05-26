@@ -57,7 +57,10 @@ body {
 	float: right;
 	height: 100px;
 }
-
+.dateoftoday {
+	font-size: 2em;
+	text-align: center;
+}
 #profileDiv {
 	position: relative;
 	top: 10px;
@@ -88,11 +91,6 @@ body {
 	padding: 5px;
 }
 
-.date {
-	font-size: 2em;
-	text-align: center;
-}
-
 .contents {
 	background-color: #ffffff;
 	margin-top: 20px;
@@ -102,29 +100,11 @@ body {
 	word-wrap: break-word;
 }
 
-.contentsImg {
-	width: 200px;
-}
-
-.time {
-	width: 20px;
-	position: absolute;
-	left: 20px;
-	background-color: rgb(210, 255, 184);
-	opacity: 0.7;
-	margin-top: -15px;
-}
-
 .timeWrapper {
 	font-size: 20px;
 	color: white;
 	margin-right: 0px;
 	margin-left: -15px;
-}
-
-.contentsP {
-	display: inline;
-	vertical-align: top;
 }
 
 @media all and (max-width: 480px) , all and

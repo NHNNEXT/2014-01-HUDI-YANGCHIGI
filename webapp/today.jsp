@@ -16,50 +16,58 @@
 <script
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/css/today.css">
+
+<!-- today.css 와 mypage.css 통합하며 중복되는 것들은 mypage.css로 옮기는 중 -->
+<link rel="stylesheet" href="/css/mypage.css">
 <script src="/js/today.js"></script>
 </head>
 <body>
-	<!-- 단상 목록 들어가는 곳 -->
-	<div id="contentContainerDiv">
-		<c:forEach items="${ideaList}" var="idea">
-			<div class="contents">
-				<span class="time"><p class="timeWrapper">${idea.time}</p></span>
-				<c:if test="${!empty idea.imgName}">
-					<img class="contentsImg" src="/image/${idea.imgName}"
-						style="margin-right: 5px;">
-				</c:if>
-				<p class="contentsP">${idea.content}</p>
-			</div>
-		</c:forEach>
-	</div>
-	<!-- 날짜, 공감 수, 작성자 닉네임, 댓글 들어가는 곳 -->
-	<div id="asideDiv">
-		<div id="dateDiv">
-			<p class="date">${year}</p>
-			<p class="date">${month}${day}</p>
-		</div>
-		<div id="likeDiv">
-			<form>
-				<button type="button" id="likeBtn" class="btn btn-default">Like</button>
-				<span id="likeSpan" class="badge">${today.like}</span> <input
-					type="hidden" id="likeInput" value="${today.like}" />
-			</form>
-		</div>
-		<div id="profileDiv">
-			<img src="/image/${user.thumbnail}" />
-			Nickname: ${user.nickname}
-		</div>
-
-		<div id="commentDiv">
-			<c:forEach items="${commList}" var="comm">
-				<div class="comment-set">${comm.content}</div>
+	<div class="container">
+		<!-- 단상 목록 들어가는 곳 -->
+		<div id="contentContainerDiv">
+			<c:forEach items="${ideaList}" var="idea">
+				<div class="row">
+					<span class="time">
+						<p class="timeWrapper">${idea.time}</p>
+					</span>
+					<div class="contents">
+						<c:if test="${!empty idea.imgName}">
+							<img class="contentsImg" src="/image/${idea.imgName}"
+								style="margin-right: 5px;">
+						</c:if>
+						<p class="contentsP">${idea.content}</p>
+					</div>
+				</div>
 			</c:forEach>
 		</div>
+		<!-- 날짜, 공감 수, 작성자 닉네임, 댓글 들어가는 곳 -->
+		<div id="asideDiv">
+			<div id="dateDiv">
+				<p class="dateoftoday">${year}</p>
+				<p class="dateoftoday">${month}${day}</p>
+			</div>
+			<div id="likeDiv">
+				<form>
+					<button type="button" id="likeBtn" class="btn btn-default">Like</button>
+					<span id="likeSpan" class="badge">${today.like}</span> <input
+						type="hidden" id="likeInput" value="${today.like}" />
+				</form>
+			</div>
+			<div id="profileDiv">
+				<img src="/image/${user.thumbnail}" /> Nickname: ${user.nickname}
+			</div>
 
-		<div id="writeCommentDiv">
-			<input type="text" id="commentInput" class="form-control"
-				maxlength="100">
-			<button id="uploadCommentBtn" class="btn btn-default" type="button">입력</button>
+			<div id="commentDiv">
+				<c:forEach items="${commList}" var="comm">
+					<div class="comment-set">${comm.content}</div>
+				</c:forEach>
+			</div>
+
+			<div id="writeCommentDiv">
+				<input type="text" id="commentInput" class="form-control"
+					maxlength="100">
+				<button id="uploadCommentBtn" class="btn btn-default" type="button">입력</button>
+			</div>
 		</div>
 	</div>
 	<script>
@@ -130,7 +138,21 @@
 				this.addLikeEvent();
 			}
 		}
-		like.init();
+		function setHeightForTimeDiv() {
+			$('.time').each(
+					function(i) {
+						var newHeight = parseInt($(this).next().height(), 10)
+								+ parseInt($(this).next().css('margin-top'), 10) * 2;
+						$(this).height(newHeight);
+						$(this).css('margin-top', $(this).next().css('margin-top'));
+					});
+		}
+		function todayLoad() {
+			$('#uploadCommentBtn').click(submitComment);
+			setHeightForTimeDiv();
+			like.init();
+		}
+		
 	</script>
 </body>
 </html>
