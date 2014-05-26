@@ -125,27 +125,55 @@
 	});
 
 	$('.next-idea').click(
-			function(e) {
-				e.stopPropagation();
-				var contents = $(e.target.parentNode).find('.contents');
-				var contentsLeft = parseInt(contents.css('left'));
-				var contentLastChildLeft = parseInt(contents.find(
-						'.content:last-child').css('left'));
-				if (contentsLeft !== (-1) * contentLastChildLeft) {
-					contents.filter(':not(:animated)').animate({
-						'left' : '-=100%'
-					}, 'slow');
-				}
-			});
+		function(e) {
+			e.stopPropagation();
+			var contents = $(e.target.parentNode).find('.contents');
+			var contentsLeft = parseInt(contents.css('left'));
+			var contentLastChildLeft = parseInt(contents.find(
+					'.content:last-child').css('left'));
+			if (contentsLeft !== (-1) * contentLastChildLeft) {
+				contents.filter(':not(:animated)').animate({
+					'left' : '-=100%'
+				}, 'slow');
+			}
+		});
 
 	$.each(todays, function(key, value) {
 		value.addEventListener('touchstart', function(e) {
 			console.log('touch start');
+			console.log(e.touches);
+			$('.change-idea').hide();
+			//e.preventDefault();
+			var firstPos = e.touches[0].clientX;
+			//var secondPos = e.touches[1] && e.touches[1].clientX;
+			var movedLength = 0;
+			var today = $(e.touches[0].target).parent().parent();
+			
 			this.addEventListener('touchmove', function(e) {
-				console.log('touch move');
-				console.log(e.touches);
+				//console.log('touch move');
+				//console.log(e.changedTouches);
+				//e.preventDefault();
+				
+				if (e.changedTouches.length == 2) {
+					e.preventDefault();
+					movedLength += (e.touches[0].clientX - firstPos); 
+								/* + (e.touches[1].clientX - secondPos)) / 2;*/
+					console.log('movedLength: ' + movedLength);
+					if (getAbs(movedLength) > today.width()/3) {
+						if (movedLength < 0) {
+							today.find('.pre-idea').click();
+						} else {
+							today.find('.next-idea').click();
+						}
+					}
+				}
 			});
 		}, false);
 	});
+			
+	function getAbs(num) {
+		if (num >= 0) return num;
+		else return (-1) * num;
+	}
 </script>
 </html>
