@@ -150,6 +150,11 @@
 		}
 		function todayLoad() {
 			$('#uploadCommentBtn').click(submitComment);
+			$('#commentInput').keydown(function(e){
+				if(e.keyCode == 13){
+					submitComment();
+				}
+			});
 			setHeightForTimeDiv();
 			like.init();
 		}
