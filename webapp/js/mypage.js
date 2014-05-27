@@ -76,14 +76,14 @@ var write = {
 					.append(
 							'<div class="row">'
 									+ '<div class="time"><p class="date">'
-									+ replace(time)
+									+ this.replace(time)
 									+ '</p></div>'
 									+ '<div class="contents">'
 									+ '<img class="contentsImg" src="image/'
 									+ imgName
 									+ '" style="margin-right:5px;">'
 									+ '<p class="contentsP">'
-									+ replace(content)
+									+ this.replace(content)
 									+ '</p>'
 									+ '<img class="trash" src="image/trash_orange.png" >'
 									+ '</div></div>').children(':last').hide()
