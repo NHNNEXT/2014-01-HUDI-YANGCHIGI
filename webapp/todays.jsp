@@ -11,13 +11,17 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+	<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/todays.css">
+<link rel="stylesheet" href="css/today_modal.css">
 <link
 	href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css"
 	rel="stylesheet">
 </head>
 <body>
+<jsp:include page="today_modal.jspf" />
 	<%@include file="header.jspf"%>
 	<div id="contentContainerDiv">
 		<div id="baloon">
@@ -46,6 +50,7 @@
 		</div>
 	</div>
 	<%@include file="footer.jspf"%>
+	
 </body>
 <script>
 	//header events
@@ -89,7 +94,28 @@
 	$.each(todays, function(key, value) {
 		var todayId = $(value).find(':input').val();
 		$(value).click(function() {
-			window.location = 'today/' + todayId;
+
+			$.ajax({
+				url : "/today/" + todayId,
+				type : "GET",
+				success : function(data) {
+					data = data.split('<body>')[1];
+					data = data.split('</body>')[0];
+					console.log(data);
+					$('#todayModal .modal-body').html(data);
+
+					$('#todayModal').on('shown.bs.modal', function(e) {
+						todayLoad();
+					});
+					$('#todayModal').on('hidden.bs.modal', function(e) {
+						$('#todayModal').off('shown.bs.modal');
+					});
+
+					$('#todayModal').modal();
+				}
+
+			});
+			/* window.location = 'today/' + todayId; */
 		});
 	});
 

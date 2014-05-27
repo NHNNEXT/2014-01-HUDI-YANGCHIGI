@@ -17,7 +17,7 @@
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/css/today.css">
 
-<!-- today.css 와 mypage.css 통합하며 중복되는 것들은 mypage.css로 옮기는 중 -->
+<!-- today.css 와 mypage.css 통합하며 중복되는 것들은 todayl_modal.css로 옮기는 중 -->
 <link rel="stylesheet" href="/css/mypage.css">
 <script src="/js/today.js"></script>
 </head>
@@ -122,11 +122,12 @@
 					$.ajax({
 						processData : true,
 						type : "POST",
-						url : "",
+						url : "/today/" + ${today.id},
 						data : {
 							like : like
 						}
 					}).done(function(like) {
+						
 						like = Number(like);
 						this.likeSpan.text(like);
 						this.likeBtn.toggleClass('btn-primary');

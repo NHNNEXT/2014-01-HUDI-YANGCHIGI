@@ -53,7 +53,7 @@ var write = {
 		if (imgName === undefined) {
 			$('#contentsContainerDiv')
 					.append(
-							'<div class="row"'
+							'<div class="row">'
 									+ '<div class="time" ><p class="date">'
 									+ this.replace(time)
 									+ '</p></div>'
@@ -62,7 +62,7 @@ var write = {
 									+ this.replace(content)
 									+ '</p>'
 									+ '<img class="trash" src="image/trash_orange.png" >'
-									+ '</div>').children(':last').hide()
+									+ '</div></div>').children(':last').hide()
 					.fadeIn('slow');
 			// if (imgName === undefined) {
 			// $('#contentsContainerDiv').append(
@@ -86,7 +86,7 @@ var write = {
 									+ replace(content)
 									+ '</p>'
 									+ '<img class="trash" src="image/trash_orange.png" >'
-									+ '</div>').children(':last').hide()
+									+ '</div></div>').children(':last').hide()
 					.fadeIn('slow');
 		}
 		// } else {
@@ -183,16 +183,21 @@ var myCalendar = {
 																			.click(
 																					function() {
 																						$.ajax({
-//																							url:"/today/" + today.id,
-																							url:"/today/1",
+																							url:"/today/" + today.id,
 																							type:"GET",
 																							success:function(data){
 																								data = data.split('<body>')[1];
 																								data = data.split('</body>')[0];
-																								$('#todayModal .modal-body').html(data).change(
-																										function(){
-																											todayLoad();
-																										});
+																								console.log(data);
+																								$('#todayModal .modal-body').html(data);
+																								
+																								$('#todayModal').on('shown.bs.modal', function (e) {
+																									todayLoad();
+																								});
+																								$('#todayModal').on('hidden.bs.modal', function (e) {
+																									$('#todayModal').off('shown.bs.modal');
+																								});
+																								
 																								$('#todayModal').modal();
 																							}
 																				

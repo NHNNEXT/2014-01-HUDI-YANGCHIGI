@@ -106,9 +106,7 @@ ul {
 	float:right;
 }
 
-.modal-dialog{
-	width:80%;
-} 
+
 
 /* responsive */
 @media ( min-width : 1px) and (max-width: 991px) {

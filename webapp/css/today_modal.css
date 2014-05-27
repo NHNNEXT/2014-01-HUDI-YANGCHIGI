@@ -1,11 +1,12 @@
 @CHARSET "UTF-8";
 
-body {
+
+#todayModal body {
 	background-color: #ede8e1;
 	padding: 1%;
 }
 
-#contentContainerDiv {
+#todayModal #contentContainerDiv {
 	display: inline;
 	width: 70%;
 	float: left;
@@ -17,6 +18,10 @@ body {
 	transition: 0.8s;
 	padding-top:5px;
 }
+
+.modal-dialog{
+	width:80%;
+} 
 
 #asideDiv {
 	display: inline;
@@ -85,14 +90,14 @@ body {
 	height: 50px;
 }
 
-.comment-set {
+#todayModal .comment-set {
 	border:1px solid #ccc;
 	border-radius: 3px;
 	margin-top: 1%;
 	padding: 5px;
 }
 
-.contents {
+#todayModal .contents {
 	background-color: #ffffff;
 	margin-top: 20px;
 	margin-left: 5%;
@@ -101,11 +106,55 @@ body {
 	word-wrap: break-word;
 }
 
-.timeWrapper {
+#todayModal .timeWrapper {
 	font-size: 20px;
 	color: white;
 	margin-right: 0px;
 	margin-left: -15px;
+}
+
+#todayModal .contents {
+	1background-color: #FFFFDD;
+	background-color: #fdf6ec;
+	
+	background: -webkit-linear-gradient(left, #fbefdd, #fdf6ec); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, #fbefdd, #fdf6ec); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #fbefdd, #fdf6ec)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #fbefdd, #fdf6ec)); /* Standard syntax */
+/* 	background: -webkit-linear-gradient(left, #fdf6ec , #fbecd6); For Safari 5.1 to 6.0
+	background: -o-linear-gradient(right, #fdf6ec , #fbecd6); For Opera 11.1 to 12.0
+	background: -moz-linear-gradient(right, #fdf6ec , #fbecd6); For Firefox 3.6 to 15
+	background: linear-gradient(to right, #fdf6ec , #fbecd6); Standard syntax */
+	
+	margin-top: 20px;
+	margin-left: 30px;
+	border-radius: 10px;
+	padding: 15px;
+}
+
+#todayModal .contentsImg {
+	width: 200px;
+	border-radius: 10px;
+}
+
+#todayModal .time {
+	width: 20px;
+	position: absolute;
+	background-color: #418270;
+	opacity: 0.7;
+}
+
+#todayModal .date {
+	font-size: 20px;
+	color: white;
+	margin-right: 0px;
+	margin-left: -15px;
+}
+
+#todayModal .contentsP {
+	display: inline;
+	vertical-align: top;
+	word-wrap: break-word;
 }
 
 @media all and (max-width: 480px) , all and
