@@ -91,7 +91,7 @@ public class MyPageServlet extends HttpServlet {
 					"user");
 			User user = userRepository.findByEmail(userEmail);
 
-			Idea idea = new Idea(content, date, time, imgName, isPrivate,
+			Idea idea = new Idea(0, content, date, time, imgName, isPrivate,
 					user.getId());
 			System.out.println(idea.toString());
 			ideaRepository.add(idea);

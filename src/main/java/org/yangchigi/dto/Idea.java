@@ -9,8 +9,9 @@ public class Idea {
 	private String imgName;
 	private int userId;
 
-	public Idea(String content, String date, String time, String imgName,
+	public Idea(int id, String content, String date, String time, String imgName,
 			boolean is_private, int user_id) {
+		this.id = id;
 		this.content = content;
 		this.date = date;
 		this.time = time;
@@ -18,7 +19,7 @@ public class Idea {
 		this.isPrivate = is_private;
 		this.userId = user_id;
 	}
-
+	
 	public int getId() {
 		return id;
 	}

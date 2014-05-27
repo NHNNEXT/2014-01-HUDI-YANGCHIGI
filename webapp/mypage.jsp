@@ -70,6 +70,7 @@
 				<div id="contentsContainerDiv">
 					<c:forEach items="${ideaList}" var="idea">
 						<div class="row">
+							<input type="hidden" id="ideaId" value="${idea.id }">
 							<div class="time">
 								<p class="date">${idea.time}</p>
 							</div>

@@ -35,7 +35,7 @@ public class IdeaRepository implements Repository<Idea> {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				idea = new Idea(MyString.replace(rs.getString("content")), MyString.replace(rs.getString("time")),
+				idea = new Idea(rs.getInt("id"), MyString.replace(rs.getString("content")), MyString.replace(rs.getString("time")),
 						MyString.replace(rs.getString("date")), MyString.replace(rs.getString("imgName")),
 						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				ideaList.add(idea);
@@ -96,7 +96,7 @@ public class IdeaRepository implements Repository<Idea> {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				idea = new Idea(MyString.replace(rs.getString("content")), MyString.replace(rs.getString("date")),
+				idea = new Idea(rs.getInt("id"), MyString.replace(rs.getString("content")), MyString.replace(rs.getString("date")),
 						MyString.replace(rs.getString("time").substring(0, 5)), MyString.replace(rs.getString("img_name")),
 						rs.getBoolean("is_private"), rs.getInt("user_id"));
 				ideaList.add(idea);
