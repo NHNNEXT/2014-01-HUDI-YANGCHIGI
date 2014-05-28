@@ -15,6 +15,7 @@ ul {
 }
 
 #calendarDiv {
+	font-family: 'Damion', cursive;
 	height: 300px;
 	margin-right: 20px;
 	1background-color: #efa87b;
@@ -69,6 +70,13 @@ ul {
 	margin-left: -15px;
 }
 
+#contentInput {
+	background: -webkit-linear-gradient(left, #fbefdd, #fdf6ec); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, #fbefdd, #fdf6ec); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #fbefdd, #fdf6ec)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #fbefdd, #fdf6ec)); /* Standard syntax */
+}
+
 .contentsP {
 	display: inline;
 	vertical-align: top;
@@ -77,7 +85,6 @@ ul {
 
 #writeFormDiv {
 	height: 150px;
-	background-color: #FFFFFF;
 	position: relative;
 }
 
