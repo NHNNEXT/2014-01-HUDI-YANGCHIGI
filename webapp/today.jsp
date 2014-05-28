@@ -62,8 +62,8 @@
 
 					<div class="comment-set">
 						<input type="hidden" value="${comm.userId}">
-						<img id="commentProfile" src="/image/${user.thumbnail}" />
-						<p id="nickname">nickname</p>
+						<%-- <img id="commentProfile" src="/image/${user.thumbnail}" />
+                                    <p id="nickname">nickname</p> --%>
 						<p id="content">${comm.content}</p>
 					</div>
 				</c:forEach>
@@ -77,112 +77,112 @@
 		</div>
 	</div>
 	<script>
-		function submitComment() {
-			
-			var contentsVal = $('#commentInput').val();
-			
-			if (contentsVal == "") {
-				alert("내용이 없습니다");
-			}
-			else {
-				$.ajax({
-					type : "POST",
-					url : "/today/" + ${today.id} + "/writecomment",
-					
-					data : {
-						content : contentsVal
-					}
-				}).done(function(time) {
-					
-					$('#commentDiv').append('<div class="comment-set">'
-							+ replace(contentsVal)
-							+ '</div>').children(':last').hide().fadeIn('slow');
-					$('#commentInput').val("");
-					$('#commentDiv').animate({
-						scrollTop : $('#commentDiv')[0].scrollHeight
-					}, "fast");
-				});
-			}
-		}
-		
-		var replace = function(val) {
-			val = val.replace('<', '&lt;');
-			val = val.replace('>', '&gt;');
-			
-			return val;
-		}
-		var like = {
-			likeBtn : $('#likeBtn'),
-			likeInput : $('#likeInput'),
-			likeSpan : $('#likeSpan'),
-			isLiked : ${isLiked},
-			
-			checkLikeTodayOrNot : function() {
-				if (this.isLiked) this.likeBtn.addClass('btn-primary');
-			},
-			addLikeEvent : function() {
-				this.likeBtn.click(function() {
-					var like = parseInt(this.likeSpan.text(), 10);
-					
-					if (this.likeBtn.hasClass('btn-primary')) like -= 1;
-					else like += 1;
-					
-					$.ajax({
-						processData : true,
-						type : "POST",
-						url : "/today/" + ${today.id},
-						data : {
-							like : like
-						}
-					}).done(function(like) {
-						
-						like = Number(like);
-						this.likeSpan.text(like);
-						this.likeBtn.toggleClass('btn-primary');
-					}.bind(this));
-				}.bind(this));
-			},
-			init : function() {
-				this.checkLikeTodayOrNot();
-				this.addLikeEvent();
-			}
-		}
-		function setHeightForTimeDiv() {
-			$('.time').each(
-					function(i) {
-						var newHeight = parseInt($(this).next().height(), 10)
-								+ parseInt($(this).next().css('margin-top'), 10) * 2;
-						$(this).height(newHeight);
-						$(this).css('margin-top', $(this).next().css('margin-top'));
-					});
-		}
-		function loadUserInfo(){
-			$('.comment-set').each(
-				function(){
-					$.ajax({
-						type:'GET',
-						url:'/today/getuser/' + $(this).children('input').val(),
-					}).done(function(){
-						/* $(this).html()
-						<img id="commentProfile" src="/image/${user.thumbnail}" />
-						<p id="nickname">nickname</p> */
-					});
-				}		
-			);
-			
-		}
-		function todayLoad() {
-			$('#uploadCommentBtn').click(submitComment);
-			$('#commentInput').keydown(function(e){
-				if(e.keyCode == 13){
-					submitComment();
-				}
-			});
-			setHeightForTimeDiv();
-			like.init();
-			loadUserInfo();
-		}
-		
-	</script>
+                    function submitComment() {
+
+                        var contentsVal = $('#commentInput').val();
+
+                        if (contentsVal == "") {
+                            alert("내용이 없습니다");
+                        }
+                        else {
+                            $.ajax({
+                                type : "POST",
+                                url : "/today/" + ${today.id} + "/writecomment",
+
+                                   data : {
+                                  	 content : contentsVal
+                                   }
+                                   }).done(function(time) {
+
+                                $('#commentDiv').append('<div class="comment-set">'
+                                		+'<img id="commentProfile" src="/image/${me.thumbnail}" /><p id="nickname">${me.nickname}</p>'
+                                                        + replace(contentsVal)
+                                                        + '</div>').children(':last').hide().fadeIn('slow');
+                                $('#commentInput').val("");
+                                $('#commentDiv').animate({
+                                    scrollTop : $('#commentDiv')[0].scrollHeight
+                                }, "fast");
+                            });
+                        }
+                    }
+
+                    var replace = function(val) {
+                        val = val.replace('<', '&lt;');
+                        val = val.replace('>', '&gt;');
+
+                        return val;
+                    }
+                    var like = {
+                        likeBtn : $('#likeBtn'),
+                        likeInput : $('#likeInput'),
+                        likeSpan : $('#likeSpan'),
+                        isLiked : ${isLiked},
+
+                        checkLikeTodayOrNot : function() {
+                            if (this.isLiked) this.likeBtn.addClass('btn-primary');
+                        },
+                            addLikeEvent : function() {
+                                this.likeBtn.click(function() {
+                                    var like = parseInt(this.likeSpan.text(), 10);
+
+                                    if (this.likeBtn.hasClass('btn-primary')) like -= 1;
+                                    else like += 1;
+
+                                    $.ajax({
+                                        processData : true,
+                                        type : "POST",
+                                        url : "/today/" + ${today.id},
+                                           data : {
+                                           like : like
+                                           }
+                                           }).done(function(like) {
+
+                                        like = Number(like);
+                                        this.likeSpan.text(like);
+                                        this.likeBtn.toggleClass('btn-primary');
+                                    }.bind(this));
+                                }.bind(this));
+                            },
+                                init : function() {
+                                    this.checkLikeTodayOrNot();
+                                    this.addLikeEvent();
+                                }
+                    }
+                    function setHeightForTimeDiv() {
+                        $('.time').each(
+                            function(i) {
+                                var newHeight = parseInt($(this).next().height(), 10)
+                                + parseInt($(this).next().css('margin-top'), 10) * 2;
+                                $(this).height(newHeight);
+                                $(this).css('margin-top', $(this).next().css('margin-top'));
+                            });
+                    }
+                    function loadUserInfo(){
+                        $('.comment-set').each(
+                            function(){
+                                $.ajax({
+                                    type:'GET',
+                                    url:'/today/getuser/' + $(this).children('input').val()
+                                }).done(function(data){
+                                	var html = '<img id="commentProfile" src="/image/'+ data.split('&')[1]+'" /><p id="nickname">'+ data.split('&')[0]+ '</p>';
+                                    $(this).prepend(html);
+                                }.bind(this))
+                            }
+                        );
+                    }
+
+                    function todayLoad() {
+                        $('#uploadCommentBtn').click(submitComment);
+                        $('#commentInput').keydown(function(e){
+                            if(e.keyCode == 13){
+                                submitComment();
+                            }
+                        });
+                        setHeightForTimeDiv();
+                        like.init();
+                        loadUserInfo();
+                    }
+
+                </script>
 </body>
 </html>

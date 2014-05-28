@@ -188,7 +188,6 @@ var myCalendar = {
 																							success:function(data){
 																								data = data.split('<body>')[1];
 																								data = data.split('</body>')[0];
-																								console.log(data);
 																								$('#todayModal .modal-body').html(data);
 																								
 																								$('#todayModal').on('shown.bs.modal', function (e) {

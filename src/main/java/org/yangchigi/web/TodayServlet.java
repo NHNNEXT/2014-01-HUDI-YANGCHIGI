@@ -85,6 +85,7 @@ public class TodayServlet extends HttpServlet {
 			request.setAttribute("commList",
 					commRepository.findListByTodayId(todayId));
 			request.setAttribute("user", userRepository.findById(today.getUserId()));
+			request.setAttribute("me", user);
 			request.getRequestDispatcher("/today.jsp").forward(request,
 					response);
 		} else if ("/today".equals(uri)) {
@@ -138,6 +139,11 @@ public class TodayServlet extends HttpServlet {
 
 			// list를 json으로 변환
 			response.getWriter().write(new Gson().toJson(todayList));
+		} else if(uri.matches("/today/getuser/[0-9]+")){
+			int userId = Integer.parseInt(uri.substring(15));
+			User user = userRepository.findById(userId);
+			
+			response.getWriter().write(user.getNickname() + "&" + user.getThumbnail());
 		}
 	}
 
