@@ -59,7 +59,13 @@
 
 			<div id="commentDiv">
 				<c:forEach items="${commList}" var="comm">
-					<div class="comment-set">${comm.content}</div>
+
+					<div class="comment-set">
+						<input type="hidden" value="${comm.userId}">
+						<img id="commentProfile" src="/image/${user.thumbnail}" />
+						<p id="nickname">nickname</p>
+						<p id="content">${comm.content}</p>
+					</div>
 				</c:forEach>
 			</div>
 
@@ -91,8 +97,10 @@
 					$('#commentDiv').append('<div class="comment-set">'
 							+ replace(contentsVal)
 							+ '</div>').children(':last').hide().fadeIn('slow');
-					$('html, body').animate({ scrollTop: $(document).height() }, "fast");
 					$('#commentInput').val("");
+					$('#commentDiv').animate({
+						scrollTop : $('#commentDiv')[0].scrollHeight
+					}, "fast");
 				});
 			}
 		}
@@ -148,6 +156,21 @@
 						$(this).css('margin-top', $(this).next().css('margin-top'));
 					});
 		}
+		function loadUserInfo(){
+			$('.comment-set').each(
+				function(){
+					$.ajax({
+						type:'GET',
+						url:'/today/getuser/' + $(this).children('input').val(),
+					}).done(function(){
+						/* $(this).html()
+						<img id="commentProfile" src="/image/${user.thumbnail}" />
+						<p id="nickname">nickname</p> */
+					});
+				}		
+			);
+			
+		}
 		function todayLoad() {
 			$('#uploadCommentBtn').click(submitComment);
 			$('#commentInput').keydown(function(e){
@@ -157,6 +180,7 @@
 			});
 			setHeightForTimeDiv();
 			like.init();
+			loadUserInfo();
 		}
 		
 	</script>
