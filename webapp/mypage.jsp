@@ -21,9 +21,8 @@
 	href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css">
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.print.css">
-<link
-	href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower'
-	rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower' rel='stylesheet' type='text/css'>	
+<link href='http://fonts.googleapis.com/css?family=League+Script|Codystar|Indie+Flower|Damion|Seaweed+Script' rel='stylesheet' type='text/css'>	
 
 <link rel="stylesheet" href="css/mypage.css">
  <link rel="stylesheet" href="css/today_modal.css">
@@ -42,7 +41,6 @@
 	<div id="baloon">
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-md-4"></div>
-
 			<div id="rightSectionDiv" class="col-md-7">
 				<div id="writeFormDiv" class="row">
 					<form action="/mypage/write" method="post"

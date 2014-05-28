@@ -13,6 +13,9 @@
 <!-- 웹폰트 -->
 <link href="http://fonts.googleapis.com/css?family=Maven+Pro"
 	rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=League+Script|Codystar|Indie+Flower|Damion|Seaweed+Script' rel='stylesheet' type='text/css'>	
+
 <link rel="stylesheet" href="/css/landing.css">
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -25,7 +28,7 @@
 </head>
 <body>
 	<img id="logo" src="image/logo_grass.png">
-	<p id="slogan">seize the moment</p>
+	<p id="slogan">Seize the moment</p>
 	<!-- Button trigger modal -->
 	<div id="signinDiv">
 		<!-- Login form -->
