@@ -11,8 +11,9 @@ ul {
 }
 
 #calendarDiv {
-	font-family: 'Damion', cursive;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	height: 300px;
+	text-align: center !important;
 	margin-right: 20px;
 	1background-color: #efa87b;
 	1background-color: #fdb553;
@@ -24,6 +25,19 @@ ul {
 	background: linear-gradient(#fde47d, #fddd7d); /* Standard syntax */
 	
 	border-radius: 10px;
+}
+
+.fc-header-title h2 {
+	font-family:'Damion', cursive !important;
+	
+}
+
+.fc-day-number {
+	float: none !important;
+	font-size: 1.2em;
+ 	padding-top: 11% !important;
+ 	padding-bottom: 11% !important;
+ 	color: #656462;
 }
 
 .contents {
@@ -80,6 +94,7 @@ ul {
 #writeFormDiv {
 	height: 150px;
 	position: relative;
+	background-color: white;
 }
 
 #writeMenuDiv {

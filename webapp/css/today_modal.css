@@ -76,11 +76,13 @@
 }
 #commentProfile{
 	width: 25px;
+	height: 25px;
 	margin-right:5px;
 	border-radius: 50%;
 }
 #profileDiv img {
-	width: 20%;
+	width: 40px;
+	height: 40px;
 	border-radius: 50%;
 }
 

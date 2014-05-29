@@ -1,4 +1,4 @@
-<div id = "todayModal" class="modal fade">
+^<div id = "todayModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">

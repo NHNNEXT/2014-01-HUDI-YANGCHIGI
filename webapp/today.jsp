@@ -59,7 +59,6 @@
 
 			<div id="commentDiv">
 				<c:forEach items="${commList}" var="comm">
-
 					<div class="comment-set">
 						<input type="hidden" value="${comm.userId}">
 						<%-- <img id="commentProfile" src="/image/${user.thumbnail}" />
