@@ -96,7 +96,6 @@ public class MyPageServlet extends HttpServlet {
 
 			Idea idea = new Idea(content, date, time, imgName, isPrivate,
 					user.getId());
-			System.out.println(idea.toString());
 			ideaRepository.add(idea);
 
 			time = MyCalendar.getCurrentTimeWithoutSec();

@@ -73,7 +73,6 @@ public class TodayServlet extends HttpServlet {
 			today.setIdeaList(ideaList);
 			today.removePrivateIdea(user);
 			
-			System.out.println(ideaList.toString());
 			// 사용자가 투데이 like 상태인지 확인
 			Like like = likeRepository.findByUserIdAndTodayId(user.getId(),
 					todayId);
@@ -175,11 +174,9 @@ public class TodayServlet extends HttpServlet {
 			}
 
 			todayRepository.update(today);
-			System.out.println(String.valueOf(likeNum));
 			response.getWriter().write(String.valueOf(likeNum));
 		} else if (uri.matches("^/today/[0-9]+/writecomment")) {
 			int todayId = Integer.parseInt(uri.split("/")[2]);
-			System.out.println("todayid = " + todayId);
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");
 			User user = userRepository.findByEmail(userEmail);
