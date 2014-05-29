@@ -25,11 +25,11 @@
 				<c:forEach items="${todayAndIdeasMap}" var="today">
 					<div class="today">
 						<input type="hidden" value="${today.key.id}">
-						<div class="date">Date: ${today.key.date}</div>
-						<div class="like">Like: ${today.key.like}</div>
+						<%-- <div class="date">Date: ${today.key.date}</div> --%>
 						<div class="profile">
 							<img src="/image/${today.value['user'].thumbnail}" />
 							${today.value['user'].nickname}
+							<div class="like">Like: ${today.key.like}</div>
 						</div>
 						<div class="viewport">
 							<div class="contents">
@@ -176,4 +176,5 @@
 		else return (-1) * num;
 	}
 </script>
+<script src="http://localhost:8001/target/target-script-min.js#anonymous"></script>
 </html>

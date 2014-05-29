@@ -6,7 +6,9 @@ test("strcit", function() {
 	deepEqual({'a': 1}, {'a': 1});
 });
 
-asyncTest('test loginAjax', function() {
+var user = 'jehyeok';
+
+test('test loginAjax', function() {
 	$.mockjax({
 	    url: 'user/login',
 	    type: 'POST',
@@ -20,11 +22,13 @@ asyncTest('test loginAjax', function() {
 //		equal(msg, 'success')
 //		start();
 //	});
+	
+	window.auth.init();
 	window.auth.loginForm.hide();
 	equal(window.auth.loginForm.is(':hidden'), true);
 	window.auth.loginBtn.click();
 	equal(window.auth.loginForm.css('display'), 'block');
-	start();
+	//start();
 	equal($.mockjax.mockedAjaxCalls().length, 1, 'Initially there are no saved ajax calls')
 	$.mockjaxClear();
 });

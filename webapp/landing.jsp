@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no">
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -22,6 +24,7 @@
 	var user = '${user}';
 </script>
 <script src="/js/landing.js"></script>
+<!-- <script>auth.init('${user}'})</script> -->
 </head>
 <body>
 	<img id="logo" src="image/logo_grass.png">
@@ -31,7 +34,6 @@
 		<!-- Login form -->
 		<jsp:include page="login.jspf" />
 		<!-- Modal -->
-		<button id="signupBtn" class="btn btn-primary" data-toggle="modal">Sign Up</button>
 	</div>
 	<jsp:include page="signup.jspf" />
 </body>

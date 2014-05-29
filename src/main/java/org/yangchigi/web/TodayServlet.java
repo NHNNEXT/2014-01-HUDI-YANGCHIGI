@@ -70,6 +70,7 @@ public class TodayServlet extends HttpServlet {
 					today.getUserId(), today.getDate());
 
 			// 비공개 설정한 idea 필터
+			today.setIdeaList(ideaList);
 			today.removePrivateIdea(user);
 			
 			System.out.println(ideaList.toString());
