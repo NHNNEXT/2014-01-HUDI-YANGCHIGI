@@ -95,6 +95,7 @@ body {
 
 .menu-btn:HOVER {
 	color: #fdf6ec;
+	cursor: pointer;
 	-webkit-transition: all 100ms ease;
 	-moz-transition: all 100ms ease;
 	-ms-transition: all 100ms ease;
