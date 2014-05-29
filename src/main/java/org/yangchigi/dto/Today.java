@@ -12,6 +12,14 @@ public class Today {
 	private User user;
 	private List<Idea> ideaList;
 
+	public List<Idea> getIdeaList() {
+		return ideaList;
+	}
+
+	public void setIdeaList(List<Idea> ideaList) {
+		this.ideaList = ideaList;
+	}
+
 	public Today(String date, int like, int userId) {
 		this.date = date;
 		this.like = like;

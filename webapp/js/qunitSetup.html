@@ -8,7 +8,20 @@
 </head>
 <body>
 	<div id="qunit"></div>
-	<div id="qunit-fixture"></div>
+	<div id="qunit-fixture">
+		<form id="loginForm" action="login" method="post" role="form">
+			<div id="emailDiv">
+				<input type="email" name="email" class="form-control"
+					placeholder="Enter email" />
+			</div>
+			<div id="passwordDiv">
+				<input type="password" name="password" class="form-control"
+					placeholder="Password" />
+			</div>
+			<button type="button" id="loginBtn" class="btn btn-default"
+				data-toggle="popover" data-placement="bottom">Sign in</button>
+		</form>
+	</div>
 	<script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

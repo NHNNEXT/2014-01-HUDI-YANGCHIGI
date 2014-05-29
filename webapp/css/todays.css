@@ -30,6 +30,11 @@ body {
 	-webkit-transition: 0.8s;
 }
 
+.like {
+	display: inline-block;
+	float: right;	
+}
+
 .next-idea {
 	position: absolute;
 	display: none;
@@ -45,6 +50,8 @@ body {
 }
 
 .viewport {
+	position: relative;
+	top: 10%;
 	height: 60%;
 	overflow: hidden;
 }

@@ -12,10 +12,10 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet(name = "LandingServlet", urlPatterns = {""}) 
+@WebServlet(name = "LandingServlet", urlPatterns = { "" })
 public class LandingServlet extends HttpServlet {
 	private static final Logger logger = LoggerFactory
-			.getLogger("org.yangchigi.web.LandingServlet");
+			.getLogger(LandingServlet.class.getName());
 	private static final long serialVersionUID = 1L;
 
 	@Override

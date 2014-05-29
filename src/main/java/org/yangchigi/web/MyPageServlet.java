@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yangchigi.dto.Idea;
 import org.yangchigi.dto.User;
 import org.yangchigi.repository.IdeaRepository;
@@ -24,7 +26,6 @@ import org.yangchigi.support.MyCalendar;
 // server path
 //@MultipartConfig(location = "/home/yangchigi/apache-tomcat-7.0.52/webapps/ROOT/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 //@MultipartConfig(location = "/Users/jehyeok/yangchigi/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
-//@MultipartConfig(location = "/Users/jehyeok/yangchigi/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 @MultipartConfig(location = "/Users/yurim/Documents/workspace2/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 //@MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 @WebServlet(name = "MyPageServlet", urlPatterns = { "/mypage/*" })
@@ -32,6 +33,8 @@ public class MyPageServlet extends HttpServlet {
 	/**
 	 * 
 	 */
+	private static final Logger logger = LoggerFactory
+			.getLogger(MyPageServlet.class.getName());
 	private static final long serialVersionUID = 1L;
 	private IdeaRepository ideaRepository;
 	private UserRepository userRepository;
@@ -93,7 +96,6 @@ public class MyPageServlet extends HttpServlet {
 
 			Idea idea = new Idea(0, content, date, time, imgName, isPrivate,
 					user.getId());
-			System.out.println(idea.toString());
 			ideaRepository.add(idea);
 
 			time = MyCalendar.getCurrentTimeWithoutSec();

@@ -57,7 +57,7 @@ $(document).ready(function() {
 					content : '로그인 정보가 틀렸어요.'
 				});
 				this.loginBtn.popover('show');
-				// 1초 후 popover 제거 
+				// 1초 후 popover 제거
 				this.popoverTimer = setTimeout(function() {
 					this.loginBtn.popover('destroy');
 				}.bind(this), 1000);
