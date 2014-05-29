@@ -52,8 +52,8 @@ body {
 }
 
 #myInfo {
-	display: inline; 
-	margin-left: 300px;
+	display: inline-block;
+	float: right; 
 }
 #myThumbnail {
 	width: 40px;
