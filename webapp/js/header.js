@@ -1,8 +1,19 @@
 var Header = {
 	logoutBtn : $('#logoutBtn'),
-	showTodaysBtn : $('#showTodaysBtn'),
-	showMyPageBtn : $('#showMyPageBtn'),
-	showSettingBtn : $('#showSettingBtn'),
+	headerBtns : {
+		showTodays : {
+			btn : $('#showTodaysBtn'),
+			path : '/today'
+		},
+		showMyPage : {
+			btn : $('#showMyPageBtn'),
+			path : '/'
+		},
+		showSetting : {
+			btn : $('#showSettingBtn'),
+			path : '/usermodify'
+		},
+	},
 	
 	addLogoutEvent : function() {
 		this.logoutBtn.click(function() {
@@ -17,26 +28,17 @@ var Header = {
 			});
 		});
 	},
-	addShowTodaysEvent : function() {
-		this.showTodaysBtn.click(function() {
-			window.location = '/today';
-		});
+	addHeaderEvents : function() {
+		$.each(this.headerBtns, function(key, value) {
+			value.btn.click(this.changeTab.bind(this, value.path));
+		}.bind(this));
 	},
-	addShowMyPageEvent : function() {
-		this.showMyPageBtn.click(function() {
-			window.location = '/';
-		});
-	},
-	addShowSettingEvent : function() {
-		this.showSettingBtn.click(function() {
-			window.location = '/usermodify';
-		});
+	changeTab : function(path) {
+		window.location = path;
 	},
 	init: function() {
 		this.addLogoutEvent();
-		this.addShowTodaysEvent();
-		this.addShowMyPageEvent();
-		this.addShowSettingEvent();
+		this.addHeaderEvents();
 	}
 }
 Header.init();
