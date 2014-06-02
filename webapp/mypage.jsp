@@ -4,34 +4,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>My Page</title>
-
-<script src="http://code.jquery.com/jquery-1.11.0.js"></script>
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
-<script src="http://malsup.github.com/jquery.form.js"></script>
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"></script>
-<link rel="stylesheet"
-	href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css">
-<link rel="stylesheet"
-	href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.print.css">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower' rel='stylesheet' type='text/css'>	
-<link href='http://fonts.googleapis.com/css?family=League+Script|Codystar|Indie+Flower|Damion|Seaweed+Script' rel='stylesheet' type='text/css'>	
-
-<link rel="stylesheet" href="css/mypage.css">
- <link rel="stylesheet" href="css/today_modal.css">
-<link rel="stylesheet" href="css/header.css">
-<!-- <link rel="stylesheet" href="css/today.css"> -->
-<link
-	href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css"
-	rel="stylesheet">
-<script src="js/mypage.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Seize</title>
+	<!-- 파비콘 -->
+	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="image/favicon.ico" type="image/x-icon">	
+	<script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+	<script
+		src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+	<link rel="stylesheet"
+		href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script
+		src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"></script>
+	<link rel="stylesheet"
+		href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css">
+	<link rel="stylesheet"
+		href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.print.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower' rel='stylesheet' type='text/css'>	
+	<link href='http://fonts.googleapis.com/css?family=League+Script|Codystar|Indie+Flower|Damion|Seaweed+Script' rel='stylesheet' type='text/css'>	
+	
+	<link rel="stylesheet" href="css/mypage.css">
+	 <link rel="stylesheet" href="css/today_modal.css">
+	<link rel="stylesheet" href="css/header.css">
+	<!-- <link rel="stylesheet" href="css/today.css"> -->
+	<link
+		href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css"
+		rel="stylesheet">
+	<script src="js/mypage.js"></script>
 
 </head>
 <body>
@@ -49,17 +51,21 @@
 							class="form-control" rows="3" placeholder="생각을 기록하세요"
 							style="resize: none;"></textarea>
 						<input name="imgName" type='file' id="fileInput" accept="image/*"
-							style="display: none;" /> <input name="isPrivate"
+							style="display: none;" /> 
+						<img id="uploadImg" class="formIcon" src="icon/photo.png" />	
+						<img id="lockIcon" class="formIcon" src="icon/unlock.png" />	
+						<img id="submitBtn" class="formIcon" src="icon/submit.png" />	
+						<input name="isPrivate"
 							id="isPrivateIpnut" type="checkbox" />비공개
 						<p id="textlength">0/200</p>
 						<div id="imgFormDiv">
-							<img id="uploadImg" src="icon/addimage.png" style="height: 30px;" />
+							<!-- <img id="uploadImg" src="icon/addimage.png" style="height: 30px;" /> -->
 							<img id="prevImg" src="#" alt="your image" style="display: none;" />
 						</div>
 
 						<div id="writeMenuDiv">
 							<div class="form-group">
-								<button type="button" class="btn btn-success" id="submitBtn">Submit</button>
+								<!-- <button type="button" class="btn btn-success" id="submitBtn">Submit</button> -->
 							</div>
 						</div>
 					</form>
@@ -128,14 +134,12 @@
 	addShowTodaysEvent();
 	addShowMyPageEvent();
 	addShowSettingEvent();
-
-	// 각 내용 받아오기	
-	/* var contents = $('.contents');
-	$.each(contents, function(key, value) {
-		console.log('time: ' + $(value).find('.time').text());
-		console.log('imgName: ' + $(value).find('img').attr('src'));
-		console.log('content: ' + $(value).find('.contentsP').text());
-	}); */
+	
+	$('.trash').click(function() {
+		/* alert("id: " + "${idea.id }"); */
+		alert($(this).closest('input').attr('value'));
+		
+	});
 
 	var addTodayBtn = $('#addTodayBtn');
 	addTodayBtn.click(function() {

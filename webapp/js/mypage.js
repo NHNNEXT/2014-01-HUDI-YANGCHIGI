@@ -64,13 +64,7 @@ var write = {
 									+ '<img class="trash" src="image/trash_orange.png" >'
 									+ '</div></div>').children(':last').hide()
 					.fadeIn('slow');
-			// if (imgName === undefined) {
-			// $('#contentsContainerDiv').append(
-			// '<div class="row contents">'
-			// + '<div class="time" ><p class="date">' + time
-			// + '</p></div>' + '<p class="contentsP">' + content
-			// + '</p></div>').children(':last').hide().fadeIn(
-			// 'slow');
+
 		} else {
 			$('#contentsContainerDiv')
 					.append(
@@ -89,16 +83,6 @@ var write = {
 									+ '</div></div>').children(':last').hide()
 					.fadeIn('slow');
 		}
-		// } else {
-		// $('#contentsContainerDiv').append(
-		// '<div class="row contents">'
-		// + '<div class="time"><p class="date">' + time
-		// + '</p></div>'
-		// + '<img class="contentsImg" src="image/' + imgName
-		// + '" style="margin-right:5px;">'
-		// + '<p class="contentsP">' + content + '</p></div>')
-		// .children(':last').hide().fadeIn('slow');
-		// }
 
 		$('html, body').animate({
 			scrollTop : $(document).height()
@@ -106,11 +90,6 @@ var write = {
 		$('#prevImg').hide();
 		$('body form')[0].reset();
 		$('#textlength').text("0/200");
-		// $('.row.contents').append('<img class="trash"
-		// src="image/trash_orange.png" >'); //으앙
-		// $('#contentsContainerDiv').append('<img class="trash"
-		// src="image/trash_orange.png" >'); //으앙
-		// $('#contentsContainerDiv').append('kakakakakakakakako');
 	},
 
 	setHeightForTimeDiv : function() {
@@ -124,19 +103,6 @@ var write = {
 					$(this).css('margin-top', $(this).next().css('margin-top'));
 				});
 	},
-
-	// addTrash : function() {
-	// $('.row contents').each(
-	// function() {
-	// $(this).append('<img class="trash" src="image/trash_orange.png" >');
-	// });
-	// },
-
-	// addTrash : function() {
-	// $('.row contents').append('<img class="trash"
-	// src="image/trash_orange.png" >');
-	//			
-	// },
 
 	replace : function(val) {
 		val = val.replace('<', '&lt;');
