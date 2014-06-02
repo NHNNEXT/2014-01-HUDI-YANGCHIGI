@@ -52,12 +52,14 @@
 							style="resize: none;"></textarea>
 						<input name="imgName" type='file' id="fileInput" accept="image/*"
 							style="display: none;" /> 
-						<img id="uploadImg" class="formIcon" src="icon/photo.png" />	
-						<img id="lockIcon" class="formIcon" src="icon/unlock.png" />	
-						<img id="submitBtn" class="formIcon" src="icon/submit.png" />	
-						<input name="isPrivate"
-							id="isPrivateIpnut" type="checkbox" />비공개
-						<p id="textlength">0/200</p>
+						<div id="formButtons">
+							<p id="textlength">0/200</p>
+							<img id="uploadImg" class="formIcon" src="icon/photo.png" />	
+							<img id="lockIcon" class="formIcon" src="icon/unlock.png" />	
+							<img id="submitBtn" class="formIcon" src="icon/submit.png" />	
+						</div>	
+						<br><input name="isPrivate"
+							id="isPrivateInput" type="checkbox" />비공개
 						<div id="imgFormDiv">
 							<!-- <img id="uploadImg" src="icon/addimage.png" style="height: 30px;" /> -->
 							<img id="prevImg" src="#" alt="your image" style="display: none;" />
@@ -140,6 +142,16 @@
 		alert($(this).closest('input').attr('value'));
 		
 	});
+	
+ 	$('#lockIcon').click(function() {
+		var lockStatus = $(this).attr("src");
+		if(lockStatus === "/icon/unlock.png"){
+			$(this).attr("src", "/icon/lock.png");
+		}
+ 		else
+			$(this).attr("src", "/icon/unlock.png"); 
+		
+	}); 
 
 	var addTodayBtn = $('#addTodayBtn');
 	addTodayBtn.click(function() {
