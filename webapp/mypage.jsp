@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no">
 <title>My Page</title>
 
 <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
@@ -21,11 +23,15 @@
 	href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css">
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.print.css">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower' rel='stylesheet' type='text/css'>	
-<link href='http://fonts.googleapis.com/css?family=League+Script|Codystar|Indie+Flower|Damion|Seaweed+Script' rel='stylesheet' type='text/css'>	
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower'
+	rel='stylesheet' type='text/css'>
+<link
+	href='http://fonts.googleapis.com/css?family=League+Script|Codystar|Indie+Flower|Damion|Seaweed+Script'
+	rel='stylesheet' type='text/css'>
 
 <link rel="stylesheet" href="css/mypage.css">
- <link rel="stylesheet" href="css/today_modal.css">
+<link rel="stylesheet" href="css/today_modal.css">
 <link rel="stylesheet" href="css/header.css">
 <!-- <link rel="stylesheet" href="css/today.css"> -->
 <link
@@ -76,7 +82,7 @@
 										style="margin-right: 5px;">
 								</c:if>
 								<p class="contentsP">${idea.content}</p>
-							<img class="trash" src="image/trash_orange.png">
+								<img class="trash" src="image/trash_orange.png">
 							</div>
 						</div>
 					</c:forEach>

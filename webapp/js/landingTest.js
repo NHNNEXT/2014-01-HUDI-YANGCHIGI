@@ -48,7 +48,7 @@ asyncTest('login fail & show popover', function() {
 	$.mockjaxClear();
 });
 
-asyncTest('test settTimeout', function() {
+asyncTest('test setTimeout', function() {
 	setTimeout(function() {
 		ok(true);
 	}, 400)
@@ -56,3 +56,4 @@ asyncTest('test settTimeout', function() {
 	tick(500);
 	start();
 });
+

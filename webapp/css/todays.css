@@ -31,8 +31,10 @@ body {
 }
 
 .like {
+	position: relative;
 	display: inline-block;
-	float: right;	
+	top: 10px;
+	float: right;
 }
 
 .next-idea {
@@ -72,8 +74,9 @@ body {
 }
 
 .profile {
-	text-align: initial;
 	position: absolute;
+	text-align: initial;
+	width: 100%;
 	bottom: 0;
 }
 
@@ -101,5 +104,6 @@ body {
 	}
 	.today {
 		width: 100%;
+		margin: 10px 0 10px 0;
 	}
 }
