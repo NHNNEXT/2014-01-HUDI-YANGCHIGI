@@ -11,7 +11,7 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
-	<script
+<script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/todays.css">
@@ -21,7 +21,7 @@
 	rel="stylesheet">
 </head>
 <body>
-<jsp:include page="today_modal.jspf" />
+	<jsp:include page="today_modal.jspf" />
 	<%@include file="header.jspf"%>
 	<div id="contentContainerDiv">
 		<div id="baloon">
@@ -50,7 +50,7 @@
 		</div>
 	</div>
 	<%@include file="footer.jspf"%>
-	
+
 </body>
 <script>
 	//header events
@@ -151,56 +151,83 @@
 	});
 
 	$('.next-idea').click(
-		function(e) {
-			e.stopPropagation();
-			var contents = $(e.target.parentNode).find('.contents');
-			var contentsLeft = parseInt(contents.css('left'));
-			var contentLastChildLeft = parseInt(contents.find(
-					'.content:last-child').css('left'));
-			if (contentsLeft !== (-1) * contentLastChildLeft) {
-				contents.filter(':not(:animated)').animate({
-					'left' : '-=100%'
-				}, 'slow');
-			}
-		});
+			function(e) {
+				e.stopPropagation();
+				var contents = $(e.target.parentNode).find('.contents');
+				var contentsLeft = parseInt(contents.css('left'));
+				var contentLastChildLeft = parseInt(contents.find(
+						'.content:last-child').css('left'));
+				if (contentsLeft !== (-1) * contentLastChildLeft) {
+					contents.filter(':not(:animated)').animate({
+						'left' : '-=100%'
+					}, 'slow');
+				}
+			});
 
 	$.each(todays, function(key, value) {
+		var movedLength = 0;
+		var today;
+		var firstPos;
+		var secondPos;
+		var touches = {};
+		
 		value.addEventListener('touchstart', function(e) {
 			console.log('touch start');
 			console.log(e.touches);
 			$('.change-idea').hide();
-			//e.preventDefault();
-			var firstPos = e.touches[0].clientX;
-			//var secondPos = e.touches[1] && e.touches[1].clientX;
-			var movedLength = 0;
-			var today = $(e.touches[0].target).parent().parent();
-			
-			this.addEventListener('touchmove', function(e) {
-				//console.log('touch move');
-				//console.log(e.changedTouches);
-				//e.preventDefault();
+
+			if (e.touches.length === 2) {
+				firstPos = e.touches[0].clientX;
+				secondPos = e.touches[1] && e.touches[1].clientX;
+				touches[e.touches[0].identifier] = [e.touches[0], firstPos];
+				touches[e.touches[1].identifier] = [e.touches[1], secondPos];
 				
-				if (e.changedTouches.length == 2) {
-					e.preventDefault();
-					movedLength += (e.touches[0].clientX - firstPos); 
-								/* + (e.touches[1].clientX - secondPos)) / 2;*/
-					console.log('movedLength: ' + movedLength);
-					if (getAbs(movedLength) > today.width()/3) {
-						if (movedLength < 0) {
-							today.find('.pre-idea').click();
-						} else {
-							today.find('.next-idea').click();
-						}
+				movedLength = 0;
+				console.log('firstPos: ' + firstPos);
+				console.log('secondPos: ' + secondPos);
+				today = $(e.currentTarget);
+			}
+		}, false);
+
+		value.addEventListener('touchmove', function(e) {
+			if (e.touches.length === 2 && e.changedTouches.length === 2) {
+				e.preventDefault();
+				
+				// 이동한 손가락 위치
+				var firstTouchPos = e.touches[0].clientX;
+				var secondTouchPos = e.touches[1].clientX;
+				
+				// 이동하기 전 손가락 위치
+				firstPos = touches[e.touches[0].identifier][1];
+				secondPos = touches[e.touches[1].identifier][1];
+				
+				// 이동한 거리
+				movedLength += (firstTouchPos - firstPos)
+						+ (secondTouchPos - secondPos) / 2;
+				// console.log('movedLength: ' + movedLength);
+				
+				// 이동한 손가락 위치 업데이트
+				touches[e.touches[0].identifier][1] = firstTouchPos;
+				touches[e.touches[1].identifier][1] = secondTouchPos;
+				
+				if (getAbs(movedLength) > today.width() / 2) {
+					if (movedLength < 0) {
+						today.find('.next-idea').click();
+					} else {
+						today.find('.pre-idea').click();
 					}
 				}
-			});
+			}
 		}, false);
 	});
-			
+
 	function getAbs(num) {
-		if (num >= 0) return num;
-		else return (-1) * num;
+		if (num >= 0)
+			return num;
+		else
+			return (-1) * num;
 	}
 </script>
-<script src="http://localhost:8001/target/target-script-min.js#anonymous"></script>
+<script
+	src="http://localhost:8001/target/target-script-min.js#anonymous"></script>
 </html>
