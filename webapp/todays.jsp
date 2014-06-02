@@ -52,43 +52,8 @@
 	<%@include file="footer.jspf"%>
 
 </body>
+<script src="/js/header.js"></script>
 <script>
-	//header events
-	function addLogoutEvent() {
-		$('#logoutBtn').click(function() {
-			$.ajax({
-				type : "POST",
-				url : "user/logout"
-			}).done(function(msg) {
-				console.log(msg);
-				if ('success' === msg) {
-					window.location = '/';
-				}
-			});
-		});
-	}
-
-	function addShowTodaysEvent() {
-		$('#showTodaysBtn').click(function() {
-			window.location = '/today';
-		});
-	}
-
-	function addShowMyPageEvent() {
-		$('#showMyPageBtn').click(function() {
-			window.location = '/';
-		});
-	}
-	function addShowSettingEvent() {
-		$('#showSettingBtn').click(function() {
-			window.location = '/usermodify';
-		});
-	}
-	addLogoutEvent();
-	addShowTodaysEvent();
-	addShowMyPageEvent();
-	addShowSettingEvent();
-
 	var todays = $('.today');
 
 	$.each(todays, function(key, value) {
@@ -122,7 +87,6 @@
 	var contents = $('.contents');
 
 	$.each(contents, function(key, value) {
-		//debugger;
 		setIdeaContents(value.children);
 	});
 
