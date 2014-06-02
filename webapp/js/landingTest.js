@@ -3,45 +3,56 @@ test("hello test", function() {
 });
 
 test("strcit", function() {
-	deepEqual({'a': 1}, {'a': 1});
+	deepEqual({
+		'a' : 1
+	}, {
+		'a' : 1
+	});
 });
 
 var user = 'jehyeok';
 
-test('test loginAjax', function() {
+asyncTest('test loginAjax', function() {
 	$.mockjax({
-	    url: 'user/login',
-	    type: 'POST',
-	    responseText: 'success'
+		url : 'user/login',
+		type : 'POST',
+		responseText : 'success'
 	});
-	
-//	$.ajax({
-//		type : "POST",
-//		url : "user/login",
-//	}).done(function(msg) {
-//		equal(msg, 'success')
-//		start();
-//	});
-	
-	window.auth.init();
+
 	window.auth.loginForm.hide();
 	equal(window.auth.loginForm.is(':hidden'), true);
 	window.auth.loginBtn.click();
+	// window.auth.loginForm.show();
 	equal(window.auth.loginForm.css('display'), 'block');
-	//start();
-	equal($.mockjax.mockedAjaxCalls().length, 1, 'Initially there are no saved ajax calls')
+	start();
+	equal($.mockjax.mockedAjaxCalls().length, 1,
+			'Initially there are no saved ajax calls')
 	$.mockjaxClear();
 });
 
-asyncTest('test setTimeout', function() {
+asyncTest('login fail & show popover', function() {
 	$.mockjax({
-		url: 'user/login',
-		type: 'POST',
-		responseText: 'fail'
+		url : 'user/login',
+		type : 'POST',
+		responseText : 'fail'
 	});
-	
+
 	window.auth.loginBtn.click();
+	// window.auth.loginBtn.popover('show');
+	tick(1000);
+	equal(window.auth.loginBtn.next().is('div'), true);
+	tick(2000);
+	equal(window.auth.loginBtn.next().is('div'), false);
 	
 	start();
 	$.mockjaxClear();
+});
+
+asyncTest('test settTimeout', function() {
+	setTimeout(function() {
+		ok(true);
+	}, 400)
+	
+	tick(500);
+	start();
 });
