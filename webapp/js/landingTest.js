@@ -1,18 +1,8 @@
-test("hello test", function() {
-	ok(1 == "1", "Passed!");
-});
-
-test("strcit", function() {
-	deepEqual({
-		'a' : 1
-	}, {
-		'a' : 1
-	});
-});
-
 var user = 'jehyeok';
-
-asyncTest('test loginAjax', function() {
+test('test loginAjax', function() {
+	TimerMock.replace();
+	TimerMock.reset();
+	
 	$.mockjax({
 		url : 'user/login',
 		type : 'POST',
@@ -22,38 +12,43 @@ asyncTest('test loginAjax', function() {
 	window.auth.loginForm.hide();
 	equal(window.auth.loginForm.is(':hidden'), true);
 	window.auth.loginBtn.click();
-	// window.auth.loginForm.show();
+	TimerMock.flow(1000);
+
 	equal(window.auth.loginForm.css('display'), 'block');
-	start();
 	equal($.mockjax.mockedAjaxCalls().length, 1,
 			'Initially there are no saved ajax calls')
 	$.mockjaxClear();
 });
 
 asyncTest('login fail & show popover', function() {
+	TimerMock.replace();
+	TimerMock.reset();
+	
 	$.mockjax({
 		url : 'user/login',
 		type : 'POST',
 		responseText : 'fail'
 	});
-
+	
+	console.log('loginBtn.next().is(div): ' + auth.loginBtn.next().is('div'));
 	window.auth.loginBtn.click();
-	// window.auth.loginBtn.popover('show');
-	tick(1000);
+	
+	TimerMock.flow(800);
 	equal(window.auth.loginBtn.next().is('div'), true);
-	tick(2000);
+	
+	TimerMock.flow(3000);
 	equal(window.auth.loginBtn.next().is('div'), false);
 	
 	start();
 	$.mockjaxClear();
 });
-
-asyncTest('test setTimeout', function() {
-	setTimeout(function() {
-		ok(true);
-	}, 400)
-	
-	tick(500);
-	start();
-});
+//
+//asyncTest('test setTimeout', function() {
+//	setTimeout(function() {
+//		ok(true);
+//	}, 400)
+//	
+//	tick(500);
+//	start();
+//});
 

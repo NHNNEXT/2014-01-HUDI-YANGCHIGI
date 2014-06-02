@@ -118,11 +118,17 @@ body {
 
 /* 미디어쿼리 CSS */
 /* 타블렛 */
-@media all and (min-width:300px) and (max-width:920px) {
+@media all and (min-width:480px) and (max-width:920px) {
 	#logo {
 		display: none;
 	}
+}
+
+@media all and (min-width:300px) and (max-width:480px) {
 	#myInfo {
+		display: none;
+	}
+	#logo {
 		display: none;
 	}
 }

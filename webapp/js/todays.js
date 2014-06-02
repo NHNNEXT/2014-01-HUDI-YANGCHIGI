@@ -24,7 +24,6 @@ $.each(todays, function(key, value) {
 			}
 
 		});
-		/* window.location = 'today/' + todayId; */
 	});
 });
 
@@ -58,20 +57,20 @@ $('.pre-idea').click(function(e) {
 	}
 });
 
-$('.next-idea').click(
-		function(e) {
-			e.stopPropagation();
-			var contents = $(e.target.parentNode).find('.contents');
-			var contentsLeft = parseInt(contents.css('left'));
-			var contentLastChildLeft = parseInt(contents.find(
-					'.content:last-child').css('left'));
-			if (contentsLeft !== (-1) * contentLastChildLeft) {
-				contents.filter(':not(:animated)').animate({
-					'left' : '-=100%'
-				}, 'slow');
-			}
-		});
+$('.next-idea').click(function(e) {
+	e.stopPropagation();
+	var contents = $(e.target.parentNode).find('.contents');
+	var contentsLeft = parseInt(contents.css('left'));
+	var contentLastChildLeft = parseInt(contents.find(
+			'.content:last-child').css('left'));
+	if (contentsLeft !== (-1) * contentLastChildLeft) {
+		contents.filter(':not(:animated)').animate({
+			'left' : '-=100%'
+		}, 'slow');
+	}
+});
 
+// 터치 이벤트
 $.each(todays, function(key, value) {
 	var movedLength = 0;
 	var today;
@@ -87,8 +86,8 @@ $.each(todays, function(key, value) {
 		if (e.touches.length === 2) {
 			firstPos = e.touches[0].clientX;
 			secondPos = e.touches[1] && e.touches[1].clientX;
-			touches[e.touches[0].identifier] = [ e.touches[0], firstPos ];
-			touches[e.touches[1].identifier] = [ e.touches[1], secondPos ];
+			touches[e.touches[0].identifier] = [e.touches[0], firstPos];
+			touches[e.touches[1].identifier] = [e.touches[1], secondPos];
 
 			movedLength = 0;
 			console.log('firstPos: ' + firstPos);
@@ -96,6 +95,18 @@ $.each(todays, function(key, value) {
 			today = $(e.currentTarget);
 		}
 	}, false);
+	function touchstart(){
+		
+	}
+	function touchmove(){
+		
+	}
+	
+	touchmove({
+		changedTouches : [],
+		touches : [],
+		
+	})
 
 	value.addEventListener('touchmove', function(e) {
 		if (e.touches.length === 2 && e.changedTouches.length === 2) {

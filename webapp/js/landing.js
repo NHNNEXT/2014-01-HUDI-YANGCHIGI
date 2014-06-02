@@ -39,6 +39,7 @@ $(document).ready(function() {
 			});
 		},
 		callback : function(fp, msg) {
+//			console.log('loginBtn callback = '+msg);
 			// 로그인 or 로그아웃 성공
 			if ("success" === msg) {
 				if (this.loginForm.is(':hidden')) {
@@ -51,14 +52,17 @@ $(document).ready(function() {
 				// 로그인 실패
 			} else {
 				clearTimeout(this.popoverTimer);
+				
 				// 로그인 실패 popover
 				this.loginBtn.popover('destroy');
+				
 				this.loginBtn.popover({
 					content : '로그인 정보가 틀렸어요.'
 				});
 				this.loginBtn.popover('show');
 				// 1초 후 popover 제거
 				this.popoverTimer = setTimeout(function() {
+					console.log("timmer")
 					this.loginBtn.popover('destroy');
 				}.bind(this), 1000);
 			}

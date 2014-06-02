@@ -50,10 +50,9 @@
 		</div>
 	</div>
 	<%@include file="footer.jspf"%>
-
 </body>
 <script src="/js/header.js"></script>
 <script src="/js/todays.js"></script>
 <script
-	src="http://localhost:8001/target/target-script-min.js#anonymous"></script>
+	src="http://10.73.43.211:8001/target/target-script-min.js#anonymous"></script>
 </html>
