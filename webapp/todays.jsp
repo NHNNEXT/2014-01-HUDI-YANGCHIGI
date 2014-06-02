@@ -169,7 +169,8 @@
 		var today;
 		var firstPos;
 		var secondPos;
-
+		var touches = {};
+		
 		value.addEventListener('touchstart', function(e) {
 			console.log('touch start');
 			console.log(e.touches);
@@ -178,37 +179,42 @@
 			if (e.touches.length === 2) {
 				firstPos = e.touches[0].clientX;
 				secondPos = e.touches[1] && e.touches[1].clientX;
+				touches[e.touches[0].identifier] = [e.touches[0], firstPos];
+				touches[e.touches[1].identifier] = [e.touches[1], secondPos];
+				
 				movedLength = 0;
 				console.log('firstPos: ' + firstPos);
 				console.log('secondPos: ' + secondPos);
-				today = $(e.touches[0].currentTarget);
+				today = $(e.currentTarget);
 			}
 		}, false);
 
 		value.addEventListener('touchmove', function(e) {
-			if (e.changedTouches.length === 2) {
+			if (e.touches.length === 2 && e.changedTouches.length === 2) {
 				e.preventDefault();
 				
+				// 이동한 손가락 위치
 				var firstTouchPos = e.touches[0].clientX;
 				var secondTouchPos = e.touches[1].clientX;
 				
+				// 이동하기 전 손가락 위치
+				firstPos = touches[e.touches[0].identifier][1];
+				secondPos = touches[e.touches[1].identifier][1];
+				
+				// 이동한 거리
 				movedLength += (firstTouchPos - firstPos)
 						+ (secondTouchPos - secondPos) / 2;
-				console.log('movedLength: ' + movedLength);
+				// console.log('movedLength: ' + movedLength);
 				
-				firstPos = firstTouchPos;
-				secondPos = secondTouchPos;
+				// 이동한 손가락 위치 업데이트
+				touches[e.touches[0].identifier][1] = firstTouchPos;
+				touches[e.touches[1].identifier][1] = secondTouchPos;
 				
-				// temp
-				today = $(e.currentTarget);
 				if (getAbs(movedLength) > today.width() / 2) {
-					debugger;
 					if (movedLength < 0) {
 						today.find('.next-idea').click();
-						debugger;
 					} else {
 						today.find('.pre-idea').click();
-						debugger;
 					}
 				}
 			}
