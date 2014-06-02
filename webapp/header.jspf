@@ -14,5 +14,4 @@
 				id="myNickname">${nickname}</span>
 		</div>
 	</div>
-	<p id="triangle"></p>
 </div>

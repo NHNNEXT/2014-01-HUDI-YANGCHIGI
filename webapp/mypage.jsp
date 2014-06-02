@@ -36,8 +36,6 @@
 </head>
 <body>
 	<%@include file="header.jspf"%>
-	<button id="addTodayBtn" class="btn btn-warning" style="float: right">Create
-		Today</button>
 	<div id="baloon">
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-md-4"></div>
@@ -87,6 +85,8 @@
 			</div>
 		</div>
 	</div>
+	<button id="addTodayBtn" class="btn btn-warning" style="float: right">Create
+		Today</button>
 	<%@include file="footer.jspf"%>
 	<jsp:include page="today_modal.jspf" />
 </body>

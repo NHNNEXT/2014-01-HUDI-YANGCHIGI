@@ -3,19 +3,22 @@
 body {
 	background-color: #ede8e1;
 	-webkit-font-smoothing: antialiased;
-	font-family: 'Roboto', sans-serif; 
+	font-family: 'Roboto', sans-serif;
 }
 
 #baloon {
-	1background-color: #fcf8f0;
-	1background-color: #f3bf76;
-	1background-color: #dcd8d0;
-
-	background: -webkit-linear-gradient(#dcd8d0, #ede8e1); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(#dcd8d0, #ede8e1); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(#dcd8d0, #ede8e1); /* For Firefox 3.6 to 15 */
+	position: relative;
+	top: 10px; 1
+	background-color: #fcf8f0; 1
+	background-color: #f3bf76; 1
+	background-color: #dcd8d0;
+	background: -webkit-linear-gradient(#dcd8d0, #ede8e1);
+	/* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#dcd8d0, #ede8e1);
+	/* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#dcd8d0, #ede8e1);
+	/* For Firefox 3.6 to 15 */
 	background: linear-gradient(#dcd8d0, #ede8e1); /* Standard syntax */
-	
 	border-radius: 1em;
 	margin-left: 5%;
 	margin-right: 5%;
@@ -32,17 +35,17 @@ body {
 .footer_links li {
 	display: inline-block;
 	list-style: none;
-	color:#a09e98;
+	color: #a09e98;
 	font-weight: 200;
-	padding:5px;
+	padding: 5px;
 }
 
-/* 헤더 CSS */ 
+/* 헤더 CSS */
 #header {
 	/* height:71px; */
-	display:block;
-	margin:auto;
-	position:relative;
+	display: block;
+	margin: auto;
+	position: relative;
 }
 
 #logo {
@@ -52,9 +55,12 @@ body {
 }
 
 #myInfo {
+	position: relative;
 	display: inline-block;
-	float: right; 
+	float: right;
+	right: 8%;
 }
+
 #myThumbnail {
 	width: 40px;
 	height: 40px;
@@ -62,14 +68,14 @@ body {
 	display: inline-block;
 	vertical-align: inherit !important;
 }
+
 #myNickname {
-	display: inline-block;
-	font-size:25px;
-	font-weight: bold;
-	1color: #413f3c;
+	position: relative;
+	top: -10px;
+	font-size: 25px;
+	font-weight: bold; 1
+	color: #413f3c;
 	color: #41403e;
-	vertical-align: middle;
-	padding-bottom: 30px;
 }
 
 #headerBarDiv {
@@ -78,18 +84,25 @@ body {
 }
 
 #btnsDiv {
+	position: relative;
 	display: inline-block;
+	left: 15%;
 }
 
 #btnsUl {
 	display: inline-block;
 	margin-bottom: 0 !important;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 0px;
 }
 
 .menu-btn {
 	display: inline-block;
 	margin-left: 5px;
-	font-size:3em; 
+	font-size: 3em;
 	color: #86827a;
 }
 
@@ -104,38 +117,20 @@ body {
 }
 
 /* 미디어쿼리 CSS */
-/* 타블렛 */ 
-@media all and (min-width:402px) and (max-width:920px){
+/* 타블렛 */
+@media all and (min-width:402px) and (max-width:920px) {
 	body {
-		background-color:#fad2b5;
+		background-color: #fad2b5;
 	}
 }
 
 /* 데탑 */
-@media all and (min-width:920px){
+@media all and (min-width:920px) {
 	#header {
 		width: 876px !important;
 	}
-	
-/* 	#logo {
-		margin: 30px 13px 0 15px;
-		float:left;	
-	} */
 	#baloon {
 		width: 920px;
-		margin:0 auto;
+		margin: 0 auto;
 	}
-	
-	1#triangle  {
-		width: 0px;
-		height: 0px;
-		border: 40px solid #fcf8f0;
-		border-top-width: 0;
-		border-right-color: transparent;
-		border-left-color: transparent;
-		position: relative;
-		top: -20px;
-		left: 530px;
-	}
-
 }

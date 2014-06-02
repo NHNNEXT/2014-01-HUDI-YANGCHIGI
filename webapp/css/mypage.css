@@ -134,6 +134,10 @@ ul {
 @media ( min-width : 1px) and (max-width: 991px) {
 	#baloon {
 		max-width: 95% !important;
+		left: 5%;
+	}
+	#logo {
+		display: none;
 	}
 	#calendarDiv {
 		/* display: none !important; */
