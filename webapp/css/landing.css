@@ -1,7 +1,13 @@
 @CHARSET "US-ASCII";
 
 body {
-	background-color: #ede8e1;
+	1background-color: #ede8e1;
+	background-color: #32706e;
+}
+
+#logoSlogan {
+	margin: 50px 150px 20px 150px;
+	border: 13px solid rgba(255, 255, 255, 0.8);
 }
 
 #logo {
@@ -9,22 +15,23 @@ body {
 	display: table;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 10%;
+	margin-top: 6%;
 }
 
 #slogan {
 	text-align: center;
-	/* font-family: 'Seaweed Script', cursive; */ 
-	font-family: 'Damion', cursive;  
-	/* font-family: 'Codystar', cursive; */ 
-	/* font-family: 'League Script', cursive; */ 
-	/* font-family: 'Indie Flower', cursive; */ 
-	/* font-family: 'Raleway', 'sans-serif'; */ 
-	/* font-family: 'Maven Pro', 'sans-serif';  */
-	font-size: 3em;
+	1font-family: 'Seaweed Script', cursive;  
+	1font-family: 'Damion', cursive;  
+	1font-family: 'Codystar', cursive; 
+	font-family: 'League Script', cursive; 
+	1font-family: 'Raleway', 'sans-serif'; 
+	1font-family: 'Maven Pro', 'sans-serif'; 
+	font-size: 30px;
 	margin-top: 30px;
-	color: #afaca8;
-	font-weight: 200;
+	margin-bottom: 30px;
+	1color: #afaca8;
+	color: #d8dbdb;
+	font-weight: 200 ;
 }
 
 #signinDiv {
@@ -40,7 +47,16 @@ body {
 #signupBtn {
 	display: inline-block;
 	/* float:right;  */
-	background-color: gray !important;
+}
+
+.btn-default {
+	background-color: #48e0a4 !important;
+	border: none !important;
+}
+
+.btn-primary {
+	background-color: #f26767 !important;
+	border: none !important;
 }
 
 #emailDiv {
@@ -51,13 +67,61 @@ body {
 	display: inline-block;
 }
 
+.form-control {
+	border: none !important;
+}
+
+#footer {
+	margin-top: 240px;
+	text-align: center;
+}
+
+.footer_links li {
+	display: inline-block;
+	list-style: none;
+	color: #cacfcf;
+	font-weight: 200;
+	padding: 7px;
+}
+
 @media all and (max-width: 480px) , all and
 	(-webkit-min-device-pixel-ratio: 2) {
 	#emailDiv {
 		display: block;
-		width: 300px;
+		width: 250px;
 	}
 	#passwordDiv {
 		display: block;
+	}
+	
+	#logoSlogan {
+		border: none;
+		margin: 0;
+		margin-bottom: 70px;
+	}
+	
+	#contents {
+		margin: 50px 5px 30px 5px;
+		padding: 10px;
+		padding-top: 15px;
+		padding-bottom: 50px;
+		border: 13px solid rgba(255, 255, 255, 0.8);
+		min-width: 270px;
+	}
+	
+	#logo {
+		width: 270px;
+	}
+	
+	#footer {
+		margin-top: 20px;
+	}
+	
+	ul {
+		-webkit-padding-start: 0px !important;
+	}
+	
+	.btn {
+		width: 120px;
 	}
 }

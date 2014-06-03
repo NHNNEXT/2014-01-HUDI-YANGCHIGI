@@ -30,14 +30,19 @@
 <!-- <script>auth.init('${user}'})</script> -->
 </head>
 <body>
-	<img id="logo" src="image/logo_grass.png">
-	<p id="slogan">Seize the moment</p>
-	<!-- Button trigger modal -->
-	<div id="signinDiv">
-		<!-- Login form -->
-		<jsp:include page="login.jspf" />
-		<!-- Modal -->
+	<div id="contents">
+		<div id="logoSlogan">
+			<img id="logo" src="image/logo_snowfox.png">
+			<p id="slogan">Seize the moment</p>
+		</div>
+		<!-- Button trigger modal -->
+		<div id="signinDiv">
+			<!-- Login form -->
+			<jsp:include page="login.jspf" />
+			<!-- Modal -->
+		</div>
+		<jsp:include page="signup.jspf" />
 	</div>
-	<jsp:include page="signup.jspf" />
+	<%@include file="footer.jspf"%>
 </body>
 </html>

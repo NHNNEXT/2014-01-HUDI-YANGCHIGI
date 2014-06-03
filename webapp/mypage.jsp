@@ -56,7 +56,7 @@
 							<img id="submitBtn" class="formIcon" src="icon/submit.png" />	
 						</div>	
 						<br><input name="isPrivate"
-							id="isPrivateInput" type="checkbox" />비공개
+							id="isPrivateInput" type="hidden" value="false"/>
 						<div id="imgFormDiv">
 							<!-- <img id="uploadImg" src="icon/addimage.png" style="height: 30px;" /> -->
 							<img id="prevImg" src="#" alt="your image" style="display: none;" />
@@ -83,7 +83,7 @@
 										style="margin-right: 5px;">
 								</c:if>
 								<p class="contentsP">${idea.content}</p>
-								<img class="trash" src="image/trash_orange.png">
+								<img class="trash" src="image/trash_orange.png" data-idea-id="${idea.id }">
 							</div>
 						</div>
 					</c:forEach>
@@ -99,8 +99,6 @@
 </body>
 <script src="/js/header.js"></script>
 <script>
-<<<<<<< HEAD
-=======
 	// header events
 	function addLogoutEvent() {
 		$('#logoutBtn').click(function() {
@@ -139,22 +137,24 @@
 	addShowSettingEvent();
 	
 	$('.trash').click(function() {
-		/* alert("id: " + "${idea.id }"); */
-		alert($(this).closest('input').attr('value'));
-		
+/* 		alert($(this).attr("data-idea-id"));
+		alert($(this).data("idea-id")); */
+		$(this).parent().parent().slideUp("slow",function(){
+			$(this).remove();
+		});
 	});
 	
  	$('#lockIcon').click(function() {
 		var lockStatus = $(this).attr("src");
-		if(lockStatus === "/icon/unlock.png"){
+		if(lockStatus === "/icon/unlock.png"){  //image sprite
 			$(this).attr("src", "/icon/lock.png");
-		}
- 		else
+			$('#isPrivateInput').val(true);
+		}else{
 			$(this).attr("src", "/icon/unlock.png"); 
-		
+			$('#isPrivateInput').val(false);
+		}
 	}); 
 
->>>>>>> refs/heads/delete
 	var addTodayBtn = $('#addTodayBtn');
 	addTodayBtn.click(function() {
 		$.ajax({

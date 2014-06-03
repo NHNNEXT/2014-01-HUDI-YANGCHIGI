@@ -1,7 +1,9 @@
 @CHARSET "UTF-8";
 /* 공통 CSS */
 body {
-	background-color: #ede8e1;
+	1background-color: #ede8e1;
+	1background-color: #478d7c;
+	background-color: #32706e;
 	-webkit-font-smoothing: antialiased;
 	font-family: 'Roboto', sans-serif;
 }
@@ -11,14 +13,21 @@ body {
 	top: 10px; 1
 	background-color: #fcf8f0; 1
 	background-color: #f3bf76; 1
-	background-color: #dcd8d0;
-	background: -webkit-linear-gradient(#dcd8d0, #ede8e1);
+	background: -webkit-linear-gradient(#397566, #478d7c);
 	/* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(#dcd8d0, #ede8e1);
+	background: -o-linear-gradient(#397566, #478d7c);
 	/* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(#dcd8d0, #ede8e1);
+	background: -moz-linear-gradient(#397566, #478d7c);
 	/* For Firefox 3.6 to 15 */
-	background: linear-gradient(#dcd8d0, #ede8e1); /* Standard syntax */
+	background: linear-gradient(#2c6260, #32706e); /* Standard syntax */
+/* 	background-color: #dcd8d0;
+	background: -webkit-linear-gradient(#dcd8d0, #ede8e1);
+	For Safari 5.1 to 6.0
+	background: -o-linear-gradient(#dcd8d0, #ede8e1);
+	For Opera 11.1 to 12.0
+	background: -moz-linear-gradient(#dcd8d0, #ede8e1);
+	For Firefox 3.6 to 15
+	background: linear-gradient(#dcd8d0, #ede8e1); Standard syntax */
 	border-radius: 1em;
 	margin-left: 5%;
 	margin-right: 5%;
@@ -86,7 +95,7 @@ body {
 #btnsDiv {
 	position: relative;
 	display: inline-block;
-	left: 15%;
+	left: 32%;
 }
 
 #btnsUl {
@@ -103,7 +112,8 @@ body {
 	display: inline-block;
 	margin-left: 5px;
 	font-size: 3em;
-	color: #86827a;
+	1color: #86827a;
+	color: #438784;
 }
 
 .menu-btn:HOVER {

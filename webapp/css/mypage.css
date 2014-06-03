@@ -42,12 +42,14 @@ ul {
 
 .contents {
 	1background-color: #FFFFDD;
-	background-color: #fdf6ec;
+	1background-color: #fdf6ec;
+	background-color: #f8f6f4;
 	
-	background: -webkit-linear-gradient(left, #fbefdd, #fdf6ec); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(right, #fbefdd, #fdf6ec); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, #fbefdd, #fdf6ec)); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, #fbefdd, #fdf6ec)); /* Standard syntax */
+	/* background: -webkit-linear-gradient(left, #fbefdd, #fdf6ec); For Safari 5.1 to 6.0
+	background: -o-linear-gradient(right, #fbefdd, #fdf6ec); For Opera 11.1 to 12.0
+	background: -moz-linear-gradient(right, #fbefdd, #fdf6ec)); For Firefox 3.6 to 15
+	background: linear-gradient(to right, #fbefdd, #fdf6ec)); Standard syntax */
+	
 /* 	background: -webkit-linear-gradient(left, #fdf6ec , #fbecd6); For Safari 5.1 to 6.0
 	background: -o-linear-gradient(right, #fdf6ec , #fbecd6); For Opera 11.1 to 12.0
 	background: -moz-linear-gradient(right, #fdf6ec , #fbecd6); For Firefox 3.6 to 15
@@ -67,8 +69,9 @@ ul {
 .time {
 	width: 20px;
 	position: absolute;
-	background-color: #418270;
-	opacity: 0.7;
+	1background-color: #418270;
+	background-color: #fda546;
+	/* opacity: 0.7; */
 }
 
 .date {
