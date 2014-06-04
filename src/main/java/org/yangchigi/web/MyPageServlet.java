@@ -101,7 +101,8 @@ public class MyPageServlet extends HttpServlet {
 			time = MyCalendar.getCurrentTimeWithoutSec();
 			response.getWriter().write(time);
 
-		} else if("/mypage/ideaDelete".equals(uri)) {
+		} 
+		else if("/mypage/ideaDelete".equals(uri)) {
 			contentsMap = getIdeaInfo(request);
 			int ideaId = Integer.parseInt(contentsMap.get("ideaId"));
 			ideaRepository.destroy(ideaId);

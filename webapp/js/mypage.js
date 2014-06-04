@@ -118,7 +118,7 @@ var write = {
 	init : function() {
 		$('#submitBtn').click(this.submitArticle.bind(this));
 		this.setHeightForTimeDiv();
-		this.addTrash();
+//		this.addTrash();
 		$('body').hide().delay(200).fadeIn('slow'); // check
 	}
 }

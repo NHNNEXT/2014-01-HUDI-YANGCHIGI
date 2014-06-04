@@ -136,22 +136,6 @@
 	addShowMyPageEvent();
 	addShowSettingEvent();
 	
-	$('.trash').click(function() {
-/* 		alert($(this).attr("data-idea-id"));*/
-		alert($(this).data("idea-id")); 
-		var ideaId = $(this).data("idea-id");
-		var option = {
-				type: "POST",
-				url: "/mypage/ideaDelete",
-				mimeType : "multipart/form-data",
-				success : function() {
-					$(this).parent().parent().slideUp("fast",function(){
-						$(this).remove();
-					}
-				} 
-		});
-	});
-	
  	$('#lockIcon').click(function() {
 		var lockStatus = $(this).attr("src");
 		if(lockStatus === "/icon/unlock.png"){  //image sprite
@@ -162,7 +146,25 @@
 			$('#isPrivateInput').val(false);
 		}
 	}); 
-
+ 	
+	$('.trash').click(function() {
+		$(this).parent().parent().slideUp("fast",function(){
+		$(this).remove(); 
+/* 		alert($(this).attr("data-idea-id"));
+		alert($(this).data("idea-id")); 
+ 		var ideaId = $(this).data("idea-id");
+		var option = {
+				type: "POST",
+				url: "/mypage/ideaDelete",
+				mimeType : "multipart/form-data",
+				success : function() {
+					$(this).parent().parent().slideUp("fast",function(){
+						$(this).remove();
+					}
+				} 
+		}); */
+	});
+	
 	var addTodayBtn = $('#addTodayBtn');
 	addTodayBtn.click(function() {
 		$.ajax({
