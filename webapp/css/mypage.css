@@ -18,13 +18,19 @@ ul {
 	1background-color: #efa87b;
 	1background-color: #fdb553;
 	background-color: #fde47d;
+	padding-top: 5px;
+	padding-bottom: 50px;
 	
-	background: -webkit-linear-gradient(#fde47d, #fddd7d); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(#fde47d, #fddd7d); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(#fde47d, #fddd7d); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(#fde47d, #fddd7d); /* Standard syntax */
+	/* background: -webkit-linear-gradient(#fde47d, #fddd7d); For Safari 5.1 to 6.0
+	background: -o-linear-gradient(#fde47d, #fddd7d); For Opera 11.1 to 12.0
+	background: -moz-linear-gradient(#fde47d, #fddd7d); For Firefox 3.6 to 15
+	background: linear-gradient(#fde47d, #fddd7d); Standard syntax */
 	
 	border-radius: 10px;
+}
+
+.fc-header {
+	margin-top: 10px;
 }
 
 .fc-header-title h2 {
@@ -37,7 +43,32 @@ ul {
 	font-size: 1.2em;
  	padding-top: 11% !important;
  	padding-bottom: 11% !important;
- 	color: #656462;
+ 	color: #6c6b69;
+}
+
+.fc-state-highlight {
+	color: white !important;
+	background: #48e0a4;
+	border-radius: 50%;
+	1border: 9px solid #fde47d !important;
+}
+
+.fc-state-default {
+	background-color: #f2d457 !important;
+	background-image: linear-gradient(to bottom, #fbdc5e, #f2d457) !important;
+	1border-radius: 50% !important;
+}
+
+.fc-state-highlight > div > div {
+	color: white !important;
+}
+
+.fc-border-separate th, .fc-border-separate td {
+	border: none;
+}
+
+.td {
+	padding: 10px !important;
 }
 
 .contents {
@@ -70,7 +101,8 @@ ul {
 	width: 20px;
 	position: absolute;
 	1background-color: #418270;
-	background-color: #fda546;
+	1background-color: #fda546;
+	background-color: #fdb553;
 	/* opacity: 0.7; */
 }
 
@@ -122,6 +154,7 @@ ul {
 
 #formButtons {
 	float: right;
+	margin-top: 5px;
 }
 
 .formIcon {

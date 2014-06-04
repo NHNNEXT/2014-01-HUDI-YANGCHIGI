@@ -110,4 +110,20 @@ public class IdeaRepository implements Repository<Idea> {
 		}
 		return ideaList;
 	}
+
+	public void destroy(int ideaId) {
+		PreparedStatement pstmt;
+		String sql = "DELETE FROM 'idea' WHERE id = ?";
+		try {
+			Connection conn = DriverManager.getConnection(addr, user, pw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ideaId);
+			pstmt.executeQuery();
+			
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

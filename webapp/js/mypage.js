@@ -93,21 +93,25 @@ var write = {
 	},
 
 	setHeightForTimeDiv : function() {
-		$('.time').each(
-				function(i) {
-					var newHeight = parseInt($(this).next().height(), 10)
-							+ parseInt($(this).next().css('margin-top'), 10)
-							* 2;
-					
-					$(this).height(newHeight);
-					$(this).css('margin-top', $(this).next().css('margin-top'));
-				});
+		$('.time')
+				.each(
+						function(i) {
+							var newHeight = parseInt($(this).next().height(),
+									10)
+									+ parseInt(
+											$(this).next().css('margin-top'),
+											10) * 2;
+
+							$(this).height(newHeight);
+							$(this).css('margin-top',
+									$(this).next().css('margin-top'));
+						});
 	},
 
 	replace : function(val) {
 		val = val.replace('<', '&lt;');
 		val = val.replace('>', '&gt;');
-		
+
 		return val;
 	},
 
@@ -120,107 +124,129 @@ var write = {
 }
 
 var myCalendar = {
-	    checkHasToday: function () {
-	        $
-	            .ajax({
-	                url: "/today/getList",
-	                dataType: "json",
-	                success: function (data) {
-	                    $
-	                        .each(
-	                            $('td.fc-day'),
-	                            function (i, val) {
-	                                $
-	                                    .each(
-	                                        data,
-	                                        function (j, today) {
-	                                            if ($(this)
-	                                                .attr(
-	                                                    'data-date') == today.date
-	                                                .toString()) {
-	                                                $(this)
-	                                                    .css(
-	                                                        'background-color',
-	                                                        '#f26767')
-	                                                    .css(
-	                                                        'border-color',
-	                                                        'transparent')
-	                                                    .css(
-	                                                        'margin',
-	                                                        '20px')
-	                                                    .css(
-	                                                        'cursor',
-	                                                        'pointer')
-	                                                    .css(
-	                                                        'border-radius',
-	                                                        '50%');
+	checkHasToday : function() {
+		$
+				.ajax({
+					url : "/today/getList",
+					dataType : "json",
+					success : function(data) {
+						$
+								.each(
+										$('td.fc-day'),
+										function(i, val) {
+											$
+													.each(
+															data,
+															function(j, today) {
+																if ($(this)
+																		.attr(
+																				'data-date') == today.date
+																		.toString()) {
+																	$(this)
+																			.css(
+																					'background-color',
+																					'#f26767')
+																			.css(
+																					'border-color',
+																					'transparent')
+																			.css(
+																					'margin',
+																					'20px')
+																			.css(
+																					'cursor',
+																					'pointer')
+																			.css(
+																					'border-radius',
+																					'50%');
+																	$(this).children().children().css('color', 'white');
+																	$(this)
+																			.click(
+																					function() {
+																						$
+																								.ajax({
+																									url : "/today/"
+																											+ today.id,
+																									type : "GET",
+																									success : function(
+																											data) {
+																										data = data
+																												.split('<body>')[1];
+																										data = data
+																												.split('</body>')[0];
+																										$(
+																												'#todayModal .modal-body')
+																												.html(
+																														data);
 
-	                                                $(this)
-	                                                    .click(
-	                                                        function () {
-	                                                            $.ajax({
-	                                                                url: "/today/" + today.id,
-	                                                                type: "GET",
-	                                                                success: function (data) {
-	                                                                    data = data.split('<body>')[1];
-	                                                                    data = data.split('</body>')[0];
-	                                                                    $('#todayModal .modal-body').html(data);
+																										$(
+																												'#todayModal')
+																												.on(
+																														'shown.bs.modal',
+																														function(
+																																e) {
+																															todayLoad();
+																														});
+																										$(
+																												'#todayModal')
+																												.on(
+																														'hidden.bs.modal',
+																														function(
+																																e) {
+																															$(
+																																	'#todayModal')
+																																	.off(
+																																			'shown.bs.modal');
+																														});
 
-	                                                                    $('#todayModal').on('shown.bs.modal', function (e) {
-	                                                                        todayLoad();
-	                                                                    });
-	                                                                    $('#todayModal').on('hidden.bs.modal', function (e) {
-	                                                                        $('#todayModal').off('shown.bs.modal');
-	                                                                    });
+																										$(
+																												'#todayModal')
+																												.modal();
+																									}
 
-	                                                                    $('#todayModal').modal();
-	                                                                }
+																								});
+																					});
+																}
+															}.bind(this));
+										});
+					}
+				});
+	},
 
+	init : function() {
+		$('#calendarDiv').fullCalendar({
+			header : {
+				left : 'prev',
+				center : 'title',
+				right : 'next'
+			},
 
-	                                                            });
-	                                                        });
-	                                            }
-	                                        }.bind(this));
-	                            });
-	                }
-	            });
-	    },
+			dayClick : function(date) {
+				// 하루를 추가해 한국 날짜로 변환
+				date.setDate(date.getDate() + 1);
+				// 오늘 날짜
+				var curDate = new Date().toISOString().substring(0, 10);
+				// 선택한 날짜
+				var clickedDate = date.toISOString().substring(0, 10);
 
-	    init: function () {
-	        $('#calendarDiv').fullCalendar({
-	            header: {
-	                left: 'prev',
-	                center: 'title',
-	                right: 'next'
-	            },
+			}
 
-	            dayClick: function (date) {
-	                // 하루를 추가해 한국 날짜로 변환
-	                date.setDate(date.getDate() + 1);
-	                // 오늘 날짜
-	                var curDate = new Date().toISOString().substring(0, 10);
-	                // 선택한 날짜
-	                var clickedDate = date.toISOString().substring(0, 10);
+		});
 
-	            }
+		this.checkHasToday();
+		$('.fc-button').click(this.checkHasToday);
 
-	        });
-
-	        this.checkHasToday();
-	        $('.fc-button').click(this.checkHasToday);
-
-	    }
 	}
+}
 
 function getLength() {
 	$('#textlength').text($('#contentInput').val().length + "/200");
 }
 
 function load() {
+	$('#contentInput').keyup(getLength);
 	myCalendar.init();
 	readImg.init();
 	write.init();
-	$('#contentInput').keyup(getLength);
 
 }
 

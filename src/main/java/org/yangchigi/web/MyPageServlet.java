@@ -101,7 +101,28 @@ public class MyPageServlet extends HttpServlet {
 			time = MyCalendar.getCurrentTimeWithoutSec();
 			response.getWriter().write(time);
 
+		} else if("/mypage/ideaDelete".equals(uri)) {
+			contentsMap = getIdeaInfo(request);
+			int ideaId = Integer.parseInt(contentsMap.get("ideaId"));
+			ideaRepository.destroy(ideaId);
 		}
+	}
+
+	private HashMap<String, String> getIdeaInfo(HttpServletRequest request) {
+		Part filePart = null;
+		HashMap<String, String> contentsMap = new HashMap<String, String>();
+		try {
+			for(Part part: request.getParts()) {
+				if(part.getName().equals("ideaId")) {
+//					String paramValue = getStringFromStream(part.getInputStream());
+//					contentsMap.put("content", paramValue.trim());
+					contentsMap.put("content", getStringFromStream(part.getInputStream()));
+				}
+			}
+		}catch (IOException | ServletException e) {
+			e.printStackTrace();
+		}
+		return contentsMap;
 	}
 
 	private boolean hasError(HashMap<String, String> contentsMap) {

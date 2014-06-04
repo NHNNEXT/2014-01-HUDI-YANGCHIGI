@@ -10,6 +10,7 @@
 				<li id="logoutBtn" class="menu-btn icon-fontawesome-webfont-4"></li>
 			</ul>
 		</div>
+		<!-- <img id="boloc" src="/image/boloc.png" /> -->
 		<div id="myInfo">
 			<img id="myThumbnail" src="image/${thumbnailName}"> <span
 				id="myNickname">${nickname}</span>
