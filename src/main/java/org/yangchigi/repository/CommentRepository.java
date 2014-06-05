@@ -32,7 +32,7 @@ public class CommentRepository implements Repository<Comment> {
 			pstmt.setString(1, comm.getContent());
 			pstmt.setInt(2, comm.getUserId());
 			pstmt.setInt(3, comm.getTodayId());
-			pstmt.execute();
+			pstmt.executeUpdate();
 
 			pstmt.close();
 			conn.close();

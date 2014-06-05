@@ -148,21 +148,26 @@
 	}); 
  	
 	$('.trash').click(function() {
-		$(this).parent().parent().slideUp("fast",function(){
-		$(this).remove(); 
-/* 		alert($(this).attr("data-idea-id"));
-		alert($(this).data("idea-id")); 
  		var ideaId = $(this).data("idea-id");
-		var option = {
+		/* var option = {
 				type: "POST",
 				url: "/mypage/ideaDelete",
-				mimeType : "multipart/form-data",
+				data: ideaId,
 				success : function() {
 					$(this).parent().parent().slideUp("fast",function(){
 						$(this).remove();
-					}
+					});
 				} 
-		}); */
+		};
+		$.ajax(option); */
+		
+		$.ajax({
+			type : "POST",
+			url: "/mypage/ideaDelete",
+			data : {ideaId : ideaId},
+		}).done(function(msg) {
+			console.log(msg);
+		});
 	});
 	
 	var addTodayBtn = $('#addTodayBtn');

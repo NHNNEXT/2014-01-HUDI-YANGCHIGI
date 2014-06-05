@@ -103,27 +103,12 @@ public class MyPageServlet extends HttpServlet {
 
 		} 
 		else if("/mypage/ideaDelete".equals(uri)) {
-			contentsMap = getIdeaInfo(request);
-			int ideaId = Integer.parseInt(contentsMap.get("ideaId"));
-			ideaRepository.destroy(ideaId);
+			logger.debug(request.getParameter("ideaId"));
+			String ideaId = request.getParameter("ideaId");
+			logger.debug("" + Integer.parseInt(ideaId));
+			ideaRepository.destroy(Integer.parseInt(ideaId));
+			response.getWriter().write("success");
 		}
-	}
-
-	private HashMap<String, String> getIdeaInfo(HttpServletRequest request) {
-		Part filePart = null;
-		HashMap<String, String> contentsMap = new HashMap<String, String>();
-		try {
-			for(Part part: request.getParts()) {
-				if(part.getName().equals("ideaId")) {
-//					String paramValue = getStringFromStream(part.getInputStream());
-//					contentsMap.put("content", paramValue.trim());
-					contentsMap.put("content", getStringFromStream(part.getInputStream()));
-				}
-			}
-		}catch (IOException | ServletException e) {
-			e.printStackTrace();
-		}
-		return contentsMap;
 	}
 
 	private boolean hasError(HashMap<String, String> contentsMap) {
