@@ -13,13 +13,17 @@
 <link href='http://fonts.googleapis.com/css?family=Raleway:400,300'
 	rel='stylesheet' type='text/css'>
 <!-- 파비콘 -->
-	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="image/favicon.ico" type="image/x-icon">		
+<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+<link rel="icon" href="image/favicon.ico" type="image/x-icon">
 <!-- 웹폰트 -->
 <link href="http://fonts.googleapis.com/css?family=Maven+Pro"
 	rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=League+Script|Codystar|Indie+Flower|Damion|Seaweed+Script' rel='stylesheet' type='text/css'>	
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,300,900|Francois+One|Indie+Flower'
+	rel='stylesheet' type='text/css'>
+<link
+	href='http://fonts.googleapis.com/css?family=League+Script|Codystar|Indie+Flower|Damion|Seaweed+Script'
+	rel='stylesheet' type='text/css'>
 
 <link rel="stylesheet" href="/css/landing.css">
 <script
@@ -43,6 +47,8 @@
 			<!-- Login form -->
 			<jsp:include page="login.jspf" />
 			<!-- Modal -->
+			<button id="signupBtn" class="btn btn-primary" data-toggle="modal"
+				data-target="#myModal">Sign Up</button>
 		</div>
 		<jsp:include page="signup.jspf" />
 	</div>
