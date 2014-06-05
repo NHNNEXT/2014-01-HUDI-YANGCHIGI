@@ -7,11 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
-<title>Insert title here</title>
+<title>Seize</title>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link href='http://fonts.googleapis.com/css?family=Raleway:400,300'
 	rel='stylesheet' type='text/css'>
+<!-- 파비콘 -->
+	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="image/favicon.ico" type="image/x-icon">		
 <!-- 웹폰트 -->
 <link href="http://fonts.googleapis.com/css?family=Maven+Pro"
 	rel="stylesheet" type="text/css">

@@ -14,6 +14,7 @@ function submitArticle() {
 		success : function() {
 			alert("변경되었습니다.새로고침 하세여...(미안)") //하면 될랑가 
 			//변경시 함수 추가(addDiv같은거) 
+			$()
 		}	
 	};
 	$('body form').ajaxSubmit(option);
@@ -43,7 +44,6 @@ function readImg() {
 		var reader = new FileReader();
 		
 		reader.onload = function(e) {
-//			debugger;
 			$("#box").css('background-image','url("'+e.target.result+'")');
 		};
 		cur_img_name = input.files[0].name;

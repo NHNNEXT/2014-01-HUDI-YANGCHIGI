@@ -41,7 +41,7 @@
 <%@ page import="java.sql.*" %>
 
 
-<title>Insert title here</title>
+<title>Seize</title>
 </head>
 <body>
 	<h1>변경되었습니당(아마도)</h1>

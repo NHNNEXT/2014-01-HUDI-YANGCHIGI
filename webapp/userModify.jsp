@@ -10,7 +10,9 @@
 	<link rel="stylesheet" href="css/header.css">
 	<link rel="stylesheet" href="css/usermodify.css">
 	<link href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css" rel="stylesheet">	
-	
+	<!-- 파비콘 -->
+	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="image/favicon.ico" type="image/x-icon">	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
 	<script src="js/userModify.js"></script>
