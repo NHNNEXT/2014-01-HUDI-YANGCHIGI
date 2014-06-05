@@ -161,15 +161,22 @@
 		};
 		$.ajax(option); */
 		
+
+		$(this).parent().parent().slideUp("fast", function() {
+			$(this).remove();
+		});
+		
 		$.ajax({
 			type : "POST",
-			url: "/mypage/ideaDelete",
-			data : {ideaId : ideaId},
+			url : "/mypage/ideaDelete",
+			data : {
+				ideaId : ideaId
+			},
 		}).done(function(msg) {
 			console.log(msg);
 		});
 	});
-	
+
 	var addTodayBtn = $('#addTodayBtn');
 	addTodayBtn.click(function() {
 		$.ajax({
