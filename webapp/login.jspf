@@ -9,6 +9,6 @@
 	</div>
 	<button type="button" id="loginBtn" class="btn btn-default"
 		data-toggle="popover" data-placement="bottom">Sign in</button>
-	<button id="signupBtn" class="btn btn-primary" data-toggle="modal">Sign
-		Up</button>
+	<!-- <button id="signupBtn" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Sign
+		Up</button> -->
 </form>
