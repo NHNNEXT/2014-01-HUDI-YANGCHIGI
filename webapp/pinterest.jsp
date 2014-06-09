@@ -6,11 +6,12 @@
 <meta name="author" content="Script Tutorials" />
 <title>PinPin</title>
 <link href="css/pinterest.css" rel="stylesheet" type="text/css" />
-<script src="http://malsup.github.com/jquery.form.js"></script>
+<!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
+<script src="js/jquery.min.js"></script>
 <script src="js/jquery.masonry.min.js"></script>
 <script src="js/jquery.colorbox-min.js"></script>
 <script src="js/pinterest.js"></script>
-        <script src="js/jquery.min.js"></script>
+<!-- <script src="js/mansory.js"></script> -->
 
 </head>
 <body>
@@ -74,7 +75,7 @@
 	</div>
 
 	<!-- main container -->
-	<div class="main_container mansory">
+	<div class="main_container">
 
 		<!-- pin element 1 -->
 		<div class="pin">

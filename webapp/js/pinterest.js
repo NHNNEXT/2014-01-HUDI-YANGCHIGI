@@ -7,6 +7,7 @@ $(document).ready(function(){
         isAnimated: true,
         isFitWidth: true
     });
+    
 
     // onclick event handler (for comments)
     $('.comment_tr').click(function () {
