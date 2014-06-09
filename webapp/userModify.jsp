@@ -41,7 +41,8 @@
 					<img id="uploadImg" src="image/${thumbnailName}"/>  --%>
 				</div>
 				<!-- <img id="prevImg" src="#" alt="your image" style="display: none;" /> -->
-				<h3><div>nickname: ${nickname} -> <input type="text" name="nickname" id="nicknameInput"></div></h3>
+				<h1 class="nickname"><p id="oldNickname">${nickname}</p></h1> 
+				<input type="text" name="nickname" id="nicknameInput">
 				
 				<!-- 제출 -->
 				<div id="writeMenuDiv">

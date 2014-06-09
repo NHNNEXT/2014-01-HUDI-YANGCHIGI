@@ -149,17 +149,9 @@
  	
 	$('.trash').click(function() {
  		var ideaId = $(this).data("idea-id");
-		/* var option = {
-				type: "POST",
-				url: "/mypage/ideaDelete",
-				data: ideaId,
-				success : function() {
-					$(this).parent().parent().slideUp("fast",function(){
-						$(this).remove();
-					});
-				} 
-		};
-		$.ajax(option); */
+		$(this).parent().parent().slideUp("fast",function(){
+			$(this).remove();
+		});
 		
 		$.ajax({
 			type : "POST",

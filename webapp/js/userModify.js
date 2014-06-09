@@ -13,7 +13,9 @@ function submitArticle() {
 		data : $('body form').serialize(),	
 		success : function() {
 			alert("변경되었습니다.새로고침 하세여...(미안)") //하면 될랑가 
-			//변경시 함수 추가(addDiv같은거) 
+			//변경시 함수 추가(addDiv같은거)
+			$('.oldId').remove();
+			$('.nickname').append("lalala")
 		}	
 	};
 	$('body form').ajaxSubmit(option);
