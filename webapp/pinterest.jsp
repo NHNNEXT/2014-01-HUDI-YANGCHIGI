@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="utf-8" />
 <meta name="author" content="Script Tutorials" />
 <title>PinPin</title>
 <link href="css/pinterest.css" rel="stylesheet" type="text/css" />
-<script src="js/jquery.min.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="js/jquery.masonry.min.js"></script>
+<script src="js/jquery.colorbox-min.js"></script>
 <script src="js/pinterest.js"></script>
-</head>
+        <script src="js/jquery.min.js"></script>
 
+</head>
 <body>
 
-	<!-- header panel -->
 	<!-- header panel -->
 	<div class="header_panel">
 
@@ -71,8 +73,10 @@
 		</form>
 	</div>
 
-	<!-- main container with pin elements -->
-	<div class="main_container">
+	<!-- main container -->
+	<div class="main_container mansory">
+
+		<!-- pin element 1 -->
 		<div class="pin">
 			<div class="holder">
 				<div class="actions" pin_id="1">
@@ -80,7 +84,8 @@
 					<a href="#" class="button disabled comment_tr">Comment</a>
 				</div>
 				<a class="image ajax" href="#" title="Photo number 1" pin_id="1">
-					<img alt="Photo number 1" src="image/tumblr_n5vniaakio1strk4go1_500.jpg">
+					<img alt="Photo number 1"
+					src="image/tumblr_n5vniaakio1strk4go1_500.jpg">
 				</a>
 			</div>
 			<p class="desc">Photo number 1 description</p>
@@ -93,105 +98,73 @@
 				<button type="button" class="button">Comment</button>
 			</form>
 		</div>
+
+		<!-- pin element 2 -->
 		<div class="pin">
 			<div class="holder">
-				<div class="actions" pin_id="1">
+				<div class="actions" pin_id="2">
 					<a href="#" class="button">Repin</a> <a href="#" class="button">Like</a>
-					<a href="#" class="button disabled comment_tr">Comment</a>
+					<a href="#" class="button comment_tr">Comment</a>
 				</div>
-				<a class="image ajax" href="#" title="Photo number 1" pin_id="1">
-					<img alt="Photo number 1" src="image/default_thumbnail.jpg">
+				<a class="image ajax" href="#" title="Photo number 2"> <img
+					alt="Photo number 2" src="image/default_thumbnail.jpg">
 				</a>
 			</div>
-			<p class="desc">Photo number 1 description</p>
+			<p class="desc">Photo number 2 description</p>
 			<p class="info">
-				<span>1 likes</span> <span>1 repins</span>
+				<span>2 likes</span> <span>2 repins</span>
 			</p>
-			<form class="comment" method="post" action="">
-				<input type="hidden" name="id" value="1" />
+			<form class="comment" method="post" action="" style="display: none">
+				<input type="hidden" name="id" value="2" />
 				<textarea placeholder="Add a comment..." maxlength="1000"></textarea>
 				<button type="button" class="button">Comment</button>
 			</form>
 		</div>
+
+		<!-- pin element 3 -->
 		<div class="pin">
 			<div class="holder">
-				<div class="actions" pin_id="1">
+				<div class="actions" pin_id="3">
 					<a href="#" class="button">Repin</a> <a href="#" class="button">Like</a>
-					<a href="#" class="button disabled comment_tr">Comment</a>
+					<a href="#" class="button comment_tr">Comment</a>
 				</div>
-				<a class="image ajax" href="#" title="Photo number 1" pin_id="1">
-					<img alt="Photo number 1" src="image/logo_grass.png">
+				<a class="image ajax" href="#" title="Photo number 3"> <img
+					alt="Photo number 3" src="image/logo_grass.png">
 				</a>
 			</div>
-			<p class="desc">Photo number 1 description</p>
+			<p class="desc">Photo number 3 description</p>
 			<p class="info">
-				<span>1 likes</span> <span>1 repins</span>
+				<span>3 likes</span> <span>3 repins</span>
 			</p>
-			<form class="comment" method="post" action="">
-				<input type="hidden" name="id" value="1" />
+			<form class="comment" method="post" action="" style="display: none">
+				<input type="hidden" name="id" value="3" />
 				<textarea placeholder="Add a comment..." maxlength="1000"></textarea>
 				<button type="button" class="button">Comment</button>
 			</form>
 		</div>
+
+		<!-- pin element 4 -->
 		<div class="pin">
 			<div class="holder">
-				<div class="actions" pin_id="1">
+				<div class="actions" pin_id="4">
 					<a href="#" class="button">Repin</a> <a href="#" class="button">Like</a>
-					<a href="#" class="button disabled comment_tr">Comment</a>
+					<a href="#" class="button comment_tr">Comment</a>
 				</div>
-				<a class="image ajax" href="#" title="Photo number 1" pin_id="1">
-					<img alt="Photo number 1" src="image/tumblr_n5vniaakio1strk4go1_500.jpg">
+				<a class="image ajax" href="#" title="Photo number 4"> <img
+					alt="Photo number 4" src="image/JavaRuby_colored.png">
 				</a>
 			</div>
-			<p class="desc">Photo number 1 description</p>
+			<p class="desc">Photo number 4 description</p>
 			<p class="info">
-				<span>1 likes</span> <span>1 repins</span>
+				<span>4 likes</span> <span>4 repins</span>
 			</p>
-			<form class="comment" method="post" action="">
-				<input type="hidden" name="id" value="1" />
+			<form class="comment" method="post" action="" style="display: none">
+				<input type="hidden" name="id" value="4" />
 				<textarea placeholder="Add a comment..." maxlength="1000"></textarea>
 				<button type="button" class="button">Comment</button>
 			</form>
 		</div>
-		<div class="pin">
-			<div class="holder">
-				<div class="actions" pin_id="1">
-					<a href="#" class="button">Repin</a> <a href="#" class="button">Like</a>
-					<a href="#" class="button disabled comment_tr">Comment</a>
-				</div>
-				<a class="image ajax" href="#" title="Photo number 1" pin_id="1">
-					<img alt="Photo number 1" src="image/default_thumbnail.jpg">
-				</a>
-			</div>
-			<p class="desc">Photo number 1 description</p>
-			<p class="info">
-				<span>1 likes</span> <span>1 repins</span>
-			</p>
-			<form class="comment" method="post" action="">
-				<input type="hidden" name="id" value="1" />
-				<textarea placeholder="Add a comment..." maxlength="1000"></textarea>
-				<button type="button" class="button">Comment</button>
-			</form>
-		</div>
-		<div class="pin">
-			<div class="holder">
-				<div class="actions" pin_id="1">
-					<a href="#" class="button">Repin</a> <a href="#" class="button">Like</a>
-					<a href="#" class="button disabled comment_tr">Comment</a>
-				</div>
-				<a class="image ajax" href="#" title="Photo number 1" pin_id="1">
-					<img alt="Photo number 1" src="image/logo_grass.png">
-				</a>
-			</div>
-			<p class="desc">Photo number 1 description</p>
-			<p class="info">
-				<span>1 likes</span> <span>1 repins</span>
-			</p>
-			<form class="comment" method="post" action="">
-				<input type="hidden" name="id" value="1" />
-				<textarea placeholder="Add a comment..." maxlength="1000"></textarea>
-				<button type="button" class="button">Comment</button>
-			</form>
-		</div>
+
 	</div>
 </body>
+</html>
