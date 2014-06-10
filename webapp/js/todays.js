@@ -53,7 +53,7 @@ $('.pre-idea').click(function(e) {
 	if (contents.css('left') !== '0px') {
 		contents.filter(':not(:animated)').animate({
 			'left' : '+=100%'
-		}, 'slow');
+		}, 300);
 	}
 });
 
@@ -66,7 +66,7 @@ $('.next-idea').click(function(e) {
 	if (contentsLeft !== (-1) * contentLastChildLeft) {
 		contents.filter(':not(:animated)').animate({
 			'left' : '-=100%'
-		}, 'slow');
+		}, 300);
 	}
 });
 
@@ -146,3 +146,14 @@ function getAbs(num) {
 	else
 		return (-1) * num;
 }
+
+$(document).ready(function(){
+
+    // masonry initialization
+    $('.main_container').masonry({
+        // options
+        itemSelector : '.pin',
+        isAnimated: true,
+        isFitWidth: true
+    });
+});

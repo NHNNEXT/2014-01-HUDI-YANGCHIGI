@@ -30,9 +30,7 @@
 	 <link rel="stylesheet" href="css/today_modal.css">
 	<link rel="stylesheet" href="css/header.css">
 	<!-- <link rel="stylesheet" href="css/today.css"> -->
-	<link
-		href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css"
-		rel="stylesheet">
+<link href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css" rel="stylesheet">
 	<script src="js/mypage.js"></script>
 </head>
 <body>
