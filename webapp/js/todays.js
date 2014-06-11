@@ -148,12 +148,10 @@ function getAbs(num) {
 }
 
 $(document).ready(function(){
-
-    // masonry initialization
-    $('.main_container').masonry({
-        // options
+    $('#baloon').masonry({
         itemSelector : '.pin',
-        isAnimated: true,
-        isFitWidth: true
+        isAnimated: true
+//        ,
+//        isFitWidth: true
     });
 });

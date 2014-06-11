@@ -27,7 +27,7 @@
 
 </head>
 <body>
-	<div id="todayContainerDiv" class="main_container">
+	<div id="todayContainerDiv" >
 		<jsp:include page="today_modal.jspf" />
 		<%@include file="header.jspf"%>
 		<div id="contentContainerDiv">
