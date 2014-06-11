@@ -147,7 +147,34 @@ function getAbs(num) {
 		return (-1) * num;
 }
 
+//$(document).keypress(function(e) { 
+//    if (e.keyCode == 27) { 
+//        $('#todayModal').fadeOut(500);
+//        //or
+//        window.close();
+//    } 
+//});
+
+$(document).keyup(function(event){
+	if (event.keyCode == 27){
+		// Close the modal/menu
+//		$('#todayModal').closeElement();
+		$('#todayModal').fadeOut(500);
+
+        	//  Return focus to the element that invoked it 
+		//$('a[href=#todayModal]').focus();
+		//$('body').removeClass("modal-open");
+		//$('.modal-backdrop').removeClass("fade");
+		$('.modal-backdrop').detach();
+	}
+});
+
 $(document).ready(function(){
+	if($('body').hasClass('modal-open')){
+		$('body').css({'overflow': 'hidden'});
+	}
+	
+	
     $('#baloon').masonry({
         itemSelector : '.pin',
         isAnimated: true

@@ -9,6 +9,7 @@
 #todayModal #contentContainerDiv {
 	display: inline;
 	width: 70%;
+	height: 550px;
 	float: left;
 	padding: 25px;
 	background-color: #fcf8f0;
@@ -17,11 +18,22 @@
 	-webkit-transition: 0.8s;
 	transition: 0.8s;
 	padding-top:5px;
+	overflow: scroll;
 }
 
+#contentContainerDiv {
+}
+.modal-content {
+	max-width: 900px;
+	margin-left: 8%;
+	height: 600px;
+	
+}
 .modal-dialog{
 	width:80%;
+	padding-top: 5%;
 } 
+
 
 #asideDiv {
 	display: inline;
@@ -126,6 +138,13 @@
 	margin-left: -15px;
 }
 
+#todayModal .time {
+	width: 20px;
+	position: absolute;
+	background-color: #418270;
+	opacity: 0.7;
+}
+
 #todayModal .contents {
 	1background-color: #FFFFDD;
 	background-color: #fdf6ec;
@@ -150,12 +169,10 @@
 	border-radius: 10px;
 }
 
-#todayModal .time {
-	width: 20px;
-	position: absolute;
-	background-color: #418270;
-	opacity: 0.7;
+#todayModal .row {
+	position: relative;
 }
+
 
 #todayModal .date {
 	font-size: 20px;
