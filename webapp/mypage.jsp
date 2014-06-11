@@ -36,6 +36,7 @@
 <body>
 	<%@include file="header.jspf"%>
 	<div id="baloon">
+		<div class="container"><div class="clock"><div class="hour"></div><div class="minute"></div></div></div>
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-md-4"></div>
 			<div id="rightSectionDiv" class="col-md-7">
@@ -73,7 +74,13 @@
 						<div class="row">
 							<input type="hidden" id="ideaId" value="${idea.id }">
 							<div class="time">
-								<p class="date">${idea.time}</p>
+								<p class="date">${idea.time}</p> 
+								<!-- <div class="container"> -->
+									<div class="clock">
+										<div class="hour"></div>
+										<div class="minute"></div>
+									</div>
+								<!-- </div> -->
 							</div>
 							<div class="contents">
 								<c:if test="${!empty idea.imgName}">
@@ -97,6 +104,20 @@
 </body>
 <script src="/js/header.js"></script>
 <script>
+/* $(".clock").css("background-color", "blue");
+$(".hour").css("transform", "rotate(" + 10 + "deg)");
+$(".minute").css("transform", "rotate(" + 40 + "deg)"); */
+
+var Shour = ${idea.time}.substring(0,2);
+var Sminutes = ${idea.time}.substring(3,5);
+var hour = parseInt(Shour);
+var minutes = parseInt(Sminutes);
+var a = minutes * 6; 
+var o = hour % 12 / 12 * 360;
+$(".clock").css("background-color", "red !important");
+$(".hour").css("transform", "rotate(" + o + "deg)");
+$(".minute").css("transform", "rotate(" + a + "deg)");
+
 	// header events
 	function addLogoutEvent() {
 		$('#logoutBtn').click(function() {
@@ -178,5 +199,6 @@
 			}
 		});
 	});
+	
 </script>
 </html>

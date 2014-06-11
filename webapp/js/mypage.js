@@ -50,6 +50,12 @@ var write = {
 	},
 
 	addDivAfterAjax : function(content, time, imgName) {
+		var Shour = time.substring(0,2);
+		var Sminutes = time.substring(3,5);
+		var hour = parseInt(Shour);
+		var minutes = parseInt(Sminutes);
+		var a = minutes * 6; 
+		var o = hour % 12 / 12 * 360;
 		if (imgName === undefined) {
 			$('#contentsContainerDiv')
 					.append(
@@ -58,12 +64,15 @@ var write = {
 									+ this.replace(time)
 									+ '</p></div>'
 									+ '<div class="contents">'
+									+ '<div class="clock"><div class="hour"></div><div class="minute"></div></div>'
 									+ '<p class="contentsP">'
 									+ this.replace(content)
 									+ '</p>'
 									+ '<img class="trash" src="image/trash_orange.png" >'
 									+ '</div></div>').children(':last').hide()
 					.fadeIn('slow');
+			$(".hour").css("transform", "rotate(" + o + "deg)");
+			$(".minute").css("transform", "rotate(" + a + "deg)");
 
 		} else {
 			$('#contentsContainerDiv')
