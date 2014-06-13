@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- <%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,7 +38,6 @@
 <body>
 	<%@include file="header.jspf"%>
 	<div id="baloon">
-		<div class="container"><div class="clock"><div class="hour"></div><div class="minute"></div></div></div>
 		<div id="myPageAllDiv" class="row">
 			<div id="calendarDiv" class="col-md-4"></div>
 			<div id="rightSectionDiv" class="col-md-7">
@@ -70,16 +71,21 @@
 				</div>
 
 				<div id="contentsContainerDiv">
+				<div class="Btime"></div>
 					<c:forEach items="${ideaList}" var="idea">
 						<div class="row">
 							<input type="hidden" id="ideaId" value="${idea.id }">
 							<div class="time">
-								<p class="date">${idea.time}</p> 
-								<!-- <div class="container"> -->
-									<div class="clock">
-										<div class="hour"></div>
-										<div class="minute"></div>
-									</div>
+								<c:set var ="_hour" value="${idea.time.substring(0,2)}" />
+								<c:set var ="_minute" value="${idea.time.substring(3,5)}" />
+								<fmt:parseNumber var="hour" integerOnly="true" value="${_hour}" />
+								<fmt:parseNumber var="minute" integerOnly="true" value="${_minute}" />
+								<c:set var ="a" value="${minute * 6}" />
+								<c:set var ="o" value="${hour % 12 / 12 * 360}" />
+								<div class="clock">
+									<div  class="hour" style="-webkit-transform: rotate(${o}deg);" ></div>
+									<div class="minute" style="-webkit-transform: rotate(${a}deg);"></div>
+								</div>
 								<!-- </div> -->
 							</div>
 							<div class="contents">
@@ -88,12 +94,12 @@
 										style="margin-right: 5px;">
 								</c:if>
 								<p class="contentsP">${idea.content}</p>
-								<img class="trash" src="image/trash_orange.png" data-idea-id="${idea.id }">
+								<img class="trash" src="image/trash_orange.png"
+									data-idea-id="${idea.id }">
 							</div>
 						</div>
 					</c:forEach>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -103,12 +109,14 @@
 	<jsp:include page="today_modal.jspf" />
 </body>
 <script src="/js/header.js"></script>
+
 <script>
+
 /* $(".clock").css("background-color", "blue");
 $(".hour").css("transform", "rotate(" + 10 + "deg)");
 $(".minute").css("transform", "rotate(" + 40 + "deg)"); */
 
-var Shour = ${idea.time}.substring(0,2);
+/* var Shour = ${idea.time}.substring(0,2);
 var Sminutes = ${idea.time}.substring(3,5);
 var hour = parseInt(Shour);
 var minutes = parseInt(Sminutes);
@@ -116,7 +124,7 @@ var a = minutes * 6;
 var o = hour % 12 / 12 * 360;
 $(".clock").css("background-color", "red !important");
 $(".hour").css("transform", "rotate(" + o + "deg)");
-$(".minute").css("transform", "rotate(" + a + "deg)");
+$(".minute").css("transform", "rotate(" + a + "deg)"); */
 
 	// header events
 	function addLogoutEvent() {

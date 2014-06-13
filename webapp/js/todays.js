@@ -159,13 +159,14 @@ $(document).keyup(function(event){
 	if (event.keyCode == 27){
 		// Close the modal/menu
 //		$('#todayModal').closeElement();
-		$('#todayModal').fadeOut(500);
+		//$('#todayModal').fadeOut(500);
 
         	//  Return focus to the element that invoked it 
 		//$('a[href=#todayModal]').focus();
 		//$('body').removeClass("modal-open");
-		//$('.modal-backdrop').removeClass("fade");
-		$('.modal-backdrop').detach();
+//		$('.modal-backdrop').removeClass("fade");
+//		$('.modal-backdrop').detach();
+		$('#todayModal').modal('hide');
 	}
 });
 

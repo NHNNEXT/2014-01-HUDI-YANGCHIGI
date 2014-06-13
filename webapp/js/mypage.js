@@ -60,27 +60,23 @@ var write = {
 			$('#contentsContainerDiv')
 					.append(
 							'<div class="row">'
-									+ '<div class="time" ><p class="date">'
-									+ this.replace(time)
-									+ '</p></div>'
-									+ '<div class="contents">'
+									+ '<div class="time">'
 									+ '<div class="clock"><div class="hour"></div><div class="minute"></div></div>'
+									+ '</div>'
+									+ '<div class="contents">'
 									+ '<p class="contentsP">'
 									+ this.replace(content)
 									+ '</p>'
 									+ '<img class="trash" src="image/trash_orange.png" >'
 									+ '</div></div>').children(':last').hide()
 					.fadeIn('slow');
-			$(".hour").css("transform", "rotate(" + o + "deg)");
-			$(".minute").css("transform", "rotate(" + a + "deg)");
-
 		} else {
 			$('#contentsContainerDiv')
 					.append(
 							'<div class="row">'
-									+ '<div class="time"><p class="date">'
-									+ this.replace(time)
-									+ '</p></div>'
+									+ '<div class="time">'
+									+ '<div class="clock"><div class="hour"></div><div class="minute"></div></div>'
+									+ '</div>'
 									+ '<div class="contents">'
 									+ '<img class="contentsImg" src="image/'
 									+ imgName
@@ -92,7 +88,9 @@ var write = {
 									+ '</div></div>').children(':last').hide()
 					.fadeIn('slow');
 		}
-
+		$(".clock:last .hour").css("transform", "rotate(" + o + "deg)");
+		$(".clock:last .minute").css("transform", "rotate(" + a + "deg)");
+		
 		$('html, body').animate({
 			scrollTop : $(document).height()
 		}, "fast", this.setHeightForTimeDiv);

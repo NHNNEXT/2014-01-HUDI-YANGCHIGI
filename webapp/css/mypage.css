@@ -1,10 +1,5 @@
 @CHARSET "UTF-8";
 
-.container {
-	margin: 40px auto 20px;
-	width: 50px;
-}
-
 .hour {
 	background: #fff;
 	height: 0;
@@ -17,22 +12,8 @@
 	-o-transform-origin: 50% 100%;
 	-ms-transform-origin: 50% 100%;
 	transform-origin: 50% 100%;
-	margin: -60px -2px 0;
-	padding: 60px 2px 0;
-}
-
-.clock {
-	margin-right: 0px;
-	margin-left: -15px;
-	
-	background-color: blue; 
-	border : 5px solid #FFF;
-	border-radius: 100%;
-	display: block;
-	height: 50px;
-	width: 50px;
-	position: relative;
-	border: 5px solid #FFF;
+	margin: -14px -2px 0;
+	padding: 14px 2px 0;
 }
 
 .minute {
@@ -47,10 +28,23 @@
 	-o-transform-origin: 50% 100%;
 	-ms-transform-origin: 50% 100%;
 	transform-origin: 50% 100%;
-	margin: -105px -2px 0;
-	padding: 105px 2px 0;
+	margin: -20px -2px 0;
+	padding: 20px 2px 0;
 }
 
+.clock {
+	margin-right: 0px;
+	margin-left: -15px;
+	
+	background-color: #fcce7e; 
+	border : 2px solid #FFF;
+	border-radius: 100%;
+	display: block;
+	height: 50px;
+	width: 50px;
+	position: relative;
+	border: 5px solid #FFF;
+}
 
 .icon-pencil {color: white !important; }
 
@@ -125,24 +119,17 @@ ul {
 }
 
 .contents {
-	1background-color: #FFFFDD;
-	1background-color: #fdf6ec;
 	background-color: #f8f6f4;
-	
-	/* background: -webkit-linear-gradient(left, #fbefdd, #fdf6ec); For Safari 5.1 to 6.0
-	background: -o-linear-gradient(right, #fbefdd, #fdf6ec); For Opera 11.1 to 12.0
-	background: -moz-linear-gradient(right, #fbefdd, #fdf6ec)); For Firefox 3.6 to 15
-	background: linear-gradient(to right, #fbefdd, #fdf6ec)); Standard syntax */
-	
-/* 	background: -webkit-linear-gradient(left, #fdf6ec , #fbecd6); For Safari 5.1 to 6.0
-	background: -o-linear-gradient(right, #fdf6ec , #fbecd6); For Opera 11.1 to 12.0
-	background: -moz-linear-gradient(right, #fdf6ec , #fbecd6); For Firefox 3.6 to 15
-	background: linear-gradient(to right, #fdf6ec , #fbecd6); Standard syntax */
-	
 	margin-top: 20px;
-	margin-left: 30px;
+	margin-left: 40px;
 	border-radius: 10px;
 	padding: 15px;
+}
+
+.contentsP {
+	display: inline-block !important;
+	width: 400px;
+	
 }
 
 .contentsImg {
@@ -153,10 +140,12 @@ ul {
 .time {
 	width: 20px;
 	position: absolute;
-	1background-color: #418270;
-	1background-color: #fda546;
-	background-color: #fdb553;
-	/* opacity: 0.7; */
+	background-color: #fcce7e;
+}
+
+.Btime {
+	1width:20px;
+	1background-color: #fcce7e;
 }
 
 .date {
