@@ -49,7 +49,7 @@ body {
 	border-radius: 0%;
 }
 
-#likeText {
+#likeSpan {
 	position: absolute;
 	top:-13px;
 	left:14px;

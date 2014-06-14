@@ -107,7 +107,7 @@ var write = {
 									10)
 									+ parseInt(
 											$(this).next().css('margin-top'),
-											10) * 2;
+											10) * 2 + 10;
 
 							$(this).height(newHeight);
 							$(this).css('margin-top',

@@ -46,11 +46,13 @@
 		<div id="signinDiv">
 			<!-- Login form -->
 			<jsp:include page="login.jspf" />
+			<button type="button" id="loginBtn" class="btn btn-default"
+		data-toggle="popover" data-placement="bottom">Sign in</button>
 			<!-- Modal -->
 			<button id="signupBtn" class="btn btn-primary" data-toggle="modal"
 				data-target="#myModal">Sign Up</button>
+			<jsp:include page="signup.jspf" />
 		</div>
-		<jsp:include page="signup.jspf" />
 	</div>
 	<%@include file="footer.jspf"%>
 </body>
