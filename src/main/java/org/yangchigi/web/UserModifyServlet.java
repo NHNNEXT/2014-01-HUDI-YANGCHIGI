@@ -17,13 +17,13 @@ import javax.servlet.http.Part;
 import org.yangchigi.dto.User;
 import org.yangchigi.repository.SingletonRepository;
 import org.yangchigi.repository.UserRepository;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @WebServlet(name = "UserModifyServlet", urlPatterns = { "/usermodify/*" })
-@MultipartConfig(location = "/Users/yurim/Documents/workspace2/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
+//@MultipartConfig(location = "/Users/yurim/Documents/workspace2/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 //@MultipartConfig(location = "/Users/jehyeok/yangchigi/2014-01-HUDI-YANGCHIGI/webapp/img", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
+@MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 public class UserModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = LoggerFactory
@@ -73,14 +73,16 @@ public class UserModifyServlet extends HttpServlet {
 			User user = userRepository.findByEmail(userEmail);// 세션에서 로그인된 사용자
 																// 받아옴
 
-			String nickname = contentsMap.get("nickname");
-			String imgName = null;
-			System.out.println(contentsMap.toString());
-			if (contentsMap.containsKey("imgName"))
-				imgName = contentsMap.get("imgName");
+			if (contentsMap.containsKey("nickname")){
+				String nickname = contentsMap.get("nickname");
+				userRepository.modifyNickname(user, nickname);// DB 수정
+			}
+			
+			if (contentsMap.containsKey("imgName")){
+				String imgName = contentsMap.get("imgName");
+				userRepository.modifyThumbnail(user, imgName);
+			}
 	
-			userRepository.modifyNickname(user, nickname);// DB 수정
-			userRepository.modifyThumbnail(user, imgName);
 			request.getRequestDispatcher("/userModify.jsp").forward(request,
 					response);
 		}
