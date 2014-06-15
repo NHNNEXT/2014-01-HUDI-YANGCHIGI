@@ -30,7 +30,8 @@ var readImg = {
 var write = {
 	submitArticle : function() {
 		var content = $('#contentInput').val();
-		var isPrivate = $('#isPrivateIpnut:checked').val();
+//		var isPrivate = $('#isPrivateIpnut:checked').val();
+		var isPrivate = $('#isPrivateInput').val();
 		var imgName = $('#fileInput').val().split('\\')[2];
 
 		if (content == "") {

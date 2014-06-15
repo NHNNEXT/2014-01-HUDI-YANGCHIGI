@@ -27,9 +27,9 @@ import org.yangchigi.support.MyCalendar;
 
 // server path
 //@MultipartConfig(location = "/home/yangchigi/apache-tomcat-7.0.52/webapps/ROOT/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
-//@MultipartConfig(location = "/Users/jehyeok/yangchigi/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
+@MultipartConfig(location = "/Users/jehyeok/yangchigi/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 //@MultipartConfig(location = "/Users/yurim/Documents/workspace2/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
-@MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
+//@MultipartConfig(location = "/Users/kimminhyeok/git/2014-01-HUDI-YANGCHIGI/webapp/image", maxFileSize = 1024 * 1024 * 10, fileSizeThreshold = 1024 * 1024, maxRequestSize = 1024 * 1024 * 20)
 @WebServlet(name = "MyPageServlet", urlPatterns = { "/mypage/*" })
 public class MyPageServlet extends HttpServlet {
 	/**
@@ -77,13 +77,14 @@ public class MyPageServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException {
 		String uri = request.getRequestURI();
 		HashMap<String, String> contentsMap;
-
+		System.out.println("test");
 		if ("/mypage/write".equals(uri)) {
 			contentsMap = getContentsListAndUpload(request);
-
+			System.out.println("hi");
 			if (hasError(contentsMap))
 				return;
-
+			
+			System.out.println(contentsMap.toString());
 			String content = contentsMap.get("content");
 			String date = MyCalendar.getCurrentDate();
 			String time = MyCalendar.getCurrentTime();
@@ -92,7 +93,7 @@ public class MyPageServlet extends HttpServlet {
 				imgName = contentsMap.get("imgName");
 			}
 			boolean isPrivate = contentsMap.containsKey("isPrivate");
-
+			System.out.println("isPrivate: " + isPrivate);
 			String userEmail = (String) request.getSession().getAttribute(
 					"user");
 			User user = userRepository.findByEmail(userEmail);

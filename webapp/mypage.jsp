@@ -30,7 +30,6 @@
 	<link rel="stylesheet" href="css/mypage.css">
 	 <link rel="stylesheet" href="css/today_modal.css">
 	<link rel="stylesheet" href="css/header.css">
-	<!-- <link rel="stylesheet" href="css/today.css"> -->
 <link href="https://fontastic.s3.amazonaws.com/atUbsU72QhekCwuoLXgtCC/icons.css" rel="stylesheet">
 	<script src="js/mypage.js"></script>
 </head>
@@ -51,7 +50,7 @@
 						<div id="formButtons">
 							<p id="textlength">0/200</p>
 							<img id="uploadImg" class="formIcon" src="icon/photo.png" />	
-							<img id="lockIcon" class="formIcon" src="icon/unlock.png" />	
+							<img id="lockIcon" class="formIcon" src="/icon/unlock.png" />	
 							<img id="submitBtn" class="formIcon" src="icon/submit.png" />	
 						</div>	
 						<br><input name="isPrivate"
@@ -107,60 +106,7 @@
 	<jsp:include page="today_modal.jspf" />
 </body>
 <script src="/js/header.js"></script>
-
 <script>
-
-/* $(".clock").css("background-color", "blue");
-$(".hour").css("transform", "rotate(" + 10 + "deg)");
-$(".minute").css("transform", "rotate(" + 40 + "deg)"); */
-
-/* var Shour = ${idea.time}.substring(0,2);
-var Sminutes = ${idea.time}.substring(3,5);
-var hour = parseInt(Shour);
-var minutes = parseInt(Sminutes);
-var a = minutes * 6; 
-var o = hour % 12 / 12 * 360;
-$(".clock").css("background-color", "red !important");
-$(".hour").css("transform", "rotate(" + o + "deg)");
-$(".minute").css("transform", "rotate(" + a + "deg)"); */
-
-	// header events
-	function addLogoutEvent() {
-		$('#logoutBtn').click(function() {
-			$.ajax({
-				type : "POST",
-				url : "user/logout"
-			}).done(function(msg) {
-				console.log(msg);
-				if ('success' === msg) {
-					window.location = '/';
-				}
-			});
-		});
-	}
-
-	function addShowTodaysEvent() {
-		$('#showTodaysBtn').click(function() {
-			window.location = '/today';
-		});
-	}
-
-	function addShowMyPageEvent() {
-		$('#showMyPageBtn').click(function() {
-			window.location = '/';
-		});
-	}
-
-	function addShowSettingEvent() {
-		$('#showSettingBtn').click(function() {
-			window.location = '/usermodify';
-		});
-	}
-	addLogoutEvent();
-	addShowTodaysEvent();
-	addShowMyPageEvent();
-	addShowSettingEvent();
-	
  	$('#lockIcon').click(function() {
 		var lockStatus = $(this).attr("src");
 		if(lockStatus === "/icon/unlock.png"){  //image sprite
