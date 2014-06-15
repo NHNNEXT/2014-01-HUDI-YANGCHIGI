@@ -53,8 +53,10 @@
 							<img id="lockIcon" class="formIcon" src="/icon/unlock.png" />	
 							<img id="submitBtn" class="formIcon" src="icon/submit.png" />	
 						</div>	
-						<br><input name="isPrivate"
-							id="isPrivateInput" type="hidden" value="false"/>
+						<!-- <br><input name="isPrivate"
+							id="isPrivateInput" type="hidden" value="false"/> -->
+						<input
+							name="isPrivate" id="isPrivateInput" type="checkbox" style="display:none;"/>비공개
 						<div id="imgFormDiv">
 							<!-- <img id="uploadImg" src="icon/addimage.png" style="height: 30px;" /> -->
 							<img id="prevImg" src="#" alt="your image" style="display: none;" />
@@ -111,10 +113,12 @@
 		var lockStatus = $(this).attr("src");
 		if(lockStatus === "/icon/unlock.png"){  //image sprite
 			$(this).attr("src", "/icon/lock.png");
-			$('#isPrivateInput').val(true);
+			//$('#isPrivateInput').val(true);
+			$('#isPrivateInput').prop('checked', true);
 		}else{
 			$(this).attr("src", "/icon/unlock.png"); 
-			$('#isPrivateInput').val(false);
+//			$('#isPrivateInput').val(false);
+			$('#isPrivateInput').prop('checked', false);
 		}
 	}); 
  	

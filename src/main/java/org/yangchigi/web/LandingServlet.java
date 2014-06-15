@@ -21,7 +21,7 @@ public class LandingServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		logger.info("LandingServlet");
+//		logger.info("LandingServlet");
 		HttpSession session = request.getSession();
 		if (null != session.getAttribute("user")) {
 			response.sendRedirect("/mypage");
