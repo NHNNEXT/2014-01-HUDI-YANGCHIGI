@@ -1,4 +1,5 @@
 var user = 'jehyeok';
+
 test('test loginAjax', function() {
 	TimerMock.replace();
 	TimerMock.reset();
@@ -11,6 +12,7 @@ test('test loginAjax', function() {
 
 	window.auth.loginForm.hide();
 	equal(window.auth.loginForm.is(':hidden'), true);
+	
 	window.auth.loginBtn.click();
 	TimerMock.flow(1000);
 
@@ -42,13 +44,3 @@ asyncTest('login fail & show popover', function() {
 	start();
 	$.mockjaxClear();
 });
-//
-//asyncTest('test setTimeout', function() {
-//	setTimeout(function() {
-//		ok(true);
-//	}, 400)
-//	
-//	tick(500);
-//	start();
-//});
-
