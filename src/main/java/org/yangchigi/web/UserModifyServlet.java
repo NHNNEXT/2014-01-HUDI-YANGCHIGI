@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -29,6 +30,7 @@ public class UserModifyServlet extends HttpServlet {
 	private static Logger logger = LoggerFactory
 			.getLogger("org.yangchigi.web.UserModifyServlet");
 	private UserRepository userRepository;
+	private String tempFileName;
 
 	public UserModifyServlet() {
 		userRepository = SingletonRepository.getUserRepository();
@@ -75,12 +77,14 @@ public class UserModifyServlet extends HttpServlet {
 
 			if (contentsMap.containsKey("nickname")){
 				String nickname = contentsMap.get("nickname");
-				userRepository.modifyNickname(user, nickname);// DB 수정
+				if(!nickname.equals(""))
+					userRepository.modifyNickname(user, nickname);// DB 수정
 			}
 			
 			if (contentsMap.containsKey("imgName")){
 				String imgName = contentsMap.get("imgName");
-				userRepository.modifyThumbnail(user, imgName);
+				if(imgName != null)
+					userRepository.modifyThumbnail(user, imgName);
 			}
 	
 			request.getRequestDispatcher("/userModify.jsp").forward(request,
@@ -108,14 +112,20 @@ public class UserModifyServlet extends HttpServlet {
 							fileName = filePartHeader.split("filename=\"")[1];
 							fileName = fileName.substring(0,
 									fileName.length() - 1);
-							contentsMap.put("imgName", fileName);
+//							contentsMap.put("imgName", fileName);
+							
+							String fileType = fileName.split(Pattern.quote("."))[1];
+
+							tempFileName = String.valueOf(fileName.hashCode() + "." + fileType);
+							contentsMap.put("imgName", tempFileName);
 						}
 					}
 				}
 			}
 
 			if (fileName != null)
-				filePart.write(fileName);
+				filePart.write(tempFileName);
+//				filePart.write(fileName);
 
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();

@@ -41,7 +41,9 @@ var write = {
 				url : "/mypage/write",
 				mimeType : "multipart/form-data",
 				data : $('body form').serialize(),
-				success : function(time) {
+				success : function(data) {
+					var time = data.split('&')[0];
+					var imgName = data.split('&')[1];
 					this.addDivAfterAjax(content, time, imgName);
 				}.bind(this)
 			};

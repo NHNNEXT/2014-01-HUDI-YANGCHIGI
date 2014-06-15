@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -60,10 +62,10 @@ public class MyPageServlet extends HttpServlet {
 			String nickname = user.getNickname();
 			String thumbnailName = user.getThumbnail();
 
-			//헤더때문에 추가
+			// 헤더때문에 추가
 			request.setAttribute("nickname", nickname);
 			request.setAttribute("thumbnailName", thumbnailName);
-			
+
 			request.getRequestDispatcher("/mypage.jsp").forward(request,
 					response);
 		}
@@ -86,8 +88,9 @@ public class MyPageServlet extends HttpServlet {
 			String date = MyCalendar.getCurrentDate();
 			String time = MyCalendar.getCurrentTime();
 			String imgName = null;
-			if (contentsMap.containsKey("imgName"))
+			if (contentsMap.containsKey("imgName")) {
 				imgName = contentsMap.get("imgName");
+			}
 			boolean isPrivate = contentsMap.containsKey("isPrivate");
 
 			String userEmail = (String) request.getSession().getAttribute(
@@ -99,10 +102,9 @@ public class MyPageServlet extends HttpServlet {
 			ideaRepository.add(idea);
 
 			time = MyCalendar.getCurrentTimeWithoutSec();
-			response.getWriter().write(time);
+			response.getWriter().write(time + "&" + imgName);
 
-		} 
-		else if("/mypage/ideaDelete".equals(uri)) {
+		} else if ("/mypage/ideaDelete".equals(uri)) {
 			logger.debug(request.getParameter("ideaId"));
 			String ideaId = request.getParameter("ideaId");
 			logger.debug("" + Integer.parseInt(ideaId));
@@ -114,18 +116,19 @@ public class MyPageServlet extends HttpServlet {
 	private boolean hasError(HashMap<String, String> contentsMap) {
 		for (String key : contentsMap.keySet()) {
 			String value = contentsMap.get(key);
-			// 200자 이상일 경우 
-			if(value.length() > 200) return true;
+			// 200자 이상일 경우
+			if (value.length() > 200)
+				return true;
 		}
 		return false;
 	}
-	
 
 	private HashMap<String, String> getContentsListAndUpload(
 			HttpServletRequest request) {
 		Part filePart = null;
 		HashMap<String, String> contentsMap = new HashMap<String, String>();
 		String fileName = null;
+		String tempFileName = null;
 		try {
 			for (Part part : request.getParts()) {
 				if (part.getName().equals("content")) {
@@ -146,14 +149,21 @@ public class MyPageServlet extends HttpServlet {
 							fileName = filePartHeader.split("filename=\"")[1];
 							fileName = fileName.substring(0,
 									fileName.length() - 1);
-							contentsMap.put("imgName", fileName);
+
+							// contentsMap.put("imgName", fileName);
+							
+							String fileType = fileName.split(Pattern.quote("."))[1];
+
+							tempFileName = String.valueOf(fileName.hashCode() + "." + fileType);
+							contentsMap.put("imgName", tempFileName);
 						}
 					}
 				}
 			}
 
 			if (fileName != null)
-				filePart.write(fileName);
+				filePart.write(tempFileName);
+			// filePart.write(fileName);
 
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();
