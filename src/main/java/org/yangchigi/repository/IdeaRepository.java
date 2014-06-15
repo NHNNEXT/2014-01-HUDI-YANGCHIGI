@@ -55,7 +55,9 @@ public class IdeaRepository implements Repository<Idea> {
 
 		String sql = "INSERT INTO `idea` (`content`, `date`, `time`, `img_name`, `is_private`, `user_id`) "
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
-
+		
+		List<Idea> ideaList = findByUserIdAndDate(idea.getUserId(), idea.getDate());
+		
 		try {
 			Connection conn = DriverManager.getConnection(addr, user, pw);
 			pstmt = conn.prepareStatement(sql);
@@ -64,7 +66,6 @@ public class IdeaRepository implements Repository<Idea> {
 			pstmt.setString(3, idea.getTime());
 			pstmt.setString(4, idea.getImgName());
 			pstmt.setBoolean(5, idea.getIsPrivate());
-			System.out.println("isPrivate: " + idea.getIsPrivate());
 			pstmt.setInt(6, idea.getUserId());
 			pstmt.execute();
 			

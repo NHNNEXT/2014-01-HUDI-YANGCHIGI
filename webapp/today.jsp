@@ -60,9 +60,9 @@
 				<p class="dateoftoday">${year.substring(2,4)}${month}${day}</p>
 			</div>
 		<div id="likeDiv">
-				<input type="hidden" id="likeBtn" class="btn btn-default" value="${today.like}" />
-				<h1 id="likeText">${today.like}</h1>
-				<img id="heart" src="icon/heart_red.png" />
+				<%-- <input type="hidden" id="likeBtn" class="btn btn-default" value="${today.like}" /> --%>
+				<img class="heart" id="likeBtn" src="icon/heart_red.png" style="width: 40px; height: 40px; border-radius: 0%;"/>
+				<h1 id="likeSpan">${today.like}</h1>
 			</div> 
 
 			<%-- <div id="likeDiv">
@@ -146,14 +146,15 @@
                         likeInput : $('#likeInput'),
                         likeSpan : $('#likeSpan'),
                         isLiked : ${isLiked},
-
+						
                         checkLikeTodayOrNot : function() {
                             if (this.isLiked) this.likeBtn.addClass('btn-primary');
                         },
                             addLikeEvent : function() {
                                 this.likeBtn.click(function() {
+                                	debugger;
                                     var like = parseInt(this.likeSpan.text(), 10);
-
+									debugger;
                                     if (this.likeBtn.hasClass('btn-primary')) like -= 1;
                                     else like += 1;
 

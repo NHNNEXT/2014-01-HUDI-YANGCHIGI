@@ -200,7 +200,11 @@ public class TodayServlet extends HttpServlet {
 
 			Today today = new Today(MyCalendar.getCurrentDate(), 0,
 					user.getId());
-			todayRepository.add(today);
+			Today preToday = todayRepository.findByDateAndUserId(MyCalendar.getCurrentDate(), user.getId());
+			
+			if (preToday == null) {
+				todayRepository.add(today);
+			}
 
 			response.getWriter().write("success");
 		}
