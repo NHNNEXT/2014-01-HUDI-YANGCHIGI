@@ -53,11 +53,29 @@ body {
 	max-height: 250px;
 }
 
+#heart {
+	width: 40px;
+	height: 40px;
+	border-radius: 0%;
+}
+
 #likeDiv {
 	width: 30%;
 	float: right;
 	height: 100px;
 }
+
+#likeText {
+	position: absolute;
+	top:-13px;
+	left:14px;
+	color: white;
+	font-size: 23px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	
+	
+}
+
 .dateoftoday {
 	font-size: 2em;
 	text-align: center;

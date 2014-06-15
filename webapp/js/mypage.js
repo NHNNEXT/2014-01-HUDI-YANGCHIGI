@@ -50,13 +50,19 @@ var write = {
 	},
 
 	addDivAfterAjax : function(content, time, imgName) {
+		var Shour = time.substring(0,2);
+		var Sminutes = time.substring(3,5);
+		var hour = parseInt(Shour);
+		var minutes = parseInt(Sminutes);
+		var a = minutes * 6; 
+		var o = hour % 12 / 12 * 360;
 		if (imgName === undefined) {
 			$('#contentsContainerDiv')
 					.append(
 							'<div class="row">'
-									+ '<div class="time" ><p class="date">'
-									+ this.replace(time)
-									+ '</p></div>'
+									+ '<div class="time">'
+									+ '<div class="clock"><div class="hour"></div><div class="minute"></div></div>'
+									+ '</div>'
 									+ '<div class="contents">'
 									+ '<p class="contentsP">'
 									+ this.replace(content)
@@ -64,14 +70,13 @@ var write = {
 									+ '<img class="trash" src="image/trash_orange.png" >'
 									+ '</div></div>').children(':last').hide()
 					.fadeIn('slow');
-
 		} else {
 			$('#contentsContainerDiv')
 					.append(
 							'<div class="row">'
-									+ '<div class="time"><p class="date">'
-									+ this.replace(time)
-									+ '</p></div>'
+									+ '<div class="time">'
+									+ '<div class="clock"><div class="hour"></div><div class="minute"></div></div>'
+									+ '</div>'
 									+ '<div class="contents">'
 									+ '<img class="contentsImg" src="image/'
 									+ imgName
@@ -83,7 +88,9 @@ var write = {
 									+ '</div></div>').children(':last').hide()
 					.fadeIn('slow');
 		}
-
+		$(".clock:last .hour").css("transform", "rotate(" + o + "deg)");
+		$(".clock:last .minute").css("transform", "rotate(" + a + "deg)");
+		
 		$('html, body').animate({
 			scrollTop : $(document).height()
 		}, "fast", this.setHeightForTimeDiv);
@@ -100,7 +107,7 @@ var write = {
 									10)
 									+ parseInt(
 											$(this).next().css('margin-top'),
-											10) * 2;
+											10) * 2 + 10;
 
 							$(this).height(newHeight);
 							$(this).css('margin-top',

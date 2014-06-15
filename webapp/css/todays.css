@@ -19,37 +19,66 @@ body {
 	text-align: center;
 	display: inline-block;
 	overflow: hidden;
-	background-color: #fcf8f0;
+	background-color: #f8f6f4;
 	margin: 10px;
-	width: 150px;
+	width: 200px;
 	height: 200px;
 	cursor: pointer;
-	border-radius: 1em;
+	border-radius: 0.7em;
 	
 	transition: 0.8s;
 	-webkit-transition: 0.8s;
 }
 
+.today:HOVER {
+	background-color: #fffbef;
+	transition: 0.3s;
+	-webkit-transition: 0.3s;
+}
+
 .like {
 	position: relative;
 	display: inline-block;
-	top: 10px;
 	float: right;
 }
 
+
+#heart {
+	width: 40px;
+	height: 40px;
+	border-radius: 0%;
+}
+
+#likeSpan {
+	position: absolute;
+	top:-13px;
+	left:14px;
+	color: white;
+	font-size: 23px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	
+	
+}
 .next-idea {
 	position: absolute;
 	display: none;
-	right: 20%;
+	right: 6%;
 	top: 30%;
+	color: #fde47d;
+	font-size: 30pt;
 }
 
 .pre-idea {
 	position: absolute;
 	display: none;
-	left: 20%;
+	left: 6%;
 	top: 30%;
+	color: #fde47d;
+	font-size: 30pt;
 }
+
+.next-idea:HOVER {color: #f7d345;}
+.pre-idea:HOVER {color: #f7d345;}
 
 .viewport {
 	position: relative;
@@ -61,13 +90,20 @@ body {
 .contents {
 	position: relative;
 	left: 0px;
-	width: 150px;
+	width: 200px;
 	word-break: break-all;
+	font-size: 18px;
+	color: #5b5959;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	
 }
 
 .content {
 	position: absolute;
-	width: 150px;
+	width: 200px;
+	padding: 10px;
+	padding-top: 0px;
+	color: #7f7f7f;
 	
 	transition: 0.8s;
 	-webkit-transition: 0.8s;
@@ -78,6 +114,10 @@ body {
 	text-align: initial;
 	width: 100%;
 	bottom: 0;
+	background-color: white;
+	padding: 10px;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .profile img {

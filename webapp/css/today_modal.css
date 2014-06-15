@@ -3,25 +3,43 @@
 
 #todayModal body {
 	background-color: #ede8e1;
-	padding: 1%;
+}
+
+.modal-body {
+	padding: 3% !important;
+}
+
+.container {
+	padding: 0% !important;
 }
 
 #todayModal #contentContainerDiv {
 	display: inline;
 	width: 70%;
+	height: 550px;
 	float: left;
 	padding: 25px;
-	background-color: #fcf8f0;
+	padding-left: 40px;
+	background-color: #c4d1d0;
 	border-radius: 1em;
 	transition: 0.8s;
 	-webkit-transition: 0.8s;
 	transition: 0.8s;
 	padding-top:5px;
+	overflow: scroll;
 }
 
+.modal-content {
+	max-width: 900px;
+	margin-left: 8%;
+	height: 600px;
+	
+}
 .modal-dialog{
 	width:80%;
+	padding-top: 5%;
 } 
+
 
 #asideDiv {
 	display: inline;
@@ -29,9 +47,10 @@
 	float: right;
 	transition: 0.8s;
 	-webkit-transition: 0.8s;
-	background-color: #fcf8f0;
+	background-color: #fff3cc;
 	border-radius: 1em;
 	padding: 1%;
+	height: 550px;
 }
 
 #commentInput {
@@ -47,7 +66,6 @@
 	display: inline-block;
 	float: left;
 	width: 70%;
-	height: 100px;
 	background-color: #ffffff;
 	border-radius: 1em;
 }
@@ -55,7 +73,7 @@
 #commentDiv {
 	margin-top: 10%;
 	overflow-y: scroll;
-	max-height: 250px;
+	max-height: 300px;
 }
 
 #likeDiv {
@@ -73,10 +91,12 @@
 	background-color: #ffffff;
 	border-radius: 1em;
 	clear: both;
+	font-size: 20px;
+	font-weight: bold;
 }
 #commentProfile{
-	width: 25px;
-	height: 25px;
+	width: 35px;
+	height: 35px;
 	margin-right:5px;
 	border-radius: 50%;
 }
@@ -91,10 +111,15 @@
 }
 
 #commentDiv #nickname{
-	display:inline; float:right; color:rgb(112, 175, 106);
+	display:inline;
+	color:rgb(112, 175, 106);
+	font-weight: bold;
+	font-size: 17px;
 }
 #commentDiv #content{
-	display:inline; word-wrap: break-word;
+	display:inline; 
+	word-wrap: break-word;
+	margin-left: 45px;
 }
 
 #writeCommentDiv {
@@ -104,19 +129,11 @@
 }
 
 #todayModal .comment-set {
-	border:1px solid #ccc;
 	border-radius: 3px;
 	margin-top: 1%;
 	padding: 5px;
-}
-
-#todayModal .contents {
-	background-color: #ffffff;
-	margin-top: 20px;
-	margin-left: 5%;
-	border-radius: 10px;
-	padding: 15px;
-	word-wrap: break-word;
+	background-color: #fffaed;
+	margin-bottom: 10px;
 }
 
 #todayModal .timeWrapper {
@@ -126,23 +143,24 @@
 	margin-left: -15px;
 }
 
+#todayModal .time {
+	width: 20px;
+	position: absolute;
+	background-color: #5b7a78;
+}
+
 #todayModal .contents {
-	1background-color: #FFFFDD;
-	background-color: #fdf6ec;
-	
-	background: -webkit-linear-gradient(left, #fbefdd, #fdf6ec); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(right, #fbefdd, #fdf6ec); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, #fbefdd, #fdf6ec)); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, #fbefdd, #fdf6ec)); /* Standard syntax */
-/* 	background: -webkit-linear-gradient(left, #fdf6ec , #fbecd6); For Safari 5.1 to 6.0
-	background: -o-linear-gradient(right, #fdf6ec , #fbecd6); For Opera 11.1 to 12.0
-	background: -moz-linear-gradient(right, #fdf6ec , #fbecd6); For Firefox 3.6 to 15
-	background: linear-gradient(to right, #fdf6ec , #fbecd6); Standard syntax */
-	
+	background-color: #f8f6f4;
+	margin-top: 20px;
+	margin-left: 5%;
+	border-radius: 10px;
+	padding: 15px;
+	word-wrap: break-word;
 	margin-top: 20px;
 	margin-left: 30px;
 	border-radius: 10px;
 	padding: 15px;
+	width: 500px;
 }
 
 #todayModal .contentsImg {
@@ -150,12 +168,10 @@
 	border-radius: 10px;
 }
 
-#todayModal .time {
-	width: 20px;
-	position: absolute;
-	background-color: #418270;
-	opacity: 0.7;
+#todayModal .row {
+	position: relative;
 }
+
 
 #todayModal .date {
 	font-size: 20px;
@@ -168,6 +184,83 @@
 	display: inline;
 	vertical-align: top;
 	word-wrap: break-word;
+	font-size: 1.1em;
+}
+
+.like {
+	position: relative;
+	display: inline-block;
+}
+
+#heart {
+	width: 40px;
+	height: 40px;
+	border-radius: 0%;
+}
+
+#likeDiv {
+	position: relative;
+	width: 30%;
+	float: right;
+	height: 100px;
+}
+
+#likeText {
+	position: absolute;
+	top:-13px;
+	left:14px;
+	color: white;
+	font-size: 23px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	
+	
+}
+
+.hour {
+	background: rgb(242, 103, 103);
+	height: 0;
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	width: 0;
+	border-radius: 35%;
+	-webkit-transform-origin: 50% 100%;
+	-moz-transform-origin: 50% 100%;
+	-o-transform-origin: 50% 100%;
+	-ms-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+	margin: -12px -2px 0;
+	padding: 12px 2px 0;
+}
+
+.minute {
+	background: #7DACC5;
+	height: 0;
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	width: 0;
+	border-radius: 35%;
+	-webkit-transform-origin: 50% 100%;
+	-moz-transform-origin: 50% 100%;
+	-o-transform-origin: 50% 100%;
+	-ms-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+	margin: -18px -2px 0;
+	padding: 18px 2px 0;
+}
+
+.clock {
+	margin-right: 0px;
+	margin-left: -15px;
+	
+	background-color: #FDE47D; 
+	border-radius: 100%;
+	display: block;
+	height: 45px;
+	width: 45px;
+	position: relative;
+	border: 0px solid #FFF;
 }
 
 @media all and (max-width: 480px) , all and

@@ -14,7 +14,8 @@ ul {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	height: 300px;
 	text-align: center !important;
-	margin-right: 20px;
+	margin-right: 15px;
+	margin-left: 1%;
 	1background-color: #efa87b;
 	1background-color: #fdb553;
 	background-color: #fde47d;
@@ -27,6 +28,10 @@ ul {
 	background: linear-gradient(#fde47d, #fddd7d); Standard syntax */
 	
 	border-radius: 10px;
+}
+
+#rightSectionDiv {
+	margin-left: 4%;
 }
 
 .fc-header {
@@ -72,24 +77,17 @@ ul {
 }
 
 .contents {
-	1background-color: #FFFFDD;
-	1background-color: #fdf6ec;
 	background-color: #f8f6f4;
-	
-	/* background: -webkit-linear-gradient(left, #fbefdd, #fdf6ec); For Safari 5.1 to 6.0
-	background: -o-linear-gradient(right, #fbefdd, #fdf6ec); For Opera 11.1 to 12.0
-	background: -moz-linear-gradient(right, #fbefdd, #fdf6ec)); For Firefox 3.6 to 15
-	background: linear-gradient(to right, #fbefdd, #fdf6ec)); Standard syntax */
-	
-/* 	background: -webkit-linear-gradient(left, #fdf6ec , #fbecd6); For Safari 5.1 to 6.0
-	background: -o-linear-gradient(right, #fdf6ec , #fbecd6); For Opera 11.1 to 12.0
-	background: -moz-linear-gradient(right, #fdf6ec , #fbecd6); For Firefox 3.6 to 15
-	background: linear-gradient(to right, #fdf6ec , #fbecd6); Standard syntax */
-	
 	margin-top: 20px;
-	margin-left: 30px;
+	margin-left: 40px;
 	border-radius: 10px;
 	padding: 15px;
+}
+
+.contentsP {
+	display: inline-block !important;
+	width: 400px;
+	
 }
 
 .contentsImg {
@@ -100,10 +98,14 @@ ul {
 .time {
 	width: 20px;
 	position: absolute;
-	1background-color: #418270;
-	1background-color: #fda546;
-	background-color: #fdb553;
-	/* opacity: 0.7; */
+	1background-color: #aaa385;
+	1background-color: #6e8988;
+	background-color: #5b7a78;
+}
+
+.Btime {
+	1width:20px;
+	1background-color: #fcce7e;
 }
 
 .date {
@@ -186,21 +188,78 @@ ul {
 }
 
 .trash {
-	width: 25px;
+	width: 22px;
 	float:right;
 }
 
+.hour {
+	background: rgb(242, 103, 103);
+	height: 0;
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	width: 0;
+	border-radius: 35%;
+	-webkit-transform-origin: 50% 100%;
+	-moz-transform-origin: 50% 100%;
+	-o-transform-origin: 50% 100%;
+	-ms-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+	margin: -12px -2px 0;
+	padding: 12px 2px 0;
+}
 
+.minute {
+	background: #7DACC5;
+	height: 0;
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	width: 0;
+	border-radius: 35%;
+	-webkit-transform-origin: 50% 100%;
+	-moz-transform-origin: 50% 100%;
+	-o-transform-origin: 50% 100%;
+	-ms-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+	margin: -18px -2px 0;
+	padding: 18px 2px 0;
+}
+
+.clock {
+	margin-right: 0px;
+	margin-left: -15px;
+	
+	background-color: #FDE47D; 
+	border-radius: 100%;
+	display: block;
+	height: 45px;
+	width: 45px;
+	position: relative;
+	border: 0px solid #FFF;
+}
 
 /* responsive */
+@media ( min-width : 991px){
+	#baloon {
+		min-width: 920px;
+	}
+	#writeFormDiv {
+	} 
+}
+
 @media ( min-width : 1px) and (max-width: 991px) {
 	#baloon {
-		max-width: 95% !important;
-		left: 5%;
+		min-width: 95% !important;
 	}
 	#calendarDiv {
 		/* display: none !important; */
+		display: inline-block;
+		width: 271px;
 	}
+	
+	#writeFormDiv {
+	} 
 }
 
 

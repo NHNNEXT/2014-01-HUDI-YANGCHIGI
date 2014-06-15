@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,7 +23,7 @@
 
 <!-- today.css 와 mypage.css 통합하며 중복되는 것들은 todayl_modal.css로 옮기는 중 -->
 <link rel="stylesheet" href="/css/mypage.css">
-<script src="/js/today.js"></script>
+<!-- <script src="/js/today.js"></script> -->
 </head>
 <body>
 	<div class="container">
@@ -30,9 +31,19 @@
 		<div id="contentContainerDiv">
 			<c:forEach items="${ideaList}" var="idea">
 				<div class="row">
-					<span class="time">
-						<p class="timeWrapper">${idea.time}</p>
-					</span>
+					<div class="time">
+						<c:set var="_hour" value="${idea.time.substring(0,2)}" />
+						<c:set var="_minute" value="${idea.time.substring(3,5)}" />
+						<fmt:parseNumber var="hour" integerOnly="true" value="${_hour}" />
+						<fmt:parseNumber var="minute" integerOnly="true"
+							value="${_minute}" />
+						<c:set var="a" value="${minute * 6}" />
+						<c:set var="o" value="${hour % 12 / 12 * 360}" />
+						<div class="clock">
+							<div class="hour" style="-webkit-transform: rotate(${o}deg);"></div>
+							<div class="minute" style="-webkit-transform: rotate(${a}deg);"></div>
+						</div>
+					</div>
 					<div class="contents">
 						<c:if test="${!empty idea.imgName}">
 							<img class="contentsImg" src="/image/${idea.imgName}"
@@ -46,24 +57,40 @@
 		<!-- 날짜, 공감 수, 작성자 닉네임, 댓글 들어가는 곳 -->
 		<div id="asideDiv">
 			<div id="dateDiv">
-				<p class="dateoftoday">${year}</p>
-				<p class="dateoftoday">${month}${day}</p>
+				<p class="dateoftoday">${year.substring(2,4)}${month}${day}</p>
 			</div>
-			<div id="likeDiv">
+		<div id="likeDiv">
+				<input type="hidden" id="likeBtn" class="btn btn-default" value="${today.like}" />
+				<h1 id="likeText">${today.like}</h1>
+				<img id="heart" src="icon/heart_red.png" />
+			</div> 
+
+			<%-- <div id="likeDiv">
+				<form>
+					<h1 id="likeSpan">${today.like}</h1>
+					<img id="heart" src="icon/heart_gray.png" />
+					<button type="button" id="likeBtn" class="btn btn-default">Like</button>
+					<span id="likeSpan" class="badge">${today.like}</span> 
+					<input type="hidden" id="likeInput" value="${today.like}" />
+				</form>
+			</div> --%>
+			
+			<%-- <div id="likeDiv">
 				<form>
 					<button type="button" id="likeBtn" class="btn btn-default">Like</button>
 					<span id="likeSpan" class="badge">${today.like}</span> <input
 						type="hidden" id="likeInput" value="${today.like}" />
 				</form>
-			</div>
+			</div> --%>
+			
 			<div id="profileDiv">
-				<img src="/image/${user.thumbnail}" /> Nickname: ${user.nickname}
+				<img src="/image/${user.thumbnail}" />${user.nickname}
 			</div>
 
 			<div id="commentDiv">
 				<c:forEach items="${commList}" var="comm">
 					<div class="comment-set">
-						<input type="hidden" value="${comm.userId}">
+						<input type="hidden" value="${comm.userId}"><br>
 						<%-- <img id="commentProfile" src="/image/${user.thumbnail}" />
                                     <p id="nickname">nickname</p> --%>
 						<p id="content">${comm.content}</p>
@@ -155,7 +182,7 @@
                             function(i) {
                                 var newHeight = parseInt($(this).next().height(), 10)
                                 + parseInt($(this).next().css('margin-top'), 10) * 2;
-                                $(this).height(newHeight);
+                                $(this).height(newHeight + 10);
                                 $(this).css('margin-top', $(this).next().css('margin-top'));
                             });
                     }

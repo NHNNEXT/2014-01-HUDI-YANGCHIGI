@@ -5,7 +5,7 @@ body {
 	1background-color: #478d7c;
 	background-color: #32706e;
 	-webkit-font-smoothing: antialiased;
-	font-family: 'Roboto', sans-serif;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #baloon {
@@ -136,16 +136,16 @@ body {
 /* 타블렛 */
 @media all and (min-width:480px) and (max-width:920px) {
 	#logo {
-		display: none;
+		/* display: none; */
 	}
 }
 
 @media all and (min-width:300px) and (max-width:480px) {
 	#myInfo {
-		display: none;
+		/* display: none; */
 	}
 	#logo {
-		display: none;
+		/* display: none; */
 	}
 }
 

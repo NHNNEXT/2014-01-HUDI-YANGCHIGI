@@ -53,7 +53,7 @@ $('.pre-idea').click(function(e) {
 	if (contents.css('left') !== '0px') {
 		contents.filter(':not(:animated)').animate({
 			'left' : '+=100%'
-		}, 'slow');
+		}, 300);
 	}
 });
 
@@ -66,7 +66,7 @@ $('.next-idea').click(function(e) {
 	if (contentsLeft !== (-1) * contentLastChildLeft) {
 		contents.filter(':not(:animated)').animate({
 			'left' : '-=100%'
-		}, 'slow');
+		}, 300);
 	}
 });
 
@@ -146,3 +146,40 @@ function getAbs(num) {
 	else
 		return (-1) * num;
 }
+
+//$(document).keypress(function(e) { 
+//    if (e.keyCode == 27) { 
+//        $('#todayModal').fadeOut(500);
+//        //or
+//        window.close();
+//    } 
+//});
+
+$(document).keyup(function(event){
+	if (event.keyCode == 27){
+		// Close the modal/menu
+//		$('#todayModal').closeElement();
+		//$('#todayModal').fadeOut(500);
+
+        	//  Return focus to the element that invoked it 
+		//$('a[href=#todayModal]').focus();
+		//$('body').removeClass("modal-open");
+//		$('.modal-backdrop').removeClass("fade");
+//		$('.modal-backdrop').detach();
+		$('#todayModal').modal('hide');
+	}
+});
+
+$(document).ready(function(){
+	if($('body').hasClass('modal-open')){
+		$('body').css({'overflow': 'hidden'});
+	}
+	
+	
+    $('#baloon').masonry({
+        itemSelector : '.pin',
+        isAnimated: true
+//        ,
+//        isFitWidth: true
+    });
+});
