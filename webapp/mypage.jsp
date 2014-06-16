@@ -36,10 +36,10 @@
 </head>
 <body>
 	<%@include file="header.jspf"%>
-	<div id="baloon">
+	<div id="baloon" >
 		<div id="myPageAllDiv" class="row">
-			<div id="calendarDiv" class="col-md-4"></div>
-			<div id="rightSectionDiv" class="col-md-7">
+			<div id="calendarDiv" class="col-xs-4"></div> 
+			<div id="rightSectionDiv" class="col-xs-7">
 				<div id="writeFormDiv" class="row">
 					<form action="/mypage/write" method="post"
 						enctype="multipart/form-data">
@@ -165,10 +165,10 @@ $(".minute").css("transform", "rotate(" + a + "deg)"); */
 		var lockStatus = $(this).attr("src");
 		if(lockStatus === "/icon/unlock.png"){  //image sprite
 			$(this).attr("src", "/icon/lock.png");
-			$('#isPrivateInput').val(true);
+			$('#isPrivateInput').val(false);
 		}else{
 			$(this).attr("src", "/icon/unlock.png"); 
-			$('#isPrivateInput').val(false);
+			$('#isPrivateInput').val(true);
 		}
 	}); 
  	

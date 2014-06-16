@@ -16,18 +16,11 @@ ul {
 	text-align: center !important;
 	margin-right: 15px;
 	margin-left: 1%;
-	1background-color: #efa87b;
-	1background-color: #fdb553;
 	background-color: #fde47d;
 	padding-top: 5px;
 	padding-bottom: 50px;
-	
-	/* background: -webkit-linear-gradient(#fde47d, #fddd7d); For Safari 5.1 to 6.0
-	background: -o-linear-gradient(#fde47d, #fddd7d); For Opera 11.1 to 12.0
-	background: -moz-linear-gradient(#fde47d, #fddd7d); For Firefox 3.6 to 15
-	background: linear-gradient(#fde47d, #fddd7d); Standard syntax */
-	
 	border-radius: 10px;
+	
 }
 
 #rightSectionDiv {
@@ -259,6 +252,11 @@ ul {
 	}
 	
 	#writeFormDiv {
+	}
+	
+	.col-xs-7 {
+		/* position: absolute !important;
+		float: right; */
 	} 
 }
 

@@ -58,7 +58,7 @@ var write = {
 		var minutes = parseInt(Sminutes);
 		var a = minutes * 6; 
 		var o = hour % 12 / 12 * 360;
-		if (imgName === undefined) {
+		if (imgName === undefined || imgName=='null') {
 			$('#contentsContainerDiv')
 					.append(
 							'<div class="row">'
