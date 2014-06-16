@@ -259,7 +259,12 @@ ul {
 	}
 	
 	#writeFormDiv {
-	} 
+	}
+	
+	#footer {
+		display: none;
+	}
+	
 }
 
 

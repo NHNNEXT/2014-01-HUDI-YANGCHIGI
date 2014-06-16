@@ -6,6 +6,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no">
 	<title>Seize</title>
 	<!-- 파비콘 -->
 	<link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
@@ -56,7 +58,7 @@
 						<!-- <br><input name="isPrivate"
 							id="isPrivateInput" type="hidden" value="false"/> -->
 						<input
-							name="isPrivate" id="isPrivateInput" type="checkbox" style="display:none;"/>비공개
+							name="isPrivate" id="isPrivateInput" type="checkbox" style="display:none;"/>
 						<div id="imgFormDiv">
 							<!-- <img id="uploadImg" src="icon/addimage.png" style="height: 30px;" /> -->
 							<img id="prevImg" src="#" alt="your image" style="display: none;" />

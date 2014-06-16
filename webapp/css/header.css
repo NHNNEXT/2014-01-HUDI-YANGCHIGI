@@ -142,10 +142,15 @@ body {
 
 @media all and (min-width:300px) and (max-width:480px) {
 	#myInfo {
-		/* display: none; */
+		display: none;
 	}
 	#logo {
 		/* display: none; */
+		width: 80px;
+	}
+	
+	#btnsDiv {
+		left: 10px;
 	}
 }
 

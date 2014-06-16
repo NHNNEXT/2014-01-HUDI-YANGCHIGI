@@ -265,7 +265,7 @@
 
 @media all and (max-width: 480px) , all and
 	(-webkit-min-device-pixel-ratio: 2) {
-	#contentContainerDiv {
+	#todayModal #contentContainerDiv {
 		width: 100%;
 		padding: 10px;
 	}
