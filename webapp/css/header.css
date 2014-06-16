@@ -25,12 +25,9 @@ body {
 	For Firefox 3.6 to 15
 	background: linear-gradient(#dcd8d0, #ede8e1); Standard syntax */
 	border-radius: 1em;
-	margin-left: 5%;
 	margin-right: 5%;
 	min-height: 550px;
 	padding-top: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
 }
 
 #footer {
@@ -140,7 +137,7 @@ body {
 	}
 }
 
-@media all and (min-width:300px) and (max-width:480px) {
+@media all and (max-width:919px) {
 	#myInfo {
 		display: none;
 	}
