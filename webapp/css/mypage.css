@@ -82,11 +82,12 @@ ul {
 	margin-left: 40px;
 	border-radius: 10px;
 	padding: 15px;
+	position:relative;
 }
 
 .contentsP {
 	display: inline-block !important;
-	width: 400px;
+	width: 85%;
 	
 }
 
@@ -250,12 +251,19 @@ ul {
 
 @media ( min-width : 1px) and (max-width: 991px) {
 	#baloon {
-		min-width: 95% !important;
+		/* min-width: 95% !important; */
+		
 	}
 	#calendarDiv {
-		/* display: none !important; */
-		display: inline-block;
+		display: none !important;
+		/* display: inline-block; */
 		width: 271px;
+	}
+	#rightSectionDiv{
+		margin-left:0%;
+	}
+	.contentsP{
+		/* width:0px; */
 	}
 	
 	#writeFormDiv {
@@ -263,6 +271,9 @@ ul {
 	
 	#footer {
 		display: none;
+	}
+	#addTodayBtn{
+		display:none;
 	}
 	
 }
