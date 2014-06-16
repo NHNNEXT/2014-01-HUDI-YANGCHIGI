@@ -54,9 +54,6 @@
 				</div>
 			</form>
 		</div>
-		<div id="userStats">
-			user stats
-		</div>
 	</div>	
 	<%@include file="footer.jspf" %> 
 </body>
